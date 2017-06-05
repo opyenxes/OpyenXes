@@ -1,0 +1,210 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>extension.XExtensionParser &#8212; OpenXes Python 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../../index.html">
+          <span>OpenXes Python 1.0 documentation</span></a></h1>
+        <h2 class="heading"><span>extension.XExtensionParser</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        <a class="uplink" href="../../index.html">Contents</a>
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <h1>Source code for extension.XExtensionParser</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">extension.XExtension</span> <span class="k">import</span> <span class="n">XExtension</span>
+<span class="kn">from</span> <span class="nn">utils.SingletonClassGenerator</span> <span class="k">import</span> <span class="n">XExtensionMetaclass</span>
+<span class="kn">from</span> <span class="nn">xml.sax.handler</span> <span class="k">import</span> <span class="n">ContentHandler</span>
+<span class="kn">from</span> <span class="nn">xml.sax</span> <span class="k">import</span> <span class="n">parse</span> <span class="k">as</span> <span class="n">xml_parse</span><span class="p">,</span> <span class="n">parseString</span>
+<span class="kn">from</span> <span class="nn">factory.XFactoryRegistry</span> <span class="k">import</span> <span class="n">XFactoryRegistry</span>
+<span class="kn">from</span> <span class="nn">info.XGlobalAttributeNameMap</span> <span class="k">import</span> <span class="n">XGlobalAttributeNameMap</span>
+<span class="kn">from</span> <span class="nn">id.XIDFactory</span> <span class="k">import</span> <span class="n">XIDFactory</span>
+<span class="kn">from</span> <span class="nn">urllib</span> <span class="k">import</span> <span class="n">request</span><span class="p">,</span> <span class="n">parse</span><span class="p">,</span> <span class="n">error</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+
+<div class="viewcode-block" id="XExtensionParser"><a class="viewcode-back" href="../../XExtensionParser.html#extension.XExtensionParser.XExtensionParser">[docs]</a><span class="k">class</span> <span class="nc">XExtensionParser</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">XExtensionMetaclass</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Parser for extension definition files.</span>
+
+<span class="sd">    Uses the singleton metaclass</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="XExtensionParser.XExtensionHandler"><a class="viewcode-back" href="../../XExtensionParser.html#extension.XExtensionParser.XExtensionParser.XExtensionHandler">[docs]</a>    <span class="k">class</span> <span class="nc">XExtensionHandler</span><span class="p">(</span><span class="n">ContentHandler</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;SAX handler class for extension definition files.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__extension</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__currentAttribute</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__xAttributes</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__factory</span> <span class="o">=</span> <span class="n">XFactoryRegistry</span><span class="p">()</span><span class="o">.</span><span class="n">current_default</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+
+<div class="viewcode-block" id="XExtensionParser.XExtensionHandler.reset"><a class="viewcode-back" href="../../XExtensionParser.html#extension.XExtensionParser.XExtensionParser.XExtensionHandler.reset">[docs]</a>        <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot;Resets the handler to initial state.</span>
+
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__extension</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__currentAttribute</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__xAttributes</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__factory</span> <span class="o">=</span> <span class="n">XFactoryRegistry</span><span class="p">()</span><span class="o">.</span><span class="n">current_default</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="XExtensionParser.XExtensionHandler.get_extension"><a class="viewcode-back" href="../../XExtensionParser.html#extension.XExtensionParser.XExtensionParser.XExtensionHandler.get_extension">[docs]</a>        <span class="k">def</span> <span class="nf">get_extension</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot;Retrieves the parsed extension after parsing.</span>
+
+<span class="sd">            :return: The parsed extension.</span>
+<span class="sd">            :rtype: XExtension</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__extension</span></div>
+
+<div class="viewcode-block" id="XExtensionParser.XExtensionHandler.startElement"><a class="viewcode-back" href="../../XExtensionParser.html#extension.XExtensionParser.XExtensionParser.XExtensionHandler.startElement">[docs]</a>        <span class="k">def</span> <span class="nf">startElement</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">attributes</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot; Overrides startElement in class ContentHandler</span>
+
+<span class="sd">            :param name:  Contains the raw XML 1.0 name of the element type</span>
+<span class="sd">            :type name: str</span>
+<span class="sd">            :param attributes: An instance of the Attributes class containing</span>
+<span class="sd">             the attributes of the element</span>
+<span class="sd">            :type attributes: xml.sax.xmlreader.AttributesImpl</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="n">tag_name</span> <span class="o">=</span> <span class="n">name</span>
+
+            <span class="k">if</span> <span class="n">tag_name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;xesextension&quot;</span><span class="p">:</span>
+                <span class="n">mapping</span> <span class="o">=</span> <span class="n">attributes</span><span class="o">.</span><span class="n">getValue</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">)</span>
+                <span class="n">name</span> <span class="o">=</span> <span class="n">attributes</span><span class="o">.</span><span class="n">getValue</span><span class="p">(</span><span class="s2">&quot;prefix&quot;</span><span class="p">)</span>
+                <span class="n">x_uri</span> <span class="o">=</span> <span class="n">parse</span><span class="o">.</span><span class="n">urlparse</span><span class="p">(</span><span class="n">attributes</span><span class="o">.</span><span class="n">getValue</span><span class="p">(</span><span class="s2">&quot;uri&quot;</span><span class="p">))</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">attributes</span><span class="o">.</span><span class="n">getValue</span><span class="p">(</span><span class="s2">&quot;uri&quot;</span><span class="p">))</span>
+                <span class="k">except</span> <span class="n">error</span><span class="o">.</span><span class="n">URLError</span><span class="p">:</span>
+                    <span class="k">return</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">__extension</span> <span class="o">=</span> <span class="n">XExtension</span><span class="p">(</span><span class="n">mapping</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">x_uri</span><span class="p">)</span>
+
+            <span class="k">elif</span> <span class="n">tag_name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;log&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__xAttributes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__extension</span><span class="o">.</span><span class="n">get_log_attributes</span><span class="p">()</span>
+            <span class="k">elif</span> <span class="n">tag_name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;trace&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__xAttributes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__extension</span><span class="o">.</span><span class="n">get_trace_attributes</span><span class="p">()</span>
+            <span class="k">elif</span> <span class="n">tag_name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;event&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__xAttributes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__extension</span><span class="o">.</span><span class="n">get_event_attributes</span><span class="p">()</span>
+            <span class="k">elif</span> <span class="n">tag_name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;meta&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__xAttributes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__extension</span><span class="o">.</span><span class="n">get_meta_attributes</span><span class="p">()</span>
+
+            <span class="k">elif</span> <span class="n">tag_name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;string&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__xAttributes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__extension</span><span class="o">.</span><span class="n">get_log_attributes</span><span class="p">()</span>
+                <span class="n">mapping</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__extension</span><span class="o">.</span><span class="n">get_prefix</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;:&#39;</span> <span class="o">+</span> <span class="n">attributes</span><span class="o">.</span><span class="n">getValue</span><span class="p">(</span><span class="s2">&quot;key&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__currentAttribute</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__factory</span><span class="o">.</span><span class="n">create_attribute_literal</span><span class="p">(</span><span class="n">mapping</span><span class="p">,</span> <span class="s2">&quot;DEFAULT&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__extension</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__xAttributes</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__currentAttribute</span><span class="p">)</span>
+
+            <span class="k">elif</span> <span class="n">tag_name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;date&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__xAttributes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__extension</span><span class="o">.</span><span class="n">get_log_attributes</span><span class="p">()</span>
+                <span class="n">mapping</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__extension</span><span class="o">.</span><span class="n">get_prefix</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;:&#39;</span> <span class="o">+</span> <span class="n">attributes</span><span class="o">.</span><span class="n">getValue</span><span class="p">(</span><span class="s2">&quot;key&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__currentAttribute</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__factory</span><span class="o">.</span><span class="n">create_attribute_timestamp</span><span class="p">(</span><span class="n">mapping</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__extension</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__xAttributes</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__currentAttribute</span><span class="p">)</span>
+
+            <span class="k">elif</span> <span class="n">tag_name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;int&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__xAttributes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__extension</span><span class="o">.</span><span class="n">get_log_attributes</span><span class="p">()</span>
+                <span class="n">mapping</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__extension</span><span class="o">.</span><span class="n">get_prefix</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;:&#39;</span> <span class="o">+</span> <span class="n">attributes</span><span class="o">.</span><span class="n">getValue</span><span class="p">(</span><span class="s2">&quot;key&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__currentAttribute</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__factory</span><span class="o">.</span><span class="n">create_attribute_discrete</span><span class="p">(</span><span class="n">mapping</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__extension</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__xAttributes</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__currentAttribute</span><span class="p">)</span>
+
+            <span class="k">elif</span> <span class="n">tag_name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;float&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__xAttributes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__extension</span><span class="o">.</span><span class="n">get_log_attributes</span><span class="p">()</span>
+                <span class="n">mapping</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__extension</span><span class="o">.</span><span class="n">get_prefix</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;:&#39;</span> <span class="o">+</span> <span class="n">attributes</span><span class="o">.</span><span class="n">getValue</span><span class="p">(</span><span class="s2">&quot;key&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__currentAttribute</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__factory</span><span class="o">.</span><span class="n">create_attribute_continuous</span><span class="p">(</span><span class="n">mapping</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__extension</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__xAttributes</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__currentAttribute</span><span class="p">)</span>
+
+            <span class="k">elif</span> <span class="n">tag_name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;boolean&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__xAttributes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__extension</span><span class="o">.</span><span class="n">get_log_attributes</span><span class="p">()</span>
+                <span class="n">mapping</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__extension</span><span class="o">.</span><span class="n">get_prefix</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;:&#39;</span> <span class="o">+</span> <span class="n">attributes</span><span class="o">.</span><span class="n">getValue</span><span class="p">(</span><span class="s2">&quot;key&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__currentAttribute</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__factory</span><span class="o">.</span><span class="n">create_attribute_boolean</span><span class="p">(</span><span class="n">mapping</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__extension</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__xAttributes</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__currentAttribute</span><span class="p">)</span>
+
+            <span class="k">elif</span> <span class="n">tag_name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;id&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__xAttributes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__extension</span><span class="o">.</span><span class="n">get_log_attributes</span><span class="p">()</span>
+                <span class="n">mapping</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__extension</span><span class="o">.</span><span class="n">get_prefix</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;:&#39;</span> <span class="o">+</span> <span class="n">attributes</span><span class="o">.</span><span class="n">getValue</span><span class="p">(</span><span class="s2">&quot;key&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__currentAttribute</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__factory</span><span class="o">.</span><span class="n">create_attribute_id</span><span class="p">(</span><span class="n">mapping</span><span class="p">,</span> <span class="n">XIDFactory</span><span class="o">.</span><span class="n">create_id</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">__extension</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__xAttributes</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__currentAttribute</span><span class="p">)</span>
+
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">__currentAttribute</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">tag_name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;alias&quot;</span><span class="p">:</span>
+                <span class="n">mapping</span> <span class="o">=</span> <span class="n">attributes</span><span class="o">.</span><span class="n">getValue</span><span class="p">(</span><span class="s2">&quot;mapping&quot;</span><span class="p">)</span>
+                <span class="n">name</span> <span class="o">=</span> <span class="n">attributes</span><span class="o">.</span><span class="n">getValue</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">)</span>
+                <span class="n">XGlobalAttributeNameMap</span><span class="p">()</span><span class="o">.</span><span class="n">register_mapping</span><span class="p">(</span><span class="n">mapping</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__currentAttribute</span><span class="o">.</span><span class="n">get_key</span><span class="p">(),</span> <span class="n">name</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="XExtensionParser.XExtensionHandler.endElement"><a class="viewcode-back" href="../../XExtensionParser.html#extension.XExtensionParser.XExtensionParser.XExtensionHandler.endElement">[docs]</a>        <span class="k">def</span> <span class="nf">endElement</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">local_name</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot; Overrides endElement in class ContentHandler</span>
+
+<span class="sd">            :param local_name: The name of the element type, just as with the</span>
+<span class="sd">              startElement event</span>
+<span class="sd">            :type local_name: str</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="n">tag_name</span> <span class="o">=</span> <span class="n">local_name</span>
+
+            <span class="k">if</span> <span class="n">tag_name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;string&quot;</span><span class="p">,</span> <span class="s2">&quot;date&quot;</span><span class="p">,</span> <span class="s2">&quot;int&quot;</span><span class="p">,</span> <span class="s2">&quot;float&quot;</span><span class="p">,</span> <span class="s2">&quot;boolean&quot;</span><span class="p">,</span> <span class="s2">&quot;id&quot;</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__currentAttribute</span> <span class="o">=</span> <span class="kc">None</span></div></div>
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="XExtensionParser.parse"><a class="viewcode-back" href="../../XExtensionParser.html#extension.XExtensionParser.XExtensionParser.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="n">file</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Parses an extension from a definition file.</span>
+
+<span class="sd">        :param file: The path of the file containing the extension or url string</span>
+<span class="sd">          which represents the extension definition file..</span>
+<span class="sd">        :type file: str</span>
+<span class="sd">        :return: The extension object, as defined in the provided file.</span>
+<span class="sd">        :rtype: XExtension</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">handler</span> <span class="o">=</span> <span class="n">XExtensionParser</span><span class="o">.</span><span class="n">XExtensionHandler</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">file</span><span class="p">):</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file</span><span class="p">)</span> <span class="k">as</span> <span class="n">data</span><span class="p">:</span>
+                <span class="n">xml_parse</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">handler</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">file</span><span class="p">):</span>
+            <span class="n">parseString</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">file</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">(),</span> <span class="n">handler</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">handler</span><span class="o">.</span><span class="n">get_extension</span><span class="p">()</span></div></div>
+</pre></div>
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        <a class="uplink" href="../../index.html">Contents</a>
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Hernán Valdivieso.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
+    </div>
+  </body>
+</html>

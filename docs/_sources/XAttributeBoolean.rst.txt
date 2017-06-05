@@ -1,0 +1,7 @@
+XAttributeBoolean
+=================
+
+.. automodule:: model.XAttributeBoolean
+   :members:
+
+

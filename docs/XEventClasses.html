@@ -1,0 +1,241 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>XEventClasses &#8212; OpenXes Python 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="XEventResourceClassifier" href="XEventResourceClassifier.html" />
+    <link rel="prev" title="XEventClass" href="XEventClass.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="index.html">
+          <span>OpenXes Python 1.0 documentation</span></a></h1>
+        <h2 class="heading"><span>XEventClasses</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="XEventClass.html">XEventClass</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="XEventResourceClassifier.html">XEventResourceClassifier</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="module-classification.XEventClasses">
+<span id="xeventclasses"></span><h1>XEventClasses<a class="headerlink" href="#module-classification.XEventClasses" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="classification.XEventClasses.XEventClasses">
+<em class="property">class </em><code class="descclassname">classification.XEventClasses.</code><code class="descname">XEventClasses</code><span class="sig-paren">(</span><em>classifier</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/classification/XEventClasses.html#XEventClasses"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#classification.XEventClasses.XEventClasses" title="Permalink to this definition">¶</a></dt>
+<dd><p>A set of event classes. For any log, this class can be used to impose a
+classification of events. Two events which belong to the same event class
+can be considered equal, i.e. to refer to the same higher-level concept
+they represent (e.g., an activity). Event classes are imposed on a log by
+a specific classifier. This class can be configured with such a classifier,
+which is then used to derive the actual event classes from a log, by
+determining the identity of the contained events.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>classifier</strong> (<a class="reference internal" href="XEventAttributeClassifier.html#classification.XEventAttributeClassifier.XEventAttributeClassifier" title="classification.XEventAttributeClassifier.XEventAttributeClassifier"><em>XEventAttributeClassifier</em></a>) &#8211; The classifier used for creating the set of event classes.</td>
+</tr>
+</tbody>
+</table>
+<dl class="staticmethod">
+<dt id="classification.XEventClasses.XEventClasses.derive_event_classes">
+<em class="property">static </em><code class="descname">derive_event_classes</code><span class="sig-paren">(</span><em>classifier</em>, <em>log</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/classification/XEventClasses.html#XEventClasses.derive_event_classes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#classification.XEventClasses.XEventClasses.derive_event_classes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a new set of event classes, factory method.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>classifier</strong> (<a class="reference internal" href="XEventAttributeClassifier.html#classification.XEventAttributeClassifier.XEventAttributeClassifier" title="classification.XEventAttributeClassifier.XEventAttributeClassifier"><em>XEventAttributeClassifier</em></a>) &#8211; The classifier to be used for event comparison.</li>
+<li><strong>log</strong> (<a class="reference internal" href="XLog.html#model.XLog.XLog" title="model.XLog.XLog"><em>XLog</em></a>) &#8211; The log, on which event classes should be imposed.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A set of event classes, as an instance of this class.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#module-classification.XEventClasses" title="classification.XEventClasses">XEventClasses</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="classification.XEventClasses.XEventClasses.get_by_identity">
+<code class="descname">get_by_identity</code><span class="sig-paren">(</span><em>identity</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/classification/XEventClasses.html#XEventClasses.get_by_identity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#classification.XEventClasses.XEventClasses.get_by_identity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a given event class by its identity, i.e. its unique
+identifier string.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>identity</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Identifier string of the requested event class.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The requested event class. If no matching event class is found,
+this method may return null.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="XEventClass.html#module-classification.XEventClass" title="classification.XEventClass">XEventClass</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="classification.XEventClasses.XEventClasses.get_by_index">
+<code class="descname">get_by_index</code><span class="sig-paren">(</span><em>index</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/classification/XEventClasses.html#XEventClasses.get_by_index"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#classification.XEventClasses.XEventClasses.get_by_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a given event class by its unique index.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>index</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Unique index of the requested event class.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The requested event class. If no matching event class is found,
+this method may return null.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="XEventClass.html#module-classification.XEventClass" title="classification.XEventClass">XEventClass</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="classification.XEventClasses.XEventClasses.get_class_of">
+<code class="descname">get_class_of</code><span class="sig-paren">(</span><em>event</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/classification/XEventClasses.html#XEventClasses.get_class_of"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#classification.XEventClasses.XEventClasses.get_class_of" title="Permalink to this definition">¶</a></dt>
+<dd><p>For any given event, returns the corresponding event class as
+determined by this set.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>event</strong> (<a class="reference internal" href="XEvent.html#module-model.XEvent" title="model.XEvent"><em>XEvent</em></a>) &#8211; The event of which the event class should be determined.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The event class of this event, as found in this set of event
+classes. If no matching event class is found, this method may return<blockquote>
+<div>null.</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="XEventClass.html#module-classification.XEventClass" title="classification.XEventClass">XEventClass</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="classification.XEventClasses.XEventClasses.get_classes">
+<code class="descname">get_classes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/classification/XEventClasses.html#XEventClasses.get_classes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#classification.XEventClasses.XEventClasses.get_classes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the collection of event classes contained in this instance.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A collection of event classes.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">dict_values</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="classification.XEventClasses.XEventClasses.get_classifier">
+<code class="descname">get_classifier</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/classification/XEventClasses.html#XEventClasses.get_classifier"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#classification.XEventClasses.XEventClasses.get_classifier" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the classifier used for determining event classes.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A classifier used in this set of classes.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)">dict</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="classification.XEventClasses.XEventClasses.harmonize_indices">
+<code class="descname">harmonize_indices</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/classification/XEventClasses.html#XEventClasses.harmonize_indices"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#classification.XEventClasses.XEventClasses.harmonize_indices" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method harmonizeds the indices of all contained event classes.
+Indices are re-assigned according to the natural order of class
+identities, i.e., the alphabetical order of class identity strings.
+This method should be called after the composition or derivation of
+event classes is complete, e.g., after scanning a log for generating
+the log info. Using parties should not have to worry about event class
+harmonization, and can thus safely ignore this method.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="classification.XEventClasses.XEventClasses.register">
+<code class="descname">register</code><span class="sig-paren">(</span><em>element</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/classification/XEventClasses.html#XEventClasses.register"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#classification.XEventClasses.XEventClasses.register" title="Permalink to this definition">¶</a></dt>
+<dd><p>Registers a XES Element(log, trace and event and class ID) with this
+set of event classes. This will result in all events of this log being
+analyzed, and potentially new event classes being added to this set of
+event classes. Event classes will be incremented in size, as new
+members of these classes are found among the events in the log.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>element</strong> (<a class="reference internal" href="XLog.html#model.XLog.XLog" title="model.XLog.XLog"><em>XLog</em></a><em> or </em><a class="reference internal" href="XTrace.html#model.XTrace.XTrace" title="model.XTrace.XTrace"><em>XTrace</em></a><em> or </em><a class="reference internal" href="XEvent.html#module-model.XEvent" title="model.XEvent"><em>XEvent</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; The Xes Element or Class ID to be analyzed.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="XEventClass.html">XEventClass</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="XEventResourceClassifier.html">XEventResourceClassifier</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Hernán Valdivieso.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
+    </div>
+  </body>
+</html>

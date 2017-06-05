@@ -1,0 +1,7 @@
+
+XLogInfo
+========
+
+.. automodule:: info.XLogInfo
+   :members:
+

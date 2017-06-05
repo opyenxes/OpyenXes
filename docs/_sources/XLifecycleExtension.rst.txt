@@ -1,0 +1,7 @@
+XLifecycleExtension
+===================
+
+.. automodule:: extension.std.XLifecycleExtension
+   :members:
+
+

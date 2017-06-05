@@ -1,0 +1,447 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>XFactory &#8212; OpenXes Python 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="XFactoryRegistry" href="XFactoryRegistry.html" />
+    <link rel="prev" title="Factory" href="factory.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="index.html">
+          <span>OpenXes Python 1.0 documentation</span></a></h1>
+        <h2 class="heading"><span>XFactory</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="factory.html">Factory</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="XFactoryRegistry.html">XFactoryRegistry</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="module-factory.XFactory">
+<span id="xfactory"></span><h1>XFactory<a class="headerlink" href="#module-factory.XFactory" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="factory.XFactory.XFactory">
+<em class="property">class </em><code class="descclassname">factory.XFactory.</code><code class="descname">XFactory</code><a class="reference internal" href="_modules/factory/XFactory.html#XFactory"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#factory.XFactory.XFactory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provide methods for creating all element classes of the XES model type
+hierarchy</p>
+<dl class="staticmethod">
+<dt id="factory.XFactory.XFactory.create_attribute_boolean">
+<em class="property">static </em><code class="descname">create_attribute_boolean</code><span class="sig-paren">(</span><em>key</em>, <em>value</em>, <em>extension=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/factory/XFactory.html#XFactory.create_attribute_boolean"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#factory.XFactory.XFactory.create_attribute_boolean" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a new XES attribute with boolean value.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>key</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; The key of the attribute.</li>
+<li><strong>value</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; The value of the attribute.</li>
+<li><strong>extension</strong> (<a class="reference internal" href="XExtension.html#module-extension.XExtension" title="extension.XExtension"><em>XExtension</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)"><em>None</em></a>) &#8211; The extension defining the attribute (set to None, if
+the attribute is not associated to an extension).</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A new attribute with boolean value.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="XAttributeBoolean.html#model.XAttributeBoolean.XAttributeBoolean" title="model.XAttributeBoolean.XAttributeBoolean">XAttributeBoolean</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="factory.XFactory.XFactory.create_attribute_container">
+<em class="property">static </em><code class="descname">create_attribute_container</code><span class="sig-paren">(</span><em>key</em>, <em>extension=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/factory/XFactory.html#XFactory.create_attribute_container"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#factory.XFactory.XFactory.create_attribute_container" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a new XES container attribute.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>key</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; The key of the attribute.</li>
+<li><strong>extension</strong> (<a class="reference internal" href="XExtension.html#module-extension.XExtension" title="extension.XExtension"><em>XExtension</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)"><em>None</em></a>) &#8211; The extension defining the attribute (set to None, if
+the attribute is not associated to an extension).</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A new container attribute.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="XAttributeCollection.html#model.XAttributeContainer.XAttributeContainer" title="model.XAttributeContainer.XAttributeContainer">XAttributeContainer</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="factory.XFactory.XFactory.create_attribute_continuous">
+<em class="property">static </em><code class="descname">create_attribute_continuous</code><span class="sig-paren">(</span><em>key</em>, <em>value</em>, <em>extension=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/factory/XFactory.html#XFactory.create_attribute_continuous"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#factory.XFactory.XFactory.create_attribute_continuous" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a new XES attribute with float value.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>key</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; The key of the attribute.</li>
+<li><strong>value</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; The value of the attribute.</li>
+<li><strong>extension</strong> (<a class="reference internal" href="XExtension.html#module-extension.XExtension" title="extension.XExtension"><em>XExtension</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)"><em>None</em></a>) &#8211; The extension defining the attribute (set to None, if
+the attribute is not associated to an extension).</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A new attribute with float value.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="XAttributeContinuous.html#model.XAttributeContinuous.XAttributeContinuous" title="model.XAttributeContinuous.XAttributeContinuous">XAttributeContinuous</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="factory.XFactory.XFactory.create_attribute_discrete">
+<em class="property">static </em><code class="descname">create_attribute_discrete</code><span class="sig-paren">(</span><em>key</em>, <em>value</em>, <em>extension=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/factory/XFactory.html#XFactory.create_attribute_discrete"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#factory.XFactory.XFactory.create_attribute_discrete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a new XES attribute with integer value.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>key</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; The key of the attribute.</li>
+<li><strong>value</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; The value of the attribute.</li>
+<li><strong>extension</strong> (<a class="reference internal" href="XExtension.html#module-extension.XExtension" title="extension.XExtension"><em>XExtension</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)"><em>None</em></a>) &#8211; The extension defining the attribute (set to None, if
+the attribute is not associated to an extension).</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A new attribute with integer value.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="XAttributeDiscrete.html#module-model.XAttributeDiscrete" title="model.XAttributeDiscrete">XAttributeDiscrete</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="factory.XFactory.XFactory.create_attribute_id">
+<em class="property">static </em><code class="descname">create_attribute_id</code><span class="sig-paren">(</span><em>key</em>, <em>value</em>, <em>extension=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/factory/XFactory.html#XFactory.create_attribute_id"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#factory.XFactory.XFactory.create_attribute_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a new XES attribute with XID value.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>key</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; The key of the attribute.</li>
+<li><strong>value</strong> (<a class="reference internal" href="XID.html#module-id.XID" title="id.XID"><em>XID</em></a>) &#8211; The value of the attribute.</li>
+<li><strong>extension</strong> (<a class="reference internal" href="XExtension.html#module-extension.XExtension" title="extension.XExtension"><em>XExtension</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)"><em>None</em></a>) &#8211; The extension defining the attribute (set to None, if
+the attribute is not associated to an extension).</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A new attribute with XID value.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="XAttributeID.html#model.XAttributeID.XAttributeID" title="model.XAttributeID.XAttributeID">XAttributeID</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="factory.XFactory.XFactory.create_attribute_list">
+<em class="property">static </em><code class="descname">create_attribute_list</code><span class="sig-paren">(</span><em>key</em>, <em>extension=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/factory/XFactory.html#XFactory.create_attribute_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#factory.XFactory.XFactory.create_attribute_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a new XES list attribute.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>key</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; The key of the attribute.</li>
+<li><strong>extension</strong> (<a class="reference internal" href="XExtension.html#module-extension.XExtension" title="extension.XExtension"><em>XExtension</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)"><em>None</em></a>) &#8211; The extension defining the attribute (set to None, if
+the attribute is not associated to an extension).</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A new list attribute.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="XAttributeList.html#module-model.XAttributeList" title="model.XAttributeList">XAttributeList</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="factory.XFactory.XFactory.create_attribute_literal">
+<em class="property">static </em><code class="descname">create_attribute_literal</code><span class="sig-paren">(</span><em>key</em>, <em>value</em>, <em>extension=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/factory/XFactory.html#XFactory.create_attribute_literal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#factory.XFactory.XFactory.create_attribute_literal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a new XES attribute with string value.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>key</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; The key of the attribute.</li>
+<li><strong>value</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; The value of the attribute.</li>
+<li><strong>extension</strong> (<a class="reference internal" href="XExtension.html#module-extension.XExtension" title="extension.XExtension"><em>XExtension</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)"><em>None</em></a>) &#8211; The extension defining the attribute (set to None, if
+the attribute is not associated to an extension).</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A new attribute with string value.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="XAttributeLiteral.html#model.XAttributeLiteral.XAttributeLiteral" title="model.XAttributeLiteral.XAttributeLiteral">XAttributeLiteral</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="factory.XFactory.XFactory.create_attribute_map">
+<em class="property">static </em><code class="descname">create_attribute_map</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/factory/XFactory.html#XFactory.create_attribute_map"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#factory.XFactory.XFactory.create_attribute_map" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a new XES attribute map.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A new attribute map instance.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="XAttributeMap.html#model.XAttributeMap.XAttributeMap" title="model.XAttributeMap.XAttributeMap">XAttributeMap</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="factory.XFactory.XFactory.create_attribute_timestamp">
+<em class="property">static </em><code class="descname">create_attribute_timestamp</code><span class="sig-paren">(</span><em>key</em>, <em>value</em>, <em>extension=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/factory/XFactory.html#XFactory.create_attribute_timestamp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#factory.XFactory.XFactory.create_attribute_timestamp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a new XES attribute with datetime value.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>key</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; The key of the attribute.</li>
+<li><strong>value</strong> (<a class="reference external" href="https://docs.python.org/2/library/datetime.html#datetime.datetime" title="(in Python v2.7)"><em>datetime.datetime</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; The value of the attribute.</li>
+<li><strong>extension</strong> (<a class="reference internal" href="XExtension.html#module-extension.XExtension" title="extension.XExtension"><em>XExtension</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)"><em>None</em></a>) &#8211; The extension defining the attribute (set to None, if
+the attribute is not associated to an extension).</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A new attribute with datetime value.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="XAttributeTimestamp.html#module-model.XAttributeTimestamp" title="model.XAttributeTimestamp">XAttributeTimestamp</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="factory.XFactory.XFactory.create_event">
+<em class="property">static </em><code class="descname">create_event</code><span class="sig-paren">(</span><em>attribute=None</em>, <em>identity=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/factory/XFactory.html#XFactory.create_event"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#factory.XFactory.XFactory.create_event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a new XES event instance.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>attribute</strong> (<a class="reference internal" href="XAttributeMap.html#model.XAttributeMap.XAttributeMap" title="model.XAttributeMap.XAttributeMap"><em>XAttributeMap</em></a>) &#8211; A XAttributeMap with the attribute for the event.</li>
+<li><strong>identity</strong> (<a class="reference internal" href="XID.html#module-id.XID" title="id.XID"><em>XID</em></a>) &#8211; The identity defining the attribute (set to None, if
+the attribute is not associated to an identity).</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A new event instance.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="XEvent.html#module-model.XEvent" title="model.XEvent">XEvent</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="factory.XFactory.XFactory.create_log">
+<em class="property">static </em><code class="descname">create_log</code><span class="sig-paren">(</span><em>attribute=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/factory/XFactory.html#XFactory.create_log"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#factory.XFactory.XFactory.create_log" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a new XES log instance.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>attribute</strong> (<a class="reference internal" href="XAttributeMap.html#model.XAttributeMap.XAttributeMap" title="model.XAttributeMap.XAttributeMap"><em>XAttributeMap</em></a>) &#8211; A XAttributeMap with the attribute for the log.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A new log instance.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="XLog.html#model.XLog.XLog" title="model.XLog.XLog">XLog</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="factory.XFactory.XFactory.create_trace">
+<em class="property">static </em><code class="descname">create_trace</code><span class="sig-paren">(</span><em>attribute=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/factory/XFactory.html#XFactory.create_trace"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#factory.XFactory.XFactory.create_trace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a new XES trace instance.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>attribute</strong> (<a class="reference internal" href="XAttributeMap.html#model.XAttributeMap.XAttributeMap" title="model.XAttributeMap.XAttributeMap"><em>XAttributeMap</em></a>) &#8211; A XAttributeMap with the attribute for the trace.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A new trace instance.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="XTrace.html#model.XTrace.XTrace" title="model.XTrace.XTrace">XTrace</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="factory.XFactory.XFactory.get_author">
+<em class="property">static </em><code class="descname">get_author</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/factory/XFactory.html#XFactory.get_author"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#factory.XFactory.XFactory.get_author" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the author name of the specific factory implementation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The author name</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="factory.XFactory.XFactory.get_description">
+<em class="property">static </em><code class="descname">get_description</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/factory/XFactory.html#XFactory.get_description"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#factory.XFactory.XFactory.get_description" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a description of the specific factory implementation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A description of the specific factory</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="factory.XFactory.XFactory.get_name">
+<em class="property">static </em><code class="descname">get_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/factory/XFactory.html#XFactory.get_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#factory.XFactory.XFactory.get_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the name of the specific factory implementation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The name of the specific factory</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="factory.XFactory.XFactory.get_uri">
+<em class="property">static </em><code class="descname">get_uri</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/factory/XFactory.html#XFactory.get_uri"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#factory.XFactory.XFactory.get_uri" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>Returns an URI, pointing to more information about the specific factory</dt>
+<dd>implementation.</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">An URI, pointing to more information about the specific factory</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">urllib.parse.ParseResult</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="factory.XFactory.XFactory.get_vendor">
+<em class="property">static </em><code class="descname">get_vendor</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/factory/XFactory.html#XFactory.get_vendor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#factory.XFactory.XFactory.get_vendor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the vendor of the specific factory implementation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The vendor of the specific factory</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="factory.html">Factory</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="XFactoryRegistry.html">XFactoryRegistry</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Hernán Valdivieso.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
+    </div>
+  </body>
+</html>

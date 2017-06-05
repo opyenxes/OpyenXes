@@ -1,0 +1,7 @@
+
+XFactory
+========
+
+.. automodule:: factory.XFactory
+   :members:
+

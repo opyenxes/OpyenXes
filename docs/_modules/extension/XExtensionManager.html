@@ -1,0 +1,263 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>extension.XExtensionManager &#8212; OpenXes Python 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../../index.html">
+          <span>OpenXes Python 1.0 documentation</span></a></h1>
+        <h2 class="heading"><span>extension.XExtensionManager</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        <a class="uplink" href="../../index.html">Contents</a>
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <h1>Source code for extension.XExtensionManager</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">extension.std.XConceptExtension</span> <span class="k">import</span> <span class="n">XConceptExtension</span>
+<span class="kn">from</span> <span class="nn">extension.std.XCostExtension</span> <span class="k">import</span> <span class="n">XCostExtension</span>
+<span class="kn">from</span> <span class="nn">extension.std.XIdentityExtension</span> <span class="k">import</span> <span class="n">XIdentityExtension</span>
+<span class="kn">from</span> <span class="nn">extension.std.XLifecycleExtension</span> <span class="k">import</span> <span class="n">XLifecycleExtension</span>
+<span class="kn">from</span> <span class="nn">extension.std.XMicroExtension</span> <span class="k">import</span> <span class="n">XMicroExtension</span>
+<span class="kn">from</span> <span class="nn">extension.std.XOrganizationalExtension</span> <span class="k">import</span> <span class="n">XOrganizationalExtension</span>
+<span class="kn">from</span> <span class="nn">extension.std.XSemanticExtension</span> <span class="k">import</span> <span class="n">XSemanticExtension</span>
+<span class="kn">from</span> <span class="nn">extension.std.XTimeExtension</span> <span class="k">import</span> <span class="n">XTimeExtension</span>
+<span class="kn">from</span> <span class="nn">extension.XExtensionParser</span> <span class="k">import</span> <span class="n">XExtensionParser</span>
+<span class="kn">from</span> <span class="nn">utils.SingletonClassGenerator</span> <span class="k">import</span> <span class="n">XExtensionManagerMetaclass</span>
+<span class="kn">from</span> <span class="nn">utils.XRuntimeUtils</span> <span class="k">import</span> <span class="n">XRuntimeUtils</span>
+<span class="kn">from</span> <span class="nn">log.XLogging</span> <span class="k">import</span> <span class="n">XLogging</span>
+<span class="kn">from</span> <span class="nn">urllib</span> <span class="k">import</span> <span class="n">request</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+
+<div class="viewcode-block" id="XExtensionManager"><a class="viewcode-back" href="../../XExtensionManager.html#extension.XExtensionManager.XExtensionManager">[docs]</a><span class="k">class</span> <span class="nc">XExtensionManager</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">XExtensionManagerMetaclass</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;The extension manager is used to access, store, and manage extensions in</span>
+<span class="sd">    a system. Extensions can be loaded from their given URI, which should point</span>
+<span class="sd">    to the file defining the extension. Also, extensions can be registered</span>
+<span class="sd">    locally, which then override any remotely-loaded extensions (which are more</span>
+<span class="sd">    generic placeholders). Extension files downloaded from remote sources</span>
+<span class="sd">    (which happens when the extension cannot be resolved locally) are cached on</span>
+<span class="sd">    the local system, so that the network source of extension files is not put</span>
+<span class="sd">    under extensive stress. The extension manager is a singleton, there is no</span>
+<span class="sd">    need to instantiate more than one extension manager, which is necessary to</span>
+<span class="sd">    avoid states of inconsistency.</span>
+
+<span class="sd">    Uses the singleton metaclass</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__extension_map</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__extension_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">register_standard_extensions</span><span class="p">()</span>
+
+<div class="viewcode-block" id="XExtensionManager.register"><a class="viewcode-back" href="../../XExtensionManager.html#extension.XExtensionManager.XExtensionManager.register">[docs]</a>    <span class="k">def</span> <span class="nf">register</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extension</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Explicitly registers an extension instance with the extension manager.</span>
+
+<span class="sd">        :param extension: The extension to be registered.</span>
+<span class="sd">        :type extension: XExtension</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__extension_map</span><span class="p">[</span><span class="n">extension</span><span class="o">.</span><span class="n">get_uri</span><span class="p">()]</span> <span class="o">=</span> <span class="n">extension</span>
+        <span class="k">if</span> <span class="n">extension</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__extension_list</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__extension_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">extension</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="XExtensionManager.get_by_uri"><a class="viewcode-back" href="../../XExtensionManager.html#extension.XExtensionManager.XExtensionManager.get_by_uri">[docs]</a>    <span class="k">def</span> <span class="nf">get_by_uri</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uri</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Retrieves an extension instance by its unique URI. If the extension</span>
+<span class="sd">        has not been registered before, it is looked up in the local cache. If</span>
+<span class="sd">        it cannot be found in the cache, the manager attempts to download it</span>
+<span class="sd">        from its unique URI, and add it to the set of managed extensions.</span>
+
+<span class="sd">        :param uri: The unique URI of the requested extension.</span>
+<span class="sd">        :type uri: urllib.parse.ParseResult or urllib.parse.SplitResult</span>
+<span class="sd">        :return: The requested extension.</span>
+<span class="sd">        :rtype: XExtension</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__extension_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">uri</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="XExtensionManager.get_by_name"><a class="viewcode-back" href="../../XExtensionManager.html#extension.XExtensionManager.XExtensionManager.get_by_name">[docs]</a>    <span class="k">def</span> <span class="nf">get_by_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Retrieves an extension by its name. If no extension by that name can</span>
+<span class="sd">        be found, this method returns null.</span>
+
+<span class="sd">        :param name: The name of the requested extension.</span>
+<span class="sd">        :type name: str</span>
+<span class="sd">        :return: The requested extension (may be null, if it cannot be found).</span>
+<span class="sd">        :rtype: XExtension</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__extension_list</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">elem</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span> <span class="o">==</span> <span class="n">name</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">elem</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="XExtensionManager.get_by_prefix"><a class="viewcode-back" href="../../XExtensionManager.html#extension.XExtensionManager.XExtensionManager.get_by_prefix">[docs]</a>    <span class="k">def</span> <span class="nf">get_by_prefix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Retrieves an extension by its prefix. If no extension by that prefix</span>
+<span class="sd">        can be found, this method returns null.</span>
+
+<span class="sd">        :param prefix: The prefix of the requested extension.</span>
+<span class="sd">        :type prefix: str</span>
+<span class="sd">        :return: The requested extension (may be null, if it cannot be found).</span>
+<span class="sd">        :rtype: XExtension</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__extension_list</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">elem</span><span class="o">.</span><span class="n">get_prefix</span><span class="p">()</span> <span class="o">==</span> <span class="n">prefix</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">elem</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="XExtensionManager.get_by_index"><a class="viewcode-back" href="../../XExtensionManager.html#extension.XExtensionManager.XExtensionManager.get_by_index">[docs]</a>    <span class="k">def</span> <span class="nf">get_by_index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Retrieves an extension by ints index. If no extension with the given</span>
+<span class="sd">        index is found, this method returns null.</span>
+
+<span class="sd">        :param index: The index of the requested extension.</span>
+<span class="sd">        :type index: int</span>
+<span class="sd">        :return: The requested extension (may be null, if it cannot be found).</span>
+<span class="sd">        :rtype: XExtension</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__extension_list</span><span class="p">)):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__extension_list</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="XExtensionManager.get_index"><a class="viewcode-back" href="../../XExtensionManager.html#extension.XExtensionManager.XExtensionManager.get_index">[docs]</a>    <span class="k">def</span> <span class="nf">get_index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extension</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Resolves the index of an extension, given that this extension has</span>
+<span class="sd">        been previously registered with this manager instance. If the given</span>
+<span class="sd">        index has not been registered previously, this method returns -1.</span>
+
+<span class="sd">        :param extension:  The extension to look up the index for.</span>
+<span class="sd">        :type extension: XExtension</span>
+<span class="sd">        :return: Unique index of the requested extension (positive integer).</span>
+<span class="sd">        :rtype: int</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__extension_list</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__extension_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">extension</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">i</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span></div>
+
+<div class="viewcode-block" id="XExtensionManager.register_standard_extensions"><a class="viewcode-back" href="../../XExtensionManager.html#extension.XExtensionManager.XExtensionManager.register_standard_extensions">[docs]</a>    <span class="k">def</span> <span class="nf">register_standard_extensions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Registers all defined standard extensions with the extension manager</span>
+<span class="sd">        before caching.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">XConceptExtension</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">XCostExtension</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">XIdentityExtension</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">XLifecycleExtension</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">XMicroExtension</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">XOrganizationalExtension</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">XSemanticExtension</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">XTimeExtension</span><span class="p">())</span></div>
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="XExtensionManager.cache_extension"><a class="viewcode-back" href="../../XExtensionManager.html#extension.XExtensionManager.XExtensionManager.cache_extension">[docs]</a>    <span class="k">def</span> <span class="nf">cache_extension</span><span class="p">(</span><span class="n">uri</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Downloads and caches an extension from its remote definition file.</span>
+<span class="sd">        The extension is subsequently placed in the local cache, so that future</span>
+<span class="sd">        loading is accelerated.</span>
+
+<span class="sd">        :param uri: Unique URI of the extension which is to be cached.</span>
+<span class="sd">        :type uri: urllib.parse.ParseResult or urllib.parse.SplitResult</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">uri_str</span> <span class="o">=</span> <span class="n">uri</span><span class="o">.</span><span class="n">geturl</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">uri_str</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;/&quot;</span><span class="p">:</span>
+            <span class="n">uri_str</span> <span class="o">=</span> <span class="n">uri_str</span><span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">uri_str</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)]</span>
+        <span class="n">filename</span> <span class="o">=</span> <span class="n">uri_str</span><span class="p">[</span><span class="n">uri_str</span><span class="o">.</span><span class="n">rindex</span><span class="p">(</span><span class="nb">chr</span><span class="p">(</span><span class="mi">47</span><span class="p">)):]</span>
+        <span class="k">if</span> <span class="n">filename</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.xesext&quot;</span><span class="p">):</span>
+            <span class="n">filename</span> <span class="o">+=</span> <span class="s2">&quot;.xesext&quot;</span>
+
+        <span class="n">cache_file</span> <span class="o">=</span> <span class="n">XRuntimeUtils</span><span class="p">()</span><span class="o">.</span><span class="n">get_extension_cache_folder</span><span class="p">()</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">sep</span> <span class="o">+</span> <span class="n">filename</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">bis</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">uri</span><span class="o">.</span><span class="n">geturl</span><span class="p">())</span>
+            <span class="n">bos</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">cache_file</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span>
+
+            <span class="n">file</span> <span class="o">=</span> <span class="n">bis</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span>
+            <span class="k">while</span> <span class="n">file</span> <span class="o">!=</span> <span class="n">b</span><span class="s2">&quot;&quot;</span><span class="p">:</span>
+                <span class="n">bos</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+                <span class="n">file</span> <span class="o">=</span> <span class="n">bis</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span>
+            <span class="n">bos</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="n">XLogging</span><span class="p">()</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&quot;Cached XES extension </span><span class="se">\\</span><span class="s2">&#39;&quot;</span> <span class="o">+</span> <span class="n">uri</span><span class="o">.</span><span class="n">geturl</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">&#39;&quot;</span><span class="p">,</span>
+                           <span class="n">XLogging</span><span class="o">.</span><span class="n">Importance</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+
+        <span class="k">except</span> <span class="ne">IOError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;I/O error(</span><span class="si">{0}</span><span class="s2">): </span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">errno</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">strerror</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="XExtensionManager.load_extension_cache"><a class="viewcode-back" href="../../XExtensionManager.html#extension.XExtensionManager.XExtensionManager.load_extension_cache">[docs]</a>    <span class="k">def</span> <span class="nf">load_extension_cache</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Loads all extensions stored in the local cache. Cached extensions</span>
+<span class="sd">        which exceed the maximum caching age are discarded, and downloaded</span>
+<span class="sd">        freshly.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">min_modified</span> <span class="o">=</span> <span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">)))()</span> <span class="o">-</span> <span class="mi">2592000000</span>
+        <span class="n">ext_folder</span> <span class="o">=</span> <span class="n">XRuntimeUtils</span><span class="p">()</span><span class="o">.</span><span class="n">get_extension_cache_folder</span><span class="p">()</span>
+        <span class="n">ext_files</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">ext_folder</span><span class="p">)))</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">ext_files</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">XLogging</span><span class="p">()</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&quot;Extension caching disabled (Could not access cache&quot;</span>
+                           <span class="s2">&quot; directory)!&quot;</span><span class="p">,</span>
+                           <span class="n">XLogging</span><span class="o">.</span><span class="n">Importance</span><span class="o">.</span><span class="n">WARNING</span><span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ext_files</span><span class="p">)):</span>
+            <span class="n">ext_file</span> <span class="o">=</span> <span class="n">ext_files</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">ext_file</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.xesext&quot;</span><span class="p">):</span>
+                <span class="n">file_name</span> <span class="o">=</span> <span class="n">ext_folder</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">sep</span> <span class="o">+</span> <span class="n">ext_file</span>
+                <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getmtime</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1000</span> <span class="o">&lt;</span> <span class="n">min_modified</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">file_name</span><span class="p">):</span>
+                            <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">extension</span> <span class="o">=</span> <span class="n">XExtensionParser</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="n">extension</span><span class="o">.</span><span class="n">get_uri</span><span class="p">()</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__extension_map</span><span class="p">:</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">__extension_map</span><span class="p">[</span><span class="n">extension</span><span class="o">.</span><span class="n">get_uri</span><span class="p">()]</span> <span class="o">=</span> <span class="n">extension</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">__extension_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">extension</span><span class="p">)</span>
+                            <span class="n">XLogging</span><span class="p">()</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&quot;Loaded XES extension </span><span class="se">\&#39;</span><span class="s2">&quot;</span> <span class="o">+</span>
+                                           <span class="n">extension</span><span class="o">.</span><span class="n">get_uri</span><span class="p">()</span><span class="o">.</span><span class="n">geturl</span><span class="p">()</span> <span class="o">+</span>
+                                           <span class="s2">&quot;</span><span class="se">\&#39;</span><span class="s2"> from cache&quot;</span><span class="p">,</span>
+                                           <span class="n">XLogging</span><span class="o">.</span><span class="n">Importance</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">XLogging</span><span class="p">()</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&quot;Skipping cached XES extension </span><span class="se">\&#39;</span><span class="s2">&quot;</span> <span class="o">+</span>
+                                           <span class="n">extension</span><span class="o">.</span><span class="n">get_uri</span><span class="p">()</span><span class="o">.</span><span class="n">geturl</span><span class="p">()</span> <span class="o">+</span>
+                                           <span class="s2">&quot;</span><span class="se">\&#39;</span><span class="s2"> (already defined)&quot;</span><span class="p">,</span>
+                                           <span class="n">XLogging</span><span class="o">.</span><span class="n">Importance</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+                    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Exception error: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="p">))</span></div></div>
+</pre></div>
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        <a class="uplink" href="../../index.html">Contents</a>
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Hernán Valdivieso.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
+    </div>
+  </body>
+</html>

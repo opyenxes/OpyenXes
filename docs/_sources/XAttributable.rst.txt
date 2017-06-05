@@ -1,0 +1,7 @@
+
+XAttributable
+=============
+
+.. automodule:: model.XAttributable
+   :members:
+

@@ -1,0 +1,7 @@
+
+XRegistry
+=========
+
+.. automodule:: utils.XRegistry
+   :members:
+

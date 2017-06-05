@@ -1,0 +1,218 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>info.XGlobalAttributeNameMap &#8212; OpenXes Python 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../../index.html">
+          <span>OpenXes Python 1.0 documentation</span></a></h1>
+        <h2 class="heading"><span>info.XGlobalAttributeNameMap</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        <a class="uplink" href="../../index.html">Contents</a>
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <h1>Source code for info.XGlobalAttributeNameMap</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">info.XAttributeNameMap</span> <span class="k">import</span> <span class="n">XAttributeNameMap</span>
+<span class="kn">from</span> <span class="nn">utils.SingletonClassGenerator</span> <span class="k">import</span> <span class="n">XGlobalAttributeNameMapMetaclass</span>
+<span class="kn">from</span> <span class="nn">model.XAttribute</span> <span class="k">import</span> <span class="n">XAttribute</span>
+
+
+<div class="viewcode-block" id="XGlobalAttributeNameMap"><a class="viewcode-back" href="../../XGlobalAttributeNameMap.html#info.XGlobalAttributeNameMap.XGlobalAttributeNameMap">[docs]</a><span class="k">class</span> <span class="nc">XGlobalAttributeNameMap</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">XGlobalAttributeNameMapMetaclass</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;This singleton class implements a global attribute name mapping facility</span>
+<span class="sd">    and can manage a number of attribute name mappings. Further, this class also</span>
+<span class="sd">    acts as a proxy to the standard mapping, i.e. it can be used directly as a</span>
+<span class="sd">    attribute name mapping instance.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">MAPPING_STANDARD</span> <span class="o">=</span> <span class="s2">&quot;EN&quot;</span>
+    <span class="n">MAPPING_ENGLISH</span> <span class="o">=</span> <span class="s2">&quot;EN&quot;</span>
+    <span class="n">MAPPING_GERMAN</span> <span class="o">=</span> <span class="s2">&quot;DE&quot;</span>
+    <span class="n">MAPPING_DUTCH</span> <span class="o">=</span> <span class="s2">&quot;NL&quot;</span>
+    <span class="n">MAPPING_FRENCH</span> <span class="o">=</span> <span class="s2">&quot;FR&quot;</span>
+    <span class="n">MAPPING_ITALIAN</span> <span class="o">=</span> <span class="s2">&quot;IT&quot;</span>
+    <span class="n">MAPPING_SPANISH</span> <span class="o">=</span> <span class="s2">&quot;ES&quot;</span>
+    <span class="n">MAPPING_PORTUGUESE</span> <span class="o">=</span> <span class="s2">&quot;PT&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__standard_mapping</span> <span class="o">=</span> <span class="n">XAttributeNameMap</span><span class="p">(</span><span class="s2">&quot;EN&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__mappings</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;EN&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">__standard_mapping</span><span class="p">}</span>
+
+<div class="viewcode-block" id="XGlobalAttributeNameMap.get_available_mapping_names"><a class="viewcode-back" href="../../XGlobalAttributeNameMap.html#info.XGlobalAttributeNameMap.XGlobalAttributeNameMap.get_available_mapping_names">[docs]</a>    <span class="k">def</span> <span class="nf">get_available_mapping_names</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the names of all available mappings. Note that referenced</span>
+<span class="sd">        mappings may be empty.</span>
+
+<span class="sd">        :return: A tuple of names of all available mappings.</span>
+<span class="sd">        :rtype: tuple</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__mappings</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="XGlobalAttributeNameMap.get_available_mappings"><a class="viewcode-back" href="../../XGlobalAttributeNameMap.html#info.XGlobalAttributeNameMap.XGlobalAttributeNameMap.get_available_mappings">[docs]</a>    <span class="k">def</span> <span class="nf">get_available_mappings</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns all available mappings. Note that returned mappings may be empty.</span>
+
+<span class="sd">        :return: A tuple of all available mappings.</span>
+<span class="sd">        :rtype: tuple</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">values</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__mappings</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="XGlobalAttributeNameMap.get_mapping"><a class="viewcode-back" href="../../XGlobalAttributeNameMap.html#info.XGlobalAttributeNameMap.XGlobalAttributeNameMap.get_mapping">[docs]</a>    <span class="k">def</span> <span class="nf">get_mapping</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Provides access to a specific attribute name mapping by its name. If</span>
+<span class="sd">        the requested mapping does not exist yet, a new mapping will be created,</span>
+<span class="sd">        added to the set of managed mappings, and returned. This means, this</span>
+<span class="sd">        method will always return a mapping, but this could be empty.</span>
+
+<span class="sd">        :param name: Name of the requested mapping.</span>
+<span class="sd">        :type name: str</span>
+<span class="sd">        :return: The requested mapping, as stored in this facility (or newly created).</span>
+<span class="sd">        :rtype: XAttributeNameMap</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">mapping</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__mappings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">mapping</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">mapping</span> <span class="o">=</span> <span class="n">XAttributeNameMap</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__mappings</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapping</span>
+
+        <span class="k">return</span> <span class="n">mapping</span></div>
+
+<div class="viewcode-block" id="XGlobalAttributeNameMap.get_standard_mapping"><a class="viewcode-back" href="../../XGlobalAttributeNameMap.html#info.XGlobalAttributeNameMap.XGlobalAttributeNameMap.get_standard_mapping">[docs]</a>    <span class="k">def</span> <span class="nf">get_standard_mapping</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Retrieves the standard attribute name mapping, i.e. the EN english</span>
+<span class="sd">        language mapping.</span>
+
+<span class="sd">        :return: The standard mapping.</span>
+<span class="sd">        :rtype: XAttributeNameMap</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__standard_mapping</span></div>
+
+<div class="viewcode-block" id="XGlobalAttributeNameMap.map_safely"><a class="viewcode-back" href="../../XGlobalAttributeNameMap.html#info.XGlobalAttributeNameMap.XGlobalAttributeNameMap.map_safely">[docs]</a>    <span class="k">def</span> <span class="nf">map_safely</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attribute</span><span class="p">,</span> <span class="n">mapping</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Maps an attribute safely, using the given attribute mapping. Safe</span>
+<span class="sd">        mapping attempts to map the attribute using the given mapping first.</span>
+<span class="sd">        If this does not succeed, the standard mapping (EN) will be used for</span>
+<span class="sd">        mapping. If no mapping is available in the standard mapping, the</span>
+<span class="sd">        original attribute key is returned unchanged. This way, it is always</span>
+<span class="sd">        ensured that this method returns a valid string for naming attributes.</span>
+
+<span class="sd">        :param attribute: Attribute to map or key of the attribute to map.</span>
+<span class="sd">        :type attribute: XAttribute or str</span>
+<span class="sd">        :param mapping: Name of the mapping to be used preferably or attribute</span>
+<span class="sd">         name map to be used preferably.</span>
+<span class="sd">        :type mapping: str or XAttributeNameMap</span>
+<span class="sd">        :return: The safe mapping for the given attribute.</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">attribute</span><span class="p">,</span> <span class="n">XAttribute</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mapping</span><span class="p">,</span> <span class="n">XAttributeNameMap</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">map_safely</span><span class="p">(</span><span class="n">attribute</span><span class="o">.</span><span class="n">get_key</span><span class="p">(),</span> <span class="n">mapping</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">attribute</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mapping</span><span class="p">,</span> <span class="n">XAttributeNameMap</span><span class="p">):</span>
+            <span class="n">alias</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">if</span> <span class="n">mapping</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">alias</span> <span class="o">=</span> <span class="n">mapping</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">attribute</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">alias</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">alias</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__standard_mapping</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">attribute</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">alias</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">alias</span> <span class="o">=</span> <span class="n">attribute</span>
+
+            <span class="k">return</span> <span class="n">alias</span>
+
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">attribute</span><span class="p">,</span> <span class="n">XAttribute</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mapping</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">map_safely</span><span class="p">(</span><span class="n">attribute</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__mappings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">mapping</span><span class="p">))</span>
+
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">attribute</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mapping</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">map_safely</span><span class="p">(</span><span class="n">attribute</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__mappings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">mapping</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="XGlobalAttributeNameMap.register_mapping"><a class="viewcode-back" href="../../XGlobalAttributeNameMap.html#info.XGlobalAttributeNameMap.XGlobalAttributeNameMap.register_mapping">[docs]</a>    <span class="k">def</span> <span class="nf">register_mapping</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mapping_name</span><span class="p">,</span> <span class="n">attribute_key</span><span class="p">,</span> <span class="n">alias</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Registers a known attribute for mapping in a given attribute name</span>
+<span class="sd">        map. **IMPORTANT**: This method should only be called when one intends</span>
+<span class="sd">        to create, or add to, the global attribute name mapping.</span>
+
+<span class="sd">        :param mapping_name: Name of the mapping to register with.</span>
+<span class="sd">        :type mapping_name: str</span>
+<span class="sd">        :param attribute_key: Attribute key to be mapped.</span>
+<span class="sd">        :type attribute_key: str</span>
+<span class="sd">        :param alias: Alias to map the given attribute to.</span>
+<span class="sd">        :type alias: str</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">mapping</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_mapping</span><span class="p">(</span><span class="n">mapping_name</span><span class="p">)</span>
+        <span class="n">mapping</span><span class="o">.</span><span class="n">register_mapping</span><span class="p">(</span><span class="n">attribute_key</span><span class="p">,</span> <span class="n">alias</span><span class="p">)</span></div>
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="XGlobalAttributeNameMap.get_mapping_name"><a class="viewcode-back" href="../../XGlobalAttributeNameMap.html#info.XGlobalAttributeNameMap.XGlobalAttributeNameMap.get_mapping_name">[docs]</a>    <span class="k">def</span> <span class="nf">get_mapping_name</span><span class="p">():</span>
+        <span class="sd">&quot;&quot;&quot;Returns the name of this mapping.</span>
+
+<span class="sd">        :return: The name of this mapping.</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;EN&quot;</span></div>
+
+<div class="viewcode-block" id="XGlobalAttributeNameMap.map"><a class="viewcode-back" href="../../XGlobalAttributeNameMap.html#info.XGlobalAttributeNameMap.XGlobalAttributeNameMap.map">[docs]</a>    <span class="k">def</span> <span class="nf">map</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attribute</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the name mapped onto the provided attribute by this mapping.</span>
+<span class="sd">        If no mapping for the given attribute is provided by this map, null is</span>
+<span class="sd">        returned.</span>
+
+<span class="sd">        :param attribute: Attribute or attribute key to retrieve mapping for.</span>
+<span class="sd">        :type attribute: str or XAttribute</span>
+<span class="sd">        :return: The mapping for the given attribute, or null, if no such</span>
+<span class="sd">         mapping exists.</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__standard_mapping</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">attribute</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">sb</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="n">sb</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Global attribute name map.</span><span class="se">\n\n</span><span class="s2">Contained maps:</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">values</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__mappings</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="n">sb</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">values</span><span class="p">))</span>
+            <span class="n">sb</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sb</span><span class="p">)</span></div>
+</pre></div>
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        <a class="uplink" href="../../index.html">Contents</a>
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Hernán Valdivieso.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
+    </div>
+  </body>
+</html>

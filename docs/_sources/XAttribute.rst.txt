@@ -1,0 +1,7 @@
+
+XAttribute
+==========
+
+.. automodule:: model.XAttribute
+   :members:
+

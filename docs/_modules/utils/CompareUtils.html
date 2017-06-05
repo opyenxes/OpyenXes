@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>utils.CompareUtils &#8212; OpenXes Python 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../../index.html">
+          <span>OpenXes Python 1.0 documentation</span></a></h1>
+        <h2 class="heading"><span>utils.CompareUtils</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        <a class="uplink" href="../../index.html">Contents</a>
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <h1>Source code for utils.CompareUtils</h1><div class="highlight"><pre>
+<div class="viewcode-block" id="compare_to_string"><a class="viewcode-back" href="../../CompareUtils.html#utils.CompareUtils.compare_to_string">[docs]</a><span></span><span class="k">def</span> <span class="nf">compare_to_string</span><span class="p">(</span><span class="n">string_1</span><span class="p">,</span> <span class="n">string_2</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;This function compares two string</span>
+
+<span class="sd">    :param string_1: The first string to compare.</span>
+<span class="sd">    :param string_2: The second string to compare with the first</span>
+<span class="sd">    :return: The value 0 if the string_2 is lexicographically equal to string_1;</span>
+<span class="sd">      a value less than 0 if string_2 is lexicographically greater than string_1;</span>
+<span class="sd">      and a value greater than 0 if the string_2 is lexicographically less than string_1.</span>
+<span class="sd">    :rtype: int</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">string_1</span> <span class="o">==</span> <span class="n">string_2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">string_1</span> <span class="o">&gt;</span> <span class="n">string_2</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span></div>
+
+
+<div class="viewcode-block" id="compare_to_boolean"><a class="viewcode-back" href="../../CompareUtils.html#utils.CompareUtils.compare_to_boolean">[docs]</a><span class="k">def</span> <span class="nf">compare_to_boolean</span><span class="p">(</span><span class="n">bool_1</span><span class="p">,</span> <span class="n">bool_2</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;This function compares two boolean</span>
+
+<span class="sd">    :param bool_1: The first boolean to compare.</span>
+<span class="sd">    :param bool_2: The second boolean to compare with the first</span>
+<span class="sd">    :return: The value 0 if if bool_1 represents the same boolean value as</span>
+<span class="sd">      the bool_2 a value less than 0 if bool_1 represents true and bool_2</span>
+<span class="sd">      represents false; and a value greater than 0 if bool_1 represents false</span>
+<span class="sd">      and bool_2 represents true.</span>
+<span class="sd">    :rtype: int</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">bool_1</span> <span class="o">==</span> <span class="n">bool_2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">bool_1</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">bool_2</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span></div>
+
+
+<div class="viewcode-block" id="compare_to_number"><a class="viewcode-back" href="../../CompareUtils.html#utils.CompareUtils.compare_to_number">[docs]</a><span class="k">def</span> <span class="nf">compare_to_number</span><span class="p">(</span><span class="n">number_1</span><span class="p">,</span> <span class="n">number_2</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;This function compares two number, integer or float</span>
+
+<span class="sd">    :param number_1: The first number to compare.</span>
+<span class="sd">    :param number_2: The second number to compare with the first</span>
+<span class="sd">    :return: The value 0 if the number_2  is equal to number_1; a value</span>
+<span class="sd">      less than 0 if number_2 is greater than number_1; and a value greater</span>
+<span class="sd">      than 0 if the number_2 is less than number_1.</span>
+<span class="sd">    :rtype: int</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">number_1</span> <span class="o">==</span> <span class="n">number_2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">number_1</span> <span class="o">&gt;</span> <span class="n">number_2</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span></div>
+</pre></div>
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        <a class="uplink" href="../../index.html">Contents</a>
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Hernán Valdivieso.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,7 @@
+XSemanticExtension
+==================
+
+.. automodule:: extension.std.XSemanticExtension
+   :members:
+
+

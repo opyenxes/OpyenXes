@@ -1,0 +1,7 @@
+XAttributeContinuous
+====================
+
+.. automodule:: model.XAttributeContinuous
+   :members:
+
+

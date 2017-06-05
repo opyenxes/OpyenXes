@@ -1,0 +1,272 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>extension.std.XAbstractNestedAttributeSupport &#8212; OpenXes Python 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../../../index.html">
+          <span>OpenXes Python 1.0 documentation</span></a></h1>
+        <h2 class="heading"><span>extension.std.XAbstractNestedAttributeSupport</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        <a class="uplink" href="../../../index.html">Contents</a>
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <h1>Source code for extension.std.XAbstractNestedAttributeSupport</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">abc</span> <span class="k">import</span> <span class="n">abstractclassmethod</span>
+<span class="kn">from</span> <span class="nn">factory.XFactoryRegistry</span> <span class="k">import</span> <span class="n">XFactoryRegistry</span>
+<span class="kn">from</span> <span class="nn">model.XAttribute</span> <span class="k">import</span> <span class="n">XAttribute</span>
+
+
+<div class="viewcode-block" id="XAbstractNestedAttributeSupport"><a class="viewcode-back" href="../../../XAbstractNestedAttributeSupport.html#extension.std.XAbstractNestedAttributeSupport.XAbstractNestedAttributeSupport">[docs]</a><span class="k">class</span> <span class="nc">XAbstractNestedAttributeSupport</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;This class offers generic support for extracting and assigning values to</span>
+<span class="sd">    and from nested attributes.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nd">@abstractclassmethod</span>
+<div class="viewcode-block" id="XAbstractNestedAttributeSupport.assign_value"><a class="viewcode-back" href="../../../XAbstractNestedAttributeSupport.html#extension.std.XAbstractNestedAttributeSupport.XAbstractNestedAttributeSupport.assign_value">[docs]</a>    <span class="k">def</span> <span class="nf">assign_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Abstract method to assign a value to an element.</span>
+
+<span class="sd">        :param element: The element to assign the value to.</span>
+<span class="sd">        :type element: XAttribute</span>
+<span class="sd">        :param value: The value to be assigned.</span>
+<span class="sd">        :type value: Any</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+    <span class="nd">@abstractclassmethod</span>
+<div class="viewcode-block" id="XAbstractNestedAttributeSupport.extract_value"><a class="viewcode-back" href="../../../XAbstractNestedAttributeSupport.html#extension.std.XAbstractNestedAttributeSupport.XAbstractNestedAttributeSupport.extract_value">[docs]</a>    <span class="k">def</span> <span class="nf">extract_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Abstract method to extract a value from an element.</span>
+
+<span class="sd">        :param element:  The element to extract the value from.</span>
+<span class="sd">        :type element: XAttribute</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="XAbstractNestedAttributeSupport.extract_values"><a class="viewcode-back" href="../../../XAbstractNestedAttributeSupport.html#extension.std.XAbstractNestedAttributeSupport.XAbstractNestedAttributeSupport.extract_values">[docs]</a>    <span class="k">def</span> <span class="nf">extract_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Retrieves a map containing all values for all child attributes of an</span>
+<span class="sd">        element. For example, the XES fragment: ::</span>
+
+<span class="sd">            &lt;trace&gt;</span>
+<span class="sd">                &lt;string key=&quot;key.1&quot; value=&quot;&quot;&gt;</span>
+<span class="sd">                    &lt;float key=&quot;ext:attr&quot; value=&quot;val.1&quot;/&gt;</span>
+<span class="sd">                    &lt;string key=&quot;key.1.1&quot; value=&quot;&quot;&gt;</span>
+<span class="sd">                        &lt;float key=&quot;ext:attr&quot; value=&quot;val.1.1&quot;/&gt;</span>
+<span class="sd">                    &lt;/string&gt;</span>
+<span class="sd">                    &lt;string key=&quot;key.1.2&quot; value=&quot;&quot;&gt;</span>
+<span class="sd">                        &lt;float key=&quot;ext:attr&quot; value=&quot;val.1.2&quot;/&gt;</span>
+<span class="sd">                    &lt;/string&gt;</span>
+<span class="sd">                &lt;/string&gt;</span>
+<span class="sd">                &lt;string key=&quot;key.2&quot; value=&quot;&quot;&gt;</span>
+<span class="sd">                   &lt;float key=&quot;ext:attr&quot; value=&quot;val.2&quot;/&gt;</span>
+<span class="sd">                &lt;/string&gt;</span>
+<span class="sd">                &lt;string key=&quot;key.3&quot; value=&quot;&quot;&gt;</span>
+<span class="sd">                   &lt;float key=&quot;ext:attr&quot; value=&quot;val.3&quot;/&gt;</span>
+<span class="sd">                &lt;/string&gt;</span>
+<span class="sd">            &lt;/trace&gt;</span>
+
+<span class="sd">        should result into the following:::</span>
+
+<span class="sd">            {&quot;key.1&quot;: val.1, &quot;key.2&quot;: val.2, &quot;key.3&quot;: val.3}</span>
+
+<span class="sd">        :param element: Element to retrieve all values for.</span>
+<span class="sd">        :type element: XAttributable</span>
+<span class="sd">        :return: Dictionary with all child keys to values.</span>
+<span class="sd">        :rtype: dict(str: any}</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="n">nested_values</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extract_nested_values</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">keys</span> <span class="ow">in</span> <span class="n">nested_values</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">keys</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">values</span><span class="p">[</span><span class="n">keys</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="n">nested_values</span><span class="p">[</span><span class="n">keys</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">values</span></div>
+
+<div class="viewcode-block" id="XAbstractNestedAttributeSupport.extract_nested_values"><a class="viewcode-back" href="../../../XAbstractNestedAttributeSupport.html#extension.std.XAbstractNestedAttributeSupport.XAbstractNestedAttributeSupport.extract_nested_values">[docs]</a>    <span class="k">def</span> <span class="nf">extract_nested_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Retrieves a map containing all values for all descending attributes</span>
+<span class="sd">        of an element. For example, the XES fragment:::</span>
+
+<span class="sd">            &lt;trace&gt;</span>
+<span class="sd">                &lt;string key=&quot;key.1&quot; value=&quot;&quot;&gt;</span>
+<span class="sd">                    &lt;float key=&quot;ext:attr&quot; value=&quot;val.1&quot;/&gt;</span>
+<span class="sd">                    &lt;string key=&quot;key.1.1&quot; value=&quot;&quot;&gt;</span>
+<span class="sd">                        &lt;float key=&quot;ext:attr&quot; value=&quot;val.1.1&quot;/&gt;</span>
+<span class="sd">                    &lt;/string&gt;</span>
+<span class="sd">                    &lt;string key=&quot;key.1.2&quot; value=&quot;&quot;&gt;</span>
+<span class="sd">                        &lt;float key=&quot;ext:attr&quot; value=&quot;val.1.2&quot;/&gt;</span>
+<span class="sd">                    &lt;/string&gt;</span>
+<span class="sd">                &lt;/string&gt;</span>
+<span class="sd">                &lt;string key=&quot;key.2&quot; value=&quot;&quot;&gt;</span>
+<span class="sd">                   &lt;float key=&quot;ext:attr&quot; value=&quot;val.2&quot;/&gt;</span>
+<span class="sd">                &lt;/string&gt;</span>
+<span class="sd">                &lt;string key=&quot;key.3&quot; value=&quot;&quot;&gt;</span>
+<span class="sd">                   &lt;float key=&quot;ext:attr&quot; value=&quot;val.3&quot;/&gt;</span>
+<span class="sd">                &lt;/string&gt;</span>
+<span class="sd">            &lt;/trace&gt;</span>
+
+
+<span class="sd">        should result into the following:::</span>
+
+<span class="sd">            {[&quot;key.1&quot;]: val.1, [&quot;key.1&quot;, &quot;key.1.1&quot;]: val.1.1, [&quot;key.1&quot;, &quot;key.1.2&quot;]: val.1.2, [&quot;key.2&quot;]: val.2, [&quot;key.3&quot;]: val.3}</span>
+
+
+<span class="sd">        :param element: Element to retrieve all values for.</span>
+<span class="sd">        :type element: XAttributable</span>
+<span class="sd">        :return: Dictionary with all descending keys to values.</span>
+<span class="sd">        :rtype: dict(list[str]: Any)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">nested_values</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span> <span class="n">element</span><span class="o">.</span><span class="n">get_attributes</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="n">keys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+            <span class="n">keys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">attr</span><span class="o">.</span><span class="n">get_key</span><span class="p">())</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__extract_nested_values_private__</span><span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="n">nested_values</span><span class="p">,</span> <span class="n">keys</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">nested_values</span></div>
+
+    <span class="k">def</span> <span class="nf">__extract_nested_values_private__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">,</span> <span class="n">nested_values</span><span class="p">,</span> <span class="n">keys</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; helper and private method to assign the nested values.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extract_value</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">value</span><span class="p">:</span>
+            <span class="n">nested_values</span><span class="p">[</span><span class="n">keys</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+
+        <span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span> <span class="n">element</span><span class="o">.</span><span class="n">get_attributes</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="n">new_keys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">keys</span><span class="p">)</span>
+            <span class="n">new_keys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">get_key</span><span class="p">())</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__extract_nested_values_private__</span><span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="n">nested_values</span><span class="p">,</span> <span class="n">new_keys</span><span class="p">)</span>
+
+<div class="viewcode-block" id="XAbstractNestedAttributeSupport.assign_values"><a class="viewcode-back" href="../../../XAbstractNestedAttributeSupport.html#extension.std.XAbstractNestedAttributeSupport.XAbstractNestedAttributeSupport.assign_values">[docs]</a>    <span class="k">def</span> <span class="nf">assign_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Assigns (to the given element) multiple values given their keys. Note</span>
+<span class="sd">        that as a side effect this method creates attributes when it does not</span>
+<span class="sd">        find an attribute with the proper key. For example, the call:::</span>
+
+<span class="sd">            assign_values(event, {&quot;key.1&quot;: val.1, &quot;key.2&quot;: val.2, &quot;key.3&quot;: val.3})</span>
+
+<span class="sd">        should result into the following XES fragment:::</span>
+
+<span class="sd">            &lt;event&gt;</span>
+<span class="sd">                &lt;string key=&quot;key.1&quot; value=&quot;&quot;&gt;</span>
+<span class="sd">                    &lt;float key=&quot;ext:attr&quot; value=&quot;val.1&quot;/&gt;</span>
+<span class="sd">                &lt;/string&gt;</span>
+<span class="sd">                &lt;string key=&quot;key.2&quot; value=&quot;&quot;&gt;</span>
+<span class="sd">                   &lt;float key=&quot;ext:attr&quot; value=&quot;val.2&quot;/&gt;</span>
+<span class="sd">                &lt;/string&gt;</span>
+<span class="sd">                &lt;string key=&quot;key.3&quot; value=&quot;&quot;&gt;</span>
+<span class="sd">                   &lt;float key=&quot;ext:attr&quot; value=&quot;val.3&quot;/&gt;</span>
+<span class="sd">                &lt;/string&gt;</span>
+<span class="sd">            &lt;/event&gt;</span>
+
+<span class="sd">        :param element: Element to assign the values to.</span>
+<span class="sd">        :type element: XAttributable</span>
+<span class="sd">        :param values: dictionary with keys to values which are to be assigned.</span>
+<span class="sd">        :type values: dict(str: Any)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">nested_values</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">values</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">keys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+            <span class="n">keys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+            <span class="n">nested_values</span><span class="p">[</span><span class="n">keys</span><span class="p">]</span> <span class="o">=</span> <span class="n">values</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">assign_nested_values</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">nested_values</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="XAbstractNestedAttributeSupport.assign_nested_values"><a class="viewcode-back" href="../../../XAbstractNestedAttributeSupport.html#extension.std.XAbstractNestedAttributeSupport.XAbstractNestedAttributeSupport.assign_nested_values">[docs]</a>    <span class="k">def</span> <span class="nf">assign_nested_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">,</span> <span class="n">amounts</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Assigns (to the given event) multiple values given their key lists.</span>
+<span class="sd">        The i-th element in the key list should correspond to an i-level</span>
+<span class="sd">        attribute with the prescribed key. Note that as a side effect this</span>
+<span class="sd">        method creates attributes when it does not find an attribute with the</span>
+<span class="sd">        proper key. For example, the call:::</span>
+
+<span class="sd">            assignNestedValues(event, {[&quot;key.1&quot;]: val.1, [&quot;key.1&quot;, &quot;key.1.1&quot;]: val.1.1, [&quot;key.1&quot;, &quot;key.1.2&quot;]: val.1.2, [&quot;key.2&quot;]: val.2, [&quot;key.3&quot;]: val.3})</span>
+
+<span class="sd">        should result into the following XES fragment:::</span>
+
+<span class="sd">            &lt;event&gt;</span>
+<span class="sd">                &lt;string key=&quot;key.1&quot; value=&quot;&quot;&gt;</span>
+<span class="sd">                    &lt;float key=&quot;ext:attr&quot; value=&quot;val.1&quot;/&gt;</span>
+<span class="sd">                    &lt;string key=&quot;key.1.1&quot; value=&quot;&quot;&gt;</span>
+<span class="sd">                        &lt;float key=&quot;ext:attr&quot; value=&quot;val.1.1&quot;/&gt;</span>
+<span class="sd">                    &lt;/string&gt;</span>
+<span class="sd">                    &lt;string key=&quot;key.1.2&quot; value=&quot;&quot;&gt;</span>
+<span class="sd">                        &lt;float key=&quot;ext:attr&quot; value=&quot;val.1.2&quot;/&gt;</span>
+<span class="sd">                    &lt;/string&gt;</span>
+<span class="sd">                &lt;/string&gt;</span>
+<span class="sd">                &lt;string key=&quot;key.2&quot; value=&quot;&quot;&gt;</span>
+<span class="sd">                   &lt;float key=&quot;ext:attr&quot; value=&quot;val.2&quot;/&gt;</span>
+<span class="sd">                &lt;/string&gt;</span>
+<span class="sd">                &lt;string key=&quot;key.3&quot; value=&quot;&quot;&gt;</span>
+<span class="sd">                   &lt;float key=&quot;ext:attr&quot; value=&quot;val.3&quot;/&gt;</span>
+<span class="sd">                &lt;/string&gt;</span>
+<span class="sd">            &lt;/event&gt;</span>
+
+<span class="sd">        :param element: Element to assign the values to.</span>
+<span class="sd">        :type element: XAttributable</span>
+<span class="sd">        :param amounts: Dictionary with key lists to values which are to be</span>
+<span class="sd">         assigned.</span>
+<span class="sd">        :type amounts: dict(list[str]: Any)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">for</span> <span class="n">keys</span> <span class="ow">in</span> <span class="n">amounts</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__assign_nested_values_private__</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">keys</span><span class="p">,</span> <span class="n">amounts</span><span class="p">[</span><span class="n">keys</span><span class="p">])</span></div>
+
+    <span class="k">def</span> <span class="nf">__assign_nested_values_private__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">,</span> <span class="n">keys</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; helper and private method to assign the nested values.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">keys</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">XAttribute</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">assign_value</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">key</span> <span class="o">=</span> <span class="n">keys</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">keys_tail</span> <span class="o">=</span> <span class="n">keys</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">element</span><span class="o">.</span><span class="n">get_attributes</span><span class="p">():</span>
+                <span class="n">attr</span> <span class="o">=</span> <span class="n">element</span><span class="o">.</span><span class="n">get_attributes</span><span class="p">()[</span><span class="n">key</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">attr</span> <span class="o">=</span> <span class="n">XFactoryRegistry</span><span class="p">()</span><span class="o">.</span><span class="n">current_default</span><span class="p">()</span><span class="o">.</span><span class="n">create_attribute_literal</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+                <span class="n">element</span><span class="o">.</span><span class="n">get_attributes</span><span class="p">()[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">attr</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__assign_nested_values_private__</span><span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="n">keys_tail</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span></div>
+</pre></div>
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        <a class="uplink" href="../../../index.html">Contents</a>
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Hernán Valdivieso.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>utils.XRuntimeUtils &#8212; OpenXes Python 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../../index.html">
+          <span>OpenXes Python 1.0 documentation</span></a></h1>
+        <h2 class="heading"><span>utils.XRuntimeUtils</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        <a class="uplink" href="../../index.html">Contents</a>
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <h1>Source code for utils.XRuntimeUtils</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+
+<div class="viewcode-block" id="XRuntimeUtils"><a class="viewcode-back" href="../../XRuntimeUtils.html#utils.XRuntimeUtils.XRuntimeUtils">[docs]</a><span class="k">class</span> <span class="nc">XRuntimeUtils</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;This class provides runtime utilities for library components.</span>
+<span class="sd">    Its main purpose is to identify the host OS, and to locate a standard</span>
+<span class="sd">    support folder location on each platform.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">xes_version</span> <span class="o">=</span> <span class="s2">&quot;1.0&quot;</span>
+    <span class="n">openxes_version</span> <span class="o">=</span> <span class="s2">&quot;1.0RC7&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__current_os</span> <span class="o">=</span> <span class="kc">None</span>
+
+<div class="viewcode-block" id="XRuntimeUtils.determine_os"><a class="viewcode-back" href="../../XRuntimeUtils.html#utils.XRuntimeUtils.XRuntimeUtils.determine_os">[docs]</a>    <span class="k">def</span> <span class="nf">determine_os</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Determines the current host platform.</span>
+
+<span class="sd">        :return: Current host platform.</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__current_os</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__current_os</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">platform</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__current_os</span></div>
+
+<div class="viewcode-block" id="XRuntimeUtils.is_running_windows"><a class="viewcode-back" href="../../XRuntimeUtils.html#utils.XRuntimeUtils.XRuntimeUtils.is_running_windows">[docs]</a>    <span class="k">def</span> <span class="nf">is_running_windows</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Checks whether the current platform is Windows.</span>
+
+<span class="sd">        :return: True if the current platform is Windows. False otherwise.</span>
+<span class="sd">        :rtype: bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">determine_os</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;win32&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="XRuntimeUtils.is_running_mac_os_x"><a class="viewcode-back" href="../../XRuntimeUtils.html#utils.XRuntimeUtils.XRuntimeUtils.is_running_mac_os_x">[docs]</a>    <span class="k">def</span> <span class="nf">is_running_mac_os_x</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Checks whether the current platform is Mac OS X.</span>
+
+<span class="sd">        :return: True if the current platform is Mac OS X. False otherwise.</span>
+<span class="sd">        :rtype: bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">determine_os</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;darwin&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="XRuntimeUtils.is_running_linux"><a class="viewcode-back" href="../../XRuntimeUtils.html#utils.XRuntimeUtils.XRuntimeUtils.is_running_linux">[docs]</a>    <span class="k">def</span> <span class="nf">is_running_linux</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Checks whether the current platform is Linux.</span>
+
+<span class="sd">        :return: True if the current platform is Linux. False otherwise.</span>
+<span class="sd">        :rtype: bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">determine_os</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;linux&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="XRuntimeUtils.is_running_unix"><a class="viewcode-back" href="../../XRuntimeUtils.html#utils.XRuntimeUtils.XRuntimeUtils.is_running_unix">[docs]</a>    <span class="k">def</span> <span class="nf">is_running_unix</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Checks whether the current platform is some flavor of Unix.</span>
+
+<span class="sd">        :return: True if the current platform is some flavor of Unix. False otherwise.</span>
+<span class="sd">        :rtype: bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">determine_os</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;freebsd&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_running_linux</span><span class="p">()</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_running_mac_os_x</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="XRuntimeUtils.get_support_folder"><a class="viewcode-back" href="../../XRuntimeUtils.html#utils.XRuntimeUtils.XRuntimeUtils.get_support_folder">[docs]</a>    <span class="k">def</span> <span class="nf">get_support_folder</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Retrieves the path of the platform-dependent OpenXES support folder.</span>
+
+<span class="sd">        :return: The path of the platform-dependent OpenXES support folder.</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">home_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;USERPROFILE&#39;</span><span class="p">))</span>
+        <span class="n">dir_name</span> <span class="o">=</span> <span class="s2">&quot;OpenXES&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_running_windows</span><span class="p">():</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">home_dir</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">dir_name</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">home_dir</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">dir_name</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">&quot;</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_running_mac_os_x</span><span class="p">():</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">home_dir</span> <span class="o">+</span> <span class="s2">&quot;/Library/Application Support/&quot;</span> <span class="o">+</span> <span class="n">dir_name</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">home_dir</span> <span class="o">+</span> <span class="s2">&quot;/Library/Application Support/&quot;</span> <span class="o">+</span> <span class="n">dir_name</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">home_dir</span> <span class="o">+</span> <span class="s2">&quot;/.&quot;</span> <span class="o">+</span> <span class="n">dir_name</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">home_dir</span> <span class="o">+</span> <span class="s2">&quot;/.&quot;</span> <span class="o">+</span> <span class="n">dir_name</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span></div>
+
+<div class="viewcode-block" id="XRuntimeUtils.get_extension_cache_folder"><a class="viewcode-back" href="../../XRuntimeUtils.html#utils.XRuntimeUtils.XRuntimeUtils.get_extension_cache_folder">[docs]</a>    <span class="k">def</span> <span class="nf">get_extension_cache_folder</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Retrieves the directory file of the platform-dependent OpenXES extension definition file folder.</span>
+
+<span class="sd">        :return: the directory file of the platform-dependent.</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ext_folder</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_support_folder</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;ExtensionCache&quot;</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">ext_folder</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ext_folder</span></div></div>
+</pre></div>
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        <a class="uplink" href="../../index.html">Contents</a>
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Hernán Valdivieso.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
+    </div>
+  </body>
+</html>

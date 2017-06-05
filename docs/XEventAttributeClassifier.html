@@ -1,0 +1,207 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>XEventAttributeClassifier &#8212; OpenXes Python 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="XEventAndClassifier" href="XEventAndClassifier.html" />
+    <link rel="prev" title="Classification" href="classification.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="index.html">
+          <span>OpenXes Python 1.0 documentation</span></a></h1>
+        <h2 class="heading"><span>XEventAttributeClassifier</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="classification.html">Classification</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="XEventAndClassifier.html">XEventAndClassifier</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="module-classification.XEventAttributeClassifier">
+<span id="xeventattributeclassifier"></span><h1>XEventAttributeClassifier<a class="headerlink" href="#module-classification.XEventAttributeClassifier" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="classification.XEventAttributeClassifier.XEventAttributeClassifier">
+<em class="property">class </em><code class="descclassname">classification.XEventAttributeClassifier.</code><code class="descname">XEventAttributeClassifier</code><span class="sig-paren">(</span><em>name</em>, <em>keys</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/classification/XEventAttributeClassifier.html#XEventAttributeClassifier"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#classification.XEventAttributeClassifier.XEventAttributeClassifier" title="Permalink to this definition">¶</a></dt>
+<dd><p>Event classifier which considers two events as equal, if, for a set of
+given (configurable) attributes, they have the same values.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>name</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Name of the classifier.</li>
+<li><strong>keys</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#list" title="(in Python v2.7)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em>]</em><em></em>) &#8211; List with the keys of the attributes used for event comparison.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="classification.XEventAttributeClassifier.XEventAttributeClassifier.compare_to">
+<code class="descname">compare_to</code><span class="sig-paren">(</span><em>obj</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/classification/XEventAttributeClassifier.html#XEventAttributeClassifier.compare_to"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#classification.XEventAttributeClassifier.XEventAttributeClassifier.compare_to" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper method to compares this object with the specified object for
+order.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>obj</strong> (<a class="reference internal" href="XAttributeDiscrete.html#module-model.XAttributeDiscrete" title="model.XAttributeDiscrete"><em>XAttributeDiscrete</em></a>) &#8211; the Object to be compared.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A negative integer, zero, or a positive integer as this object
+is less than, equal to, or greater than the specified object.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)">int</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="classification.XEventAttributeClassifier.XEventAttributeClassifier.get_class_identity">
+<code class="descname">get_class_identity</code><span class="sig-paren">(</span><em>event</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/classification/XEventAttributeClassifier.html#XEventAttributeClassifier.get_class_identity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#classification.XEventAttributeClassifier.XEventAttributeClassifier.get_class_identity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves the unique class identity string of a given event.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>event</strong> (<a class="reference internal" href="XEvent.html#module-model.XEvent" title="model.XEvent"><em>XEvent</em></a>) &#8211; The given event to transform in the identity string.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The string that represent that event with this classifier.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="classification.XEventAttributeClassifier.XEventAttributeClassifier.get_defining_attribute_keys">
+<code class="descname">get_defining_attribute_keys</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/classification/XEventAttributeClassifier.html#XEventAttributeClassifier.get_defining_attribute_keys"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#classification.XEventAttributeClassifier.XEventAttributeClassifier.get_defining_attribute_keys" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves the set of attribute keys which are used in this event
+classifier (May be used for the construction of events that are not
+part of an existing event class).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">An array of attribute keys, which are used for defining this
+classifier.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#list" title="(in Python v2.7)">list</a>[<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)">str</a>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="classification.XEventAttributeClassifier.XEventAttributeClassifier.name">
+<code class="descname">name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/classification/XEventAttributeClassifier.html#XEventAttributeClassifier.name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#classification.XEventAttributeClassifier.XEventAttributeClassifier.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the name of this comparator</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The name of this comparator.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="classification.XEventAttributeClassifier.XEventAttributeClassifier.same_event_class">
+<code class="descname">same_event_class</code><span class="sig-paren">(</span><em>event_a</em>, <em>event_b</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/classification/XEventAttributeClassifier.html#XEventAttributeClassifier.same_event_class"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#classification.XEventAttributeClassifier.XEventAttributeClassifier.same_event_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks whether two event instances correspond to the same event
+class, i.e. are equal in that sense.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>event_a</strong> (<a class="reference internal" href="XEvent.html#module-model.XEvent" title="model.XEvent"><em>XEvent</em></a>) &#8211; The first event to check.</li>
+<li><strong>event_b</strong> (<a class="reference internal" href="XEvent.html#module-model.XEvent" title="model.XEvent"><em>XEvent</em></a>) &#8211; The second event to check with the first.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">True if two event have the same event class, False otherwise.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)">bool</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="classification.XEventAttributeClassifier.XEventAttributeClassifier.set_name">
+<code class="descname">set_name</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/classification/XEventAttributeClassifier.html#XEventAttributeClassifier.set_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#classification.XEventAttributeClassifier.XEventAttributeClassifier.set_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assigns a custom name to this classifier</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> &#8211; Name to be assigned to this classifier.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="classification.html">Classification</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="XEventAndClassifier.html">XEventAndClassifier</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Hernán Valdivieso.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
+    </div>
+  </body>
+</html>

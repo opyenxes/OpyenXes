@@ -1,0 +1,7 @@
+
+XMxmlGZIPSerializer
+===================
+
+.. automodule:: out.XMxmlGZIPSerializer
+   :members:
+

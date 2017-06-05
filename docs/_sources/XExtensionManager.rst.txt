@@ -1,0 +1,7 @@
+XExtensionManager
+=================
+
+.. automodule:: extension.XExtensionManager
+   :members:
+
+

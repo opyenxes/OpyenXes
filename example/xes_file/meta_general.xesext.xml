@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xesextension name="MetaData_General" prefix="meta_general" uri="http://www.xes-standard.org/meta_general.xesext">
+	<log>
+		<int key="classifiers">
+			<alias mapping="EN" name="Classifiers"/>
+		</int>
+		<int key="traces_total">
+			<alias mapping="EN" name="Total number of traces"/>
+		</int>
+		<int key="events_total">
+			<alias mapping="EN" name="Total number of events"/>
+		</int>
+		<float key="events_average">
+			<alias mapping="EN" name="Average number of events"/>
+		</float>
+		<float key="events_standard_deviation">
+			<alias mapping="EN" name="Standard deviation of number of events"/>
+		</float>
+		<int key="events_min">
+			<alias mapping="EN" name="Minimum number of events"/>
+		</int>
+		<int key="events_max">
+			<alias mapping="EN" name="Maximum number of events"/>
+		</int>
+	</log>
+	<meta>
+		<int key="different_classified_total"><!--Total number of different types of events (as defined by the classifier) in the log-->
+			<alias mapping="EN" name="Total number of differently classified events"/>
+		</int>
+		<float key="different_classified_average"><!--Average number of different classified events per trace-->
+			<alias mapping="EN" name="Average number of differently classified events"/>
+		</float>
+		<float key="different_classified_standard_deviation"><!--Standard deviation of different classified events per trace-->
+			<alias mapping="EN" name="Standard deviation of differently classified events"/>
+		</float>
+		<int key="different_classified_min"><!--Minimum number of different classified events in a trace-->
+			<alias mapping="EN" name="Minimum number of differently classified events"/>
+		</int>
+		<int key="different_classified_max"><!--Maximum number of different classified events in a trace-->
+			<alias mapping="EN" name="Maximum number of differently classified events"/>
+		</int>
+		<int key="classified_events_total"><!--Total number of classified events in the log-->
+			<alias mapping="EN" name="Total number of classified events"/>
+		</int>
+		<float key="classified_events_average"><!--Average number of classified events per trace-->
+			<alias mapping="EN" name="Average number of classified events"/>
+		</float>
+		<float key="classified_events_standard_deviation"><!--Standard deviation of classified events per trace-->
+			<alias mapping="EN" name="Standard deviation of classified events"/>
+		</float>
+		<int key="classified_events_min"><!--Minimum number of classified events in a trace-->
+			<alias mapping="EN" name="Minimum number of classified events"/>
+		</int>
+		<int key="classified_events_max"><!--Maximum number of classified events in a trace-->
+			<alias mapping="EN" name="Maximum number of classified events"/>
+		</int>	  
+		<int key="different_traces"><!--Total number of different traces in a log-->
+			<alias mapping="EN" name="Total number of different traces"/>
+		</int>	
+	</meta>
+</xesextension>

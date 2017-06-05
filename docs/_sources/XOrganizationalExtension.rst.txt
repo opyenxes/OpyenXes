@@ -1,0 +1,7 @@
+XOrganizationalExtension
+========================
+
+.. automodule:: extension.std.XOrganizationalExtension
+   :members:
+
+

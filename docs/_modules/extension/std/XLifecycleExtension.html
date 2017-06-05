@@ -1,0 +1,235 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>extension.std.XLifecycleExtension &#8212; OpenXes Python 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../../../index.html">
+          <span>OpenXes Python 1.0 documentation</span></a></h1>
+        <h2 class="heading"><span>extension.std.XLifecycleExtension</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        <a class="uplink" href="../../../index.html">Contents</a>
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <h1>Source code for extension.std.XLifecycleExtension</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">extension.XExtension</span> <span class="k">import</span> <span class="n">XExtension</span>
+<span class="kn">from</span> <span class="nn">urllib.parse</span> <span class="k">import</span> <span class="n">urlparse</span>
+<span class="kn">from</span> <span class="nn">info.XGlobalAttributeNameMap</span> <span class="k">import</span> <span class="n">XGlobalAttributeNameMap</span>
+<span class="kn">from</span> <span class="nn">utils.SingletonClassGenerator</span> <span class="k">import</span> <span class="n">XLifecycleExtensionMetaclass</span>
+<span class="kn">from</span> <span class="nn">factory.XFactoryRegistry</span> <span class="k">import</span> <span class="n">XFactoryRegistry</span>
+
+
+<div class="viewcode-block" id="XLifecycleExtension"><a class="viewcode-back" href="../../../XLifecycleExtension.html#extension.std.XLifecycleExtension.XLifecycleExtension">[docs]</a><span class="k">class</span> <span class="nc">XLifecycleExtension</span><span class="p">(</span><span class="n">XExtension</span><span class="p">,</span> <span class="n">metaclass</span><span class="o">=</span><span class="n">XLifecycleExtensionMetaclass</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Extension defining additional attributes for the event lifecycle.</span>
+<span class="sd">    Lifecycles define a set of states for activities, with an accompanying set</span>
+<span class="sd">    of transitions between those states. Any event which is referring to by a</span>
+<span class="sd">    lifecycle represents a certain transition of an activity within that</span>
+<span class="sd">    lifecycle.</span>
+
+<span class="sd">    Uses the singleton metaclass</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="XLifecycleExtension.StandardModel"><a class="viewcode-back" href="../../../XLifecycleExtension.html#extension.std.XLifecycleExtension.XLifecycleExtension.StandardModel">[docs]</a>    <span class="k">class</span> <span class="nc">StandardModel</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Class with the standard lifecycle model.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">SCHEDULE</span> <span class="o">=</span> <span class="s2">&quot;schedule&quot;</span>
+        <span class="n">ASSIGN</span> <span class="o">=</span> <span class="s2">&quot;assign&quot;</span>
+        <span class="n">WITHDRAW</span> <span class="o">=</span> <span class="s2">&quot;withdraw&quot;</span>
+        <span class="n">REASSIGN</span> <span class="o">=</span> <span class="s2">&quot;reassign&quot;</span>
+        <span class="n">START</span> <span class="o">=</span> <span class="s2">&quot;start&quot;</span>
+        <span class="n">SUSPEND</span> <span class="o">=</span> <span class="s2">&quot;suspend&quot;</span>
+        <span class="n">RESUME</span> <span class="o">=</span> <span class="s2">&quot;resume&quot;</span>
+        <span class="n">PI_ABORT</span> <span class="o">=</span> <span class="s2">&quot;pi_abort&quot;</span>
+        <span class="n">ATE_ABORT</span> <span class="o">=</span> <span class="s2">&quot;ate_abort&quot;</span>
+        <span class="n">COMPLETE</span> <span class="o">=</span> <span class="s2">&quot;complete&quot;</span>
+        <span class="n">AUTOSKIP</span> <span class="o">=</span> <span class="s2">&quot;autoskip&quot;</span>
+        <span class="n">MANUALSKIP</span> <span class="o">=</span> <span class="s2">&quot;manualskip&quot;</span>
+        <span class="n">UNKNOWN</span> <span class="o">=</span> <span class="s2">&quot;unknown&quot;</span>
+
+<div class="viewcode-block" id="XLifecycleExtension.StandardModel.values"><a class="viewcode-back" href="../../../XLifecycleExtension.html#extension.std.XLifecycleExtension.XLifecycleExtension.StandardModel.values">[docs]</a>        <span class="k">def</span> <span class="nf">values</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot;Returns an array containing the constants of this enum type, in</span>
+<span class="sd">            the order they are declared. This method may be used to iterate over</span>
+<span class="sd">            the constants as follows:</span>
+
+<span class="sd">            :return: An array containing the constants of this enum type, in the</span>
+<span class="sd">             order they are declared</span>
+<span class="sd">            :rtype: list[str]</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">SCHEDULE</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ASSIGN</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">WITHDRAW</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">REASSIGN</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">START</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">SUSPEND</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">RESUME</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">PI_ABORT</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">ATE_ABORT</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">COMPLETE</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">AUTOSKIP</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">MANUALSKIP</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">UNKNOWN</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="XLifecycleExtension.StandardModel.decode"><a class="viewcode-back" href="../../../XLifecycleExtension.html#extension.std.XLifecycleExtension.XLifecycleExtension.StandardModel.decode">[docs]</a>        <span class="k">def</span> <span class="nf">decode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">encoding</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot;Decodes any encoding string, referring to the respective</span>
+<span class="sd">            standard-model lifecycle transition object in this enum.</span>
+
+<span class="sd">            :param encoding: Encoding string.</span>
+<span class="sd">            :type encoding: str</span>
+<span class="sd">            :return: Standard-model transition string</span>
+<span class="sd">            :rtype: str</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="n">encoding</span> <span class="o">=</span> <span class="n">encoding</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">encoding</span> <span class="o">==</span> <span class="n">elem</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">elem</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">UNKNOWN</span></div></div>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="s2">&quot;Lifecycle&quot;</span><span class="p">,</span> <span class="s2">&quot;lifecycle&quot;</span><span class="p">,</span> <span class="n">urlparse</span><span class="p">(</span><span class="s2">&quot;http://www.xes-standard.org/lifecycle.xesext&quot;</span><span class="p">))</span>
+        <span class="n">factory</span> <span class="o">=</span> <span class="n">XFactoryRegistry</span><span class="p">()</span><span class="o">.</span><span class="n">current_default</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ATTR_MODEL</span> <span class="o">=</span> <span class="n">factory</span><span class="o">.</span><span class="n">create_attribute_literal</span><span class="p">(</span><span class="s2">&quot;lifecycle:model&quot;</span><span class="p">,</span> <span class="s2">&quot;standart&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ATTR_TRANSITION</span> <span class="o">=</span> <span class="n">factory</span><span class="o">.</span><span class="n">create_attribute_literal</span><span class="p">(</span><span class="s2">&quot;lifecycle:transition&quot;</span><span class="p">,</span> <span class="n">XLifecycleExtension</span><span class="o">.</span><span class="n">StandardModel</span><span class="o">.</span><span class="n">COMPLETE</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">get_log_attributes</span><span class="p">()</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ATTR_MODEL</span><span class="o">.</span><span class="n">clone</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">get_event_attributes</span><span class="p">()</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ATTR_TRANSITION</span><span class="o">.</span><span class="n">clone</span><span class="p">())</span>
+        <span class="n">XGlobalAttributeNameMap</span><span class="p">()</span><span class="o">.</span><span class="n">register_mapping</span><span class="p">(</span><span class="s2">&quot;EN&quot;</span><span class="p">,</span> <span class="s2">&quot;lifecycle:model&quot;</span><span class="p">,</span> <span class="s2">&quot;Lifecycle Model&quot;</span><span class="p">)</span>
+        <span class="n">XGlobalAttributeNameMap</span><span class="p">()</span><span class="o">.</span><span class="n">register_mapping</span><span class="p">(</span><span class="s2">&quot;EN&quot;</span><span class="p">,</span> <span class="s2">&quot;lifecycle:transition&quot;</span><span class="p">,</span> <span class="s2">&quot;Lifecycle Transition&quot;</span><span class="p">)</span>
+        <span class="n">XGlobalAttributeNameMap</span><span class="p">()</span><span class="o">.</span><span class="n">register_mapping</span><span class="p">(</span><span class="s2">&quot;DE&quot;</span><span class="p">,</span> <span class="s2">&quot;lifecycle:model&quot;</span><span class="p">,</span> <span class="s2">&quot;Lebenszyklus-Model&quot;</span><span class="p">)</span>
+        <span class="n">XGlobalAttributeNameMap</span><span class="p">()</span><span class="o">.</span><span class="n">register_mapping</span><span class="p">(</span><span class="s2">&quot;DE&quot;</span><span class="p">,</span> <span class="s2">&quot;lifecycle:transition&quot;</span><span class="p">,</span> <span class="s2">&quot;Lebenszyklus-Transition&quot;</span><span class="p">)</span>
+        <span class="n">XGlobalAttributeNameMap</span><span class="p">()</span><span class="o">.</span><span class="n">register_mapping</span><span class="p">(</span><span class="s2">&quot;FR&quot;</span><span class="p">,</span> <span class="s2">&quot;lifecycle:model&quot;</span><span class="p">,</span> <span class="s2">&quot;Modèle du Cycle Vital&quot;</span><span class="p">)</span>
+        <span class="n">XGlobalAttributeNameMap</span><span class="p">()</span><span class="o">.</span><span class="n">register_mapping</span><span class="p">(</span><span class="s2">&quot;FR&quot;</span><span class="p">,</span> <span class="s2">&quot;lifecycle:transition&quot;</span><span class="p">,</span> <span class="s2">&quot;Transition en Cycle Vital&quot;</span><span class="p">)</span>
+        <span class="n">XGlobalAttributeNameMap</span><span class="p">()</span><span class="o">.</span><span class="n">register_mapping</span><span class="p">(</span><span class="s2">&quot;ES&quot;</span><span class="p">,</span> <span class="s2">&quot;lifecycle:model&quot;</span><span class="p">,</span> <span class="s2">&quot;Modelo de Ciclo de Vida&quot;</span><span class="p">)</span>
+        <span class="n">XGlobalAttributeNameMap</span><span class="p">()</span><span class="o">.</span><span class="n">register_mapping</span><span class="p">(</span><span class="s2">&quot;ES&quot;</span><span class="p">,</span> <span class="s2">&quot;lifecycle:transition&quot;</span><span class="p">,</span> <span class="s2">&quot;Transición en Ciclo de Vida&quot;</span><span class="p">)</span>
+        <span class="n">XGlobalAttributeNameMap</span><span class="p">()</span><span class="o">.</span><span class="n">register_mapping</span><span class="p">(</span><span class="s2">&quot;PT&quot;</span><span class="p">,</span> <span class="s2">&quot;lifecycle:model&quot;</span><span class="p">,</span> <span class="s2">&quot;Modelo do Ciclo de Vida&quot;</span><span class="p">)</span>
+        <span class="n">XGlobalAttributeNameMap</span><span class="p">()</span><span class="o">.</span><span class="n">register_mapping</span><span class="p">(</span><span class="s2">&quot;PT&quot;</span><span class="p">,</span> <span class="s2">&quot;lifecycle:transition&quot;</span><span class="p">,</span> <span class="s2">&quot;Transição do Ciclo de Vida&quot;</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="XLifecycleExtension.extract_model"><a class="viewcode-back" href="../../../XLifecycleExtension.html#extension.std.XLifecycleExtension.XLifecycleExtension.extract_model">[docs]</a>    <span class="k">def</span> <span class="nf">extract_model</span><span class="p">(</span><span class="n">log</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Extracts the lifecycle model identifier from a given log.</span>
+
+<span class="sd">        :param log: Event log.</span>
+<span class="sd">        :type log: XLog</span>
+<span class="sd">        :return: Lifecycle model identifier string.</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">attribute</span> <span class="o">=</span> <span class="n">log</span><span class="o">.</span><span class="n">get_attributes</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;lifecycle:model&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">attribute</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">attribute</span><span class="o">.</span><span class="n">get_value</span><span class="p">()</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="XLifecycleExtension.assign_model"><a class="viewcode-back" href="../../../XLifecycleExtension.html#extension.std.XLifecycleExtension.XLifecycleExtension.assign_model">[docs]</a>    <span class="k">def</span> <span class="nf">assign_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">log</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Assigns a value for the lifecycle model identifier to a given log.</span>
+
+<span class="sd">        :param log: Log to be tagged.</span>
+<span class="sd">        :type log: XLog</span>
+<span class="sd">        :param model: Lifecycle model identifier string to be used.</span>
+<span class="sd">        :type model: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">model</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">attr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ATTR_MODEL</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
+            <span class="n">attr</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">get_attributes</span><span class="p">()[</span><span class="s2">&quot;lifecycle:model&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">attr</span></div>
+
+<div class="viewcode-block" id="XLifecycleExtension.uses_standard_model"><a class="viewcode-back" href="../../../XLifecycleExtension.html#extension.std.XLifecycleExtension.XLifecycleExtension.uses_standard_model">[docs]</a>    <span class="k">def</span> <span class="nf">uses_standard_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">log</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Checks, whether a given log uses the standard model for lifecycle</span>
+<span class="sd">        transitions.</span>
+
+<span class="sd">        :param log: Log to be checked.</span>
+<span class="sd">        :type log: XLog</span>
+<span class="sd">        :return: Returns true, if the log indeed uses the standard lifecycle model.</span>
+<span class="sd">        :rtype: bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extract_model</span><span class="p">(</span><span class="n">log</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">model</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="n">model</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;standard&quot;</span></div>
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="XLifecycleExtension.extract_transition"><a class="viewcode-back" href="../../../XLifecycleExtension.html#extension.std.XLifecycleExtension.XLifecycleExtension.extract_transition">[docs]</a>    <span class="k">def</span> <span class="nf">extract_transition</span><span class="p">(</span><span class="n">event</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Extracts the lifecycle transition string from a given event.</span>
+
+<span class="sd">        :param event: The given event</span>
+<span class="sd">        :type event: XEvent</span>
+<span class="sd">        :return: The lifecycle transition string of this event. Can be null, if</span>
+<span class="sd">         not defined.</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">attribute</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">get_attributes</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;lifecycle:transition&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">attribute</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">attribute</span><span class="o">.</span><span class="n">get_value</span><span class="p">()</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="XLifecycleExtension.extract_standard_transition"><a class="viewcode-back" href="../../../XLifecycleExtension.html#extension.std.XLifecycleExtension.XLifecycleExtension.extract_standard_transition">[docs]</a>    <span class="k">def</span> <span class="nf">extract_standard_transition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Extracts the standard lifecycle transition object from a given event.</span>
+
+<span class="sd">        :param event: The given event</span>
+<span class="sd">        :type event: XEvent</span>
+<span class="sd">        :return: The standard lifecycle transition instance of this event. Can</span>
+<span class="sd">         be null, if not defined.</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">transition</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extract_transition</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">transition</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">XLifecycleExtension</span><span class="o">.</span><span class="n">StandardModel</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">transition</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="XLifecycleExtension.assign_transition"><a class="viewcode-back" href="../../../XLifecycleExtension.html#extension.std.XLifecycleExtension.XLifecycleExtension.assign_transition">[docs]</a>    <span class="k">def</span> <span class="nf">assign_transition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">,</span> <span class="n">transition</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Assigns a lifecycle transition string to the given event.</span>
+
+<span class="sd">        :param event: Event to be tagged.</span>
+<span class="sd">        :type event: XEvent</span>
+<span class="sd">        :param transition: Lifecycle transition string to be assigned.</span>
+<span class="sd">        :type transition: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">transition</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">transition</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">trans_attr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ATTR_TRANSITION</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
+            <span class="n">trans_attr</span><span class="o">.</span><span class="n">set_value</span> <span class="o">=</span> <span class="n">transition</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            <span class="n">event</span><span class="o">.</span><span class="n">get_attributes</span><span class="p">()[</span><span class="s2">&quot;lifecycle:transition&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">trans_attr</span></div>
+
+<div class="viewcode-block" id="XLifecycleExtension.assign_standard_transition"><a class="viewcode-back" href="../../../XLifecycleExtension.html#extension.std.XLifecycleExtension.XLifecycleExtension.assign_standard_transition">[docs]</a>    <span class="k">def</span> <span class="nf">assign_standard_transition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">,</span> <span class="n">transition</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Assigns a standard lifecycle transition to the given event..</span>
+
+<span class="sd">        :param event: Event to be tagged.</span>
+<span class="sd">        :type event: XEvent</span>
+<span class="sd">        :param transition: Standard lifecycle transition to be assigned.</span>
+<span class="sd">        :type transition: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assign_transition</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">XLifecycleExtension</span><span class="o">.</span><span class="n">StandardModel</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">transition</span><span class="p">))</span></div></div>
+</pre></div>
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        <a class="uplink" href="../../../index.html">Contents</a>
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Hernán Valdivieso.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
+    </div>
+  </body>
+</html>

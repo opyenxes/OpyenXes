@@ -1,0 +1,231 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>XGlobalAttributeNameMap &#8212; OpenXes Python 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="index.html">
+          <span>OpenXes Python 1.0 documentation</span></a></h1>
+        <h2 class="heading"><span>XGlobalAttributeNameMap</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        <a class="uplink" href="index.html">Contents</a>
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="module-info.XGlobalAttributeNameMap">
+<span id="xglobalattributenamemap"></span><h1>XGlobalAttributeNameMap<a class="headerlink" href="#module-info.XGlobalAttributeNameMap" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="info.XGlobalAttributeNameMap.XGlobalAttributeNameMap">
+<em class="property">class </em><code class="descclassname">info.XGlobalAttributeNameMap.</code><code class="descname">XGlobalAttributeNameMap</code><a class="reference internal" href="_modules/info/XGlobalAttributeNameMap.html#XGlobalAttributeNameMap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#info.XGlobalAttributeNameMap.XGlobalAttributeNameMap" title="Permalink to this definition">¶</a></dt>
+<dd><p>This singleton class implements a global attribute name mapping facility
+and can manage a number of attribute name mappings. Further, this class also
+acts as a proxy to the standard mapping, i.e. it can be used directly as a
+attribute name mapping instance.</p>
+<dl class="method">
+<dt id="info.XGlobalAttributeNameMap.XGlobalAttributeNameMap.get_available_mapping_names">
+<code class="descname">get_available_mapping_names</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/info/XGlobalAttributeNameMap.html#XGlobalAttributeNameMap.get_available_mapping_names"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#info.XGlobalAttributeNameMap.XGlobalAttributeNameMap.get_available_mapping_names" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the names of all available mappings. Note that referenced
+mappings may be empty.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A tuple of names of all available mappings.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#tuple" title="(in Python v2.7)">tuple</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="info.XGlobalAttributeNameMap.XGlobalAttributeNameMap.get_available_mappings">
+<code class="descname">get_available_mappings</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/info/XGlobalAttributeNameMap.html#XGlobalAttributeNameMap.get_available_mappings"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#info.XGlobalAttributeNameMap.XGlobalAttributeNameMap.get_available_mappings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns all available mappings. Note that returned mappings may be empty.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A tuple of all available mappings.</td>
+</tr>
+</tbody>
+</table>
+<p>:<a href="#id1"><span class="problematic" id="id2">rtype_</span></a> tuple</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="info.XGlobalAttributeNameMap.XGlobalAttributeNameMap.get_mapping">
+<code class="descname">get_mapping</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/info/XGlobalAttributeNameMap.html#XGlobalAttributeNameMap.get_mapping"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#info.XGlobalAttributeNameMap.XGlobalAttributeNameMap.get_mapping" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provides access to a specific attribute name mapping by its name. If
+the requested mapping does not exist yet, a new mapping will be created,
+added to the set of managed mappings, and returned. This means, this
+method will always return a mapping, but this could be empty.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Name of the requested mapping.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The requested mapping, as stored in this facility (or newly created).</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="XAttributeNameMap.html#info.XAttributeNameMap.XAttributeNameMap" title="info.XAttributeNameMap.XAttributeNameMap">XAttributeNameMap</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="info.XGlobalAttributeNameMap.XGlobalAttributeNameMap.get_mapping_name">
+<em class="property">static </em><code class="descname">get_mapping_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/info/XGlobalAttributeNameMap.html#XGlobalAttributeNameMap.get_mapping_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#info.XGlobalAttributeNameMap.XGlobalAttributeNameMap.get_mapping_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the name of this mapping.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The name of this mapping.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="info.XGlobalAttributeNameMap.XGlobalAttributeNameMap.get_standard_mapping">
+<code class="descname">get_standard_mapping</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/info/XGlobalAttributeNameMap.html#XGlobalAttributeNameMap.get_standard_mapping"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#info.XGlobalAttributeNameMap.XGlobalAttributeNameMap.get_standard_mapping" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves the standard attribute name mapping, i.e. the EN english
+language mapping.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The standard mapping.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="XAttributeNameMap.html#info.XAttributeNameMap.XAttributeNameMap" title="info.XAttributeNameMap.XAttributeNameMap">XAttributeNameMap</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="info.XGlobalAttributeNameMap.XGlobalAttributeNameMap.map">
+<code class="descname">map</code><span class="sig-paren">(</span><em>attribute</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/info/XGlobalAttributeNameMap.html#XGlobalAttributeNameMap.map"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#info.XGlobalAttributeNameMap.XGlobalAttributeNameMap.map" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the name mapped onto the provided attribute by this mapping.
+If no mapping for the given attribute is provided by this map, null is
+returned.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>attribute</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> or </em><a class="reference internal" href="XAttribute.html#model.XAttribute.XAttribute" title="model.XAttribute.XAttribute"><em>XAttribute</em></a>) &#8211; Attribute or attribute key to retrieve mapping for.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The mapping for the given attribute, or null, if no such
+mapping exists.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="info.XGlobalAttributeNameMap.XGlobalAttributeNameMap.map_safely">
+<code class="descname">map_safely</code><span class="sig-paren">(</span><em>attribute</em>, <em>mapping</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/info/XGlobalAttributeNameMap.html#XGlobalAttributeNameMap.map_safely"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#info.XGlobalAttributeNameMap.XGlobalAttributeNameMap.map_safely" title="Permalink to this definition">¶</a></dt>
+<dd><p>Maps an attribute safely, using the given attribute mapping. Safe
+mapping attempts to map the attribute using the given mapping first.
+If this does not succeed, the standard mapping (EN) will be used for
+mapping. If no mapping is available in the standard mapping, the
+original attribute key is returned unchanged. This way, it is always
+ensured that this method returns a valid string for naming attributes.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>attribute</strong> (<a class="reference internal" href="XAttribute.html#model.XAttribute.XAttribute" title="model.XAttribute.XAttribute"><em>XAttribute</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Attribute to map or key of the attribute to map.</li>
+<li><strong>mapping</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> or </em><a class="reference internal" href="XAttributeNameMap.html#info.XAttributeNameMap.XAttributeNameMap" title="info.XAttributeNameMap.XAttributeNameMap"><em>XAttributeNameMap</em></a>) &#8211; Name of the mapping to be used preferably or attribute
+name map to be used preferably.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The safe mapping for the given attribute.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)">str</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="info.XGlobalAttributeNameMap.XGlobalAttributeNameMap.register_mapping">
+<code class="descname">register_mapping</code><span class="sig-paren">(</span><em>mapping_name</em>, <em>attribute_key</em>, <em>alias</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/info/XGlobalAttributeNameMap.html#XGlobalAttributeNameMap.register_mapping"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#info.XGlobalAttributeNameMap.XGlobalAttributeNameMap.register_mapping" title="Permalink to this definition">¶</a></dt>
+<dd><p>Registers a known attribute for mapping in a given attribute name
+map. <strong>IMPORTANT</strong>: This method should only be called when one intends
+to create, or add to, the global attribute name mapping.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>mapping_name</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Name of the mapping to register with.</li>
+<li><strong>attribute_key</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Attribute key to be mapped.</li>
+<li><strong>alias</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Alias to map the given attribute to.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        <a class="uplink" href="index.html">Contents</a>
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Hernán Valdivieso.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
+    </div>
+  </body>
+</html>

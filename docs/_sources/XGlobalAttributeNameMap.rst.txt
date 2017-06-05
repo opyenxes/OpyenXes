@@ -1,0 +1,7 @@
+
+XGlobalAttributeNameMap
+=======================
+
+.. automodule:: info.XGlobalAttributeNameMap
+   :members:
+

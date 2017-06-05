@@ -1,0 +1,278 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>out.XMxmlSerializer &#8212; OpenXes Python 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../../index.html">
+          <span>OpenXes Python 1.0 documentation</span></a></h1>
+        <h2 class="heading"><span>out.XMxmlSerializer</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        <a class="uplink" href="../../index.html">Contents</a>
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <h1>Source code for out.XMxmlSerializer</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">log.XLogging</span> <span class="k">import</span> <span class="n">XLogging</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">xml.etree.ElementTree</span> <span class="k">as</span> <span class="nn">Et</span>
+<span class="kn">from</span> <span class="nn">xml.dom</span> <span class="k">import</span> <span class="n">minidom</span>
+<span class="kn">from</span> <span class="nn">extension.std.XConceptExtension</span> <span class="k">import</span> <span class="n">XConceptExtension</span>
+
+
+<div class="viewcode-block" id="XMxmlSerializer"><a class="viewcode-back" href="../../XMxmlSerializer.html#out.XMxmlSerializer.XMxmlSerializer">[docs]</a><span class="k">class</span> <span class="nc">XMxmlSerializer</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;MXML serialization for XES data (legacy implementation). Note that this</span>
+<span class="sd">    serialization may be lossy, you should preferrably use the XES.XML</span>
+<span class="sd">    serialization for XES data.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__known_types</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__known_types</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;schedule&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__known_types</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;assign&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__known_types</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;withdraw&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__known_types</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;reassign&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__known_types</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;start&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__known_types</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;suspend&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__known_types</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;resume&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__known_types</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;pi_abort&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__known_types</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;ate_abort&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__known_types</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;complete&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__known_types</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;autoskip&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__known_types</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;manualskip&quot;</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="XMxmlSerializer.get_author"><a class="viewcode-back" href="../../XMxmlSerializer.html#out.XMxmlSerializer.XMxmlSerializer.get_author">[docs]</a>    <span class="k">def</span> <span class="nf">get_author</span><span class="p">():</span>
+        <span class="sd">&quot;&quot;&quot;Returns the name of this serialization&#39;s author.</span>
+
+<span class="sd">        :return:  The author name.</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;Hernán F. Valdivieso&quot;</span></div>
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="XMxmlSerializer.get_description"><a class="viewcode-back" href="../../XMxmlSerializer.html#out.XMxmlSerializer.XMxmlSerializer.get_description">[docs]</a>    <span class="k">def</span> <span class="nf">get_description</span><span class="p">():</span>
+        <span class="sd">&quot;&quot;&quot;Returns a brief description of this serialization.</span>
+
+<span class="sd">        :return: A description of this serialization.</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;MXML serialization (legacy)&quot;</span></div>
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="XMxmlSerializer.get_name"><a class="viewcode-back" href="../../XMxmlSerializer.html#out.XMxmlSerializer.XMxmlSerializer.get_name">[docs]</a>    <span class="k">def</span> <span class="nf">get_name</span><span class="p">():</span>
+        <span class="sd">&quot;&quot;&quot;Returns the human-readable name of this serialization.</span>
+
+<span class="sd">        :return: the human-readable name of this serialization.</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;MXML&quot;</span></div>
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="XMxmlSerializer.get_suffices"><a class="viewcode-back" href="../../XMxmlSerializer.html#out.XMxmlSerializer.XMxmlSerializer.get_suffices">[docs]</a>    <span class="k">def</span> <span class="nf">get_suffices</span><span class="p">():</span>
+        <span class="sd">&quot;&quot;&quot;Returns an array of possible file suffices for this serialization.</span>
+
+<span class="sd">        :return: An array of possible file suffices for this serialization.</span>
+<span class="sd">        :rtype: list[str]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="s2">&quot;mxml&quot;</span><span class="p">]</span></div>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span>
+
+<div class="viewcode-block" id="XMxmlSerializer.serialize"><a class="viewcode-back" href="../../XMxmlSerializer.html#out.XMxmlSerializer.XMxmlSerializer.serialize">[docs]</a>    <span class="k">def</span> <span class="nf">serialize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">log</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">in_bytes</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Serializes a given log to the given output stream.</span>
+
+<span class="sd">        :param log: Log to be serialized.</span>
+<span class="sd">        :type log: XLog</span>
+<span class="sd">        :param out:  TextIOWrapper for serialization.</span>
+<span class="sd">        :type out: _io.TextIOWrapper</span>
+<span class="sd">        :param in_bytes: Private argument to decide if serialized in bytes or in string</span>
+<span class="sd">        :type in_bytes: bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">XLogging</span><span class="p">()</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&quot;start serializing log to MXML&quot;</span><span class="p">,</span> <span class="n">XLogging</span><span class="o">.</span><span class="n">Importance</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">*</span> <span class="mi">1000</span>
+
+        <span class="n">root</span> <span class="o">=</span> <span class="n">Et</span><span class="o">.</span><span class="n">Element</span><span class="p">(</span><span class="s2">&quot;WorkflowLog&quot;</span><span class="p">)</span>
+        <span class="n">source</span> <span class="o">=</span> <span class="n">Et</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="s2">&quot;Source&quot;</span><span class="p">)</span>
+        <span class="n">source</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;program&quot;</span><span class="p">,</span> <span class="s2">&quot;XES MXML serialization&quot;</span><span class="p">)</span>
+        <span class="n">source</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;openxes.version&quot;</span><span class="p">,</span> <span class="s2">&quot;1.0RC7&quot;</span><span class="p">)</span>
+        <span class="n">process</span> <span class="o">=</span> <span class="n">Et</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="s2">&quot;Process&quot;</span><span class="p">)</span>
+        <span class="n">identity</span> <span class="o">=</span> <span class="n">XConceptExtension</span><span class="p">()</span><span class="o">.</span><span class="n">extract_name</span><span class="p">(</span><span class="n">log</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">identity</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">process</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;none&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">process</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="n">identity</span><span class="p">)</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">XConceptExtension</span><span class="p">()</span><span class="o">.</span><span class="n">extract_name</span><span class="p">(</span><span class="n">log</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;None&quot;</span>
+        <span class="n">process</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">,</span> <span class="s2">&quot;process with id &quot;</span> <span class="o">+</span> <span class="n">name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_model_reference</span><span class="p">(</span><span class="n">log</span><span class="p">,</span> <span class="n">process</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_attribute</span><span class="p">(</span><span class="n">process</span><span class="p">,</span> <span class="n">log</span><span class="o">.</span><span class="n">get_attributes</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+
+        <span class="k">for</span> <span class="n">trace</span> <span class="ow">in</span> <span class="n">log</span><span class="p">:</span>
+            <span class="n">instance</span> <span class="o">=</span> <span class="n">Et</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">process</span><span class="p">,</span> <span class="s2">&quot;ProcessInstance&quot;</span><span class="p">)</span>
+            <span class="n">identity</span> <span class="o">=</span> <span class="n">XConceptExtension</span><span class="p">()</span><span class="o">.</span><span class="n">extract_name</span><span class="p">(</span><span class="n">trace</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">identity</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">identity</span> <span class="o">=</span> <span class="s2">&quot;None&quot;</span>
+            <span class="n">instance</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="n">identity</span><span class="p">)</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="n">XConceptExtension</span><span class="p">()</span><span class="o">.</span><span class="n">extract_name</span><span class="p">(</span><span class="n">trace</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;None&quot;</span>
+            <span class="n">instance</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">,</span> <span class="s2">&quot;instance with id &quot;</span> <span class="o">+</span> <span class="n">name</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_model_reference</span><span class="p">(</span><span class="n">trace</span><span class="p">,</span> <span class="n">instance</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_attribute</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="n">trace</span><span class="o">.</span><span class="n">get_attributes</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+
+            <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">trace</span><span class="p">:</span>
+                <span class="n">ate</span> <span class="o">=</span> <span class="n">Et</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="s2">&quot;AuditTrailEntry&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">add_attribute</span><span class="p">(</span><span class="n">ate</span><span class="p">,</span> <span class="n">event</span><span class="o">.</span><span class="n">get_attributes</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+                <span class="n">workflow_mode</span> <span class="o">=</span> <span class="n">Et</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">ate</span><span class="p">,</span> <span class="s2">&quot;WorkflowModelElement&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">add_model_reference</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">workflow_mode</span><span class="p">)</span>
+                <span class="n">workflow_mode</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">XConceptExtension</span><span class="p">()</span><span class="o">.</span><span class="n">extract_name</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
+                <span class="n">type_</span> <span class="o">=</span> <span class="n">Et</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">ate</span><span class="p">,</span> <span class="s2">&quot;EventType&quot;</span><span class="p">)</span>
+                <span class="n">type_attr</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">get_attributes</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;lifecycle:transition&quot;</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="n">type_attr</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">add_model_reference</span><span class="p">(</span><span class="n">type_attr</span><span class="p">,</span> <span class="n">type_</span><span class="p">)</span>
+                    <span class="n">originator_attr</span> <span class="o">=</span> <span class="n">type_attr</span><span class="o">.</span><span class="n">get_value</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+                    <span class="k">if</span> <span class="n">originator_attr</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__known_types</span><span class="p">:</span>
+                        <span class="n">type_</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">originator_attr</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">type_</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;unknownType&quot;</span><span class="p">,</span> <span class="n">type_attr</span><span class="o">.</span><span class="n">get_value</span><span class="p">())</span>
+                        <span class="n">type_</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;unknown&quot;</span>
+
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">type_</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;complete&quot;</span>
+
+                <span class="n">originator_attr_1</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">get_attributes</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;org:resource&quot;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">originator_attr_1</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">originator_attr_1</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">get_attributes</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;org:role&quot;</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="n">originator_attr_1</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">originator_attr_1</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">get_attributes</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;org:group&quot;</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="n">originator_attr_1</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">timestamp_attr</span> <span class="o">=</span> <span class="n">Et</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">ate</span><span class="p">,</span> <span class="s2">&quot;originator&quot;</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">add_model_reference</span><span class="p">(</span><span class="n">originator_attr_1</span><span class="p">,</span> <span class="n">timestamp_attr</span><span class="p">)</span>
+                    <span class="n">timestamp_attr</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="p">(</span><span class="n">originator_attr_1</span><span class="o">.</span><span class="n">get_value</span><span class="p">())</span>
+
+                <span class="n">timestamp_attr_1</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">get_attributes</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;time:timestamp&quot;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">timestamp_attr_1</span><span class="p">:</span>
+                    <span class="n">timestamp</span> <span class="o">=</span> <span class="n">Et</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">ate</span><span class="p">,</span> <span class="s2">&quot;timestamp&quot;</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">add_model_reference</span><span class="p">(</span><span class="n">timestamp_attr_1</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">)</span>
+                    <span class="n">date</span> <span class="o">=</span> <span class="n">timestamp_attr_1</span><span class="o">.</span><span class="n">get_value</span><span class="p">()</span>
+                    <span class="n">timestamp</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">date</span><span class="p">)</span>
+
+        <span class="n">text</span> <span class="o">=</span> <span class="n">minidom</span><span class="o">.</span><span class="n">parseString</span><span class="p">(</span><span class="n">Et</span><span class="o">.</span><span class="n">tostring</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="s2">&quot;utf-8&quot;</span><span class="p">))</span>
+        <span class="n">c1</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">createComment</span><span class="p">(</span><span class="s2">&quot;This file has been generated with the OpenXES library. It conforms&quot;</span><span class="p">)</span>
+        <span class="n">c2</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">createComment</span><span class="p">(</span><span class="s2">&quot;to the legacy MXML standard for log storage and management.&quot;</span><span class="p">)</span>
+        <span class="n">c3</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">createComment</span><span class="p">(</span><span class="s2">&quot;OpenXES library version: 1.0RC7&quot;</span><span class="p">)</span>
+        <span class="n">c4</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">createComment</span><span class="p">(</span><span class="s2">&quot;OpenXES is available from http://www.xes-standard.org/&quot;</span><span class="p">)</span>
+        <span class="n">text</span><span class="o">.</span><span class="n">insertBefore</span><span class="p">(</span><span class="n">c4</span><span class="p">,</span> <span class="n">text</span><span class="o">.</span><span class="n">childNodes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">text</span><span class="o">.</span><span class="n">insertBefore</span><span class="p">(</span><span class="n">c3</span><span class="p">,</span> <span class="n">text</span><span class="o">.</span><span class="n">childNodes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">text</span><span class="o">.</span><span class="n">insertBefore</span><span class="p">(</span><span class="n">c2</span><span class="p">,</span> <span class="n">text</span><span class="o">.</span><span class="n">childNodes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">text</span><span class="o">.</span><span class="n">insertBefore</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span> <span class="n">text</span><span class="o">.</span><span class="n">childNodes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">in_bytes</span><span class="p">:</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">text</span><span class="o">.</span><span class="n">toprettyxml</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">text</span><span class="o">.</span><span class="n">toprettyxml</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">))</span>
+
+        <span class="n">duration1</span> <span class="o">=</span> <span class="s2">&quot; (&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">*</span> <span class="mi">1000</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; msec.)&quot;</span>
+        <span class="n">XLogging</span><span class="p">()</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&quot;finished serializing log&quot;</span> <span class="o">+</span> <span class="n">duration1</span><span class="p">,</span> <span class="n">XLogging</span><span class="o">.</span><span class="n">Importance</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="XMxmlSerializer.add_attribute"><a class="viewcode-back" href="../../XMxmlSerializer.html#out.XMxmlSerializer.XMxmlSerializer.add_attribute">[docs]</a>    <span class="k">def</span> <span class="nf">add_attribute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tag</span><span class="p">,</span> <span class="n">attributes</span><span class="p">,</span> <span class="n">key_prefix</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Helper method, adds attributes to a tag.</span>
+
+<span class="sd">        :param tag: The tag to add attributes to.</span>
+<span class="sd">        :type tag: xml.etree.ElementTree.Element</span>
+<span class="sd">        :param attributes: The attributes to add.</span>
+<span class="sd">        :type attributes: dict_values</span>
+<span class="sd">        :param key_prefix: The Key prefix of attributes.</span>
+<span class="sd">        :type key_prefix: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">key_prefix</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">key_prefix</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+            <span class="n">node</span> <span class="o">=</span> <span class="n">Et</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="s2">&quot;Data&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">node</span> <span class="o">=</span> <span class="n">tag</span>
+
+        <span class="k">for</span> <span class="n">attribute</span> <span class="ow">in</span> <span class="n">attributes</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">attribute</span><span class="o">.</span><span class="n">get_key</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;semantic:modelReference&quot;</span><span class="p">:</span>
+                <span class="n">attribute_tag</span> <span class="o">=</span> <span class="n">Et</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="s2">&quot;attribute&quot;</span><span class="p">)</span>
+                <span class="n">attribute_tag</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="n">key_prefix</span> <span class="o">+</span> <span class="n">attribute</span><span class="o">.</span><span class="n">get_key</span><span class="p">())</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">add_model_reference</span><span class="p">(</span><span class="n">attribute</span><span class="p">,</span> <span class="n">attribute_tag</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="n">attribute_tag</span><span class="o">.</span><span class="n">text</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">attribute_tag</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">attribute</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">attribute_tag</span><span class="o">.</span><span class="n">text</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">attribute</span><span class="p">)</span>
+
+                <span class="n">sub_attributes</span> <span class="o">=</span> <span class="n">attribute</span><span class="o">.</span><span class="n">get_attributes</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sub_attributes</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">sub_key_prefix</span> <span class="o">=</span> <span class="n">attribute</span><span class="o">.</span><span class="n">get_key</span><span class="p">()</span>
+
+                    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sub_key_prefix</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="n">sub_key_prefix</span> <span class="o">=</span> <span class="n">key_prefix</span> <span class="o">+</span> <span class="s2">&quot;:&quot;</span> <span class="o">+</span> <span class="n">sub_key_prefix</span>
+
+                    <span class="bp">self</span><span class="o">.</span><span class="n">add_attribute</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">sub_key_prefix</span><span class="p">,</span> <span class="n">sub_attributes</span><span class="p">)</span></div>
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="XMxmlSerializer.add_model_reference"><a class="viewcode-back" href="../../XMxmlSerializer.html#out.XMxmlSerializer.XMxmlSerializer.add_model_reference">[docs]</a>    <span class="k">def</span> <span class="nf">add_model_reference</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Helper method, adds all model references of an attributable to the given tag.</span>
+
+<span class="sd">        :param element: Attributable element.</span>
+<span class="sd">        :type element: XAttributable</span>
+<span class="sd">        :param target: Tag to add model references to.</span>
+<span class="sd">        :type target: xml.etree.ElementTree.Element</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">model_ref_attr</span> <span class="o">=</span> <span class="n">element</span><span class="o">.</span><span class="n">get_attributes</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;semantic:modelReference&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">model_ref_attr</span><span class="p">:</span>
+            <span class="n">target</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;modelReference&quot;</span><span class="p">,</span> <span class="n">model_ref_attr</span><span class="o">.</span><span class="n">get_value</span><span class="p">())</span></div></div>
+</pre></div>
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        <a class="uplink" href="../../index.html">Contents</a>
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Hernán Valdivieso.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
+    </div>
+  </body>
+</html>

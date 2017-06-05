@@ -1,0 +1,264 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>XLog &#8212; OpenXes Python 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="XTrace" href="XTrace.html" />
+    <link rel="prev" title="XEvent" href="XEvent.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="index.html">
+          <span>OpenXes Python 1.0 documentation</span></a></h1>
+        <h2 class="heading"><span>XLog</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="XEvent.html">XEvent</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="XTrace.html">XTrace</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="module-model.XLog">
+<span id="xlog"></span><h1>XLog<a class="headerlink" href="#module-model.XLog" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="model.XLog.XLog">
+<em class="property">class </em><code class="descclassname">model.XLog.</code><code class="descname">XLog</code><span class="sig-paren">(</span><em>attributes</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/model/XLog.html#XLog"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#model.XLog.XLog" title="Permalink to this definition">¶</a></dt>
+<dd><p>A log is an element of an XES event log structure. Logs are contained in
+archives. Any log is a list of traces. Logs represent a collection of
+traces, which are all representing executions of the same kind of process.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>attributes</strong> (<a class="reference internal" href="XAttributeMap.html#module-model.XAttributeMap" title="model.XAttributeMap"><em>XAttributeMap</em></a>) &#8211; Map of attribute for the log.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="model.XLog.XLog.append">
+<code class="descname">append</code><span class="sig-paren">(</span><em>p_object</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/model/XLog.html#XLog.append"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#model.XLog.XLog.append" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add only a trace object in the log.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>p_object</strong> (<a class="reference internal" href="XTrace.html#module-model.XTrace" title="model.XTrace"><em>XTrace</em></a>) &#8211; a Trace object to append for the log</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="model.XLog.XLog.clone">
+<code class="descname">clone</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/model/XLog.html#XLog.clone"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#model.XLog.XLog.clone" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates and returns a copy of this object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A clone of this instance.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#model.XLog.XLog" title="model.XLog.XLog">XLog</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="model.XLog.XLog.get_classifiers">
+<code class="descname">get_classifiers</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/model/XLog.html#XLog.get_classifiers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#model.XLog.XLog.get_classifiers" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method returns the list of classifiers defined for this log. This
+list can be used for reading or writing, i.e., it must be supported to
+add further classifiers to this list.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The list of classifiers defined for this log.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#list" title="(in Python v2.7)">list</a>[<a class="reference internal" href="XEventAttributeClassifier.html#classification.XEventAttributeClassifier.XEventAttributeClassifier" title="classification.XEventAttributeClassifier.XEventAttributeClassifier">XEventAttributeClassifier</a>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="model.XLog.XLog.get_extensions">
+<code class="descname">get_extensions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/model/XLog.html#XLog.get_extensions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#model.XLog.XLog.get_extensions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves the extensions used by this element, i.e. the extensions
+used by all attributes of this element, and the element itself</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A set of extensions</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#set" title="(in Python v2.7)">set</a>(<a class="reference internal" href="XExtension.html#module-extension.XExtension" title="extension.XExtension">XExtension</a>)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="model.XLog.XLog.get_features">
+<code class="descname">get_features</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/model/XLog.html#XLog.get_features"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#model.XLog.XLog.get_features" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>Retrieves the features of the log for example version, encoding,</dt>
+<dd>if have nested-attributes, etc</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Dictionary with features</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)">dict</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="model.XLog.XLog.get_global_event_attributes">
+<code class="descname">get_global_event_attributes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/model/XLog.html#XLog.get_global_event_attributes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#model.XLog.XLog.get_global_event_attributes" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method returns a list of attributes which are global for all
+events, i.e. every event in the log is guaranteed to have these
+attributes.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">List of ubiquitous trace attributes.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">List[<a class="reference internal" href="XAttribute.html#model.XAttribute.XAttribute" title="model.XAttribute.XAttribute">XAttribute</a>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="model.XLog.XLog.get_global_trace_attributes">
+<code class="descname">get_global_trace_attributes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/model/XLog.html#XLog.get_global_trace_attributes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#model.XLog.XLog.get_global_trace_attributes" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method returns a list of attributes which are global for all
+traces, i.e. every trace in the log is guaranteed to have these
+attributes.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">List of ubiquitous trace attributes.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">List[<a class="reference internal" href="XAttribute.html#model.XAttribute.XAttribute" title="model.XAttribute.XAttribute">XAttribute</a>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="model.XLog.XLog.get_info">
+<code class="descname">get_info</code><span class="sig-paren">(</span><em>classifier</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/model/XLog.html#XLog.get_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#model.XLog.XLog.get_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the cached info for the given classifier, null if not available.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>classifier</strong> (<a class="reference internal" href="XEventAttributeClassifier.html#classification.XEventAttributeClassifier.XEventAttributeClassifier" title="classification.XEventAttributeClassifier.XEventAttributeClassifier"><em>XEventAttributeClassifier</em></a>) &#8211; The given classifier</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The cached info for the given classifier, null if not available</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="XLogInfo.html#module-info.XLogInfo" title="info.XLogInfo">XLogInfo</a> or <a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)">None</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="model.XLog.XLog.set_features">
+<code class="descname">set_features</code><span class="sig-paren">(</span><em>key</em>, <em>values</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/model/XLog.html#XLog.set_features"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#model.XLog.XLog.set_features" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assigns the key with the value in de features dictionary.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>key</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; key of the feature.</li>
+<li><strong>values</strong> (<em>Any</em>) &#8211; data of that features</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="model.XLog.XLog.set_info">
+<code class="descname">set_info</code><span class="sig-paren">(</span><em>classifier</em>, <em>info</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/model/XLog.html#XLog.set_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#model.XLog.XLog.set_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds the given info for the given classifier to the info cache.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>classifier</strong> (<em>XEventClassifier</em>) &#8211; The given classifier.</li>
+<li><strong>info</strong> (<a class="reference internal" href="XLogInfo.html#module-info.XLogInfo" title="info.XLogInfo"><em>XLogInfo</em></a>) &#8211; The given info.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="XEvent.html">XEvent</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="XTrace.html">XTrace</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Hernán Valdivieso.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
+    </div>
+  </body>
+</html>

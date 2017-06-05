@@ -1,0 +1,197 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>XOrganizationalExtension &#8212; OpenXes Python 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="XSemanticExtension" href="XSemanticExtension.html" />
+    <link rel="prev" title="XMicroExtension" href="XMicroExtension.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="index.html">
+          <span>OpenXes Python 1.0 documentation</span></a></h1>
+        <h2 class="heading"><span>XOrganizationalExtension</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="XMicroExtension.html">XMicroExtension</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="XSemanticExtension.html">XSemanticExtension</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="module-extension.std.XOrganizationalExtension">
+<span id="xorganizationalextension"></span><h1>XOrganizationalExtension<a class="headerlink" href="#module-extension.std.XOrganizationalExtension" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="extension.std.XOrganizationalExtension.XOrganizationalExtension">
+<em class="property">class </em><code class="descclassname">extension.std.XOrganizationalExtension.</code><code class="descname">XOrganizationalExtension</code><a class="reference internal" href="_modules/extension/std/XOrganizationalExtension.html#XOrganizationalExtension"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#extension.std.XOrganizationalExtension.XOrganizationalExtension" title="Permalink to this definition">¶</a></dt>
+<dd><p>This extension adds the organizational perspective to event logs. It
+defines for events three attributes, referring to:</p>
+<blockquote>
+<div><ul class="simple">
+<li>The resource which has executed the event</li>
+<li>The role of this resource</li>
+<li>The group of this resource</li>
+</ul>
+</div></blockquote>
+<p>Uses the singleton metaclass</p>
+<dl class="method">
+<dt id="extension.std.XOrganizationalExtension.XOrganizationalExtension.assign_group">
+<code class="descname">assign_group</code><span class="sig-paren">(</span><em>event</em>, <em>instance</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/extension/std/XOrganizationalExtension.html#XOrganizationalExtension.assign_group"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#extension.std.XOrganizationalExtension.XOrganizationalExtension.assign_group" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assigns the group attribute value for a given event.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>event</strong> (<a class="reference internal" href="XEvent.html#module-model.XEvent" title="model.XEvent"><em>XEvent</em></a>) &#8211; Event to be modified.</li>
+<li><strong>instance</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Group string to be assigned.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="extension.std.XOrganizationalExtension.XOrganizationalExtension.assign_resource">
+<code class="descname">assign_resource</code><span class="sig-paren">(</span><em>event</em>, <em>instance</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/extension/std/XOrganizationalExtension.html#XOrganizationalExtension.assign_resource"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#extension.std.XOrganizationalExtension.XOrganizationalExtension.assign_resource" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assigns the resource attribute value for a given event.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>event</strong> (<a class="reference internal" href="XEvent.html#module-model.XEvent" title="model.XEvent"><em>XEvent</em></a>) &#8211; Event to be modified.</li>
+<li><strong>instance</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Resource string to be assigned.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="extension.std.XOrganizationalExtension.XOrganizationalExtension.assign_role">
+<code class="descname">assign_role</code><span class="sig-paren">(</span><em>event</em>, <em>instance</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/extension/std/XOrganizationalExtension.html#XOrganizationalExtension.assign_role"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#extension.std.XOrganizationalExtension.XOrganizationalExtension.assign_role" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assigns the role attribute value for a given event.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>event</strong> (<a class="reference internal" href="XEvent.html#module-model.XEvent" title="model.XEvent"><em>XEvent</em></a>) &#8211; Event to be modified.</li>
+<li><strong>instance</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Role string to be assigned.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="extension.std.XOrganizationalExtension.XOrganizationalExtension.extract_group">
+<em class="property">static </em><code class="descname">extract_group</code><span class="sig-paren">(</span><em>event</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/extension/std/XOrganizationalExtension.html#XOrganizationalExtension.extract_group"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#extension.std.XOrganizationalExtension.XOrganizationalExtension.extract_group" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extracts the group attribute string from an event.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>event</strong> (<a class="reference internal" href="XEvent.html#module-model.XEvent" title="model.XEvent"><em>XEvent</em></a>) &#8211; Event to extract instance from.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The requested activity instance identifier.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="extension.std.XOrganizationalExtension.XOrganizationalExtension.extract_resource">
+<em class="property">static </em><code class="descname">extract_resource</code><span class="sig-paren">(</span><em>event</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/extension/std/XOrganizationalExtension.html#XOrganizationalExtension.extract_resource"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#extension.std.XOrganizationalExtension.XOrganizationalExtension.extract_resource" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extracts the resource attribute string from an event.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>event</strong> (<a class="reference internal" href="XEvent.html#module-model.XEvent" title="model.XEvent"><em>XEvent</em></a>) &#8211; Event to extract instance from.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Resource string for the given event (may be None if not defined)</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="extension.std.XOrganizationalExtension.XOrganizationalExtension.extract_role">
+<em class="property">static </em><code class="descname">extract_role</code><span class="sig-paren">(</span><em>event</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/extension/std/XOrganizationalExtension.html#XOrganizationalExtension.extract_role"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#extension.std.XOrganizationalExtension.XOrganizationalExtension.extract_role" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extracts the role attribute string from an event.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>event</strong> (<a class="reference internal" href="XEvent.html#module-model.XEvent" title="model.XEvent"><em>XEvent</em></a>) &#8211; Event to extract instance from.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Role string for the given event (may be None if not defined)</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="XMicroExtension.html">XMicroExtension</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="XSemanticExtension.html">XSemanticExtension</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Hernán Valdivieso.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
+    </div>
+  </body>
+</html>

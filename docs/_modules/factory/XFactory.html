@@ -1,0 +1,312 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>factory.XFactory &#8212; OpenXes Python 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../../index.html">
+          <span>OpenXes Python 1.0 documentation</span></a></h1>
+        <h2 class="heading"><span>factory.XFactory</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        <a class="uplink" href="../../index.html">Contents</a>
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <h1>Source code for factory.XFactory</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">urllib</span> <span class="k">import</span> <span class="n">parse</span>
+<span class="kn">from</span> <span class="nn">model.XAttributeBoolean</span> <span class="k">import</span> <span class="n">XAttributeBoolean</span>
+<span class="kn">from</span> <span class="nn">model.XAttributeContainer</span> <span class="k">import</span> <span class="n">XAttributeContainer</span>
+<span class="kn">from</span> <span class="nn">model.XAttributeContinuous</span> <span class="k">import</span> <span class="n">XAttributeContinuous</span>
+<span class="kn">from</span> <span class="nn">model.XAttributeDiscrete</span> <span class="k">import</span> <span class="n">XAttributeDiscrete</span>
+<span class="kn">from</span> <span class="nn">model.XAttributeID</span> <span class="k">import</span> <span class="n">XAttributeID</span>
+<span class="kn">from</span> <span class="nn">model.XAttributeList</span> <span class="k">import</span> <span class="n">XAttributeList</span>
+<span class="kn">from</span> <span class="nn">model.XAttributeLiteral</span> <span class="k">import</span> <span class="n">XAttributeLiteral</span>
+<span class="kn">from</span> <span class="nn">model.XAttributeMap</span> <span class="k">import</span> <span class="n">XAttributeMap</span>
+<span class="kn">from</span> <span class="nn">model.XAttributeTimestamp</span> <span class="k">import</span> <span class="n">XAttributeTimestamp</span>
+<span class="kn">from</span> <span class="nn">model.XEvent</span> <span class="k">import</span> <span class="n">XEvent</span>
+<span class="kn">from</span> <span class="nn">model.XLog</span> <span class="k">import</span> <span class="n">XLog</span>
+<span class="kn">from</span> <span class="nn">model.XTrace</span> <span class="k">import</span> <span class="n">XTrace</span>
+
+
+<div class="viewcode-block" id="XFactory"><a class="viewcode-back" href="../../XFactory.html#factory.XFactory.XFactory">[docs]</a><span class="k">class</span> <span class="nc">XFactory</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Provide methods for creating all element classes of the XES model type</span>
+<span class="sd">    hierarchy</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="XFactory.create_log"><a class="viewcode-back" href="../../XFactory.html#factory.XFactory.XFactory.create_log">[docs]</a>    <span class="k">def</span> <span class="nf">create_log</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Creates a new XES log instance.</span>
+
+<span class="sd">        :param attribute: A XAttributeMap with the attribute for the log.</span>
+<span class="sd">        :type attribute: XAttributeMap</span>
+<span class="sd">        :return: A new log instance.</span>
+<span class="sd">        :rtype: XLog</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">attribute</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">XLog</span><span class="p">(</span><span class="n">attribute</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">XLog</span><span class="p">(</span><span class="n">XAttributeMap</span><span class="p">())</span></div>
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="XFactory.create_trace"><a class="viewcode-back" href="../../XFactory.html#factory.XFactory.XFactory.create_trace">[docs]</a>    <span class="k">def</span> <span class="nf">create_trace</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Creates a new XES trace instance.</span>
+
+<span class="sd">        :param attribute: A XAttributeMap with the attribute for the trace.</span>
+<span class="sd">        :type attribute: XAttributeMap</span>
+<span class="sd">        :return: A new trace instance.</span>
+<span class="sd">        :rtype: XTrace</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">attribute</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">XTrace</span><span class="p">(</span><span class="n">attribute</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">XTrace</span><span class="p">(</span><span class="n">XAttributeMap</span><span class="p">())</span></div>
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="XFactory.create_event"><a class="viewcode-back" href="../../XFactory.html#factory.XFactory.XFactory.create_event">[docs]</a>    <span class="k">def</span> <span class="nf">create_event</span><span class="p">(</span><span class="n">attribute</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">identity</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Creates a new XES event instance.</span>
+
+<span class="sd">        :param attribute: A XAttributeMap with the attribute for the event.</span>
+<span class="sd">        :type attribute: XAttributeMap</span>
+<span class="sd">        :param identity:  The identity defining the attribute (set to None, if</span>
+<span class="sd">         the attribute is not associated to an identity).</span>
+<span class="sd">        :type identity: XID</span>
+<span class="sd">        :return: A new event instance.</span>
+<span class="sd">        :rtype: XEvent</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">attribute</span> <span class="ow">and</span> <span class="n">identity</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">XEvent</span><span class="p">(</span><span class="n">attribute</span><span class="p">,</span> <span class="n">identity</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">attribute</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">XEvent</span><span class="p">(</span><span class="n">attribute</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">XEvent</span><span class="p">()</span></div>
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="XFactory.create_attribute_map"><a class="viewcode-back" href="../../XFactory.html#factory.XFactory.XFactory.create_attribute_map">[docs]</a>    <span class="k">def</span> <span class="nf">create_attribute_map</span><span class="p">():</span>
+        <span class="sd">&quot;&quot;&quot;Creates a new XES attribute map.</span>
+
+<span class="sd">        :return: A new attribute map instance.</span>
+<span class="sd">        :rtype: XAttributeMap</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">XAttributeMap</span><span class="p">()</span></div>
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="XFactory.create_attribute_boolean"><a class="viewcode-back" href="../../XFactory.html#factory.XFactory.XFactory.create_attribute_boolean">[docs]</a>    <span class="k">def</span> <span class="nf">create_attribute_boolean</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">extension</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Creates a new XES attribute with boolean value.</span>
+
+<span class="sd">        :param key: The key of the attribute.</span>
+<span class="sd">        :type key: str</span>
+<span class="sd">        :param value: The value of the attribute.</span>
+<span class="sd">        :type value: bool</span>
+<span class="sd">        :param extension: The extension defining the attribute (set to None, if</span>
+<span class="sd">         the attribute is not associated to an extension).</span>
+<span class="sd">        :type extension: XExtension or None</span>
+<span class="sd">        :return: A new attribute with boolean value.</span>
+<span class="sd">        :rtype: XAttributeBoolean</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">XAttributeBoolean</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">extension</span><span class="p">)</span></div>
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="XFactory.create_attribute_continuous"><a class="viewcode-back" href="../../XFactory.html#factory.XFactory.XFactory.create_attribute_continuous">[docs]</a>    <span class="k">def</span> <span class="nf">create_attribute_continuous</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">extension</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Creates a new XES attribute with float value.</span>
+
+<span class="sd">        :param key: The key of the attribute.</span>
+<span class="sd">        :type key: str</span>
+<span class="sd">        :param value: The value of the attribute.</span>
+<span class="sd">        :type value: float</span>
+<span class="sd">        :param extension: The extension defining the attribute (set to None, if</span>
+<span class="sd">         the attribute is not associated to an extension).</span>
+<span class="sd">        :type extension: XExtension or None</span>
+<span class="sd">        :return: A new attribute with float value.</span>
+<span class="sd">        :rtype: XAttributeContinuous</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">XAttributeContinuous</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">extension</span><span class="p">)</span></div>
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="XFactory.create_attribute_discrete"><a class="viewcode-back" href="../../XFactory.html#factory.XFactory.XFactory.create_attribute_discrete">[docs]</a>    <span class="k">def</span> <span class="nf">create_attribute_discrete</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">extension</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Creates a new XES attribute with integer value.</span>
+
+<span class="sd">        :param key: The key of the attribute.</span>
+<span class="sd">        :type key: str</span>
+<span class="sd">        :param value: The value of the attribute.</span>
+<span class="sd">        :type value: int</span>
+<span class="sd">        :param extension: The extension defining the attribute (set to None, if</span>
+<span class="sd">         the attribute is not associated to an extension).</span>
+<span class="sd">        :type extension: XExtension or None</span>
+<span class="sd">        :return: A new attribute with integer value.</span>
+<span class="sd">        :rtype: XAttributeDiscrete</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">XAttributeDiscrete</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">extension</span><span class="p">)</span></div>
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="XFactory.create_attribute_literal"><a class="viewcode-back" href="../../XFactory.html#factory.XFactory.XFactory.create_attribute_literal">[docs]</a>    <span class="k">def</span> <span class="nf">create_attribute_literal</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">extension</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Creates a new XES attribute with string value.</span>
+
+<span class="sd">        :param key: The key of the attribute.</span>
+<span class="sd">        :type key: str</span>
+<span class="sd">        :param value: The value of the attribute.</span>
+<span class="sd">        :type value: str</span>
+<span class="sd">        :param extension: The extension defining the attribute (set to None, if</span>
+<span class="sd">         the attribute is not associated to an extension).</span>
+<span class="sd">        :type extension: XExtension or None</span>
+<span class="sd">        :return: A new attribute with string value.</span>
+<span class="sd">        :rtype: XAttributeLiteral</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">XAttributeLiteral</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">extension</span><span class="p">)</span></div>
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="XFactory.create_attribute_timestamp"><a class="viewcode-back" href="../../XFactory.html#factory.XFactory.XFactory.create_attribute_timestamp">[docs]</a>    <span class="k">def</span> <span class="nf">create_attribute_timestamp</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">extension</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Creates a new XES attribute with datetime value.</span>
+
+<span class="sd">        :param key: The key of the attribute.</span>
+<span class="sd">        :type key: str</span>
+<span class="sd">        :param value: The value of the attribute.</span>
+<span class="sd">        :type value: datetime.datetime or int</span>
+<span class="sd">        :param extension: The extension defining the attribute (set to None, if</span>
+<span class="sd">         the attribute is not associated to an extension).</span>
+<span class="sd">        :type extension: XExtension or None</span>
+<span class="sd">        :return: A new attribute with datetime value.</span>
+<span class="sd">        :rtype: XAttributeTimestamp</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">XAttributeTimestamp</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">extension</span><span class="p">)</span></div>
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="XFactory.create_attribute_id"><a class="viewcode-back" href="../../XFactory.html#factory.XFactory.XFactory.create_attribute_id">[docs]</a>    <span class="k">def</span> <span class="nf">create_attribute_id</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">extension</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Creates a new XES attribute with XID value.</span>
+
+<span class="sd">        :param key: The key of the attribute.</span>
+<span class="sd">        :type key: str</span>
+<span class="sd">        :param value: The value of the attribute.</span>
+<span class="sd">        :type value: XID</span>
+<span class="sd">        :param extension: The extension defining the attribute (set to None, if</span>
+<span class="sd">         the attribute is not associated to an extension).</span>
+<span class="sd">        :type extension: XExtension or None</span>
+<span class="sd">        :return: A new attribute with XID value.</span>
+<span class="sd">        :rtype: XAttributeID</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">XAttributeID</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">extension</span><span class="p">)</span></div>
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="XFactory.create_attribute_list"><a class="viewcode-back" href="../../XFactory.html#factory.XFactory.XFactory.create_attribute_list">[docs]</a>    <span class="k">def</span> <span class="nf">create_attribute_list</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">extension</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Creates a new XES list attribute.</span>
+
+<span class="sd">        :param key: The key of the attribute.</span>
+<span class="sd">        :type key: str</span>
+<span class="sd">        :param extension: The extension defining the attribute (set to None, if</span>
+<span class="sd">         the attribute is not associated to an extension).</span>
+<span class="sd">        :type extension: XExtension or None</span>
+<span class="sd">        :return: A new list attribute.</span>
+<span class="sd">        :rtype: XAttributeList</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">XAttributeList</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">extension</span><span class="p">)</span></div>
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="XFactory.create_attribute_container"><a class="viewcode-back" href="../../XFactory.html#factory.XFactory.XFactory.create_attribute_container">[docs]</a>    <span class="k">def</span> <span class="nf">create_attribute_container</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">extension</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Creates a new XES container attribute.</span>
+
+<span class="sd">        :param key: The key of the attribute.</span>
+<span class="sd">        :type key: str</span>
+<span class="sd">        :param extension: The extension defining the attribute (set to None, if</span>
+<span class="sd">         the attribute is not associated to an extension).</span>
+<span class="sd">        :type extension: XExtension or None</span>
+<span class="sd">        :return: A new container attribute.</span>
+<span class="sd">        :rtype: XAttributeContainer</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">XAttributeContainer</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">extension</span><span class="o">=</span><span class="n">extension</span><span class="p">)</span></div>
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="XFactory.get_author"><a class="viewcode-back" href="../../XFactory.html#factory.XFactory.XFactory.get_author">[docs]</a>    <span class="k">def</span> <span class="nf">get_author</span><span class="p">():</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the author name of the specific factory implementation.</span>
+
+<span class="sd">        :return:  The author name</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;Hernán F. Valdivieso&quot;</span></div>
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="XFactory.get_description"><a class="viewcode-back" href="../../XFactory.html#factory.XFactory.XFactory.get_description">[docs]</a>    <span class="k">def</span> <span class="nf">get_description</span><span class="p">():</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a description of the specific factory implementation.</span>
+
+<span class="sd">        :return: A description of the specific factory</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;Creates naive implementations for all available model &quot;</span> \
+               <span class="s2">&quot;hierarchy elements, i.e., no optimizations will be employed.&quot;</span></div>
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="XFactory.get_uri"><a class="viewcode-back" href="../../XFactory.html#factory.XFactory.XFactory.get_uri">[docs]</a>    <span class="k">def</span> <span class="nf">get_uri</span><span class="p">():</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns an URI, pointing to more information about the specific factory</span>
+<span class="sd">         implementation.</span>
+
+<span class="sd">        :return: An URI, pointing to more information about the specific factory</span>
+<span class="sd">        :rtype: urllib.parse.ParseResult</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">parse</span><span class="o">.</span><span class="n">urlparse</span><span class="p">(</span><span class="s2">&quot;http://www.xes-standard.org/&quot;</span><span class="p">)</span></div>
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="XFactory.get_name"><a class="viewcode-back" href="../../XFactory.html#factory.XFactory.XFactory.get_name">[docs]</a>    <span class="k">def</span> <span class="nf">get_name</span><span class="p">():</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the name of the specific factory implementation.</span>
+
+<span class="sd">        :return:  The name of the specific factory</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;Standard&quot;</span></div>
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="XFactory.get_vendor"><a class="viewcode-back" href="../../XFactory.html#factory.XFactory.XFactory.get_vendor">[docs]</a>    <span class="k">def</span> <span class="nf">get_vendor</span><span class="p">():</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the vendor of the specific factory implementation.</span>
+
+<span class="sd">        :return: The vendor of the specific factory</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;xes-standard.org&quot;</span></div></div>
+</pre></div>
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        <a class="uplink" href="../../index.html">Contents</a>
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Hernán Valdivieso.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
+    </div>
+  </body>
+</html>

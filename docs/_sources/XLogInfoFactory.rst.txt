@@ -1,0 +1,7 @@
+
+XLogInfoFactory
+===============
+
+.. automodule:: info.XLogInfoFactory
+   :members:
+

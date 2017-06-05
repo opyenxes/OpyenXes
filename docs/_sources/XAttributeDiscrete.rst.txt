@@ -1,0 +1,7 @@
+XAttributeDiscrete
+==================
+
+.. automodule:: model.XAttributeDiscrete
+   :members:
+
+

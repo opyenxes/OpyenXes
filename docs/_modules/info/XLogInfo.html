@@ -1,0 +1,300 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>info.XLogInfo &#8212; OpenXes Python 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../../index.html">
+          <span>OpenXes Python 1.0 documentation</span></a></h1>
+        <h2 class="heading"><span>info.XLogInfo</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        <a class="uplink" href="../../index.html">Contents</a>
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <h1>Source code for info.XLogInfo</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">classification.XEventAttributeClassifier</span> <span class="k">import</span> <span class="n">XEventAttributeClassifier</span>
+<span class="kn">from</span> <span class="nn">classification.XEventLifeTransClassifier</span> <span class="k">import</span> <span class="n">XEventLifeTransClassifier</span>
+<span class="kn">from</span> <span class="nn">classification.XEventResourceClassifier</span> <span class="k">import</span> <span class="n">XEventResourceClassifier</span>
+<span class="kn">from</span> <span class="nn">classification.XEventNameClassifier</span> <span class="k">import</span> <span class="n">XEventNameClassifier</span>
+<span class="kn">from</span> <span class="nn">classification.XEventClasses</span> <span class="k">import</span> <span class="n">XEventClasses</span>
+<span class="kn">from</span> <span class="nn">info.XAttributeInfo</span> <span class="k">import</span> <span class="n">XAttributeInfo</span>
+<span class="kn">from</span> <span class="nn">info.XTimeBounds</span> <span class="k">import</span> <span class="n">XTimeBounds</span>
+
+
+<div class="viewcode-block" id="XLogInfo"><a class="viewcode-back" href="../../XLogInfo.html#info.XLogInfo.XLogInfo">[docs]</a><span class="k">class</span> <span class="nc">XLogInfo</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;This class implements a bare-bones log info summary which can be created</span>
+<span class="sd">    on demand by using applications. The log info summary is based on an event</span>
+<span class="sd">    classifier, which is used to identify event class abstractions.</span>
+
+<span class="sd">    :param log: The event log to create an info summary for.</span>
+<span class="sd">    :type log: XLog</span>
+<span class="sd">    :param default_classifier: The default event classifier to be used</span>
+<span class="sd">    :type default_classifier: XEventAttributeClassifier</span>
+<span class="sd">    :param classifiers: A collection of additional event classifiers to be</span>
+<span class="sd">     covered by the created log info instance.</span>
+<span class="sd">    :type classifiers: list[XEventAttributeClassifier]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">STANDARD_CLASSIFIER</span> <span class="o">=</span> <span class="n">XEventAttributeClassifier</span><span class="p">(</span><span class="s2">&quot;MXML Legacy Classifier&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;concept:name&quot;</span><span class="p">,</span> <span class="s2">&quot;lifecycle:transition&quot;</span><span class="p">])</span>
+    <span class="n">NAME_CLASSIFIER</span> <span class="o">=</span> <span class="n">XEventNameClassifier</span><span class="p">()</span>
+    <span class="n">RESOURCE_CLASSIFIER</span> <span class="o">=</span> <span class="n">XEventResourceClassifier</span><span class="p">()</span>
+    <span class="n">LIFECYCLE_TRANSITION_CLASSIFIER</span> <span class="o">=</span> <span class="n">XEventLifeTransClassifier</span><span class="p">()</span>
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="XLogInfo.create"><a class="viewcode-back" href="../../XLogInfo.html#info.XLogInfo.XLogInfo.create">[docs]</a>    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="n">log</span><span class="p">,</span> <span class="n">default_classifier</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">classifiers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Creates a new log info summary with the standard event classifier.</span>
+
+<span class="sd">        :param log: The event log to create an info summary for.</span>
+<span class="sd">        :type log: XLog</span>
+<span class="sd">        :param default_classifier: The default event classifier to be used</span>
+<span class="sd">        :type default_classifier: XEventAttributeClassifier</span>
+<span class="sd">        :param classifiers: A collection of additional event classifiers to be</span>
+<span class="sd">         covered by the created log info instance.</span>
+<span class="sd">        :type classifiers: list[XEventAttributeClassifier]</span>
+<span class="sd">        :return: The log info summary for this log.</span>
+<span class="sd">        :rtype: XLogInfo</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">default_classifier</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">XLogInfo</span><span class="p">(</span><span class="n">log</span><span class="p">,</span> <span class="n">XLogInfo</span><span class="o">.</span><span class="n">STANDARD_CLASSIFIER</span><span class="p">,</span> <span class="n">classifiers</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">XLogInfo</span><span class="p">(</span><span class="n">log</span><span class="p">,</span> <span class="n">default_classifier</span><span class="p">,</span> <span class="n">classifiers</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">log</span><span class="p">,</span> <span class="n">default_classifier</span><span class="p">,</span> <span class="n">classifiers</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__log</span> <span class="o">=</span> <span class="n">log</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__default_classifier</span> <span class="o">=</span> <span class="n">default_classifier</span>
+        <span class="k">if</span> <span class="n">classifiers</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">classifiers</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__event_classes</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">classifier</span> <span class="ow">in</span> <span class="n">classifiers</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__event_classes</span><span class="p">[</span><span class="n">classifier</span><span class="p">]</span> <span class="o">=</span> <span class="n">XEventClasses</span><span class="p">(</span><span class="n">classifier</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__event_classes</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">__default_classifier</span><span class="p">]</span> <span class="o">=</span> <span class="n">XEventClasses</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__default_classifier</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__event_classes</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">NAME_CLASSIFIER</span><span class="p">]</span> <span class="o">=</span> <span class="n">XEventClasses</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">NAME_CLASSIFIER</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__event_classes</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">RESOURCE_CLASSIFIER</span><span class="p">]</span> <span class="o">=</span> <span class="n">XEventClasses</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">RESOURCE_CLASSIFIER</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__event_classes</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">LIFECYCLE_TRANSITION_CLASSIFIER</span><span class="p">]</span> <span class="o">=</span> <span class="n">XEventClasses</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">LIFECYCLE_TRANSITION_CLASSIFIER</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__number_of_events</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__number_of_traces</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__log_boundaries</span> <span class="o">=</span> <span class="n">XTimeBounds</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__trace_boundaries</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__log_attribute_info</span> <span class="o">=</span> <span class="n">XAttributeInfo</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__trace_attribute_info</span> <span class="o">=</span> <span class="n">XAttributeInfo</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__event_attribute_info</span> <span class="o">=</span> <span class="n">XAttributeInfo</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__meta_attribute_info</span> <span class="o">=</span> <span class="n">XAttributeInfo</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setup</span><span class="p">()</span>
+
+<div class="viewcode-block" id="XLogInfo.setup"><a class="viewcode-back" href="../../XLogInfo.html#info.XLogInfo.XLogInfo.setup">[docs]</a>    <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Creates the internal data structures of this summary on setup from</span>
+<span class="sd">        the log.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">register_attributes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__log_attribute_info</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__log</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">trace</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__log</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__number_of_traces</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">register_attributes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__trace_attribute_info</span><span class="p">,</span> <span class="n">trace</span><span class="p">)</span>
+            <span class="n">trace_bounds</span> <span class="o">=</span> <span class="n">XTimeBounds</span><span class="p">()</span>
+
+            <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">trace</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__number_of_events</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">register_attributes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__event_attribute_info</span><span class="p">,</span> <span class="n">event</span><span class="p">)</span>
+
+                <span class="k">for</span> <span class="n">classes</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__event_classes</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+                    <span class="n">classes</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
+
+                <span class="n">trace_bounds</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">__trace_boundaries</span><span class="p">[</span><span class="n">trace</span><span class="p">]</span> <span class="o">=</span> <span class="n">trace_bounds</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__log_boundaries</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">trace_bounds</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">classes</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__event_classes</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="n">classes</span><span class="o">.</span><span class="n">harmonize_indices</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="XLogInfo.register_attributes"><a class="viewcode-back" href="../../XLogInfo.html#info.XLogInfo.XLogInfo.register_attributes">[docs]</a>    <span class="k">def</span> <span class="nf">register_attributes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attribute_info</span><span class="p">,</span> <span class="n">attributable</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Registers all attributes of a given attributable, i.e. model type</span>
+<span class="sd">        hierarchy element, in the given attribute info registry.</span>
+
+<span class="sd">        :param attribute_info: Attribute info registry to use for registration.</span>
+<span class="sd">        :type attribute_info: XAttributeInfo</span>
+<span class="sd">        :param attributable: Attributable whose attributes to register.</span>
+<span class="sd">        :type attributable: XAttributable</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">attributable</span><span class="o">.</span><span class="n">has_attributes</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">attribute</span> <span class="ow">in</span> <span class="n">attributable</span><span class="o">.</span><span class="n">get_attributes</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+                <span class="n">attribute_info</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">attribute</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">register_attributes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__meta_attribute_info</span><span class="p">,</span> <span class="n">attribute</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="XLogInfo.get_log"><a class="viewcode-back" href="../../XLogInfo.html#info.XLogInfo.XLogInfo.get_log">[docs]</a>    <span class="k">def</span> <span class="nf">get_log</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Retrieves the log used for this summary.</span>
+
+<span class="sd">        :return: The event log which this summary describes.</span>
+<span class="sd">        :rtype: XLog</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__log</span></div>
+
+<div class="viewcode-block" id="XLogInfo.get_number_of_event"><a class="viewcode-back" href="../../XLogInfo.html#info.XLogInfo.XLogInfo.get_number_of_event">[docs]</a>    <span class="k">def</span> <span class="nf">get_number_of_event</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Retrieves the total number of events in this log.</span>
+
+<span class="sd">        :return: Total number of events.</span>
+<span class="sd">        :rtype: int</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__number_of_events</span></div>
+
+<div class="viewcode-block" id="XLogInfo.get_number_of_traces"><a class="viewcode-back" href="../../XLogInfo.html#info.XLogInfo.XLogInfo.get_number_of_traces">[docs]</a>    <span class="k">def</span> <span class="nf">get_number_of_traces</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Retrieves the number of traces in this log.</span>
+
+<span class="sd">        :return: Number of traces available in this log.</span>
+<span class="sd">        :rtype: int</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__number_of_traces</span></div>
+
+<div class="viewcode-block" id="XLogInfo.get_event_classes"><a class="viewcode-back" href="../../XLogInfo.html#info.XLogInfo.XLogInfo.get_event_classes">[docs]</a>    <span class="k">def</span> <span class="nf">get_event_classes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">classifier</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Retrieves the event classes for a given classifier.</span>
+<span class="sd">        *Note:* The given event classifier must be covered by this log info,</span>
+<span class="sd">        i.e., the log info must have been created with this classifier.</span>
+<span class="sd">        Otherwise, this method will return null. You can retrieve the collection</span>
+<span class="sd">        of event classifiers covered by this log info instance by calling the</span>
+<span class="sd">        method getEventClassifiers().</span>
+
+<span class="sd">        :param classifier: The classifier for which to retrieve the event classes.</span>
+<span class="sd">        :type classifier: XEventAttributeClassifier or None</span>
+<span class="sd">        :return: The requested event classes, or null if the given event</span>
+<span class="sd">         classifier is not covered by this log info instance.</span>
+<span class="sd">        :rtype: XEventClasses</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">classifier</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__event_classes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__default_classifier</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__event_classes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">classifier</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="XLogInfo.get_event_classifiers"><a class="viewcode-back" href="../../XLogInfo.html#info.XLogInfo.XLogInfo.get_event_classifiers">[docs]</a>    <span class="k">def</span> <span class="nf">get_event_classifiers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Retrieves the set of event classifiers covered by this log info,</span>
+<span class="sd">        i.e., for which event classes are registered in this log info instance.</span>
+
+<span class="sd">        :return: The tuple of event classifiers covered by this log info instance.</span>
+<span class="sd">        :rtype: tuple</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__event_classes</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="XLogInfo.get_resource_classes"><a class="viewcode-back" href="../../XLogInfo.html#info.XLogInfo.XLogInfo.get_resource_classes">[docs]</a>    <span class="k">def</span> <span class="nf">get_resource_classes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Retrieves the resource classes of the summarized log.</span>
+
+<span class="sd">        :return: The resource classes of the summarized log.</span>
+<span class="sd">        :rtype: XEventClasses</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__event_classes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">RESOURCE_CLASSIFIER</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="XLogInfo.get_name_classes"><a class="viewcode-back" href="../../XLogInfo.html#info.XLogInfo.XLogInfo.get_name_classes">[docs]</a>    <span class="k">def</span> <span class="nf">get_name_classes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Retrieves the event name classes of the summarized log.</span>
+
+<span class="sd">        :return: The event name classes of the summarized log.</span>
+<span class="sd">        :rtype: XEventClasses</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__event_classes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">NAME_CLASSIFIER</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="XLogInfo.get_transition_classes"><a class="viewcode-back" href="../../XLogInfo.html#info.XLogInfo.XLogInfo.get_transition_classes">[docs]</a>    <span class="k">def</span> <span class="nf">get_transition_classes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Retrieves the lifecycle transition classes of the summarized log.</span>
+
+<span class="sd">        :return: The lifecycle transition classes of the summarized log.</span>
+<span class="sd">        :rtype: XEventClasses</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__event_classes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">LIFECYCLE_TRANSITION_CLASSIFIER</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="XLogInfo.get_log_time_boundaries"><a class="viewcode-back" href="../../XLogInfo.html#info.XLogInfo.XLogInfo.get_log_time_boundaries">[docs]</a>    <span class="k">def</span> <span class="nf">get_log_time_boundaries</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Retrieves the global timestamp boundaries of this log.</span>
+
+<span class="sd">        :return: Timestamp boundaries for the complete log.</span>
+<span class="sd">        :rtype XTimeBounds</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__log_boundaries</span></div>
+
+<div class="viewcode-block" id="XLogInfo.get_trace_time_boundaries"><a class="viewcode-back" href="../../XLogInfo.html#info.XLogInfo.XLogInfo.get_trace_time_boundaries">[docs]</a>    <span class="k">def</span> <span class="nf">get_trace_time_boundaries</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">trace</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Retrieves the timestamp boundaries for a specified trace.</span>
+
+<span class="sd">        :param trace: Trace to be queried for.</span>
+<span class="sd">        :return: Timestamp boundaries for the indicated trace.</span>
+<span class="sd">        :rtype: XTimeBounds</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__trace_boundaries</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">trace</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="XLogInfo.get_log_attribute_info"><a class="viewcode-back" href="../../XLogInfo.html#info.XLogInfo.XLogInfo.get_log_attribute_info">[docs]</a>    <span class="k">def</span> <span class="nf">get_log_attribute_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Retrieves attribute information about all attributes this log</span>
+<span class="sd">        contains on the log level.</span>
+
+<span class="sd">        :return: Attribute information on the log level.</span>
+<span class="sd">        :rtype: XAttributeInfo</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__log_attribute_info</span></div>
+
+<div class="viewcode-block" id="XLogInfo.get_trace_attribute_info"><a class="viewcode-back" href="../../XLogInfo.html#info.XLogInfo.XLogInfo.get_trace_attribute_info">[docs]</a>    <span class="k">def</span> <span class="nf">get_trace_attribute_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Retrieves attribute information about all attributes this log</span>
+<span class="sd">        contains on the trace level.</span>
+
+<span class="sd">        :return: Attribute information on the trace level.</span>
+<span class="sd">        :rtype: XAttributeInfo</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__trace_attribute_info</span></div>
+
+<div class="viewcode-block" id="XLogInfo.get_event_attribute_info"><a class="viewcode-back" href="../../XLogInfo.html#info.XLogInfo.XLogInfo.get_event_attribute_info">[docs]</a>    <span class="k">def</span> <span class="nf">get_event_attribute_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Retrieves attribute information about all attributes this log</span>
+<span class="sd">        contains on the event level.</span>
+
+<span class="sd">        :return: Attribute information on the event level.</span>
+<span class="sd">        :rtype: XAttributeInfo</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__event_attribute_info</span></div>
+
+<div class="viewcode-block" id="XLogInfo.get_meta_attribute_info"><a class="viewcode-back" href="../../XLogInfo.html#info.XLogInfo.XLogInfo.get_meta_attribute_info">[docs]</a>    <span class="k">def</span> <span class="nf">get_meta_attribute_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Retrieves attribute information about all attributes this log</span>
+<span class="sd">        contains on the meta (i.e., attribute) level.</span>
+
+<span class="sd">        :return: Attribute information on the meta level.</span>
+<span class="sd">        :rtype: XAttributeInfo</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__meta_attribute_info</span></div></div>
+
+</pre></div>
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        <a class="uplink" href="../../index.html">Contents</a>
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Hernán Valdivieso.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
+    </div>
+  </body>
+</html>

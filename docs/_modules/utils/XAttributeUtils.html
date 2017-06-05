@@ -1,0 +1,166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>utils.XAttributeUtils &#8212; OpenXes Python 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../../index.html">
+          <span>OpenXes Python 1.0 documentation</span></a></h1>
+        <h2 class="heading"><span>utils.XAttributeUtils</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        <a class="uplink" href="../../index.html">Contents</a>
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <h1>Source code for utils.XAttributeUtils</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">model.XAttributeDiscrete</span> <span class="k">import</span> <span class="n">XAttributeDiscrete</span>
+<span class="kn">from</span> <span class="nn">model.XAttributeLiteral</span> <span class="k">import</span> <span class="n">XAttributeLiteral</span>
+<span class="kn">from</span> <span class="nn">model.XAttributeContinuous</span> <span class="k">import</span> <span class="n">XAttributeContinuous</span>
+<span class="kn">from</span> <span class="nn">model.XAttributeBoolean</span> <span class="k">import</span> <span class="n">XAttributeBoolean</span>
+<span class="kn">from</span> <span class="nn">model.XAttributeID</span> <span class="k">import</span> <span class="n">XAttributeID</span>
+<span class="kn">from</span> <span class="nn">model.XAttributeList</span> <span class="k">import</span> <span class="n">XAttributeList</span>
+<span class="kn">from</span> <span class="nn">model.XAttributeContainer</span> <span class="k">import</span> <span class="n">XAttributeContainer</span>
+<span class="kn">from</span> <span class="nn">model.XAttributeTimestamp</span> <span class="k">import</span> <span class="n">XAttributeTimestamp</span>
+<span class="kn">from</span> <span class="nn">id.XIDFactory</span> <span class="k">import</span> <span class="n">XIDFactory</span>
+
+
+<div class="viewcode-block" id="XAttributeUtils"><a class="viewcode-back" href="../../XAttributeUtils.html#utils.XAttributeUtils.XAttributeUtils">[docs]</a><span class="k">class</span> <span class="nc">XAttributeUtils</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Utilities for working with attributes.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="XAttributeUtils.get_type"><a class="viewcode-back" href="../../XAttributeUtils.html#utils.XAttributeUtils.XAttributeUtils.get_type">[docs]</a>    <span class="k">def</span> <span class="nf">get_type</span><span class="p">(</span><span class="n">attribute</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;For the given attribute, returns its type, i.e., the most high-level,</span>
+<span class="sd">        typed interface this attribute implements.</span>
+
+<span class="sd">        :param attribute: Attribute to analyze.</span>
+<span class="sd">        :type attribute: XAttribute</span>
+<span class="sd">        :return: Class of this attribute.</span>
+<span class="sd">        :rtype: type</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">attribute</span><span class="p">,</span> <span class="n">XAttributeDiscrete</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">XAttributeDiscrete</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">attribute</span><span class="p">,</span> <span class="n">XAttributeLiteral</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">XAttributeLiteral</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">attribute</span><span class="p">,</span> <span class="n">XAttributeContinuous</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">XAttributeContinuous</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">attribute</span><span class="p">,</span> <span class="n">XAttributeBoolean</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">XAttributeBoolean</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">attribute</span><span class="p">,</span> <span class="n">XAttributeID</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">XAttributeID</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">attribute</span><span class="p">,</span> <span class="n">XAttributeList</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">XAttributeList</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">attribute</span><span class="p">,</span> <span class="n">XAttributeContainer</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">XAttributeContainer</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">attribute</span><span class="p">,</span> <span class="n">XAttributeTimestamp</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">XAttributeTimestamp</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Unexpected attribute type!&quot;</span><span class="p">)</span></div>
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="XAttributeUtils.get_type_string"><a class="viewcode-back" href="../../XAttributeUtils.html#utils.XAttributeUtils.XAttributeUtils.get_type_string">[docs]</a>    <span class="k">def</span> <span class="nf">get_type_string</span><span class="p">(</span><span class="n">attribute</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;For the given attribute, derives the standardized string describing</span>
+<span class="sd">        the attributes specific type (used, e.g., for serialization).</span>
+
+<span class="sd">        :param attribute: Attribute to extract type string from.</span>
+<span class="sd">        :type attribute: XAttribute</span>
+<span class="sd">        :return: String representation of the attribute&#39;s specific type.</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">attribute</span><span class="p">,</span> <span class="n">XAttributeDiscrete</span><span class="p">):</span>
+            <span class="k">return</span> <span class="s2">&quot;DISCRETE&quot;</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">attribute</span><span class="p">,</span> <span class="n">XAttributeLiteral</span><span class="p">):</span>
+            <span class="k">return</span> <span class="s2">&quot;LITERAL&quot;</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">attribute</span><span class="p">,</span> <span class="n">XAttributeContinuous</span><span class="p">):</span>
+            <span class="k">return</span> <span class="s2">&quot;CONTINUOUS&quot;</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">attribute</span><span class="p">,</span> <span class="n">XAttributeBoolean</span><span class="p">):</span>
+            <span class="k">return</span> <span class="s2">&quot;BOOLEAN&quot;</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">attribute</span><span class="p">,</span> <span class="n">XAttributeID</span><span class="p">):</span>
+            <span class="k">return</span> <span class="s2">&quot;ID&quot;</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">attribute</span><span class="p">,</span> <span class="n">XAttributeList</span><span class="p">):</span>
+            <span class="k">return</span> <span class="s2">&quot;LIST&quot;</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">attribute</span><span class="p">,</span> <span class="n">XAttributeContainer</span><span class="p">):</span>
+            <span class="k">return</span> <span class="s2">&quot;CONTAINER&quot;</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">attribute</span><span class="p">,</span> <span class="n">XAttributeTimestamp</span><span class="p">):</span>
+            <span class="k">return</span> <span class="s2">&quot;TIMESTAMP&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Unexpected attribute type!&quot;</span><span class="p">)</span></div>
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="XAttributeUtils.derive_prototype"><a class="viewcode-back" href="../../XAttributeUtils.html#utils.XAttributeUtils.XAttributeUtils.derive_prototype">[docs]</a>    <span class="k">def</span> <span class="nf">derive_prototype</span><span class="p">(</span><span class="n">instance</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Derives a prototype for the given attribute. This prototype attribute</span>
+<span class="sd">        will be equal in all respects, expect for the value of the attribute.</span>
+<span class="sd">        This value will be set to a default value, depending on the specific</span>
+<span class="sd">        type of the given attribute.</span>
+
+<span class="sd">        :param instance: Attribute to derive prototype from.</span>
+<span class="sd">        :type instance: XAttribute</span>
+<span class="sd">        :return: The derived prototype attribute.</span>
+<span class="sd">        :rtype: XAttribute</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">prototype</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">prototype</span><span class="p">,</span> <span class="n">XAttributeList</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">prototype</span><span class="p">,</span> <span class="n">XAttributeContainer</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">prototype</span><span class="p">,</span> <span class="n">XAttributeLiteral</span><span class="p">):</span>
+                <span class="n">prototype</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;UNKNOWN&quot;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">prototype</span><span class="p">,</span> <span class="n">XAttributeBoolean</span><span class="p">):</span>
+                <span class="n">prototype</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">prototype</span><span class="p">,</span> <span class="n">XAttributeContinuous</span><span class="p">):</span>
+                <span class="n">prototype</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">prototype</span><span class="p">,</span> <span class="n">XAttributeDiscrete</span><span class="p">):</span>
+                <span class="n">prototype</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">prototype</span><span class="p">,</span> <span class="n">XAttributeTimestamp</span><span class="p">):</span>
+                <span class="n">prototype</span><span class="o">.</span><span class="n">set_value_millies</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">prototype</span><span class="p">,</span> <span class="n">XAttributeID</span><span class="p">):</span>
+                <span class="n">prototype</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="n">XIDFactory</span><span class="p">()</span><span class="o">.</span><span class="n">create_id</span><span class="p">())</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Unexpected attribute type!&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">prototype</span></div></div>
+</pre></div>
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        <a class="uplink" href="../../index.html">Contents</a>
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Hernán Valdivieso.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
+    </div>
+  </body>
+</html>

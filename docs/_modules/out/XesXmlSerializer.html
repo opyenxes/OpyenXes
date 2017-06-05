@@ -1,0 +1,247 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>out.XesXmlSerializer &#8212; OpenXes Python 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../../index.html">
+          <span>OpenXes Python 1.0 documentation</span></a></h1>
+        <h2 class="heading"><span>out.XesXmlSerializer</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        <a class="uplink" href="../../index.html">Contents</a>
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <h1>Source code for out.XesXmlSerializer</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">log.XLogging</span> <span class="k">import</span> <span class="n">XLogging</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">xml.etree.ElementTree</span> <span class="k">as</span> <span class="nn">Et</span>
+<span class="kn">from</span> <span class="nn">xml.dom</span> <span class="k">import</span> <span class="n">minidom</span>
+<span class="kn">from</span> <span class="nn">classification.XEventAttributeClassifier</span> <span class="k">import</span> <span class="n">XEventAttributeClassifier</span>
+<span class="kn">from</span> <span class="nn">model.XAttributeDiscrete</span> <span class="k">import</span> <span class="n">XAttributeDiscrete</span>
+<span class="kn">from</span> <span class="nn">model.XAttributeLiteral</span> <span class="k">import</span> <span class="n">XAttributeLiteral</span>
+<span class="kn">from</span> <span class="nn">model.XAttributeContinuous</span> <span class="k">import</span> <span class="n">XAttributeContinuous</span>
+<span class="kn">from</span> <span class="nn">model.XAttributeBoolean</span> <span class="k">import</span> <span class="n">XAttributeBoolean</span>
+<span class="kn">from</span> <span class="nn">model.XAttributeID</span> <span class="k">import</span> <span class="n">XAttributeID</span>
+<span class="kn">from</span> <span class="nn">model.XAttributeList</span> <span class="k">import</span> <span class="n">XAttributeList</span>
+<span class="kn">from</span> <span class="nn">model.XAttributeContainer</span> <span class="k">import</span> <span class="n">XAttributeContainer</span>
+<span class="kn">from</span> <span class="nn">model.XAttributeTimestamp</span> <span class="k">import</span> <span class="n">XAttributeTimestamp</span>
+<span class="kn">from</span> <span class="nn">model.XAttributeCollection</span> <span class="k">import</span> <span class="n">XAttributeCollection</span>
+<span class="kn">from</span> <span class="nn">utils.XTokenHelper</span> <span class="k">import</span> <span class="n">XTokenHelper</span>
+
+
+<div class="viewcode-block" id="XesXmlSerializer"><a class="viewcode-back" href="../../XesXmlSerializer.html#out.XesXmlSerializer.XesXmlSerializer">[docs]</a><span class="k">class</span> <span class="nc">XesXmlSerializer</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;XES plain XML serialization for the XES format.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="XesXmlSerializer.get_author"><a class="viewcode-back" href="../../XesXmlSerializer.html#out.XesXmlSerializer.XesXmlSerializer.get_author">[docs]</a>    <span class="k">def</span> <span class="nf">get_author</span><span class="p">():</span>
+        <span class="sd">&quot;&quot;&quot;Returns the name of this serialization&#39;s author.</span>
+
+<span class="sd">        :return:  The author name.</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;Hernán F. Valdivieso&quot;</span></div>
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="XesXmlSerializer.get_description"><a class="viewcode-back" href="../../XesXmlSerializer.html#out.XesXmlSerializer.XesXmlSerializer.get_description">[docs]</a>    <span class="k">def</span> <span class="nf">get_description</span><span class="p">():</span>
+        <span class="sd">&quot;&quot;&quot;Returns a brief description of this serialization.</span>
+
+<span class="sd">        :return: A description of this serialization.</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;XES XML Serialization&quot;</span></div>
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="XesXmlSerializer.get_name"><a class="viewcode-back" href="../../XesXmlSerializer.html#out.XesXmlSerializer.XesXmlSerializer.get_name">[docs]</a>    <span class="k">def</span> <span class="nf">get_name</span><span class="p">():</span>
+        <span class="sd">&quot;&quot;&quot;Returns the human-readable name of this serialization.</span>
+
+<span class="sd">        :return: the human-readable name of this serialization.</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;XES XML&quot;</span></div>
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="XesXmlSerializer.get_suffices"><a class="viewcode-back" href="../../XesXmlSerializer.html#out.XesXmlSerializer.XesXmlSerializer.get_suffices">[docs]</a>    <span class="k">def</span> <span class="nf">get_suffices</span><span class="p">():</span>
+        <span class="sd">&quot;&quot;&quot;Returns an array of possible file suffices for this serialization.</span>
+
+<span class="sd">        :return: An array of possible file suffices for this serialization.</span>
+<span class="sd">        :rtype: list[str]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="s2">&quot;xes&quot;</span><span class="p">]</span></div>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span>
+
+<div class="viewcode-block" id="XesXmlSerializer.serialize"><a class="viewcode-back" href="../../XesXmlSerializer.html#out.XesXmlSerializer.XesXmlSerializer.serialize">[docs]</a>    <span class="k">def</span> <span class="nf">serialize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">log</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">in_bytes</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Serializes a given log to the given output stream.</span>
+
+<span class="sd">        :param log: Log to be serialized.</span>
+<span class="sd">        :type log: XLog</span>
+<span class="sd">        :param out: TextIOWrapper for serialization.</span>
+<span class="sd">        :type out: _io.TextIOWrapper</span>
+<span class="sd">        :param in_bytes: Private argument to decide if serialized as bytes or as string</span>
+<span class="sd">        :type in_bytes: bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">XLogging</span><span class="p">()</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&quot;Start serializing log to XES.XML&quot;</span><span class="p">,</span> <span class="n">XLogging</span><span class="o">.</span><span class="n">Importance</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">*</span> <span class="mi">1000</span>
+
+        <span class="n">log_xml</span> <span class="o">=</span> <span class="n">Et</span><span class="o">.</span><span class="n">Element</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+        <span class="n">log_xml</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;xes.version&quot;</span><span class="p">,</span> <span class="s2">&quot;1.0&quot;</span><span class="p">)</span>
+        <span class="n">log_xml</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;xes.features&quot;</span><span class="p">,</span> <span class="s2">&quot;nested-attributes&quot;</span><span class="p">)</span>
+        <span class="n">log_xml</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;openxes.version&quot;</span><span class="p">,</span> <span class="s2">&quot;1.0RC7&quot;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">extension</span> <span class="ow">in</span> <span class="n">log</span><span class="o">.</span><span class="n">get_extensions</span><span class="p">():</span>
+            <span class="n">extension_xml</span> <span class="o">=</span> <span class="n">Et</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">log_xml</span><span class="p">,</span> <span class="s2">&quot;extension&quot;</span><span class="p">)</span>
+            <span class="n">extension_xml</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="n">extension</span><span class="o">.</span><span class="n">get_name</span><span class="p">())</span>
+            <span class="n">extension_xml</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;prefix&quot;</span><span class="p">,</span> <span class="n">extension</span><span class="o">.</span><span class="n">get_prefix</span><span class="p">())</span>
+            <span class="n">extension_xml</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;uri&quot;</span><span class="p">,</span> <span class="n">extension</span><span class="o">.</span><span class="n">get_uri</span><span class="p">()</span><span class="o">.</span><span class="n">geturl</span><span class="p">())</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_global_attributes</span><span class="p">(</span><span class="n">log_xml</span><span class="p">,</span> <span class="s2">&quot;trace&quot;</span><span class="p">,</span> <span class="n">log</span><span class="o">.</span><span class="n">get_global_trace_attributes</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_global_attributes</span><span class="p">(</span><span class="n">log_xml</span><span class="p">,</span> <span class="s2">&quot;event&quot;</span><span class="p">,</span> <span class="n">log</span><span class="o">.</span><span class="n">get_global_event_attributes</span><span class="p">())</span>
+
+        <span class="k">for</span> <span class="n">classifier</span> <span class="ow">in</span> <span class="n">log</span><span class="o">.</span><span class="n">get_classifiers</span><span class="p">():</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">classifier</span><span class="p">,</span> <span class="n">XEventAttributeClassifier</span><span class="p">):</span>
+                <span class="n">classifier_xml</span> <span class="o">=</span> <span class="n">Et</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">log_xml</span><span class="p">,</span> <span class="s2">&quot;classifier&quot;</span><span class="p">)</span>
+                <span class="n">classifier_xml</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="n">classifier</span><span class="o">.</span><span class="n">name</span><span class="p">())</span>
+                <span class="n">classifier_xml</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;keys&quot;</span><span class="p">,</span> <span class="n">XTokenHelper</span><span class="o">.</span><span class="n">format_token</span><span class="p">(</span><span class="n">classifier</span><span class="o">.</span><span class="n">get_defining_attribute_keys</span><span class="p">()))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_attributes</span><span class="p">(</span><span class="n">log_xml</span><span class="p">,</span> <span class="n">log</span><span class="o">.</span><span class="n">get_attributes</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+
+        <span class="k">for</span> <span class="n">trace</span> <span class="ow">in</span> <span class="n">log</span><span class="p">:</span>
+            <span class="n">trace_xml</span> <span class="o">=</span> <span class="n">Et</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">log_xml</span><span class="p">,</span> <span class="s2">&quot;trace&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_attributes</span><span class="p">(</span><span class="n">trace_xml</span><span class="p">,</span> <span class="n">trace</span><span class="o">.</span><span class="n">get_attributes</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+
+            <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">trace</span><span class="p">:</span>
+                <span class="n">event_xml</span> <span class="o">=</span> <span class="n">Et</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">trace_xml</span><span class="p">,</span> <span class="s2">&quot;event&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">add_attributes</span><span class="p">(</span><span class="n">event_xml</span><span class="p">,</span> <span class="n">event</span><span class="o">.</span><span class="n">get_attributes</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+
+        <span class="n">text</span> <span class="o">=</span> <span class="n">minidom</span><span class="o">.</span><span class="n">parseString</span><span class="p">(</span><span class="n">Et</span><span class="o">.</span><span class="n">tostring</span><span class="p">(</span><span class="n">log_xml</span><span class="p">,</span> <span class="s2">&quot;utf-8&quot;</span><span class="p">))</span>
+        <span class="n">c1</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">createComment</span><span class="p">(</span><span class="s2">&quot;This file has been generated with the OpenXES library. It conforms&quot;</span><span class="p">)</span>
+        <span class="n">c2</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">createComment</span><span class="p">(</span><span class="s2">&quot;to the XML serialization of the XES standard for log storage and&quot;</span><span class="p">)</span>
+        <span class="n">c3</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">createComment</span><span class="p">(</span><span class="s2">&quot;management.&quot;</span><span class="p">)</span>
+        <span class="n">c4</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">createComment</span><span class="p">(</span><span class="s2">&quot;XES standard version: 1.0&quot;</span><span class="p">)</span>
+        <span class="n">c5</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">createComment</span><span class="p">(</span><span class="s2">&quot;OpenXES library version: 1.0RC7&quot;</span><span class="p">)</span>
+        <span class="n">c6</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">createComment</span><span class="p">(</span><span class="s2">&quot;OpenXES is available from http://www.openxes.org/&quot;</span><span class="p">)</span>
+        <span class="n">text</span><span class="o">.</span><span class="n">insertBefore</span><span class="p">(</span><span class="n">c6</span><span class="p">,</span> <span class="n">text</span><span class="o">.</span><span class="n">childNodes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">text</span><span class="o">.</span><span class="n">insertBefore</span><span class="p">(</span><span class="n">c5</span><span class="p">,</span> <span class="n">text</span><span class="o">.</span><span class="n">childNodes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">text</span><span class="o">.</span><span class="n">insertBefore</span><span class="p">(</span><span class="n">c4</span><span class="p">,</span> <span class="n">text</span><span class="o">.</span><span class="n">childNodes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">text</span><span class="o">.</span><span class="n">insertBefore</span><span class="p">(</span><span class="n">c3</span><span class="p">,</span> <span class="n">text</span><span class="o">.</span><span class="n">childNodes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">text</span><span class="o">.</span><span class="n">insertBefore</span><span class="p">(</span><span class="n">c2</span><span class="p">,</span> <span class="n">text</span><span class="o">.</span><span class="n">childNodes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">text</span><span class="o">.</span><span class="n">insertBefore</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span> <span class="n">text</span><span class="o">.</span><span class="n">childNodes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="n">in_bytes</span><span class="p">:</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">text</span><span class="o">.</span><span class="n">toprettyxml</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">text</span><span class="o">.</span><span class="n">toprettyxml</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">))</span>
+
+        <span class="n">duration1</span> <span class="o">=</span> <span class="s2">&quot; (&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">*</span> <span class="mi">1000</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; msec.)&quot;</span>
+        <span class="n">XLogging</span><span class="p">()</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&quot;finished serializing log&quot;</span> <span class="o">+</span> <span class="n">duration1</span><span class="p">,</span> <span class="n">XLogging</span><span class="o">.</span><span class="n">Importance</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="XesXmlSerializer.add_global_attributes"><a class="viewcode-back" href="../../XesXmlSerializer.html#out.XesXmlSerializer.XesXmlSerializer.add_global_attributes">[docs]</a>    <span class="k">def</span> <span class="nf">add_global_attributes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="n">scope</span><span class="p">,</span> <span class="n">attributes</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Helper method for defining global attributes on a given scope.</span>
+
+<span class="sd">        :param parent: xml element to add a children element with the global attributes</span>
+<span class="sd">        :type parent: xml.etree.ElementTree.Element</span>
+<span class="sd">        :param scope: Name of the global attributes, can be &#39;trace&#39; or &#39;event&#39;.</span>
+<span class="sd">        :type scope: str</span>
+<span class="sd">        :param attributes: Collection with the attributes to add.</span>
+<span class="sd">        :type attributes: dict_values</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">attributes</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">global_attribute</span> <span class="o">=</span> <span class="n">Et</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="s2">&quot;global&quot;</span><span class="p">)</span>
+            <span class="n">global_attribute</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;scope&quot;</span><span class="p">,</span> <span class="n">scope</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_attributes</span><span class="p">(</span><span class="n">global_attribute</span><span class="p">,</span> <span class="n">attributes</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="XesXmlSerializer.add_attributes"><a class="viewcode-back" href="../../XesXmlSerializer.html#out.XesXmlSerializer.XesXmlSerializer.add_attributes">[docs]</a>    <span class="k">def</span> <span class="nf">add_attributes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tag</span><span class="p">,</span> <span class="n">attributes</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Helper method, adds the given collection of attributes to the given Tag.</span>
+
+<span class="sd">        :param tag: Tag to add attributes to.</span>
+<span class="sd">        :type tag: xml.etree.ElementTree.Element</span>
+<span class="sd">        :param attributes: Collection with the attributes to add.</span>
+<span class="sd">        :type attributes: dict_values</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">attribute</span> <span class="ow">in</span> <span class="n">attributes</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">attribute</span><span class="p">,</span> <span class="n">XAttributeDiscrete</span><span class="p">):</span>
+                <span class="n">attribute_tag</span> <span class="o">=</span> <span class="n">Et</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="s2">&quot;int&quot;</span><span class="p">)</span>
+                <span class="n">attribute_tag</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;key&quot;</span><span class="p">,</span> <span class="n">attribute</span><span class="o">.</span><span class="n">get_key</span><span class="p">())</span>
+                <span class="n">attribute_tag</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;value&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">attribute</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">attribute</span><span class="p">,</span> <span class="n">XAttributeLiteral</span><span class="p">):</span>
+                <span class="n">attribute_tag</span> <span class="o">=</span> <span class="n">Et</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="s2">&quot;string&quot;</span><span class="p">)</span>
+                <span class="n">attribute_tag</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;key&quot;</span><span class="p">,</span> <span class="n">attribute</span><span class="o">.</span><span class="n">get_key</span><span class="p">())</span>
+                <span class="n">attribute_tag</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;value&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">attribute</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">attribute</span><span class="p">,</span> <span class="n">XAttributeContinuous</span><span class="p">):</span>
+                <span class="n">attribute_tag</span> <span class="o">=</span> <span class="n">Et</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="s2">&quot;float&quot;</span><span class="p">)</span>
+                <span class="n">attribute_tag</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;key&quot;</span><span class="p">,</span> <span class="n">attribute</span><span class="o">.</span><span class="n">get_key</span><span class="p">())</span>
+                <span class="n">attribute_tag</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;value&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">attribute</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">attribute</span><span class="p">,</span> <span class="n">XAttributeBoolean</span><span class="p">):</span>
+                <span class="n">attribute_tag</span> <span class="o">=</span> <span class="n">Et</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="s2">&quot;boolean&quot;</span><span class="p">)</span>
+                <span class="n">attribute_tag</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;key&quot;</span><span class="p">,</span> <span class="n">attribute</span><span class="o">.</span><span class="n">get_key</span><span class="p">())</span>
+                <span class="n">attribute_tag</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;value&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">attribute</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">attribute</span><span class="p">,</span> <span class="n">XAttributeID</span><span class="p">):</span>
+                <span class="n">attribute_tag</span> <span class="o">=</span> <span class="n">Et</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="s2">&quot;id&quot;</span><span class="p">)</span>
+                <span class="n">attribute_tag</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;key&quot;</span><span class="p">,</span> <span class="n">attribute</span><span class="o">.</span><span class="n">get_key</span><span class="p">())</span>
+                <span class="n">attribute_tag</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;value&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">attribute</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">attribute</span><span class="p">,</span> <span class="n">XAttributeList</span><span class="p">):</span>
+                <span class="n">attribute_tag</span> <span class="o">=</span> <span class="n">Et</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="s2">&quot;list&quot;</span><span class="p">)</span>
+                <span class="n">attribute_tag</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;key&quot;</span><span class="p">,</span> <span class="n">attribute</span><span class="o">.</span><span class="n">get_key</span><span class="p">())</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">attribute</span><span class="p">,</span> <span class="n">XAttributeContainer</span><span class="p">):</span>
+                <span class="n">attribute_tag</span> <span class="o">=</span> <span class="n">Et</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="s2">&quot;container&quot;</span><span class="p">)</span>
+                <span class="n">attribute_tag</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;key&quot;</span><span class="p">,</span> <span class="n">attribute</span><span class="o">.</span><span class="n">get_key</span><span class="p">())</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">attribute</span><span class="p">,</span> <span class="n">XAttributeTimestamp</span><span class="p">):</span>
+                <span class="n">attribute_tag</span> <span class="o">=</span> <span class="n">Et</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="s2">&quot;date&quot;</span><span class="p">)</span>
+                <span class="n">attribute_tag</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;key&quot;</span><span class="p">,</span> <span class="n">attribute</span><span class="o">.</span><span class="n">get_key</span><span class="p">())</span>
+                <span class="n">attribute_tag</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;value&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">attribute</span><span class="p">))</span>
+
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">attribute</span><span class="p">,</span> <span class="n">XAttributeCollection</span><span class="p">):</span>
+                <span class="n">collection</span> <span class="o">=</span> <span class="n">attribute</span><span class="o">.</span><span class="n">get_collection</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">add_attributes</span><span class="p">(</span><span class="n">attribute_tag</span><span class="p">,</span> <span class="n">collection</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">attribute</span><span class="o">.</span><span class="n">has_attributes</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">add_attributes</span><span class="p">(</span><span class="n">attribute_tag</span><span class="p">,</span> <span class="n">attribute</span><span class="o">.</span><span class="n">get_attributes</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">())</span></div></div>
+</pre></div>
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        <a class="uplink" href="../../index.html">Contents</a>
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Hernán Valdivieso.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
+    </div>
+  </body>
+</html>

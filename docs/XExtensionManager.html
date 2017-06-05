@@ -1,0 +1,233 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>XExtensionManager &#8212; OpenXes Python 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="XExtensionParser" href="XExtensionParser.html" />
+    <link rel="prev" title="XExtension" href="XExtension.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="index.html">
+          <span>OpenXes Python 1.0 documentation</span></a></h1>
+        <h2 class="heading"><span>XExtensionManager</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="XExtension.html">XExtension</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="XExtensionParser.html">XExtensionParser</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="module-extension.XExtensionManager">
+<span id="xextensionmanager"></span><h1>XExtensionManager<a class="headerlink" href="#module-extension.XExtensionManager" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="extension.XExtensionManager.XExtensionManager">
+<em class="property">class </em><code class="descclassname">extension.XExtensionManager.</code><code class="descname">XExtensionManager</code><a class="reference internal" href="_modules/extension/XExtensionManager.html#XExtensionManager"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#extension.XExtensionManager.XExtensionManager" title="Permalink to this definition">¶</a></dt>
+<dd><p>The extension manager is used to access, store, and manage extensions in
+a system. Extensions can be loaded from their given URI, which should point
+to the file defining the extension. Also, extensions can be registered
+locally, which then override any remotely-loaded extensions (which are more
+generic placeholders). Extension files downloaded from remote sources
+(which happens when the extension cannot be resolved locally) are cached on
+the local system, so that the network source of extension files is not put
+under extensive stress. The extension manager is a singleton, there is no
+need to instantiate more than one extension manager, which is necessary to
+avoid states of inconsistency.</p>
+<p>Uses the singleton metaclass</p>
+<dl class="staticmethod">
+<dt id="extension.XExtensionManager.XExtensionManager.cache_extension">
+<em class="property">static </em><code class="descname">cache_extension</code><span class="sig-paren">(</span><em>uri</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/extension/XExtensionManager.html#XExtensionManager.cache_extension"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#extension.XExtensionManager.XExtensionManager.cache_extension" title="Permalink to this definition">¶</a></dt>
+<dd><p>Downloads and caches an extension from its remote definition file.
+The extension is subsequently placed in the local cache, so that future
+loading is accelerated.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>uri</strong> (<em>urllib.parse.ParseResult</em><em> or </em><em>urllib.parse.SplitResult</em>) &#8211; Unique URI of the extension which is to be cached.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="extension.XExtensionManager.XExtensionManager.get_by_index">
+<code class="descname">get_by_index</code><span class="sig-paren">(</span><em>index</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/extension/XExtensionManager.html#XExtensionManager.get_by_index"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#extension.XExtensionManager.XExtensionManager.get_by_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves an extension by ints index. If no extension with the given
+index is found, this method returns null.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>index</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; The index of the requested extension.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The requested extension (may be null, if it cannot be found).</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="XExtension.html#module-extension.XExtension" title="extension.XExtension">XExtension</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="extension.XExtensionManager.XExtensionManager.get_by_name">
+<code class="descname">get_by_name</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/extension/XExtensionManager.html#XExtensionManager.get_by_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#extension.XExtensionManager.XExtensionManager.get_by_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves an extension by its name. If no extension by that name can
+be found, this method returns null.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; The name of the requested extension.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The requested extension (may be null, if it cannot be found).</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="XExtension.html#module-extension.XExtension" title="extension.XExtension">XExtension</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="extension.XExtensionManager.XExtensionManager.get_by_prefix">
+<code class="descname">get_by_prefix</code><span class="sig-paren">(</span><em>prefix</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/extension/XExtensionManager.html#XExtensionManager.get_by_prefix"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#extension.XExtensionManager.XExtensionManager.get_by_prefix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves an extension by its prefix. If no extension by that prefix
+can be found, this method returns null.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>prefix</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; The prefix of the requested extension.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The requested extension (may be null, if it cannot be found).</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="XExtension.html#module-extension.XExtension" title="extension.XExtension">XExtension</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="extension.XExtensionManager.XExtensionManager.get_by_uri">
+<code class="descname">get_by_uri</code><span class="sig-paren">(</span><em>uri</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/extension/XExtensionManager.html#XExtensionManager.get_by_uri"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#extension.XExtensionManager.XExtensionManager.get_by_uri" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves an extension instance by its unique URI. If the extension
+has not been registered before, it is looked up in the local cache. If
+it cannot be found in the cache, the manager attempts to download it
+from its unique URI, and add it to the set of managed extensions.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>uri</strong> (<em>urllib.parse.ParseResult</em><em> or </em><em>urllib.parse.SplitResult</em>) &#8211; The unique URI of the requested extension.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The requested extension.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="XExtension.html#module-extension.XExtension" title="extension.XExtension">XExtension</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="extension.XExtensionManager.XExtensionManager.get_index">
+<code class="descname">get_index</code><span class="sig-paren">(</span><em>extension</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/extension/XExtensionManager.html#XExtensionManager.get_index"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#extension.XExtensionManager.XExtensionManager.get_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resolves the index of an extension, given that this extension has
+been previously registered with this manager instance. If the given
+index has not been registered previously, this method returns -1.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>extension</strong> (<a class="reference internal" href="XExtension.html#module-extension.XExtension" title="extension.XExtension"><em>XExtension</em></a>) &#8211; The extension to look up the index for.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Unique index of the requested extension (positive integer).</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)">int</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="extension.XExtensionManager.XExtensionManager.load_extension_cache">
+<code class="descname">load_extension_cache</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/extension/XExtensionManager.html#XExtensionManager.load_extension_cache"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#extension.XExtensionManager.XExtensionManager.load_extension_cache" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads all extensions stored in the local cache. Cached extensions
+which exceed the maximum caching age are discarded, and downloaded
+freshly.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="extension.XExtensionManager.XExtensionManager.register">
+<code class="descname">register</code><span class="sig-paren">(</span><em>extension</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/extension/XExtensionManager.html#XExtensionManager.register"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#extension.XExtensionManager.XExtensionManager.register" title="Permalink to this definition">¶</a></dt>
+<dd><p>Explicitly registers an extension instance with the extension manager.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>extension</strong> (<a class="reference internal" href="XExtension.html#module-extension.XExtension" title="extension.XExtension"><em>XExtension</em></a>) &#8211; The extension to be registered.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="extension.XExtensionManager.XExtensionManager.register_standard_extensions">
+<code class="descname">register_standard_extensions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/extension/XExtensionManager.html#XExtensionManager.register_standard_extensions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#extension.XExtensionManager.XExtensionManager.register_standard_extensions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Registers all defined standard extensions with the extension manager
+before caching.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="XExtension.html">XExtension</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="XExtensionParser.html">XExtensionParser</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Hernán Valdivieso.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
+    </div>
+  </body>
+</html>

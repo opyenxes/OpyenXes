@@ -1,0 +1,213 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>classification.XEventClasses &#8212; OpenXes Python 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../../index.html">
+          <span>OpenXes Python 1.0 documentation</span></a></h1>
+        <h2 class="heading"><span>classification.XEventClasses</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        <a class="uplink" href="../../index.html">Contents</a>
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <h1>Source code for classification.XEventClasses</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">classification.XEventAttributeClassifier</span> <span class="k">import</span> <span class="n">XEventAttributeClassifier</span>
+<span class="kn">from</span> <span class="nn">classification.XEventClass</span> <span class="k">import</span> <span class="n">XEventClass</span>
+<span class="kn">from</span> <span class="nn">model.XElement</span> <span class="k">import</span> <span class="n">XElement</span>
+<span class="kn">from</span> <span class="nn">model.XEvent</span> <span class="k">import</span> <span class="n">XEvent</span>
+
+
+<div class="viewcode-block" id="XEventClasses"><a class="viewcode-back" href="../../XEventClasses.html#classification.XEventClasses.XEventClasses">[docs]</a><span class="k">class</span> <span class="nc">XEventClasses</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;A set of event classes. For any log, this class can be used to impose a</span>
+<span class="sd">    classification of events. Two events which belong to the same event class</span>
+<span class="sd">    can be considered equal, i.e. to refer to the same higher-level concept</span>
+<span class="sd">    they represent (e.g., an activity). Event classes are imposed on a log by</span>
+<span class="sd">    a specific classifier. This class can be configured with such a classifier,</span>
+<span class="sd">    which is then used to derive the actual event classes from a log, by</span>
+<span class="sd">    determining the identity of the contained events.</span>
+
+<span class="sd">    :param classifier: The classifier used for creating the set of event classes.</span>
+<span class="sd">    :type classifier: XEventAttributeClassifier</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">classifier</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__classifier</span> <span class="o">=</span> <span class="n">classifier</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__class_map</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="XEventClasses.derive_event_classes"><a class="viewcode-back" href="../../XEventClasses.html#classification.XEventClasses.XEventClasses.derive_event_classes">[docs]</a>    <span class="k">def</span> <span class="nf">derive_event_classes</span><span class="p">(</span><span class="n">classifier</span><span class="p">,</span> <span class="n">log</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Creates a new set of event classes, factory method.</span>
+
+<span class="sd">        :param classifier: The classifier to be used for event comparison.</span>
+<span class="sd">        :type classifier: XEventAttributeClassifier</span>
+<span class="sd">        :param log: The log, on which event classes should be imposed.</span>
+<span class="sd">        :type log: XLog</span>
+<span class="sd">        :return: A set of event classes, as an instance of this class.</span>
+<span class="sd">        :rtype: XEventClasses</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">n_classes</span> <span class="o">=</span> <span class="n">XEventClasses</span><span class="p">(</span><span class="n">classifier</span><span class="p">)</span>
+        <span class="n">n_classes</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">log</span><span class="p">)</span>
+        <span class="n">n_classes</span><span class="o">.</span><span class="n">harmonize_indices</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">n_classes</span></div>
+
+<div class="viewcode-block" id="XEventClasses.get_classifier"><a class="viewcode-back" href="../../XEventClasses.html#classification.XEventClasses.XEventClasses.get_classifier">[docs]</a>    <span class="k">def</span> <span class="nf">get_classifier</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Returns the classifier used for determining event classes.</span>
+
+<span class="sd">        :return: A classifier used in this set of classes.</span>
+<span class="sd">        :rtype: dict</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__classifier</span></div>
+
+<div class="viewcode-block" id="XEventClasses.get_classes"><a class="viewcode-back" href="../../XEventClasses.html#classification.XEventClasses.XEventClasses.get_classes">[docs]</a>    <span class="k">def</span> <span class="nf">get_classes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the collection of event classes contained in this instance.</span>
+
+
+<span class="sd">        :return: A collection of event classes.</span>
+<span class="sd">        :rtype: dict_values</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class_map</span><span class="o">.</span><span class="n">values</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="XEventClasses.get_class_of"><a class="viewcode-back" href="../../XEventClasses.html#classification.XEventClasses.XEventClasses.get_class_of">[docs]</a>    <span class="k">def</span> <span class="nf">get_class_of</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;For any given event, returns the corresponding event class as</span>
+<span class="sd">        determined by this set.</span>
+
+<span class="sd">        :param event: The event of which the event class should be determined.</span>
+<span class="sd">        :type event: XEvent</span>
+<span class="sd">        :return: The event class of this event, as found in this set of event</span>
+<span class="sd">         classes. If no matching event class is found, this method may return</span>
+<span class="sd">          null.</span>
+<span class="sd">        :rtype: XEventClass</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__classifier</span><span class="o">.</span><span class="n">get_class_identity</span><span class="p">(</span><span class="n">event</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="XEventClasses.get_by_identity"><a class="viewcode-back" href="../../XEventClasses.html#classification.XEventClasses.XEventClasses.get_by_identity">[docs]</a>    <span class="k">def</span> <span class="nf">get_by_identity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">identity</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns a given event class by its identity, i.e. its unique</span>
+<span class="sd">        identifier string.</span>
+
+<span class="sd">        :param identity: Identifier string of the requested event class.</span>
+<span class="sd">        :type identity: str</span>
+<span class="sd">        :return: The requested event class. If no matching event class is found,</span>
+<span class="sd">         this method may return null.</span>
+<span class="sd">        :rtype: XEventClass</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">identity</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="XEventClasses.get_by_index"><a class="viewcode-back" href="../../XEventClasses.html#classification.XEventClasses.XEventClasses.get_by_index">[docs]</a>    <span class="k">def</span> <span class="nf">get_by_index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns a given event class by its unique index.</span>
+
+<span class="sd">        :param index: Unique index of the requested event class.</span>
+<span class="sd">        :type index: int</span>
+<span class="sd">        :return: The requested event class. If no matching event class is found,</span>
+<span class="sd">         this method may return null.</span>
+<span class="sd">        :rtype: XEventClass</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">event_class</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class_map</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">event_class</span><span class="o">.</span><span class="n">get_index</span><span class="p">()</span> <span class="o">==</span> <span class="n">index</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">event_class</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="XEventClasses.register"><a class="viewcode-back" href="../../XEventClasses.html#classification.XEventClasses.XEventClasses.register">[docs]</a>    <span class="k">def</span> <span class="nf">register</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Registers a XES Element(log, trace and event and class ID) with this</span>
+<span class="sd">        set of event classes. This will result in all events of this log being</span>
+<span class="sd">        analyzed, and potentially new event classes being added to this set of</span>
+<span class="sd">        event classes. Event classes will be incremented in size, as new</span>
+<span class="sd">        members of these classes are found among the events in the log.</span>
+
+<span class="sd">        :param element: The Xes Element or Class ID to be analyzed.</span>
+<span class="sd">        :type element: XLog or XTrace or XEvent or str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">XElement</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">XEvent</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">objects</span> <span class="ow">in</span> <span class="n">element</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">objects</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">XEvent</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__classifier</span><span class="o">.</span><span class="n">get_class_identity</span><span class="p">(</span><span class="n">element</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">event_class</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">event_class</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">element</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">event_class</span> <span class="o">=</span> <span class="n">XEventClass</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__class_map</span><span class="p">))</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__class_map</span><span class="p">[</span><span class="n">element</span><span class="p">]</span> <span class="o">=</span> <span class="n">event_class</span>
+
+            <span class="k">if</span> <span class="n">event_class</span><span class="p">:</span>
+                <span class="n">event_class</span><span class="o">.</span><span class="n">increment_size</span><span class="p">()</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;The argument must be a XElement or string&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="XEventClasses.harmonize_indices"><a class="viewcode-back" href="../../XEventClasses.html#classification.XEventClasses.XEventClasses.harmonize_indices">[docs]</a>    <span class="k">def</span> <span class="nf">harmonize_indices</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;This method harmonizeds the indices of all contained event classes.</span>
+<span class="sd">        Indices are re-assigned according to the natural order of class</span>
+<span class="sd">        identities, i.e., the alphabetical order of class identity strings.</span>
+<span class="sd">        This method should be called after the composition or derivation of</span>
+<span class="sd">        event classes is complete, e.g., after scanning a log for generating</span>
+<span class="sd">        the log info. Using parties should not have to worry about event class</span>
+<span class="sd">        harmonization, and can thus safely ignore this method.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">array_list</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__class_map</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__class_map</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">array_list</span><span class="p">)):</span>
+            <span class="n">original</span> <span class="o">=</span> <span class="n">array_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">harmonized</span> <span class="o">=</span> <span class="n">XEventClass</span><span class="p">(</span><span class="n">original</span><span class="o">.</span><span class="n">get_id</span><span class="p">(),</span> <span class="n">i</span><span class="p">)</span>
+            <span class="n">harmonized</span><span class="o">.</span><span class="n">set_size</span><span class="p">(</span><span class="n">original</span><span class="o">.</span><span class="n">size</span><span class="p">())</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__class_map</span><span class="p">[</span><span class="n">harmonized</span><span class="o">.</span><span class="n">get_id</span><span class="p">()]</span> <span class="o">=</span> <span class="n">harmonized</span></div>
+
+    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">XEventClasses</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__classifier</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">get_classifier</span><span class="p">()</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="k">def</span> <span class="nf">__ne__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">__eq__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;Event classes defined by &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">__classifier</span><span class="o">.</span><span class="n">name</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__class_map</span><span class="p">)</span></div>
+</pre></div>
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        <a class="uplink" href="../../index.html">Contents</a>
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Hernán Valdivieso.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
+    </div>
+  </body>
+</html>

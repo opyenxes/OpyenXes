@@ -1,0 +1,393 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>data_in.XMxmlParser &#8212; OpenXes Python 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../../index.html">
+          <span>OpenXes Python 1.0 documentation</span></a></h1>
+        <h2 class="heading"><span>data_in.XMxmlParser</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        <a class="uplink" href="../../index.html">Contents</a>
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <h1>Source code for data_in.XMxmlParser</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">xml.sax.handler</span> <span class="k">import</span> <span class="n">ContentHandler</span>
+<span class="kn">from</span> <span class="nn">xml.sax</span> <span class="k">import</span> <span class="n">parse</span> <span class="k">as</span> <span class="n">xml_parse</span>
+<span class="kn">from</span> <span class="nn">factory.XFactoryRegistry</span> <span class="k">import</span> <span class="n">XFactoryRegistry</span>
+<span class="kn">from</span> <span class="nn">extension.std.XTimeExtension</span> <span class="k">import</span> <span class="n">XTimeExtension</span>
+<span class="kn">from</span> <span class="nn">extension.std.XConceptExtension</span> <span class="k">import</span> <span class="n">XConceptExtension</span>
+<span class="kn">from</span> <span class="nn">extension.std.XOrganizationalExtension</span> <span class="k">import</span> <span class="n">XOrganizationalExtension</span>
+<span class="kn">from</span> <span class="nn">extension.std.XLifecycleExtension</span> <span class="k">import</span> <span class="n">XLifecycleExtension</span>
+<span class="kn">from</span> <span class="nn">extension.std.XSemanticExtension</span> <span class="k">import</span> <span class="n">XSemanticExtension</span>
+<span class="kn">from</span> <span class="nn">classification.XEventAttributeClassifier</span> <span class="k">import</span> <span class="n">XEventAttributeClassifier</span>
+<span class="kn">from</span> <span class="nn">classification.XEventNameClassifier</span> <span class="k">import</span> <span class="n">XEventNameClassifier</span>
+<span class="kn">from</span> <span class="nn">classification.XEventResourceClassifier</span> <span class="k">import</span> <span class="n">XEventResourceClassifier</span>
+<span class="kn">from</span> <span class="nn">log.XLogging</span> <span class="k">import</span> <span class="n">XLogging</span>
+<span class="kn">from</span> <span class="nn">utils.XsDateTimeConversion</span> <span class="k">import</span> <span class="n">parse_date_time</span>
+
+
+<div class="viewcode-block" id="XMxmlParser"><a class="viewcode-back" href="../../XMxmlParser.html#data_in.XMxmlParser.XMxmlParser">[docs]</a><span class="k">class</span> <span class="nc">XMxmlParser</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Parser for the MXML format for event logs (deprecated).</span>
+
+<span class="sd">    :param factory: The factory to use for XES model building.</span>
+<span class="sd">    :type factory: XFactory</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">MXML_CLASSIFIERS</span> <span class="o">=</span> <span class="p">[</span><span class="n">XEventAttributeClassifier</span><span class="p">(</span><span class="s2">&quot;MXML Legacy Classifier&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;concept:name&quot;</span><span class="p">,</span> <span class="s2">&quot;lifecycle:transition&quot;</span><span class="p">]),</span>
+                        <span class="n">XEventNameClassifier</span><span class="p">(),</span>
+                        <span class="n">XEventResourceClassifier</span><span class="p">()]</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">factory</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">factory</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">factory</span> <span class="o">=</span> <span class="n">factory</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">factory</span> <span class="o">=</span> <span class="n">XFactoryRegistry</span><span class="p">()</span><span class="o">.</span><span class="n">current_default</span><span class="p">()</span>
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="XMxmlParser.author"><a class="viewcode-back" href="../../XMxmlParser.html#data_in.XMxmlParser.XMxmlParser.author">[docs]</a>    <span class="k">def</span> <span class="nf">author</span><span class="p">():</span>
+        <span class="sd">&quot;&quot;&quot;Returns the name of the author of this parser.</span>
+
+<span class="sd">        :return:  The author name.</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;Hernán Valdivieso&quot;</span></div>
+
+<div class="viewcode-block" id="XMxmlParser.can_parse"><a class="viewcode-back" href="../../XMxmlParser.html#data_in.XMxmlParser.XMxmlParser.can_parse">[docs]</a>    <span class="k">def</span> <span class="nf">can_parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Checks whether this parser can handle the given file.</span>
+
+<span class="sd">        :param file: path of the file to check against parser.</span>
+<span class="sd">        :type file: str</span>
+<span class="sd">        :return: Whether this parser can handle the given file.</span>
+<span class="sd">        :rtype: bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ends_with_ignore_case</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="s2">&quot;.mxml&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">ends_with_ignore_case</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="s2">&quot;.xml&quot;</span><span class="p">)</span></div>
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="XMxmlParser.description"><a class="viewcode-back" href="../../XMxmlParser.html#data_in.XMxmlParser.XMxmlParser.description">[docs]</a>    <span class="k">def</span> <span class="nf">description</span><span class="p">():</span>
+        <span class="sd">&quot;&quot;&quot;Returns a brief description of this parser.</span>
+
+<span class="sd">        :return: A description of this serialization.</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;Reads XES models from legacy MXML serializations&quot;</span></div>
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="XMxmlParser.name"><a class="viewcode-back" href="../../XMxmlParser.html#data_in.XMxmlParser.XMxmlParser.name">[docs]</a>    <span class="k">def</span> <span class="nf">name</span><span class="p">():</span>
+        <span class="sd">&quot;&quot;&quot;Returns the name of this parser or, more specifically, the name of</span>
+<span class="sd">        the format it can process.</span>
+
+
+<span class="sd">        :return: the human-readable name of this parser.</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;MXML&quot;</span></div>
+
+<div class="viewcode-block" id="XMxmlParser.parse"><a class="viewcode-back" href="../../XMxmlParser.html#data_in.XMxmlParser.XMxmlParser.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Parses a set of logs from the given input stream, which is supposed</span>
+<span class="sd">        to deliver an MXML serialization.</span>
+
+
+
+<span class="sd">        :param file: file generated by the function &#39;open(path)&#39;, which is</span>
+<span class="sd">          supposed to deliver an MXML serialization.</span>
+<span class="sd">        :type file: _io.TextIOWrapper</span>
+<span class="sd">        :return: The parsed list of logs.</span>
+<span class="sd">        :rtype: list[XLog]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">handler</span> <span class="o">=</span> <span class="n">XMxmlParser</span><span class="o">.</span><span class="n">MxmlHandler</span><span class="p">()</span>
+
+        <span class="n">xml_parse</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">handler</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">handler</span><span class="o">.</span><span class="n">get_logs</span><span class="p">()</span></div>
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="XMxmlParser.ends_with_ignore_case"><a class="viewcode-back" href="../../XMxmlParser.html#data_in.XMxmlParser.XMxmlParser.ends_with_ignore_case">[docs]</a>    <span class="k">def</span> <span class="nf">ends_with_ignore_case</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">suffix</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns whether the given file name ends (ignoring the case) with the given suffix.</span>
+
+<span class="sd">        :param name: The given file name.</span>
+<span class="sd">        :type name: str</span>
+<span class="sd">        :param suffix: The given suffix.</span>
+<span class="sd">        :type suffix: str</span>
+<span class="sd">        :return: Whether the given file name ends (ignoring the case) with the given suffix.</span>
+<span class="sd">        :rtype: bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">suffix</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">suffix</span> <span class="ow">in</span> <span class="n">name</span><span class="p">[</span><span class="n">i</span><span class="p">:]</span>
+        <span class="k">return</span> <span class="kc">False</span></div>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">()</span>
+
+<div class="viewcode-block" id="XMxmlParser.MxmlHandler"><a class="viewcode-back" href="../../XMxmlParser.html#data_in.XMxmlParser.XMxmlParser.MxmlHandler">[docs]</a>    <span class="k">class</span> <span class="nc">MxmlHandler</span><span class="p">(</span><span class="n">ContentHandler</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;SAX handler class for XES in XML representation.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__buffer</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__logs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__currentProcess</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__currentInstance</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__entry</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__sourceAttribute</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__genericAttribute</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__eventTypeAttribute</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__originatorAttribute</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__sourceOpen</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__timestamp</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__lastTimestamp</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__numUnorderedEntries</span> <span class="o">=</span> <span class="mi">0</span>
+
+<div class="viewcode-block" id="XMxmlParser.MxmlHandler.get_logs"><a class="viewcode-back" href="../../XMxmlParser.html#data_in.XMxmlParser.XMxmlParser.MxmlHandler.get_logs">[docs]</a>        <span class="k">def</span> <span class="nf">get_logs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot;Retrieves the parsed list of logs.</span>
+
+<span class="sd">            :return: The parsed list of logs.</span>
+<span class="sd">            :rtype: list[XLog]</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__logs</span></div>
+
+<div class="viewcode-block" id="XMxmlParser.MxmlHandler.startElement"><a class="viewcode-back" href="../../XMxmlParser.html#data_in.XMxmlParser.XMxmlParser.MxmlHandler.startElement">[docs]</a>        <span class="k">def</span> <span class="nf">startElement</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element_name</span><span class="p">,</span> <span class="n">attributes</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot; Overrides startElement in class ContentHandler</span>
+
+<span class="sd">            :param element_name: Contains the raw XML 1.0 name of the element type.</span>
+<span class="sd">            :type element_name: str</span>
+<span class="sd">            :param attributes: An instance of the Attributes class containing</span>
+<span class="sd">              the attributes of the element</span>
+<span class="sd">            :type attributes: xml.sax.xmlreader.AttributesImpl</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="n">tag_name</span> <span class="o">=</span> <span class="n">element_name</span>
+            <span class="k">if</span> <span class="n">tag_name</span> <span class="o">!=</span> <span class="s2">&quot;WorkflowLog&quot;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">tag_name</span> <span class="o">==</span> <span class="s2">&quot;Source&quot;</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">__sourceOpen</span> <span class="o">=</span> <span class="kc">True</span>
+                    <span class="n">description_string</span> <span class="o">=</span> <span class="n">attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;program&quot;</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">__sourceAttribute</span> <span class="o">=</span> <span class="n">XMxmlParser</span><span class="p">()</span><span class="o">.</span><span class="n">factory</span><span class="o">.</span><span class="n">create_attribute_literal</span><span class="p">(</span><span class="s2">&quot;source&quot;</span><span class="p">,</span> <span class="n">description_string</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">__add_model_reference__</span><span class="p">(</span><span class="n">attributes</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__sourceAttribute</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">tag_name</span> <span class="o">==</span> <span class="s2">&quot;Process&quot;</span><span class="p">:</span>
+                    <span class="n">description_string</span> <span class="o">=</span> <span class="n">attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">)</span>
+                    <span class="n">description</span> <span class="o">=</span> <span class="n">attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">)</span>
+
+                    <span class="bp">self</span><span class="o">.</span><span class="n">__currentProcess</span> <span class="o">=</span> <span class="n">XMxmlParser</span><span class="p">()</span><span class="o">.</span><span class="n">factory</span><span class="o">.</span><span class="n">create_log</span><span class="p">()</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">__currentProcess</span><span class="o">.</span><span class="n">get_extensions</span><span class="p">()</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">XConceptExtension</span><span class="p">())</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">__currentProcess</span><span class="o">.</span><span class="n">get_extensions</span><span class="p">()</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">XOrganizationalExtension</span><span class="p">())</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">__currentProcess</span><span class="o">.</span><span class="n">get_extensions</span><span class="p">()</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">XLifecycleExtension</span><span class="p">())</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">__currentProcess</span><span class="o">.</span><span class="n">get_extensions</span><span class="p">()</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">XSemanticExtension</span><span class="p">())</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">__currentProcess</span><span class="o">.</span><span class="n">get_extensions</span><span class="p">()</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">XTimeExtension</span><span class="p">())</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__sourceAttribute</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">__currentProcess</span><span class="o">.</span><span class="n">get_attributes</span><span class="p">()[</span><span class="bp">self</span><span class="o">.</span><span class="n">__sourceAttribute</span><span class="o">.</span><span class="n">get_key</span><span class="p">()]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__sourceAttribute</span>
+
+                    <span class="n">XConceptExtension</span><span class="p">()</span><span class="o">.</span><span class="n">assign_name</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__currentProcess</span><span class="p">,</span> <span class="n">description_string</span><span class="p">)</span>
+                    <span class="n">XLifecycleExtension</span><span class="p">()</span><span class="o">.</span><span class="n">assign_model</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__currentProcess</span><span class="p">,</span> <span class="s2">&quot;standard&quot;</span><span class="p">)</span>
+
+                    <span class="k">if</span> <span class="n">description</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">description</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+
+                        <span class="n">description1</span> <span class="o">=</span> <span class="n">XMxmlParser</span><span class="p">()</span><span class="o">.</span><span class="n">factory</span><span class="o">.</span><span class="n">create_attribute_literal</span><span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">__currentProcess</span><span class="o">.</span><span class="n">get_attributes</span><span class="p">()[</span><span class="n">description1</span><span class="o">.</span><span class="n">get_key</span><span class="p">()]</span> <span class="o">=</span> <span class="n">description1</span>
+
+                    <span class="bp">self</span><span class="o">.</span><span class="n">__add_model_reference__</span><span class="p">(</span><span class="n">attributes</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__currentProcess</span><span class="p">)</span>
+
+                <span class="k">elif</span> <span class="n">tag_name</span> <span class="o">==</span> <span class="s2">&quot;ProcessInstance&quot;</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">__currentInstance</span> <span class="o">=</span> <span class="n">XMxmlParser</span><span class="p">()</span><span class="o">.</span><span class="n">factory</span><span class="o">.</span><span class="n">create_trace</span><span class="p">()</span>
+                    <span class="n">name</span> <span class="o">=</span> <span class="n">attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;None&quot;</span>
+
+                    <span class="n">XConceptExtension</span><span class="p">()</span><span class="o">.</span><span class="n">assign_name</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__currentInstance</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+                    <span class="n">description_string</span> <span class="o">=</span> <span class="n">attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">)</span>
+
+                    <span class="k">if</span> <span class="n">description_string</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">description_string</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="n">description2</span> <span class="o">=</span> <span class="n">XMxmlParser</span><span class="p">()</span><span class="o">.</span><span class="n">factory</span><span class="o">.</span><span class="n">create_attribute_literal</span><span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">,</span> <span class="n">description_string</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">__currentInstance</span><span class="o">.</span><span class="n">get_attributes</span><span class="p">()[</span><span class="n">description2</span><span class="o">.</span><span class="n">get_key</span><span class="p">()]</span> <span class="o">=</span> <span class="n">description2</span>
+
+                    <span class="bp">self</span><span class="o">.</span><span class="n">__add_model_reference__</span><span class="p">(</span><span class="n">attributes</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__currentInstance</span><span class="p">)</span>
+
+                <span class="k">elif</span> <span class="n">tag_name</span> <span class="o">==</span> <span class="s2">&quot;AuditTrailEntry&quot;</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">__entry</span> <span class="o">=</span> <span class="n">XMxmlParser</span><span class="p">()</span><span class="o">.</span><span class="n">factory</span><span class="o">.</span><span class="n">create_event</span><span class="p">()</span>
+
+                <span class="k">elif</span> <span class="n">tag_name</span> <span class="o">==</span> <span class="s2">&quot;Attribute&quot;</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">__genericAttribute</span> <span class="o">=</span> <span class="n">XMxmlParser</span><span class="p">()</span><span class="o">.</span><span class="n">factory</span><span class="o">.</span><span class="n">create_attribute_literal</span><span class="p">(</span><span class="n">attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span> <span class="s2">&quot;DEFAULT_VALUE&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">__add_model_reference__</span><span class="p">(</span><span class="n">attributes</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__genericAttribute</span><span class="p">)</span>
+
+                <span class="k">elif</span> <span class="n">tag_name</span> <span class="o">==</span> <span class="s2">&quot;EventType&quot;</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">__eventTypeAttribute</span> <span class="o">=</span> <span class="n">XLifecycleExtension</span><span class="p">()</span><span class="o">.</span><span class="n">ATTR_TRANSITION</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
+                    <span class="n">unknown_type</span> <span class="o">=</span> <span class="n">attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;unknowntype&quot;</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">unknown_type</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">__eventTypeAttribute</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="n">unknown_type</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">__eventTypeAttribute</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;UNKNOWN&quot;</span><span class="p">)</span>
+
+                    <span class="bp">self</span><span class="o">.</span><span class="n">__add_model_reference__</span><span class="p">(</span><span class="n">attributes</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__eventTypeAttribute</span><span class="p">)</span>
+
+                <span class="k">elif</span> <span class="n">tag_name</span> <span class="o">==</span> <span class="s2">&quot;WorkflowModelElement&quot;</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">__add_model_reference__</span><span class="p">(</span><span class="n">attributes</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__entry</span><span class="p">)</span>
+
+                <span class="k">elif</span> <span class="n">tag_name</span> <span class="o">==</span> <span class="s2">&quot;Originator&quot;</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">__originatorAttribute</span> <span class="o">=</span> <span class="n">XOrganizationalExtension</span><span class="p">()</span><span class="o">.</span><span class="n">ATTR_RESOURCE</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">__add_model_reference__</span><span class="p">(</span><span class="n">attributes</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__originatorAttribute</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="XMxmlParser.MxmlHandler.endElement"><a class="viewcode-back" href="../../XMxmlParser.html#data_in.XMxmlParser.XMxmlParser.MxmlHandler.endElement">[docs]</a>        <span class="k">def</span> <span class="nf">endElement</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">local_name</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot; Overrides endElement in class ContentHandler</span>
+
+<span class="sd">            :param local_name: The name of the element type, just as with the startElement event</span>
+<span class="sd">            :type local_name: str</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="n">tag_name</span> <span class="o">=</span> <span class="n">local_name</span>
+
+            <span class="k">if</span> <span class="n">tag_name</span> <span class="o">==</span> <span class="s2">&quot;WorkflowLog&quot;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__numUnorderedEntries</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">XLogging</span><span class="p">()</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&quot;LogData: Log contains &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__numUnorderedEntries</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; audit trail entries in non-natural order!&quot;</span><span class="p">,</span> <span class="n">XLogging</span><span class="o">.</span><span class="n">Importance</span><span class="o">.</span><span class="n">ERROR</span><span class="p">)</span>
+                    <span class="n">XLogging</span><span class="p">()</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&quot;LogData: The log file you have loaded is not MXML compliant! (error compensated transparently)&quot;</span><span class="p">,</span> <span class="n">XLogging</span><span class="o">.</span><span class="n">Importance</span><span class="o">.</span><span class="n">ERROR</span><span class="p">)</span>
+
+            <span class="k">elif</span> <span class="n">tag_name</span> <span class="o">==</span> <span class="s2">&quot;Process&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__currentProcess</span><span class="o">.</span><span class="n">get_classifiers</span><span class="p">()</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">XMxmlParser</span><span class="o">.</span><span class="n">MXML_CLASSIFIERS</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__currentProcess</span><span class="o">.</span><span class="n">get_global_trace_attributes</span><span class="p">()</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">XConceptExtension</span><span class="p">()</span><span class="o">.</span><span class="n">ATTR_NAME</span><span class="o">.</span><span class="n">clone</span><span class="p">())</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__currentProcess</span><span class="o">.</span><span class="n">get_global_event_attributes</span><span class="p">()</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">XConceptExtension</span><span class="p">()</span><span class="o">.</span><span class="n">ATTR_NAME</span><span class="o">.</span><span class="n">clone</span><span class="p">())</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__currentProcess</span><span class="o">.</span><span class="n">get_global_event_attributes</span><span class="p">()</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">XLifecycleExtension</span><span class="p">()</span><span class="o">.</span><span class="n">ATTR_TRANSITION</span><span class="o">.</span><span class="n">clone</span><span class="p">())</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__logs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__currentProcess</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__currentProcess</span> <span class="o">=</span> <span class="kc">None</span>
+
+            <span class="k">elif</span> <span class="n">tag_name</span> <span class="o">==</span> <span class="s2">&quot;Process&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__sourceOpen</span> <span class="o">=</span> <span class="kc">False</span>
+
+            <span class="k">elif</span> <span class="n">tag_name</span> <span class="o">==</span> <span class="s2">&quot;ProcessInstance&quot;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__currentInstance</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">__currentProcess</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__currentInstance</span><span class="p">)</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">__currentInstance</span> <span class="o">=</span> <span class="kc">None</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__lastTimestamp</span> <span class="o">=</span> <span class="kc">None</span>
+
+            <span class="k">elif</span> <span class="n">tag_name</span> <span class="o">==</span> <span class="s2">&quot;AuditTrailEntry&quot;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__timestamp</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">__currentInstance</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__entry</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">__lastTimestamp</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">__currentInstance</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__entry</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">__lastTimestamp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__timestamp</span>
+                <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">__timestamp</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">__lastTimestamp</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">__currentInstance</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__entry</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">__lastTimestamp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__timestamp</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">__currentInstance</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__entry</span><span class="p">)</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">__entry</span> <span class="o">=</span> <span class="kc">None</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">tag_name</span> <span class="o">==</span> <span class="s2">&quot;Attribute&quot;</span><span class="p">:</span>
+                    <span class="n">originator</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__buffer</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">originator</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">__genericAttribute</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__buffer</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+                        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__entry</span><span class="p">:</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">__entry</span><span class="o">.</span><span class="n">get_attributes</span><span class="p">()[</span><span class="bp">self</span><span class="o">.</span><span class="n">__genericAttribute</span><span class="o">.</span><span class="n">get_key</span><span class="p">()]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__genericAttribute</span>
+                        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">__currentInstance</span><span class="p">:</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">__currentInstance</span><span class="o">.</span><span class="n">get_attributes</span><span class="p">()[</span><span class="bp">self</span><span class="o">.</span><span class="n">__genericAttribute</span><span class="o">.</span><span class="n">get_key</span><span class="p">()]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__genericAttribute</span>
+                        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">__currentProcess</span><span class="p">:</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">__currentProcess</span><span class="o">.</span><span class="n">get_attributes</span><span class="p">()[</span><span class="bp">self</span><span class="o">.</span><span class="n">__genericAttribute</span><span class="o">.</span><span class="n">get_key</span><span class="p">()]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__genericAttribute</span>
+                        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">__sourceOpen</span><span class="p">:</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">__sourceAttribute</span><span class="o">.</span><span class="n">get_attributes</span><span class="p">()[</span><span class="bp">self</span><span class="o">.</span><span class="n">__genericAttribute</span><span class="o">.</span><span class="n">get_key</span><span class="p">()]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__genericAttribute</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">__genericAttribute</span> <span class="o">=</span> <span class="kc">None</span>
+
+                <span class="k">elif</span> <span class="n">tag_name</span> <span class="o">==</span> <span class="s2">&quot;EventType&quot;</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__eventTypeAttribute</span><span class="o">.</span><span class="n">get_value</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;UNKNOWN&quot;</span><span class="p">:</span>
+                        <span class="n">originator</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__buffer</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">originator</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">__eventTypeAttribute</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="n">originator</span><span class="p">)</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">__entry</span><span class="o">.</span><span class="n">get_attributes</span><span class="p">()[</span><span class="bp">self</span><span class="o">.</span><span class="n">__eventTypeAttribute</span><span class="o">.</span><span class="n">get_key</span><span class="p">()]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__eventTypeAttribute</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">__entry</span><span class="o">.</span><span class="n">get_attributes</span><span class="p">()[</span><span class="bp">self</span><span class="o">.</span><span class="n">__eventTypeAttribute</span><span class="o">.</span><span class="n">get_key</span><span class="p">()]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__eventTypeAttribute</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">__eventTypeAttribute</span> <span class="o">=</span> <span class="kc">None</span>
+
+                <span class="k">elif</span> <span class="n">tag_name</span> <span class="o">==</span> <span class="s2">&quot;WorkflowModelElement&quot;</span><span class="p">:</span>
+                    <span class="n">XConceptExtension</span><span class="p">()</span><span class="o">.</span><span class="n">assign_name</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__entry</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__buffer</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+
+                <span class="k">elif</span> <span class="n">tag_name</span> <span class="o">==</span> <span class="s2">&quot;Timestamp&quot;</span><span class="p">:</span>
+                    <span class="n">originator</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__buffer</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">__timestamp</span> <span class="o">=</span> <span class="n">parse_date_time</span><span class="p">(</span><span class="n">originator</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__timestamp</span><span class="p">:</span>
+                        <span class="n">timestamp_attribute</span> <span class="o">=</span> <span class="n">XTimeExtension</span><span class="p">()</span><span class="o">.</span><span class="n">ATTR_TIMESTAMP</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
+                        <span class="n">timestamp_attribute</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__timestamp</span><span class="p">)</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">__entry</span><span class="o">.</span><span class="n">get_attributes</span><span class="p">()[</span><span class="n">timestamp_attribute</span><span class="o">.</span><span class="n">get_key</span><span class="p">()]</span> <span class="o">=</span> <span class="n">timestamp_attribute</span>
+
+                <span class="k">elif</span> <span class="n">tag_name</span> <span class="o">==</span> <span class="s2">&quot;Originator&quot;</span><span class="p">:</span>
+                    <span class="n">originator</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__buffer</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">originator</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">__originatorAttribute</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="n">originator</span><span class="p">)</span>
+
+                    <span class="bp">self</span><span class="o">.</span><span class="n">__entry</span><span class="o">.</span><span class="n">get_attributes</span><span class="p">()[</span><span class="bp">self</span><span class="o">.</span><span class="n">__originatorAttribute</span><span class="o">.</span><span class="n">get_key</span><span class="p">()]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__originatorAttribute</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">__originatorAttribute</span> <span class="o">=</span> <span class="kc">None</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">__buffer</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span></div>
+
+        <span class="nd">@staticmethod</span>
+        <span class="k">def</span> <span class="nf">__add_model_reference__</span><span class="p">(</span><span class="n">attrib</span><span class="p">,</span> <span class="n">subject</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">model_reference</span> <span class="o">=</span> <span class="n">attrib</span><span class="o">.</span><span class="n">getValue</span><span class="p">(</span><span class="s2">&quot;modelReference&quot;</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+                <span class="n">model_reference</span> <span class="o">=</span> <span class="kc">None</span>
+
+            <span class="k">if</span> <span class="n">model_reference</span><span class="p">:</span>
+                <span class="n">attribute</span> <span class="o">=</span> <span class="n">XSemanticExtension</span><span class="p">()</span><span class="o">.</span><span class="n">ATTR_MODELREFERENCE</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
+                <span class="n">attribute</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="n">model_reference</span><span class="p">)</span>
+                <span class="n">subject</span><span class="o">.</span><span class="n">get_attributes</span><span class="p">()[</span><span class="n">attribute</span><span class="o">.</span><span class="n">get_key</span><span class="p">()]</span> <span class="o">=</span> <span class="n">attribute</span>
+
+<div class="viewcode-block" id="XMxmlParser.MxmlHandler.ignorableWhitespace"><a class="viewcode-back" href="../../XMxmlParser.html#data_in.XMxmlParser.XMxmlParser.MxmlHandler.ignorableWhitespace">[docs]</a>        <span class="k">def</span> <span class="nf">ignorableWhitespace</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">whitespace</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot; Overrides ignorableWhitespace in class ContentHandler</span>
+
+<span class="sd">            :param whitespace: The whitespace characters.</span>
+<span class="sd">            :type whitespace: str</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__buffer</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">whitespace</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="XMxmlParser.MxmlHandler.characters"><a class="viewcode-back" href="../../XMxmlParser.html#data_in.XMxmlParser.XMxmlParser.MxmlHandler.characters">[docs]</a>        <span class="k">def</span> <span class="nf">characters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">content</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot; Overrides characters in class ContentHandler</span>
+
+<span class="sd">            :param content: The characters.</span>
+<span class="sd">            :type content: str</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__buffer</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">content</span><span class="p">)</span></div></div></div>
+</pre></div>
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        <a class="uplink" href="../../index.html">Contents</a>
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Hernán Valdivieso.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
+    </div>
+  </body>
+</html>

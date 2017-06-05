@@ -1,0 +1,7 @@
+
+SingletonClassGenerator
+=======================
+
+.. automodule:: utils.SingletonClassGenerator
+   :members:
+

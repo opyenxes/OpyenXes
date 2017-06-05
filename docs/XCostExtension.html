@@ -1,0 +1,739 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>XCostExtension &#8212; OpenXes Python 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="XExtendedEvent" href="XExtendedEvent.html" />
+    <link rel="prev" title="XConceptExtension" href="XConceptExtension.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="index.html">
+          <span>OpenXes Python 1.0 documentation</span></a></h1>
+        <h2 class="heading"><span>XCostExtension</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="XConceptExtension.html">XConceptExtension</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="XExtendedEvent.html">XExtendedEvent</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="module-extension.std.XCostExtension">
+<span id="xcostextension"></span><h1>XCostExtension<a class="headerlink" href="#module-extension.std.XCostExtension" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="extension.std.XCostExtension.XCostAmount">
+<em class="property">class </em><code class="descclassname">extension.std.XCostExtension.</code><code class="descname">XCostAmount</code><a class="reference internal" href="_modules/extension/std/XCostExtension.html#XCostAmount"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#extension.std.XCostExtension.XCostAmount" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class which value contains the cost amount for a cost driver.</p>
+<p>Uses the singleton metaclass</p>
+<dl class="method">
+<dt id="extension.std.XCostExtension.XCostAmount.assign_value">
+<code class="descname">assign_value</code><span class="sig-paren">(</span><em>attribute</em>, <em>value</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/extension/std/XCostExtension.html#XCostAmount.assign_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#extension.std.XCostExtension.XCostAmount.assign_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Abstract method to assign a value to an element.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>attribute</strong> (<a class="reference internal" href="XAttribute.html#model.XAttribute.XAttribute" title="model.XAttribute.XAttribute"><em>XAttribute</em></a>) &#8211; The element to assign the value to.</li>
+<li><strong>value</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; The value to be assigned.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="extension.std.XCostExtension.XCostAmount.extract_value">
+<code class="descname">extract_value</code><span class="sig-paren">(</span><em>attribute</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/extension/std/XCostExtension.html#XCostAmount.extract_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#extension.std.XCostExtension.XCostAmount.extract_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Abstract method to extract a value from an element.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>attribute</strong> (<a class="reference internal" href="XAttribute.html#model.XAttribute.XAttribute" title="model.XAttribute.XAttribute"><em>XAttribute</em></a>) &#8211; The element to extract the value from.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The extracted value.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="extension.std.XCostExtension.XCostDriver">
+<em class="property">class </em><code class="descclassname">extension.std.XCostExtension.</code><code class="descname">XCostDriver</code><a class="reference internal" href="_modules/extension/std/XCostExtension.html#XCostDriver"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#extension.std.XCostExtension.XCostDriver" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class which value contains the cost amount for a cost driver.</p>
+<p>Uses the singleton metaclass</p>
+<dl class="method">
+<dt id="extension.std.XCostExtension.XCostDriver.assign_value">
+<code class="descname">assign_value</code><span class="sig-paren">(</span><em>attribute</em>, <em>value</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/extension/std/XCostExtension.html#XCostDriver.assign_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#extension.std.XCostExtension.XCostDriver.assign_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Abstract method to assign a value to an element.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>attribute</strong> (<a class="reference internal" href="XAttribute.html#model.XAttribute.XAttribute" title="model.XAttribute.XAttribute"><em>XAttribute</em></a>) &#8211; The element to assign the value to.</li>
+<li><strong>value</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; The value to be assigned.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="extension.std.XCostExtension.XCostDriver.extract_value">
+<code class="descname">extract_value</code><span class="sig-paren">(</span><em>attribute</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/extension/std/XCostExtension.html#XCostDriver.extract_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#extension.std.XCostExtension.XCostDriver.extract_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Abstract method to extract a value from an element.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>attribute</strong> (<a class="reference internal" href="XAttribute.html#model.XAttribute.XAttribute" title="model.XAttribute.XAttribute"><em>XAttribute</em></a>) &#8211; The element to extract the value from.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The extracted value.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="extension.std.XCostExtension.XCostExtension">
+<em class="property">class </em><code class="descclassname">extension.std.XCostExtension.</code><code class="descname">XCostExtension</code><a class="reference internal" href="_modules/extension/std/XCostExtension.html#XCostExtension"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#extension.std.XCostExtension.XCostExtension" title="Permalink to this definition">¶</a></dt>
+<dd><p>This extension provides costs for traces and events. It defines five
+attributes:</p>
+<ul class="simple">
+<li>cost total: Contains total cost incurred for a trace or an event.
+The value represents the sum of all the cost amounts within the
+element.</li>
+<li>cost currecny: Any valid currency format.</li>
+<li>cost amount: The value contains the cost amount for a cost driver.</li>
+<li>cost driver: The value contains the id for the cost driver used to
+calculate the cost.</li>
+<li>cost type: The value contains the cost type (e.g., Fixed, Overhead,
+Materials).</li>
+</ul>
+<p>Uses the singleton metaclass</p>
+<dl class="method">
+<dt id="extension.std.XCostExtension.XCostExtension.assign_amount">
+<code class="descname">assign_amount</code><span class="sig-paren">(</span><em>attribute</em>, <em>amount</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/extension/std/XCostExtension.html#XCostExtension.assign_amount"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#extension.std.XCostExtension.XCostExtension.assign_amount" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assigns any attribute its cost amount, as defined by this extension&#8217;s
+amount attribute.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>attribute</strong> (<a class="reference internal" href="XAttribute.html#model.XAttribute.XAttribute" title="model.XAttribute.XAttribute"><em>XAttribute</em></a>) &#8211; Attribute to assign cost amount to</li>
+<li><strong>amount</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; The cost amount to be assigned.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="extension.std.XCostExtension.XCostExtension.assign_amounts">
+<em class="property">static </em><code class="descname">assign_amounts</code><span class="sig-paren">(</span><em>element</em>, <em>amounts</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/extension/std/XCostExtension.html#XCostExtension.assign_amounts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#extension.std.XCostExtension.XCostExtension.assign_amounts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assigns (to the given trace or event) multiple amounts given their
+keys. Note that as a side effect this method creates attributes when it
+does not find an attribute with the proper key. For example, the call::</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">assign_amounts</span><span class="p">(</span><span class="n">trace</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="mf">10.00</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="mf">15.00</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">:</span> <span class="mf">25.00</span><span class="p">})</span>
+</pre></div>
+</div>
+<p>should result into the following XES fragment::</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">trace</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">string</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;a&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nb">float</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;cost:amount&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;10.00&quot;</span><span class="o">/&gt;</span>
+    <span class="o">&lt;/</span><span class="n">string</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">string</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;b&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nb">float</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;cost:amount&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;15.00&quot;</span><span class="o">/&gt;</span>
+    <span class="o">&lt;/</span><span class="n">string</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">string</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;c&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nb">float</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;cost:amount&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;25.00&quot;</span><span class="o">/&gt;</span>
+    <span class="o">&lt;/</span><span class="n">string</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">trace</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>element</strong> (<a class="reference internal" href="XEvent.html#module-model.XEvent" title="model.XEvent"><em>XEvent</em></a><em> or </em><a class="reference internal" href="XTrace.html#model.XTrace.XTrace" title="model.XTrace.XTrace"><em>XTrace</em></a>) &#8211; Trace or Event to assign the amounts to.</li>
+<li><strong>amounts</strong> (<a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a><em>(</em><em>str: float</em><em>)</em><em></em>) &#8211; Dictionary with keys to amounts which are to be assigned.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="extension.std.XCostExtension.XCostExtension.assign_currency">
+<code class="descname">assign_currency</code><span class="sig-paren">(</span><em>element</em>, <em>currency</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/extension/std/XCostExtension.html#XCostExtension.assign_currency"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#extension.std.XCostExtension.XCostExtension.assign_currency" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assigns any trace or event its cost currency, as defined by this
+extension&#8217;s currency attribute.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>element</strong> (<a class="reference internal" href="XEvent.html#module-model.XEvent" title="model.XEvent"><em>XEvent</em></a><em> or </em><a class="reference internal" href="XEvent.html#module-model.XEvent" title="model.XEvent"><em>XEvent</em></a>) &#8211; Trace or Event to assign cost currency to.</li>
+<li><strong>currency</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; The currency to be assigned.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="extension.std.XCostExtension.XCostExtension.assign_driver">
+<code class="descname">assign_driver</code><span class="sig-paren">(</span><em>attribute</em>, <em>driver</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/extension/std/XCostExtension.html#XCostExtension.assign_driver"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#extension.std.XCostExtension.XCostExtension.assign_driver" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assigns any attribute its cost driver, as defined by this
+extension&#8217;s driver attribute.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>attribute</strong> (<a class="reference internal" href="XAttribute.html#model.XAttribute.XAttribute" title="model.XAttribute.XAttribute"><em>XAttribute</em></a>) &#8211; Attribute to assign cost driver to.</li>
+<li><strong>driver</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; The cost driver to be assigned.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="extension.std.XCostExtension.XCostExtension.assign_drivers">
+<em class="property">static </em><code class="descname">assign_drivers</code><span class="sig-paren">(</span><em>element</em>, <em>drivers</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/extension/std/XCostExtension.html#XCostExtension.assign_drivers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#extension.std.XCostExtension.XCostExtension.assign_drivers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assigns (to the given trace or event) multiple cost drivers given
+their keys. Note that as a side effect this method creates attributes
+when it does not find an attribute with the proper key.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>element</strong> (<a class="reference internal" href="XTrace.html#model.XTrace.XTrace" title="model.XTrace.XTrace"><em>XTrace</em></a><em> or </em><a class="reference internal" href="XEvent.html#module-model.XEvent" title="model.XEvent"><em>XEvent</em></a>) &#8211; Trace or Event to assign the cost drivers to.</li>
+<li><strong>drivers</strong> (<a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a><em>(</em><em>str: str</em><em>)</em><em></em>) &#8211; Dictionary with keys to cost drivers which are to be assigned.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="extension.std.XCostExtension.XCostExtension.assign_nested_amounts">
+<em class="property">static </em><code class="descname">assign_nested_amounts</code><span class="sig-paren">(</span><em>element</em>, <em>amounts</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/extension/std/XCostExtension.html#XCostExtension.assign_nested_amounts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#extension.std.XCostExtension.XCostExtension.assign_nested_amounts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assigns (to the given trace or event) multiple amounts given their
+key lists. The i-th element in the key list should correspond to an
+i-level attribute with the prescribed key. Note that as a side effect
+this method creates attributes when it does not find an attribute with
+the proper key. For example, the call::</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">assign_nested_amounts</span><span class="p">(</span><span class="n">trace</span><span class="p">,</span> <span class="p">{[</span><span class="s2">&quot;a&quot;</span><span class="p">]:</span> <span class="mf">10.00</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">]:</span> <span class="mf">20.00</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">]:</span> <span class="mf">30.00</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;b&quot;</span><span class="p">]:</span> <span class="mf">15.00</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;c&quot;</span><span class="p">]:</span> <span class="mf">25.00</span><span class="p">})</span>
+</pre></div>
+</div>
+<p>should result into the following XES fragment::</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">trace</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">string</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;a&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nb">float</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;cost:amount&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;10.00&quot;</span><span class="o">/&gt;</span>
+        <span class="o">&lt;</span><span class="n">string</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;b&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="nb">float</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;cost:amount&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;20.00&quot;</span><span class="o">/&gt;</span>
+        <span class="o">&lt;/</span><span class="n">string</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">string</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;c&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="nb">float</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;cost:amount&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;30.00&quot;</span><span class="o">/&gt;</span>
+        <span class="o">&lt;/</span><span class="n">string</span><span class="o">&gt;</span>
+    <span class="o">&lt;/</span><span class="n">string</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">string</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;b&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="o">&gt;</span>
+       <span class="o">&lt;</span><span class="nb">float</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;cost:amount&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;15.00&quot;</span><span class="o">/&gt;</span>
+    <span class="o">&lt;/</span><span class="n">string</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">string</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;c&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="o">&gt;</span>
+       <span class="o">&lt;</span><span class="nb">float</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;cost:amount&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;25.00&quot;</span><span class="o">/&gt;</span>
+    <span class="o">&lt;/</span><span class="n">string</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">trace</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>element</strong> (<a class="reference internal" href="XEvent.html#module-model.XEvent" title="model.XEvent"><em>XEvent</em></a><em> or </em><a class="reference internal" href="XTrace.html#model.XTrace.XTrace" title="model.XTrace.XTrace"><em>XTrace</em></a>) &#8211; Trace or Event to assign the amounts to.</li>
+<li><strong>amounts</strong> (<a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a><em>(</em><a class="reference external" href="https://docs.python.org/2/library/functions.html#list" title="(in Python v2.7)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em>]</em><em>: float</em><em>)</em><em></em>) &#8211; Dictionary with list of keys to amounts which are to
+be assigned.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="extension.std.XCostExtension.XCostExtension.assign_nested_drivers">
+<em class="property">static </em><code class="descname">assign_nested_drivers</code><span class="sig-paren">(</span><em>element</em>, <em>drivers</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/extension/std/XCostExtension.html#XCostExtension.assign_nested_drivers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#extension.std.XCostExtension.XCostExtension.assign_nested_drivers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assigns (to the given trace) multiple cost drivers given their key
+lists. The i-th element in the key list should correspond to an i-level
+attribute with the prescribed key. Note that as a side effect this
+method creates attributes when it does not find an attribute with the
+proper key.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>element</strong> (<a class="reference internal" href="XTrace.html#model.XTrace.XTrace" title="model.XTrace.XTrace"><em>XTrace</em></a><em> or </em><a class="reference internal" href="XEvent.html#module-model.XEvent" title="model.XEvent"><em>XEvent</em></a>) &#8211; Trace or Event to assign the cost drivers to.</li>
+<li><strong>drivers</strong> (<a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a><em>(</em><a class="reference external" href="https://docs.python.org/2/library/functions.html#list" title="(in Python v2.7)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em>]</em><em>: str</em><em>)</em><em></em>) &#8211; Dictionary with keys to cost drivers which are to be assigned.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="extension.std.XCostExtension.XCostExtension.assign_nested_types">
+<em class="property">static </em><code class="descname">assign_nested_types</code><span class="sig-paren">(</span><em>element</em>, <em>types</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/extension/std/XCostExtension.html#XCostExtension.assign_nested_types"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#extension.std.XCostExtension.XCostExtension.assign_nested_types" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assigns (to the given trace or event) multiple cost types given
+their key lists. The i-th element in the key list should correspond to
+an i-level attribute with the prescribed key. Note that as a side
+effect this method creates attributes when it does not find an attribute
+with the proper key.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>element</strong> (<a class="reference internal" href="XTrace.html#model.XTrace.XTrace" title="model.XTrace.XTrace"><em>XTrace</em></a><em> or </em><a class="reference internal" href="XEvent.html#module-model.XEvent" title="model.XEvent"><em>XEvent</em></a>) &#8211; Event or Trace to assign the cost types to.</li>
+<li><strong>types</strong> (<a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a><em>(</em><a class="reference external" href="https://docs.python.org/2/library/functions.html#list" title="(in Python v2.7)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em>]</em><em>: str</em><em>)</em><em></em>) &#8211; Dictionary with keys to cost types which are to be assigned.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="extension.std.XCostExtension.XCostExtension.assign_total">
+<code class="descname">assign_total</code><span class="sig-paren">(</span><em>element</em>, <em>total</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/extension/std/XCostExtension.html#XCostExtension.assign_total"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#extension.std.XCostExtension.XCostExtension.assign_total" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assigns any trace or event its total costs, as defined by this
+extension&#8217;s total attribute.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>element</strong> (<a class="reference internal" href="XTrace.html#model.XTrace.XTrace" title="model.XTrace.XTrace"><em>XTrace</em></a><em> or </em><a class="reference internal" href="XEvent.html#module-model.XEvent" title="model.XEvent"><em>XEvent</em></a>) &#8211; Trace or Event to assign total costs to.</li>
+<li><strong>total</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; The total costs to be assigned.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="extension.std.XCostExtension.XCostExtension.assign_type">
+<code class="descname">assign_type</code><span class="sig-paren">(</span><em>attribute</em>, <em>type_</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/extension/std/XCostExtension.html#XCostExtension.assign_type"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#extension.std.XCostExtension.XCostExtension.assign_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assigns any attribute its cost type, as defined by this extension&#8217;s
+type attribute.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>attribute</strong> (<a class="reference internal" href="XAttribute.html#model.XAttribute.XAttribute" title="model.XAttribute.XAttribute"><em>XAttribute</em></a>) &#8211; Attribute to assign cost type to.</li>
+<li><strong>type</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; The cost type to be assigned.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="extension.std.XCostExtension.XCostExtension.assign_types">
+<em class="property">static </em><code class="descname">assign_types</code><span class="sig-paren">(</span><em>element</em>, <em>types</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/extension/std/XCostExtension.html#XCostExtension.assign_types"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#extension.std.XCostExtension.XCostExtension.assign_types" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assigns (to the given event or trace) multiple cost types given their
+keys. Note that as a side effect this method creates attributes when it
+does not find an attribute with the proper key.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>element</strong> (<a class="reference internal" href="XTrace.html#model.XTrace.XTrace" title="model.XTrace.XTrace"><em>XTrace</em></a><em> or </em><a class="reference internal" href="XEvent.html#module-model.XEvent" title="model.XEvent"><em>XEvent</em></a>) &#8211; Event or Trace to assign the cost types to.</li>
+<li><strong>types</strong> (<a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a><em>(</em><a class="reference external" href="https://docs.python.org/2/library/functions.html#list" title="(in Python v2.7)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em>]</em><em>: str</em><em>)</em><em></em>) &#8211; Dictionary with keys to cost types which are to be assigned.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="extension.std.XCostExtension.XCostExtension.extract_amount">
+<em class="property">static </em><code class="descname">extract_amount</code><span class="sig-paren">(</span><em>attribute</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/extension/std/XCostExtension.html#XCostExtension.extract_amount"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#extension.std.XCostExtension.XCostExtension.extract_amount" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves the cost amount for an attribute, if set by this
+extension&#8217;s amount attribute.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>attribute</strong> (<a class="reference internal" href="XAttribute.html#model.XAttribute.XAttribute" title="model.XAttribute.XAttribute"><em>XAttribute</em></a>) &#8211; Attribute element to retrieve cost amount for.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The requested cost amount.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="extension.std.XCostExtension.XCostExtension.extract_amounts">
+<em class="property">static </em><code class="descname">extract_amounts</code><span class="sig-paren">(</span><em>element</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/extension/std/XCostExtension.html#XCostExtension.extract_amounts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#extension.std.XCostExtension.XCostExtension.extract_amounts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves a map containing all cost amounts for all child attributes
+of an event. For example, the XES fragment::</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">trace</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">string</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;a&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nb">float</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;cost:amount&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;10.00&quot;</span><span class="o">/&gt;</span>
+        <span class="o">&lt;</span><span class="n">string</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;b&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="nb">float</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;cost:amount&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;20.00&quot;</span><span class="o">/&gt;</span>
+        <span class="o">&lt;/</span><span class="n">string</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">string</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;c&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="nb">float</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;cost:amount&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;30.00&quot;</span><span class="o">/&gt;</span>
+        <span class="o">&lt;/</span><span class="n">string</span><span class="o">&gt;</span>
+    <span class="o">&lt;/</span><span class="n">string</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">string</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;b&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nb">float</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;cost:amount&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;15.00&quot;</span><span class="o">/&gt;</span>
+    <span class="o">&lt;/</span><span class="n">string</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">string</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;c&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nb">float</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;cost:amount&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;25.00&quot;</span><span class="o">/&gt;</span>
+    <span class="o">&lt;/</span><span class="n">string</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">trace</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>should result into the following::</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="mf">10.00</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="mf">15.00</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">:</span> <span class="mf">25.00</span><span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>element</strong> (<a class="reference internal" href="XTrace.html#model.XTrace.XTrace" title="model.XTrace.XTrace"><em>XTrace</em></a><em> or </em><a class="reference internal" href="XEvent.html#module-model.XEvent" title="model.XEvent"><em>XEvent</em></a>) &#8211; Trace or Event to retrieve all cost amounts for.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Dictionary with all child keys to cost amounts.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)">dict</a>(str: float)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="extension.std.XCostExtension.XCostExtension.extract_currency">
+<em class="property">static </em><code class="descname">extract_currency</code><span class="sig-paren">(</span><em>element</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/extension/std/XCostExtension.html#XCostExtension.extract_currency"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#extension.std.XCostExtension.XCostExtension.extract_currency" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves the cost currency for an event or trace, if set by this
+extension&#8217;s currency attribute.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>element</strong> (<a class="reference internal" href="XTrace.html#model.XTrace.XTrace" title="model.XTrace.XTrace"><em>XTrace</em></a><em> or </em><a class="reference internal" href="XEvent.html#module-model.XEvent" title="model.XEvent"><em>XEvent</em></a>) &#8211; Event or Trace to retrieve currency for.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The requested cost currency.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="extension.std.XCostExtension.XCostExtension.extract_driver">
+<em class="property">static </em><code class="descname">extract_driver</code><span class="sig-paren">(</span><em>attribute</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/extension/std/XCostExtension.html#XCostExtension.extract_driver"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#extension.std.XCostExtension.XCostExtension.extract_driver" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves the cost driver for an attribute, if set by this extension&#8217;s
+driver attribute.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>attribute</strong> (<a class="reference internal" href="XAttribute.html#model.XAttribute.XAttribute" title="model.XAttribute.XAttribute"><em>XAttribute</em></a>) &#8211; Attribute element to retrieve cost driver for.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The requested cost driver.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="extension.std.XCostExtension.XCostExtension.extract_drivers">
+<em class="property">static </em><code class="descname">extract_drivers</code><span class="sig-paren">(</span><em>element</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/extension/std/XCostExtension.html#XCostExtension.extract_drivers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#extension.std.XCostExtension.XCostExtension.extract_drivers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves a map containing all cost drivers for all child attributes
+of a trace or event.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>element</strong> (<a class="reference internal" href="XTrace.html#model.XTrace.XTrace" title="model.XTrace.XTrace"><em>XTrace</em></a><em> or </em><a class="reference internal" href="XEvent.html#module-model.XEvent" title="model.XEvent"><em>XEvent</em></a>) &#8211; Trace or Event to retrieve all cost drivers for.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Dictionary with all child keys to cost drivers.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)">dict</a>(str: str)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="extension.std.XCostExtension.XCostExtension.extract_nested_amounts">
+<em class="property">static </em><code class="descname">extract_nested_amounts</code><span class="sig-paren">(</span><em>element</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/extension/std/XCostExtension.html#XCostExtension.extract_nested_amounts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#extension.std.XCostExtension.XCostExtension.extract_nested_amounts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves a map containing all cost amounts for all child attributes
+of an event. For example, the XES fragment::</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">trace</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">string</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;a&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nb">float</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;cost:amount&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;10.00&quot;</span><span class="o">/&gt;</span>
+        <span class="o">&lt;</span><span class="n">string</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;b&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="nb">float</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;cost:amount&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;20.00&quot;</span><span class="o">/&gt;</span>
+        <span class="o">&lt;/</span><span class="n">string</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">string</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;c&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="nb">float</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;cost:amount&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;30.00&quot;</span><span class="o">/&gt;</span>
+        <span class="o">&lt;/</span><span class="n">string</span><span class="o">&gt;</span>
+    <span class="o">&lt;/</span><span class="n">string</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">string</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;b&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nb">float</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;cost:amount&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;15.00&quot;</span><span class="o">/&gt;</span>
+    <span class="o">&lt;/</span><span class="n">string</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">string</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;c&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nb">float</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;cost:amount&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;25.00&quot;</span><span class="o">/&gt;</span>
+    <span class="o">&lt;/</span><span class="n">string</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">trace</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>should result into the following::</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{[</span><span class="s2">&quot;a&quot;</span><span class="p">]:</span> <span class="mf">10.00</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">]:</span> <span class="mf">20.00</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">]:</span> <span class="mf">30.00</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;b&quot;</span><span class="p">]:</span> <span class="mf">15.00</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;c&quot;</span><span class="p">]:</span> <span class="mf">25.00</span><span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>element</strong> (<a class="reference internal" href="XTrace.html#model.XTrace.XTrace" title="model.XTrace.XTrace"><em>XTrace</em></a><em> or </em><a class="reference internal" href="XEvent.html#module-model.XEvent" title="model.XEvent"><em>XEvent</em></a>) &#8211; Trace or Event to retrieve all cost amounts for.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Dictionary with all descending keys to cost amounts.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)">dict</a>(<a class="reference external" href="https://docs.python.org/2/library/functions.html#list" title="(in Python v2.7)">list</a>[<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)">str</a>]: float)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="extension.std.XCostExtension.XCostExtension.extract_nested_drivers">
+<em class="property">static </em><code class="descname">extract_nested_drivers</code><span class="sig-paren">(</span><em>element</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/extension/std/XCostExtension.html#XCostExtension.extract_nested_drivers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#extension.std.XCostExtension.XCostExtension.extract_nested_drivers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves a map containing all cost drivers for all descending
+attributes of a trace or event.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>element</strong> (<a class="reference internal" href="XTrace.html#model.XTrace.XTrace" title="model.XTrace.XTrace"><em>XTrace</em></a><em> or </em><a class="reference internal" href="XEvent.html#module-model.XEvent" title="model.XEvent"><em>XEvent</em></a>) &#8211; Trace or Event to retrieve all cost drivers for.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Dictionary with all descending keys to cost drivers.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)">dict</a>(<a class="reference external" href="https://docs.python.org/2/library/functions.html#list" title="(in Python v2.7)">list</a>[<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)">str</a>]: str)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="extension.std.XCostExtension.XCostExtension.extract_nested_types">
+<em class="property">static </em><code class="descname">extract_nested_types</code><span class="sig-paren">(</span><em>element</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/extension/std/XCostExtension.html#XCostExtension.extract_nested_types"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#extension.std.XCostExtension.XCostExtension.extract_nested_types" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves a map containing all cost types for all descending
+attributes of a trace or event.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>element</strong> (<a class="reference internal" href="XTrace.html#model.XTrace.XTrace" title="model.XTrace.XTrace"><em>XTrace</em></a><em> or </em><a class="reference internal" href="XEvent.html#module-model.XEvent" title="model.XEvent"><em>XEvent</em></a>) &#8211; Trace or Event to retrieve all cost types for.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Dictionary with all descending keys to cost types.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)">dict</a>(<a class="reference external" href="https://docs.python.org/2/library/functions.html#list" title="(in Python v2.7)">list</a>[<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)">str</a>]: str)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="extension.std.XCostExtension.XCostExtension.extract_total">
+<em class="property">static </em><code class="descname">extract_total</code><span class="sig-paren">(</span><em>element</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/extension/std/XCostExtension.html#XCostExtension.extract_total"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#extension.std.XCostExtension.XCostExtension.extract_total" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves the total costs of a trace or event, if set by this
+extension&#8217;s total attribute.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>element</strong> (<a class="reference internal" href="XTrace.html#model.XTrace.XTrace" title="model.XTrace.XTrace"><em>XTrace</em></a><em> or </em><a class="reference internal" href="XEvent.html#module-model.XEvent" title="model.XEvent"><em>XEvent</em></a>) &#8211; Trace or Event to retrieve total costs for.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The requested total costs.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="extension.std.XCostExtension.XCostExtension.extract_type">
+<em class="property">static </em><code class="descname">extract_type</code><span class="sig-paren">(</span><em>attribute</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/extension/std/XCostExtension.html#XCostExtension.extract_type"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#extension.std.XCostExtension.XCostExtension.extract_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves the cost type for an attribute, if set by this extension&#8217;s
+type attribute.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>attribute</strong> (<a class="reference internal" href="XAttribute.html#model.XAttribute.XAttribute" title="model.XAttribute.XAttribute"><em>XAttribute</em></a>) &#8211; Attribute element to retrieve cost type for.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The requested cost type.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="extension.std.XCostExtension.XCostExtension.extract_types">
+<em class="property">static </em><code class="descname">extract_types</code><span class="sig-paren">(</span><em>element</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/extension/std/XCostExtension.html#XCostExtension.extract_types"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#extension.std.XCostExtension.XCostExtension.extract_types" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves a map containing all cost types for all child attributes
+of a trace or event.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>element</strong> (<a class="reference internal" href="XTrace.html#model.XTrace.XTrace" title="model.XTrace.XTrace"><em>XTrace</em></a><em> or </em><a class="reference internal" href="XEvent.html#module-model.XEvent" title="model.XEvent"><em>XEvent</em></a>) &#8211; Trace or Event to retrieve all cost types for.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Dictionary with all child keys to cost types.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)">dict</a>(str: str)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="extension.std.XCostExtension.XCostType">
+<em class="property">class </em><code class="descclassname">extension.std.XCostExtension.</code><code class="descname">XCostType</code><a class="reference internal" href="_modules/extension/std/XCostExtension.html#XCostType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#extension.std.XCostExtension.XCostType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class which value contains the cost type (e.g., Fixed,Overhead, Materials).</p>
+<p>Uses the singleton metaclass</p>
+<dl class="method">
+<dt id="extension.std.XCostExtension.XCostType.assign_value">
+<code class="descname">assign_value</code><span class="sig-paren">(</span><em>attribute</em>, <em>value</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/extension/std/XCostExtension.html#XCostType.assign_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#extension.std.XCostExtension.XCostType.assign_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Abstract method to assign a value to an element.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>attribute</strong> (<a class="reference internal" href="XAttribute.html#model.XAttribute.XAttribute" title="model.XAttribute.XAttribute"><em>XAttribute</em></a>) &#8211; The element to assign the value to.</li>
+<li><strong>value</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; The value to be assigned.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="extension.std.XCostExtension.XCostType.extract_value">
+<code class="descname">extract_value</code><span class="sig-paren">(</span><em>attribute</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/extension/std/XCostExtension.html#XCostType.extract_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#extension.std.XCostExtension.XCostType.extract_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Abstract method to extract a value from an element.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>attribute</strong> (<a class="reference internal" href="XAttribute.html#model.XAttribute.XAttribute" title="model.XAttribute.XAttribute"><em>XAttribute</em></a>) &#8211; The element to extract the value from.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The extracted value.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="XConceptExtension.html">XConceptExtension</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="XExtendedEvent.html">XExtendedEvent</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Hernán Valdivieso.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
+    </div>
+  </body>
+</html>

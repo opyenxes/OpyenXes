@@ -1,0 +1,10 @@
+
+Factory
+=======
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:
+
+
+   XFactory
+   XFactoryRegistry

@@ -1,0 +1,258 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>XLifecycleExtension &#8212; OpenXes Python 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="XMicroExtension" href="XMicroExtension.html" />
+    <link rel="prev" title="XIdentityExtension" href="XIdentityExtension.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="index.html">
+          <span>OpenXes Python 1.0 documentation</span></a></h1>
+        <h2 class="heading"><span>XLifecycleExtension</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="XIdentityExtension.html">XIdentityExtension</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="XMicroExtension.html">XMicroExtension</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="module-extension.std.XLifecycleExtension">
+<span id="xlifecycleextension"></span><h1>XLifecycleExtension<a class="headerlink" href="#module-extension.std.XLifecycleExtension" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="extension.std.XLifecycleExtension.XLifecycleExtension">
+<em class="property">class </em><code class="descclassname">extension.std.XLifecycleExtension.</code><code class="descname">XLifecycleExtension</code><a class="reference internal" href="_modules/extension/std/XLifecycleExtension.html#XLifecycleExtension"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#extension.std.XLifecycleExtension.XLifecycleExtension" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extension defining additional attributes for the event lifecycle.
+Lifecycles define a set of states for activities, with an accompanying set
+of transitions between those states. Any event which is referring to by a
+lifecycle represents a certain transition of an activity within that
+lifecycle.</p>
+<p>Uses the singleton metaclass</p>
+<dl class="class">
+<dt id="extension.std.XLifecycleExtension.XLifecycleExtension.StandardModel">
+<em class="property">class </em><code class="descname">StandardModel</code><a class="reference internal" href="_modules/extension/std/XLifecycleExtension.html#XLifecycleExtension.StandardModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#extension.std.XLifecycleExtension.XLifecycleExtension.StandardModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class with the standard lifecycle model.</p>
+<dl class="method">
+<dt id="extension.std.XLifecycleExtension.XLifecycleExtension.StandardModel.decode">
+<code class="descname">decode</code><span class="sig-paren">(</span><em>encoding</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/extension/std/XLifecycleExtension.html#XLifecycleExtension.StandardModel.decode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#extension.std.XLifecycleExtension.XLifecycleExtension.StandardModel.decode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decodes any encoding string, referring to the respective
+standard-model lifecycle transition object in this enum.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>encoding</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Encoding string.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Standard-model transition string</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="extension.std.XLifecycleExtension.XLifecycleExtension.StandardModel.values">
+<code class="descname">values</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/extension/std/XLifecycleExtension.html#XLifecycleExtension.StandardModel.values"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#extension.std.XLifecycleExtension.XLifecycleExtension.StandardModel.values" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an array containing the constants of this enum type, in
+the order they are declared. This method may be used to iterate over
+the constants as follows:</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">An array containing the constants of this enum type, in the
+order they are declared</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#list" title="(in Python v2.7)">list</a>[<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)">str</a>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="method">
+<dt id="extension.std.XLifecycleExtension.XLifecycleExtension.assign_model">
+<code class="descclassname">XLifecycleExtension.</code><code class="descname">assign_model</code><span class="sig-paren">(</span><em>log</em>, <em>model</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/extension/std/XLifecycleExtension.html#XLifecycleExtension.assign_model"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#extension.std.XLifecycleExtension.XLifecycleExtension.assign_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assigns a value for the lifecycle model identifier to a given log.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>log</strong> (<a class="reference internal" href="XLog.html#model.XLog.XLog" title="model.XLog.XLog"><em>XLog</em></a>) &#8211; Log to be tagged.</li>
+<li><strong>model</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Lifecycle model identifier string to be used.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="extension.std.XLifecycleExtension.XLifecycleExtension.assign_standard_transition">
+<code class="descclassname">XLifecycleExtension.</code><code class="descname">assign_standard_transition</code><span class="sig-paren">(</span><em>event</em>, <em>transition</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/extension/std/XLifecycleExtension.html#XLifecycleExtension.assign_standard_transition"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#extension.std.XLifecycleExtension.XLifecycleExtension.assign_standard_transition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assigns a standard lifecycle transition to the given event..</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>event</strong> (<a class="reference internal" href="XEvent.html#module-model.XEvent" title="model.XEvent"><em>XEvent</em></a>) &#8211; Event to be tagged.</li>
+<li><strong>transition</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Standard lifecycle transition to be assigned.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="extension.std.XLifecycleExtension.XLifecycleExtension.assign_transition">
+<code class="descclassname">XLifecycleExtension.</code><code class="descname">assign_transition</code><span class="sig-paren">(</span><em>event</em>, <em>transition</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/extension/std/XLifecycleExtension.html#XLifecycleExtension.assign_transition"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#extension.std.XLifecycleExtension.XLifecycleExtension.assign_transition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assigns a lifecycle transition string to the given event.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>event</strong> (<a class="reference internal" href="XEvent.html#module-model.XEvent" title="model.XEvent"><em>XEvent</em></a>) &#8211; Event to be tagged.</li>
+<li><strong>transition</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Lifecycle transition string to be assigned.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="extension.std.XLifecycleExtension.XLifecycleExtension.extract_model">
+<em class="property">static </em><code class="descclassname">XLifecycleExtension.</code><code class="descname">extract_model</code><span class="sig-paren">(</span><em>log</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/extension/std/XLifecycleExtension.html#XLifecycleExtension.extract_model"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#extension.std.XLifecycleExtension.XLifecycleExtension.extract_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extracts the lifecycle model identifier from a given log.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>log</strong> (<a class="reference internal" href="XLog.html#model.XLog.XLog" title="model.XLog.XLog"><em>XLog</em></a>) &#8211; Event log.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Lifecycle model identifier string.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="extension.std.XLifecycleExtension.XLifecycleExtension.extract_standard_transition">
+<code class="descclassname">XLifecycleExtension.</code><code class="descname">extract_standard_transition</code><span class="sig-paren">(</span><em>event</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/extension/std/XLifecycleExtension.html#XLifecycleExtension.extract_standard_transition"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#extension.std.XLifecycleExtension.XLifecycleExtension.extract_standard_transition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extracts the standard lifecycle transition object from a given event.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>event</strong> (<a class="reference internal" href="XEvent.html#module-model.XEvent" title="model.XEvent"><em>XEvent</em></a>) &#8211; The given event</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The standard lifecycle transition instance of this event. Can
+be null, if not defined.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="extension.std.XLifecycleExtension.XLifecycleExtension.extract_transition">
+<em class="property">static </em><code class="descclassname">XLifecycleExtension.</code><code class="descname">extract_transition</code><span class="sig-paren">(</span><em>event</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/extension/std/XLifecycleExtension.html#XLifecycleExtension.extract_transition"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#extension.std.XLifecycleExtension.XLifecycleExtension.extract_transition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extracts the lifecycle transition string from a given event.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>event</strong> (<a class="reference internal" href="XEvent.html#module-model.XEvent" title="model.XEvent"><em>XEvent</em></a>) &#8211; The given event</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The lifecycle transition string of this event. Can be null, if
+not defined.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="extension.std.XLifecycleExtension.XLifecycleExtension.uses_standard_model">
+<code class="descclassname">XLifecycleExtension.</code><code class="descname">uses_standard_model</code><span class="sig-paren">(</span><em>log</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/extension/std/XLifecycleExtension.html#XLifecycleExtension.uses_standard_model"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#extension.std.XLifecycleExtension.XLifecycleExtension.uses_standard_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks, whether a given log uses the standard model for lifecycle
+transitions.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>log</strong> (<a class="reference internal" href="XLog.html#model.XLog.XLog" title="model.XLog.XLog"><em>XLog</em></a>) &#8211; Log to be checked.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Returns true, if the log indeed uses the standard lifecycle model.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)">bool</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="XIdentityExtension.html">XIdentityExtension</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="XMicroExtension.html">XMicroExtension</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Hernán Valdivieso.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
+    </div>
+  </body>
+</html>

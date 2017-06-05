@@ -1,0 +1,7 @@
+
+XIDFactory
+==========
+
+.. automodule:: id.XIDFactory
+   :members:
+

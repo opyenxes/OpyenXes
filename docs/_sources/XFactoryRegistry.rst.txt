@@ -1,0 +1,7 @@
+
+XFactoryRegistry
+================
+
+.. automodule:: factory.XFactoryRegistry
+   :members:
+

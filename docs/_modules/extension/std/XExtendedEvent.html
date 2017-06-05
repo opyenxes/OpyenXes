@@ -1,0 +1,339 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>extension.std.XExtendedEvent &#8212; OpenXes Python 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../../../index.html">
+          <span>OpenXes Python 1.0 documentation</span></a></h1>
+        <h2 class="heading"><span>extension.std.XExtendedEvent</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        <a class="uplink" href="../../../index.html">Contents</a>
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <h1>Source code for extension.std.XExtendedEvent</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">extension.std.XConceptExtension</span> <span class="k">import</span> <span class="n">XConceptExtension</span>
+<span class="kn">from</span> <span class="nn">extension.std.XTimeExtension</span> <span class="k">import</span> <span class="n">XTimeExtension</span>
+<span class="kn">from</span> <span class="nn">extension.std.XOrganizationalExtension</span> <span class="k">import</span> <span class="n">XOrganizationalExtension</span>
+<span class="kn">from</span> <span class="nn">extension.std.XLifecycleExtension</span> <span class="k">import</span> <span class="n">XLifecycleExtension</span>
+<span class="kn">from</span> <span class="nn">extension.std.XSemanticExtension</span> <span class="k">import</span> <span class="n">XSemanticExtension</span>
+<span class="kn">from</span> <span class="nn">id.XIDFactory</span> <span class="k">import</span> <span class="n">XIDFactory</span>
+
+
+<div class="viewcode-block" id="XExtendedEvent"><a class="viewcode-back" href="../../../XExtendedEvent.html#extension.std.XExtendedEvent.XExtendedEvent">[docs]</a><span class="k">class</span> <span class="nc">XExtendedEvent</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Helper class. This class can be used to dynamically wrap any event, and</span>
+<span class="sd">    provides an extended set of getter and setter methods for</span>
+<span class="sd">    typically-available extension attributes.</span>
+
+<span class="sd">    :param event: The original event to be wrapped.</span>
+<span class="sd">    :type event: XEvent</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="XExtendedEvent.wrap"><a class="viewcode-back" href="../../../XExtendedEvent.html#extension.std.XExtendedEvent.XExtendedEvent.wrap">[docs]</a>    <span class="k">def</span> <span class="nf">wrap</span><span class="p">(</span><span class="n">event</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Static wrapper method. Wraps the given event into an instance of</span>
+<span class="sd">        this class, which transparently provides extended access to attributes.</span>
+
+<span class="sd">        :param event: The original event to be wrapped.</span>
+<span class="sd">        :type event: XEvent</span>
+<span class="sd">        :return: A wrapped event.</span>
+<span class="sd">        :rtype: XExtendedEvent</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">XExtendedEvent</span><span class="p">(</span><span class="n">event</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__original</span> <span class="o">=</span> <span class="n">event</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__id</span> <span class="o">=</span> <span class="n">XIDFactory</span><span class="o">.</span><span class="n">create_id</span><span class="p">()</span>
+
+<div class="viewcode-block" id="XExtendedEvent.get_name"><a class="viewcode-back" href="../../../XExtendedEvent.html#extension.std.XExtendedEvent.XExtendedEvent.get_name">[docs]</a>    <span class="k">def</span> <span class="nf">get_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Retrieves the activity name of this event, as defined by the Concept</span>
+<span class="sd">        extension.</span>
+
+<span class="sd">        :return: Activity name of the event.</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">XConceptExtension</span><span class="p">()</span><span class="o">.</span><span class="n">extract_name</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__original</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="XExtendedEvent.set_name"><a class="viewcode-back" href="../../../XExtendedEvent.html#extension.std.XExtendedEvent.XExtendedEvent.set_name">[docs]</a>    <span class="k">def</span> <span class="nf">set_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Sets the activity name of this event, as defined by the Concept</span>
+<span class="sd">        extension.</span>
+
+<span class="sd">        :param name: Activity instance of the event.</span>
+<span class="sd">        :type name: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">XConceptExtension</span><span class="p">()</span><span class="o">.</span><span class="n">assign_name</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__original</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="XExtendedEvent.get_instance"><a class="viewcode-back" href="../../../XExtendedEvent.html#extension.std.XExtendedEvent.XExtendedEvent.get_instance">[docs]</a>    <span class="k">def</span> <span class="nf">get_instance</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Retrieves the activity instance of this event, as defined by the</span>
+<span class="sd">        Concept extension.</span>
+
+<span class="sd">        :return: Activity instance of the event.</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">XConceptExtension</span><span class="p">()</span><span class="o">.</span><span class="n">extract_instance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__original</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="XExtendedEvent.set_instance"><a class="viewcode-back" href="../../../XExtendedEvent.html#extension.std.XExtendedEvent.XExtendedEvent.set_instance">[docs]</a>    <span class="k">def</span> <span class="nf">set_instance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Sets the activity instance of this event, as defined by the Concept</span>
+<span class="sd">        extension.</span>
+
+<span class="sd">        :param instance: Activity instance of the event.</span>
+<span class="sd">        :type instance: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">XConceptExtension</span><span class="p">()</span><span class="o">.</span><span class="n">assign_instance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__original</span><span class="p">,</span> <span class="n">instance</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="XExtendedEvent.get_time_stamp"><a class="viewcode-back" href="../../../XExtendedEvent.html#extension.std.XExtendedEvent.XExtendedEvent.get_time_stamp">[docs]</a>    <span class="k">def</span> <span class="nf">get_time_stamp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Retrieves the timestamp of the event, as defined by the Time</span>
+<span class="sd">        extension.</span>
+
+<span class="sd">        :return: Timestamp as Date object, or null if not defined.</span>
+<span class="sd">        :rtype: datetime.datetime</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">XTimeExtension</span><span class="p">()</span><span class="o">.</span><span class="n">extract_timestamp</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__original</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="XExtendedEvent.set_time_stamp"><a class="viewcode-back" href="../../../XExtendedEvent.html#extension.std.XExtendedEvent.XExtendedEvent.set_time_stamp">[docs]</a>    <span class="k">def</span> <span class="nf">set_time_stamp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time_stamp</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Sets the timestamp of the event, as defined by the Time extension.</span>
+
+<span class="sd">        :param time_stamp: Timestamp, as Date or as long value in milliseconds,</span>
+<span class="sd">        to be set.</span>
+<span class="sd">        :type time_stamp: datetime.datetime or int</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">XTimeExtension</span><span class="p">()</span><span class="o">.</span><span class="n">assign_timestamp</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__original</span><span class="p">,</span> <span class="n">time_stamp</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="XExtendedEvent.get_resourse"><a class="viewcode-back" href="../../../XExtendedEvent.html#extension.std.XExtendedEvent.XExtendedEvent.get_resourse">[docs]</a>    <span class="k">def</span> <span class="nf">get_resourse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the resource of the event, as defined by the Organizational</span>
+<span class="sd">        extension.</span>
+
+<span class="sd">        :return: Resource string. Can be null, if not defined.</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">XOrganizationalExtension</span><span class="p">()</span><span class="o">.</span><span class="n">extract_resource</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__original</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="XExtendedEvent.set_resource"><a class="viewcode-back" href="../../../XExtendedEvent.html#extension.std.XExtendedEvent.XExtendedEvent.set_resource">[docs]</a>    <span class="k">def</span> <span class="nf">set_resource</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resource</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Sets the resource of the event, as defined by the Organizational</span>
+<span class="sd">        extension.</span>
+
+<span class="sd">        :param resource: Resource string.</span>
+<span class="sd">        :type resource: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">XOrganizationalExtension</span><span class="p">()</span><span class="o">.</span><span class="n">assign_resource</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__original</span><span class="p">,</span> <span class="n">resource</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="XExtendedEvent.get_role"><a class="viewcode-back" href="../../../XExtendedEvent.html#extension.std.XExtendedEvent.XExtendedEvent.get_role">[docs]</a>    <span class="k">def</span> <span class="nf">get_role</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the role of the event, as defined by the Organizational</span>
+<span class="sd">        extension.</span>
+
+<span class="sd">        :return: Role string. Can be null, if not defined.</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">XOrganizationalExtension</span><span class="p">()</span><span class="o">.</span><span class="n">extract_role</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__original</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="XExtendedEvent.set_role"><a class="viewcode-back" href="../../../XExtendedEvent.html#extension.std.XExtendedEvent.XExtendedEvent.set_role">[docs]</a>    <span class="k">def</span> <span class="nf">set_role</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">role</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Sets the role of the event, as defined by the Organizational</span>
+<span class="sd">        extension.</span>
+
+<span class="sd">        :param role: Role string.</span>
+<span class="sd">        :type role: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">XOrganizationalExtension</span><span class="p">()</span><span class="o">.</span><span class="n">assign_role</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__original</span><span class="p">,</span> <span class="n">role</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="XExtendedEvent.get_group"><a class="viewcode-back" href="../../../XExtendedEvent.html#extension.std.XExtendedEvent.XExtendedEvent.get_group">[docs]</a>    <span class="k">def</span> <span class="nf">get_group</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the group of the event, as defined by the Organizational</span>
+<span class="sd">        extension.</span>
+
+<span class="sd">        :return: Group string. Can be null, if not defined.</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">XOrganizationalExtension</span><span class="p">()</span><span class="o">.</span><span class="n">extract_group</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__original</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="XExtendedEvent.set_group"><a class="viewcode-back" href="../../../XExtendedEvent.html#extension.std.XExtendedEvent.XExtendedEvent.set_group">[docs]</a>    <span class="k">def</span> <span class="nf">set_group</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Sets the group of the event, as defined by the Organizational</span>
+<span class="sd">        extension.</span>
+
+<span class="sd">        :param group: Group string.</span>
+<span class="sd">        :type group: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">XOrganizationalExtension</span><span class="p">()</span><span class="o">.</span><span class="n">assign_group</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__original</span><span class="p">,</span> <span class="n">group</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="XExtendedEvent.get_transition"><a class="viewcode-back" href="../../../XExtendedEvent.html#extension.std.XExtendedEvent.XExtendedEvent.get_transition">[docs]</a>    <span class="k">def</span> <span class="nf">get_transition</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the lifecycle transition of the event, as defined by the</span>
+<span class="sd">        Lifecycle extension.</span>
+
+<span class="sd">        :return: Lifecycle transition string. Can be null, if not defined.</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">XLifecycleExtension</span><span class="p">()</span><span class="o">.</span><span class="n">extract_transition</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__original</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="XExtendedEvent.set_transition"><a class="viewcode-back" href="../../../XExtendedEvent.html#extension.std.XExtendedEvent.XExtendedEvent.set_transition">[docs]</a>    <span class="k">def</span> <span class="nf">set_transition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transition</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Sets the lifecycle transition of the event, as defined by the</span>
+<span class="sd">        Lifecycle extension.</span>
+
+<span class="sd">        :param transition: Lifecycle transition string.</span>
+<span class="sd">        :type transition: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">XLifecycleExtension</span><span class="p">()</span><span class="o">.</span><span class="n">assign_transition</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__original</span><span class="p">,</span> <span class="n">transition</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="XExtendedEvent.get_standard_transition"><a class="viewcode-back" href="../../../XExtendedEvent.html#extension.std.XExtendedEvent.XExtendedEvent.get_standard_transition">[docs]</a>    <span class="k">def</span> <span class="nf">get_standard_transition</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the standard lifecycle transition of the event, as defined</span>
+<span class="sd">        by the Lifecycle extension.</span>
+
+<span class="sd">        :return: Standard lifecycle transition as string. Can be null, if not</span>
+<span class="sd">         defined.</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">XLifecycleExtension</span><span class="p">()</span><span class="o">.</span><span class="n">extract_standard_transition</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__original</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="XExtendedEvent.set_standard_transition"><a class="viewcode-back" href="../../../XExtendedEvent.html#extension.std.XExtendedEvent.XExtendedEvent.set_standard_transition">[docs]</a>    <span class="k">def</span> <span class="nf">set_standard_transition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transition</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Sets the standard lifecycle transition of the event, as defined by</span>
+<span class="sd">        the Lifecycle extension.</span>
+
+<span class="sd">        :param transition: Standard lifecycle transition object as string.</span>
+<span class="sd">        :type transition: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">XLifecycleExtension</span><span class="p">()</span><span class="o">.</span><span class="n">assign_standard_transition</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__original</span><span class="p">,</span> <span class="n">transition</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="XExtendedEvent.get_model_references"><a class="viewcode-back" href="../../../XExtendedEvent.html#extension.std.XExtendedEvent.XExtendedEvent.get_model_references">[docs]</a>    <span class="k">def</span> <span class="nf">get_model_references</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the list of model references defined for this event, as</span>
+<span class="sd">        defined in the Semantic extension.</span>
+
+<span class="sd">        :return: List of model reference strings.</span>
+<span class="sd">        :rtype: list[str]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">XSemanticExtension</span><span class="p">()</span><span class="o">.</span><span class="n">extract_model_references</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__original</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="XExtendedEvent.set_model_references"><a class="viewcode-back" href="../../../XExtendedEvent.html#extension.std.XExtendedEvent.XExtendedEvent.set_model_references">[docs]</a>    <span class="k">def</span> <span class="nf">set_model_references</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_references</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Sets the list of model reference strings defined for this event,</span>
+<span class="sd">        as defined in the Semantic extension.</span>
+
+<span class="sd">        :param model_references: List of model reference strings.</span>
+<span class="sd">        :type model_references: list[str]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">XSemanticExtension</span><span class="p">()</span><span class="o">.</span><span class="n">assign_model_references</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__original</span><span class="p">,</span> <span class="n">model_references</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="XExtendedEvent.get_model_references_uris"><a class="viewcode-back" href="../../../XExtendedEvent.html#extension.std.XExtendedEvent.XExtendedEvent.get_model_references_uris">[docs]</a>    <span class="k">def</span> <span class="nf">get_model_references_uris</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the list of model reference URIs defined for this event,</span>
+<span class="sd">        as defined in the Semantic extension.</span>
+
+<span class="sd">        :return: List of model reference URIs.</span>
+<span class="sd">        :rtype: list[ParseResult]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">XSemanticExtension</span><span class="p">()</span><span class="o">.</span><span class="n">extract_model_reference_uris</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__original</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="XExtendedEvent.set_model_references_uris"><a class="viewcode-back" href="../../../XExtendedEvent.html#extension.std.XExtendedEvent.XExtendedEvent.set_model_references_uris">[docs]</a>    <span class="k">def</span> <span class="nf">set_model_references_uris</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_references_uris</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Sets the list of model reference URIs defined for this event, as</span>
+<span class="sd">        defined in the Semantic extension.</span>
+
+<span class="sd">        :param model_references_uris: List of model reference URIs.</span>
+<span class="sd">        :type model_references_uris: list[ParseResult or SplitResult]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">XSemanticExtension</span><span class="p">()</span><span class="o">.</span><span class="n">assign_model_reference_uris</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__original</span><span class="p">,</span>
+                                                         <span class="n">model_references_uris</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="XExtendedEvent.get_attributes"><a class="viewcode-back" href="../../../XExtendedEvent.html#extension.std.XExtendedEvent.XExtendedEvent.get_attributes">[docs]</a>    <span class="k">def</span> <span class="nf">get_attributes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Retrieves the attributes set for this element.</span>
+
+<span class="sd">        :return: A map of attributes.</span>
+<span class="sd">        :rtype: XAttributeMap</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__original</span><span class="o">.</span><span class="n">get_attributes</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="XExtendedEvent.get_extensions"><a class="viewcode-back" href="../../../XExtendedEvent.html#extension.std.XExtendedEvent.XExtendedEvent.get_extensions">[docs]</a>    <span class="k">def</span> <span class="nf">get_extensions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Retrieves the extensions used by this element, i.e. the extensions</span>
+<span class="sd">        used by all attributes of this element, and the element itself</span>
+
+<span class="sd">        :return: A set of extensions</span>
+<span class="sd">        :rtype: set(XExtension)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__original</span><span class="o">.</span><span class="n">get_extensions</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="XExtendedEvent.set_attributes"><a class="viewcode-back" href="../../../XExtendedEvent.html#extension.std.XExtendedEvent.XExtendedEvent.set_attributes">[docs]</a>    <span class="k">def</span> <span class="nf">set_attributes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attributes</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Sets the map of attributes for this element.</span>
+
+<span class="sd">        :param attributes: A map of attributes</span>
+<span class="sd">        :type attributes: XAttributeMap</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__original</span><span class="o">.</span><span class="n">set_attributes</span><span class="p">(</span><span class="n">attributes</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="XExtendedEvent.has_attributes"><a class="viewcode-back" href="../../../XExtendedEvent.html#extension.std.XExtendedEvent.XExtendedEvent.has_attributes">[docs]</a>    <span class="k">def</span> <span class="nf">has_attributes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Checks for the existence of attributes</span>
+
+<span class="sd">        :return: True if this element has any attributes; False otherwise.</span>
+<span class="sd">        :rtype: bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__original</span><span class="o">.</span><span class="n">has_attributes</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="XExtendedEvent.clone"><a class="viewcode-back" href="../../../XExtendedEvent.html#extension.std.XExtendedEvent.XExtendedEvent.clone">[docs]</a>    <span class="k">def</span> <span class="nf">clone</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Clones this event, i.e. creates a deep copy, but with a new ID, so</span>
+<span class="sd">        equals does not hold between this and the clone</span>
+
+<span class="sd">        :return: An identical clone.</span>
+<span class="sd">        :rtype: XExtendedEvent</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">aux</span> <span class="o">=</span> <span class="n">XExtendedEvent</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__original</span><span class="o">.</span><span class="n">clone</span><span class="p">())</span>
+        <span class="n">aux</span><span class="o">.</span><span class="n">_XExtendedEvent__id</span> <span class="o">=</span> <span class="n">XIDFactory</span><span class="o">.</span><span class="n">create_id</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">aux</span></div>
+
+<div class="viewcode-block" id="XExtendedEvent.get_id"><a class="viewcode-back" href="../../../XExtendedEvent.html#extension.std.XExtendedEvent.XExtendedEvent.get_id">[docs]</a>    <span class="k">def</span> <span class="nf">get_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Retrieves the id value of this event</span>
+
+<span class="sd">        :return: id of this event</span>
+<span class="sd">        :rtype: XID</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__id</span></div>
+
+    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">XExtendedEvent</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__id</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">get_id</span><span class="p">()</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="k">def</span> <span class="nf">__ne__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">__eq__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">hash</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__id</span><span class="p">)</span></div>
+</pre></div>
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        <a class="uplink" href="../../../index.html">Contents</a>
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Hernán Valdivieso.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
+    </div>
+  </body>
+</html>
