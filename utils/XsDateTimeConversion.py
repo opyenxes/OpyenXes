@@ -34,7 +34,11 @@ def parse_date_time(date_time):
             hours = 0
             minute = 0
 
-        time = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
+        if '.' in value:
+            time = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
+        else:
+            time = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S")
+
         time = time.replace(tzinfo=timezone(timedelta(minutes=int(minute), hours=int(hours))))
         return time
 
