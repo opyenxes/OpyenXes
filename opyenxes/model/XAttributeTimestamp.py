@@ -1,5 +1,6 @@
 from opyenxes.model.XAttribute import XAttribute
 from datetime import datetime
+import platform
 import time
 
 
@@ -21,7 +22,7 @@ class XAttributeTimestamp(XAttribute):
         if isinstance(value, datetime):
             self.__value = value
         elif isinstance(value, int):
-            self.__value = datetime.fromtimestamp(value / 1000.0)
+            self.__value = datetime.fromtimestamp(self.__timestamp(value))
 
     def get_value(self):
         """Retrieves the datetime value of this attribute
@@ -118,3 +119,13 @@ class XAttributeTimestamp(XAttribute):
 
     def __ge__(self, other):
         return True if self.compare_to(other) >= 0 else False
+
+    def __timestamp(self, value):
+        """ Windows timestamp workaround
+
+        Creating the timestamp will fail if less than 86400 on Windows with Python 3.6.
+        """
+        value = value / 1000.0
+        if (platform.system() == 'Windows') and (value < 86400):
+            return 86400
+        return value
