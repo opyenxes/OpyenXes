@@ -33,14 +33,14 @@ class XEventAttributeClassifier:
             attribute_1 = event.get_attributes().get(self.__keys[0])
             attribute_2 = event.get_attributes().get(self.__keys[1])
             if attribute_1 and attribute_2:
-                return "{}+{}".format(str(attribute_1),
+                return "{}&&{}".format(str(attribute_1),
                                       str(attribute_2))
             elif attribute_1:
-                return "{}+".format(str(attribute_1))
+                return "{}&&".format(str(attribute_1))
             elif attribute_2:
-                return "+{}".format(str(attribute_2))
+                return "&&{}".format(str(attribute_2))
 
-            return "+"
+            return "&&"
 
         else:
             identity = []
@@ -49,7 +49,7 @@ class XEventAttributeClassifier:
                 if attribute:
                     identity.append(str(attribute))
 
-            return "+".join(identity)
+            return "&&".join(identity)
 
     def name(self):
         """Returns the name of this comparator
