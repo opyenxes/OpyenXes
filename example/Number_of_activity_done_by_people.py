@@ -1,5 +1,5 @@
-from data_in.XUniversalParser import XUniversalParser
-from classification.XEventAttributeClassifier import XEventAttributeClassifier
+from opyenxes.data_in.XUniversalParser import XUniversalParser
+from opyenxes.classification.XEventAttributeClassifier import XEventAttributeClassifier
 from collections import defaultdict
 from matplotlib import pylab as plt
 import numpy as np
