@@ -1,6 +1,6 @@
 import itertools
 import copy
-from classification.XEventAttributeClassifier import XEventAttributeClassifier
+from opyenxes.classification.XEventAttributeClassifier import XEventAttributeClassifier
 
 
 def gen():
