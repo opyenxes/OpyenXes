@@ -6,7 +6,7 @@ OpyenXes
 .. image:: https://img.shields.io/pypi/v/opyenxes.svg
         :target: https://pypi.python.org/pypi/opyenxes
 
-.. image:: https://img.shields.io/travis/wailamjonathanlee/opyenxes.svg
+.. image:: https://img.shields.io/travis/opyenxes/OpyenXes.svg
         :target: https://travis-ci.org/opyenxes/OpyenXes
 
 .. image:: https://readthedocs.org/projects/opyenxes/badge/?version=latest
