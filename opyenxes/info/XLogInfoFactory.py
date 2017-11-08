@@ -1,4 +1,4 @@
-from info.XLogInfo import XLogInfo
+from opyenxes.info.XLogInfo import XLogInfo
 
 
 class XLogInfoFactory:

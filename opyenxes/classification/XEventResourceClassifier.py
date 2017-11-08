@@ -1,4 +1,4 @@
-from classification.XEventAttributeClassifier import XEventAttributeClassifier
+from opyenxes.classification.XEventAttributeClassifier import XEventAttributeClassifier
 
 
 class XEventResourceClassifier(XEventAttributeClassifier):

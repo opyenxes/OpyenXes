@@ -1,15 +1,15 @@
-from model.XAttributeBoolean import XAttributeBoolean
-from model.XAttributeContainer import XAttributeContainer
-from model.XAttributeContinuous import XAttributeContinuous
-from model.XAttributeDiscrete import XAttributeDiscrete
-from model.XAttributeID import XAttributeID
-from model.XAttributeList import XAttributeList
-from model.XAttributeLiteral import XAttributeLiteral
-from model.XAttributeMap import XAttributeMap
-from model.XAttributeTimestamp import XAttributeTimestamp
-from model.XEvent import XEvent
-from model.XLog import XLog
-from model.XTrace import XTrace
+from opyenxes.model.XAttributeBoolean import XAttributeBoolean
+from opyenxes.model.XAttributeContainer import XAttributeContainer
+from opyenxes.model.XAttributeContinuous import XAttributeContinuous
+from opyenxes.model.XAttributeDiscrete import XAttributeDiscrete
+from opyenxes.model.XAttributeID import XAttributeID
+from opyenxes.model.XAttributeList import XAttributeList
+from opyenxes.model.XAttributeLiteral import XAttributeLiteral
+from opyenxes.model.XAttributeMap import XAttributeMap
+from opyenxes.model.XAttributeTimestamp import XAttributeTimestamp
+from opyenxes.model.XEvent import XEvent
+from opyenxes.model.XLog import XLog
+from opyenxes.model.XTrace import XTrace
 
 
 class XFactory:

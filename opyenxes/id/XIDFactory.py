@@ -1,5 +1,5 @@
-from id.XID import XID
-from utils.SingletonClassGenerator import XIDFactoryMetaclass
+from opyenxes.id.XID import XID
+from opyenxes.utils.SingletonClassGenerator import XIDFactoryMetaclass
 
 
 class XIDFactory(metaclass=XIDFactoryMetaclass):

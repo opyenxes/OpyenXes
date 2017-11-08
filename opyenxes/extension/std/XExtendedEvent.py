@@ -1,9 +1,9 @@
-from extension.std.XConceptExtension import XConceptExtension
-from extension.std.XTimeExtension import XTimeExtension
-from extension.std.XOrganizationalExtension import XOrganizationalExtension
-from extension.std.XLifecycleExtension import XLifecycleExtension
-from extension.std.XSemanticExtension import XSemanticExtension
-from id.XIDFactory import XIDFactory
+from opyenxes.extension.std.XConceptExtension import XConceptExtension
+from opyenxes.extension.std.XTimeExtension import XTimeExtension
+from opyenxes.extension.std.XOrganizationalExtension import XOrganizationalExtension
+from opyenxes.extension.std.XLifecycleExtension import XLifecycleExtension
+from opyenxes.extension.std.XSemanticExtension import XSemanticExtension
+from opyenxes.id.XIDFactory import XIDFactory
 
 
 class XExtendedEvent:

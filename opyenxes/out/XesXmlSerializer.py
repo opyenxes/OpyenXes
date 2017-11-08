@@ -1,18 +1,18 @@
-from log.XLogging import XLogging
+from opyenxes.log.XLogging import XLogging
 import time
 import xml.etree.ElementTree as Et
 from xml.dom import minidom
-from classification.XEventAttributeClassifier import XEventAttributeClassifier
-from model.XAttributeDiscrete import XAttributeDiscrete
-from model.XAttributeLiteral import XAttributeLiteral
-from model.XAttributeContinuous import XAttributeContinuous
-from model.XAttributeBoolean import XAttributeBoolean
-from model.XAttributeID import XAttributeID
-from model.XAttributeList import XAttributeList
-from model.XAttributeContainer import XAttributeContainer
-from model.XAttributeTimestamp import XAttributeTimestamp
-from model.XAttributeCollection import XAttributeCollection
-from utils.XTokenHelper import XTokenHelper
+from opyenxes.classification.XEventAttributeClassifier import XEventAttributeClassifier
+from opyenxes.model.XAttributeDiscrete import XAttributeDiscrete
+from opyenxes.model.XAttributeLiteral import XAttributeLiteral
+from opyenxes.model.XAttributeContinuous import XAttributeContinuous
+from opyenxes.model.XAttributeBoolean import XAttributeBoolean
+from opyenxes.model.XAttributeID import XAttributeID
+from opyenxes.model.XAttributeList import XAttributeList
+from opyenxes.model.XAttributeContainer import XAttributeContainer
+from opyenxes.model.XAttributeTimestamp import XAttributeTimestamp
+from opyenxes.model.XAttributeCollection import XAttributeCollection
+from opyenxes.utils.XTokenHelper import XTokenHelper
 
 
 class XesXmlSerializer:

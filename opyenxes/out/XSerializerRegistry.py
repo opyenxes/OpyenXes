@@ -1,9 +1,9 @@
-from utils.XRegistry import XRegistry
-from utils.SingletonClassGenerator import XSerializerRegistryMetaclass
-from out.XesXmlGZIPSerializer import XesXmlGZIPSerializer
-from out.XesXmlSerializer import XesXmlSerializer
-from out.XMxmlSerializer import XMxmlSerializer
-from out.XMxmlGZIPSerializer import XMxmlGZIPSerializer
+from opyenxes.utils.XRegistry import XRegistry
+from opyenxes.utils.SingletonClassGenerator import XSerializerRegistryMetaclass
+from opyenxes.out.XesXmlGZIPSerializer import XesXmlGZIPSerializer
+from opyenxes.out.XesXmlSerializer import XesXmlSerializer
+from opyenxes.out.XMxmlSerializer import XMxmlSerializer
+from opyenxes.out.XMxmlGZIPSerializer import XMxmlGZIPSerializer
 
 
 class XSerializerRegistry(XRegistry, metaclass=XSerializerRegistryMetaclass):

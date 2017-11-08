@@ -1,8 +1,8 @@
-from extension.XExtension import XExtension
+from opyenxes.extension.XExtension import XExtension
 from urllib.parse import urlparse
-from info.XGlobalAttributeNameMap import XGlobalAttributeNameMap
-from utils.SingletonClassGenerator import XLifecycleExtensionMetaclass
-from factory.XFactoryRegistry import XFactoryRegistry
+from opyenxes.info.XGlobalAttributeNameMap import XGlobalAttributeNameMap
+from opyenxes.utils.SingletonClassGenerator import XLifecycleExtensionMetaclass
+from opyenxes.factory.XFactoryRegistry import XFactoryRegistry
 
 
 class XLifecycleExtension(XExtension, metaclass=XLifecycleExtensionMetaclass):

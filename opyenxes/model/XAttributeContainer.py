@@ -1,4 +1,4 @@
-from model.XAttributeCollection import XAttributeCollection
+from opyenxes.model.XAttributeCollection import XAttributeCollection
 
 
 class XAttributeContainer(XAttributeCollection):

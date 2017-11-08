@@ -1,4 +1,4 @@
-from out.XesXmlSerializer import XesXmlSerializer
+from opyenxes.out.XesXmlSerializer import XesXmlSerializer
 import gzip
 
 

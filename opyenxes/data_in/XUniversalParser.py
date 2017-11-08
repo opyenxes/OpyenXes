@@ -1,4 +1,4 @@
-from data_in.XParserRegistry import XParserRegistry
+from opyenxes.data_in.XParserRegistry import XParserRegistry
 
 
 class XUniversalParser:

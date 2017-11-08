@@ -1,5 +1,5 @@
-from model.XAttributable import XAttributable
-from utils.CompareUtils import compare_to_string
+from opyenxes.model.XAttributable import XAttributable
+from opyenxes.utils.CompareUtils import compare_to_string
 
 
 class XAttribute(XAttributable):

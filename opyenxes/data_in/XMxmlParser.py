@@ -1,16 +1,16 @@
 from xml.sax.handler import ContentHandler
 from xml.sax import parse as xml_parse
-from factory.XFactoryRegistry import XFactoryRegistry
-from extension.std.XTimeExtension import XTimeExtension
-from extension.std.XConceptExtension import XConceptExtension
-from extension.std.XOrganizationalExtension import XOrganizationalExtension
-from extension.std.XLifecycleExtension import XLifecycleExtension
-from extension.std.XSemanticExtension import XSemanticExtension
-from classification.XEventAttributeClassifier import XEventAttributeClassifier
-from classification.XEventNameClassifier import XEventNameClassifier
-from classification.XEventResourceClassifier import XEventResourceClassifier
-from log.XLogging import XLogging
-from utils.XsDateTimeConversion import parse_date_time
+from opyenxes.factory.XFactoryRegistry import XFactoryRegistry
+from opyenxes.extension.std.XTimeExtension import XTimeExtension
+from opyenxes.extension.std.XConceptExtension import XConceptExtension
+from opyenxes.extension.std.XOrganizationalExtension import XOrganizationalExtension
+from opyenxes.extension.std.XLifecycleExtension import XLifecycleExtension
+from opyenxes.extension.std.XSemanticExtension import XSemanticExtension
+from opyenxes.classification.XEventAttributeClassifier import XEventAttributeClassifier
+from opyenxes.classification.XEventNameClassifier import XEventNameClassifier
+from opyenxes.classification.XEventResourceClassifier import XEventResourceClassifier
+from opyenxes.log.XLogging import XLogging
+from opyenxes.utils.XsDateTimeConversion import parse_date_time
 
 
 class XMxmlParser:

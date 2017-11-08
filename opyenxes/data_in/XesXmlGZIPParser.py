@@ -1,4 +1,4 @@
-from data_in.XesXmlParser import XesXmlParser
+from opyenxes.data_in.XesXmlParser import XesXmlParser
 import gzip
 
 

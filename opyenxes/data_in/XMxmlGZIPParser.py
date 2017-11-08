@@ -1,4 +1,4 @@
-from data_in.XMxmlParser import XMxmlParser
+from opyenxes.data_in.XMxmlParser import XMxmlParser
 import gzip
 
 

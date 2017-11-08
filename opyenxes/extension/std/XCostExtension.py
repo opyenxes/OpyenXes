@@ -1,9 +1,9 @@
 from urllib.parse import urlparse
-from info.XGlobalAttributeNameMap import XGlobalAttributeNameMap
-from extension.std.XAbstractNestedAttributeSupport import XAbstractNestedAttributeSupport
-from extension.XExtension import XExtension
-from factory.XFactoryRegistry import XFactoryRegistry
-from utils.SingletonClassGenerator import XConceptExtensionMetaclass, XCostAmountMetaclass, XCostDriverMetaclass, XCostTypeMetaclass
+from opyenxes.info.XGlobalAttributeNameMap import XGlobalAttributeNameMap
+from opyenxes.extension.std.XAbstractNestedAttributeSupport import XAbstractNestedAttributeSupport
+from opyenxes.extension.XExtension import XExtension
+from opyenxes.factory.XFactoryRegistry import XFactoryRegistry
+from opyenxes.utils.SingletonClassGenerator import XConceptExtensionMetaclass, XCostAmountMetaclass, XCostDriverMetaclass, XCostTypeMetaclass
 
 
 class XCostAmount(XAbstractNestedAttributeSupport, metaclass=XCostAmountMetaclass):

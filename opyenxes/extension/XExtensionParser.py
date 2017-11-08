@@ -1,10 +1,10 @@
-from extension.XExtension import XExtension
-from utils.SingletonClassGenerator import XExtensionMetaclass
+from opyenxes.extension.XExtension import XExtension
+from opyenxes.utils.SingletonClassGenerator import XExtensionMetaclass
 from xml.sax.handler import ContentHandler
 from xml.sax import parse as xml_parse, parseString
-from factory.XFactoryRegistry import XFactoryRegistry
-from info.XGlobalAttributeNameMap import XGlobalAttributeNameMap
-from id.XIDFactory import XIDFactory
+from opyenxes.factory.XFactoryRegistry import XFactoryRegistry
+from opyenxes.info.XGlobalAttributeNameMap import XGlobalAttributeNameMap
+from opyenxes.id.XIDFactory import XIDFactory
 from urllib import request, parse, error
 import os
 

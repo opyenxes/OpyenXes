@@ -1,9 +1,9 @@
-from extension.XExtension import XExtension
+from opyenxes.extension.XExtension import XExtension
 from urllib.parse import urlparse
-from info.XGlobalAttributeNameMap import XGlobalAttributeNameMap
-from factory.XFactoryRegistry import XFactoryRegistry
-from id.XIDFactory import XIDFactory
-from utils.SingletonClassGenerator import XMicroExtensionMetaclass
+from opyenxes.info.XGlobalAttributeNameMap import XGlobalAttributeNameMap
+from opyenxes.factory.XFactoryRegistry import XFactoryRegistry
+from opyenxes.id.XIDFactory import XIDFactory
+from opyenxes.utils.SingletonClassGenerator import XMicroExtensionMetaclass
 
 
 class XMicroExtension(XExtension, metaclass=XMicroExtensionMetaclass):

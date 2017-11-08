@@ -1,4 +1,4 @@
-from model.XAttributeMap import XAttributeMap
+from opyenxes.model.XAttributeMap import XAttributeMap
 
 
 class XAttributable:

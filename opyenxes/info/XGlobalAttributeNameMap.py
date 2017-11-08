@@ -1,6 +1,6 @@
-from info.XAttributeNameMap import XAttributeNameMap
-from utils.SingletonClassGenerator import XGlobalAttributeNameMapMetaclass
-from model.XAttribute import XAttribute
+from opyenxes.info.XAttributeNameMap import XAttributeNameMap
+from opyenxes.utils.SingletonClassGenerator import XGlobalAttributeNameMapMetaclass
+from opyenxes.model.XAttribute import XAttribute
 
 
 class XGlobalAttributeNameMap(metaclass=XGlobalAttributeNameMapMetaclass):

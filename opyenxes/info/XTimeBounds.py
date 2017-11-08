@@ -1,6 +1,6 @@
 from datetime import datetime
-from model.XEvent import XEvent
-from extension.std.XTimeExtension import XTimeExtension
+from opyenxes.model.XEvent import XEvent
+from opyenxes.extension.std.XTimeExtension import XTimeExtension
 
 
 class XTimeBounds:

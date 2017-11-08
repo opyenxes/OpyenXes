@@ -1,10 +1,10 @@
-from extension.XExtension import XExtension
+from opyenxes.extension.XExtension import XExtension
 from urllib.parse import urlparse
-from info.XGlobalAttributeNameMap import XGlobalAttributeNameMap
-from factory.XFactoryRegistry import XFactoryRegistry
-from model.XAttributable import XAttributable
-from id.XIDFactory import XIDFactory
-from utils.SingletonClassGenerator import XIdentityExtensionMetaclass
+from opyenxes.info.XGlobalAttributeNameMap import XGlobalAttributeNameMap
+from opyenxes.factory.XFactoryRegistry import XFactoryRegistry
+from opyenxes.model.XAttributable import XAttributable
+from opyenxes.id.XIDFactory import XIDFactory
+from opyenxes.utils.SingletonClassGenerator import XIdentityExtensionMetaclass
 
 
 class XIdentityExtension(XExtension, metaclass=XIdentityExtensionMetaclass):

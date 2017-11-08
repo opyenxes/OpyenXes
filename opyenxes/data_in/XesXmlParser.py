@@ -1,13 +1,13 @@
 ﻿from xml.sax.handler import ContentHandler
 from xml.sax import parse as xml_parse
 from urllib import parse
-from factory.XFactoryRegistry import XFactoryRegistry
-from extension.XExtensionManager import XExtensionManager
-from classification.XEventAttributeClassifier import XEventAttributeClassifier
-from utils.XsDateTimeConversion import parse_date_time
-from utils.XTokenHelper import XTokenHelper
-from id.XID import XID
-from model.XAttributeCollection import XAttributeCollection
+from opyenxes.factory.XFactoryRegistry import XFactoryRegistry
+from opyenxes.extension.XExtensionManager import XExtensionManager
+from opyenxes.classification.XEventAttributeClassifier import XEventAttributeClassifier
+from opyenxes.utils.XsDateTimeConversion import parse_date_time
+from opyenxes.utils.XTokenHelper import XTokenHelper
+from opyenxes.id.XID import XID
+from opyenxes.model.XAttributeCollection import XAttributeCollection
 
 
 class XesXmlParser:

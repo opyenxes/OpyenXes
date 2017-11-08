@@ -1,5 +1,5 @@
-from model.XAttribute import XAttribute
-from utils.CompareUtils import compare_to_number
+from opyenxes.model.XAttribute import XAttribute
+from opyenxes.utils.CompareUtils import compare_to_number
 
 
 class XAttributeContinuous(XAttribute):

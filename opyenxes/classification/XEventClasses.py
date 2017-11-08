@@ -1,7 +1,7 @@
-from classification.XEventAttributeClassifier import XEventAttributeClassifier
-from classification.XEventClass import XEventClass
-from model.XElement import XElement
-from model.XEvent import XEvent
+from opyenxes.classification.XEventAttributeClassifier import XEventAttributeClassifier
+from opyenxes.classification.XEventClass import XEventClass
+from opyenxes.model.XElement import XElement
+from opyenxes.model.XEvent import XEvent
 
 
 class XEventClasses:

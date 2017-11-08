@@ -1,9 +1,9 @@
-from utils.XRegistry import XRegistry
-from utils.SingletonClassGenerator import XParserRegistryMetaclass
-from data_in.XesXmlParser import XesXmlParser
-from data_in.XMxmlParser import XMxmlParser
-from data_in.XMxmlGZIPParser import XMxmlGZIPParser
-from data_in.XesXmlGZIPParser import XesXmlGZIPParser
+from opyenxes.utils.XRegistry import XRegistry
+from opyenxes.utils.SingletonClassGenerator import XParserRegistryMetaclass
+from opyenxes.data_in.XesXmlParser import XesXmlParser
+from opyenxes.data_in.XMxmlParser import XMxmlParser
+from opyenxes.data_in.XMxmlGZIPParser import XMxmlGZIPParser
+from opyenxes.data_in.XesXmlGZIPParser import XesXmlGZIPParser
 
 
 class XParserRegistry(XRegistry, metaclass=XParserRegistryMetaclass):

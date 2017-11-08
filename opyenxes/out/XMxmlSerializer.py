@@ -1,8 +1,8 @@
-from log.XLogging import XLogging
+from opyenxes.log.XLogging import XLogging
 import time
 import xml.etree.ElementTree as Et
 from xml.dom import minidom
-from extension.std.XConceptExtension import XConceptExtension
+from opyenxes.extension.std.XConceptExtension import XConceptExtension
 
 
 class XMxmlSerializer:

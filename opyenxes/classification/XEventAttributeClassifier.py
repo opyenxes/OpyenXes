@@ -1,5 +1,5 @@
-from model.XEvent import XEvent
-from utils.CompareUtils import compare_to_string
+from opyenxes.model.XEvent import XEvent
+from opyenxes.utils.CompareUtils import compare_to_string
 
 
 class XEventAttributeClassifier:

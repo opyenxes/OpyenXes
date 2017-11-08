@@ -1,6 +1,6 @@
-from utils.XRegistry import XRegistry
-from utils.SingletonClassGenerator import XFactoryRegistryMetaclass
-from factory.XFactory import XFactory
+from opyenxes.utils.XRegistry import XRegistry
+from opyenxes.utils.SingletonClassGenerator import XFactoryRegistryMetaclass
+from opyenxes.factory.XFactory import XFactory
 
 
 class XFactoryRegistry(XRegistry, metaclass=XFactoryRegistryMetaclass):

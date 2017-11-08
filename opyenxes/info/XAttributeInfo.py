@@ -1,5 +1,5 @@
-from utils.XAttributeUtils import XAttributeUtils
-from model.XAttribute import XAttribute
+from opyenxes.utils.XAttributeUtils import XAttributeUtils
+from opyenxes.model.XAttribute import XAttribute
 
 
 class XAttributeInfo:

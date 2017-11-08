@@ -1,4 +1,4 @@
-from utils.CompareUtils import compare_to_string
+from opyenxes.utils.CompareUtils import compare_to_string
 
 
 class XEventClass:

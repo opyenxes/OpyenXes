@@ -1,6 +1,6 @@
 from abc import abstractclassmethod
-from factory.XFactoryRegistry import XFactoryRegistry
-from model.XAttribute import XAttribute
+from opyenxes.factory.XFactoryRegistry import XFactoryRegistry
+from opyenxes.model.XAttribute import XAttribute
 
 
 class XAbstractNestedAttributeSupport:

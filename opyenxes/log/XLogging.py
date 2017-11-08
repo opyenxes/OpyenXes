@@ -1,4 +1,4 @@
-from log.XStdoutLoggingListener import XStdOutLoggingListener
+from opyenxes.log.XStdoutLoggingListener import XStdOutLoggingListener
 
 
 class XLogging:

@@ -1,6 +1,6 @@
-from model.XElement import XElement
-from model.XAttributeMap import XAttributeMap
-from id.XIDFactory import XIDFactory
+from opyenxes.model.XElement import XElement
+from opyenxes.model.XAttributeMap import XAttributeMap
+from opyenxes.id.XIDFactory import XIDFactory
 
 
 class XEvent(XElement):

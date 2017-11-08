@@ -1,4 +1,4 @@
-from model.XElement import XElement
+from opyenxes.model.XElement import XElement
 
 
 class XTrace(XElement, list):

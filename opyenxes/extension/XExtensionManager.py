@@ -1,15 +1,15 @@
-from extension.std.XConceptExtension import XConceptExtension
-from extension.std.XCostExtension import XCostExtension
-from extension.std.XIdentityExtension import XIdentityExtension
-from extension.std.XLifecycleExtension import XLifecycleExtension
-from extension.std.XMicroExtension import XMicroExtension
-from extension.std.XOrganizationalExtension import XOrganizationalExtension
-from extension.std.XSemanticExtension import XSemanticExtension
-from extension.std.XTimeExtension import XTimeExtension
-from extension.XExtensionParser import XExtensionParser
-from utils.SingletonClassGenerator import XExtensionManagerMetaclass
-from utils.XRuntimeUtils import XRuntimeUtils
-from log.XLogging import XLogging
+from opyenxes.extension.std.XConceptExtension import XConceptExtension
+from opyenxes.extension.std.XCostExtension import XCostExtension
+from opyenxes.extension.std.XIdentityExtension import XIdentityExtension
+from opyenxes.extension.std.XLifecycleExtension import XLifecycleExtension
+from opyenxes.extension.std.XMicroExtension import XMicroExtension
+from opyenxes.extension.std.XOrganizationalExtension import XOrganizationalExtension
+from opyenxes.extension.std.XSemanticExtension import XSemanticExtension
+from opyenxes.extension.std.XTimeExtension import XTimeExtension
+from opyenxes.extension.XExtensionParser import XExtensionParser
+from opyenxes.utils.SingletonClassGenerator import XExtensionManagerMetaclass
+from opyenxes.utils.XRuntimeUtils import XRuntimeUtils
+from opyenxes.log.XLogging import XLogging
 from urllib import request
 import os
 import time

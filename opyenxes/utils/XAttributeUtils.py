@@ -1,12 +1,12 @@
-from model.XAttributeDiscrete import XAttributeDiscrete
-from model.XAttributeLiteral import XAttributeLiteral
-from model.XAttributeContinuous import XAttributeContinuous
-from model.XAttributeBoolean import XAttributeBoolean
-from model.XAttributeID import XAttributeID
-from model.XAttributeList import XAttributeList
-from model.XAttributeContainer import XAttributeContainer
-from model.XAttributeTimestamp import XAttributeTimestamp
-from id.XIDFactory import XIDFactory
+from opyenxes.model.XAttributeDiscrete import XAttributeDiscrete
+from opyenxes.model.XAttributeLiteral import XAttributeLiteral
+from opyenxes.model.XAttributeContinuous import XAttributeContinuous
+from opyenxes.model.XAttributeBoolean import XAttributeBoolean
+from opyenxes.model.XAttributeID import XAttributeID
+from opyenxes.model.XAttributeList import XAttributeList
+from opyenxes.model.XAttributeContainer import XAttributeContainer
+from opyenxes.model.XAttributeTimestamp import XAttributeTimestamp
+from opyenxes.id.XIDFactory import XIDFactory
 
 
 class XAttributeUtils:

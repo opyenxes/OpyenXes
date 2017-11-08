@@ -1,5 +1,5 @@
-from model.XAttributable import XAttributable
-from model.XAttributeMap import XAttributeMap
+from opyenxes.model.XAttributable import XAttributable
+from opyenxes.model.XAttributeMap import XAttributeMap
 
 
 class XElement(XAttributable):

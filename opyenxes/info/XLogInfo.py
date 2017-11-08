@@ -1,10 +1,10 @@
-from classification.XEventAttributeClassifier import XEventAttributeClassifier
-from classification.XEventLifeTransClassifier import XEventLifeTransClassifier
-from classification.XEventResourceClassifier import XEventResourceClassifier
-from classification.XEventNameClassifier import XEventNameClassifier
-from classification.XEventClasses import XEventClasses
-from info.XAttributeInfo import XAttributeInfo
-from info.XTimeBounds import XTimeBounds
+from opyenxes.classification.XEventAttributeClassifier import XEventAttributeClassifier
+from opyenxes.classification.XEventLifeTransClassifier import XEventLifeTransClassifier
+from opyenxes.classification.XEventResourceClassifier import XEventResourceClassifier
+from opyenxes.classification.XEventNameClassifier import XEventNameClassifier
+from opyenxes.classification.XEventClasses import XEventClasses
+from opyenxes.info.XAttributeInfo import XAttributeInfo
+from opyenxes.info.XTimeBounds import XTimeBounds
 
 
 class XLogInfo:
