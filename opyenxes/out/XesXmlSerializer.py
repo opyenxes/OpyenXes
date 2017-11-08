@@ -26,7 +26,7 @@ class XesXmlSerializer:
         :return:  The author name.
         :rtype: str
         """
-        return "Hernán F. Valdivieso"
+        return "Hernan F. Valdivieso"
 
     @staticmethod
     def get_suffices():
