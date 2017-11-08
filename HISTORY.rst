@@ -11,3 +11,8 @@ History
 -----------------
 
 * Fix missing packages for release.
+
+0.1.3 (2017-11-08)
+------------------
+
+* Fixing missing packages in setup.
