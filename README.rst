@@ -7,14 +7,14 @@ OpyenXes
         :target: https://pypi.python.org/pypi/opyenxes
 
 .. image:: https://img.shields.io/travis/wailamjonathanlee/opyenxes.svg
-        :target: https://travis-ci.org/wailamjonathanlee/opyenxes
+        :target: https://travis-ci.org/opyenxes/OpyenXes
 
 .. image:: https://readthedocs.org/projects/opyenxes/badge/?version=latest
         :target: https://opyenxes.readthedocs.io/en/latest/?badge=latest
         :alt: Documentation Status
 
-.. image:: https://pyup.io/repos/github/wailamjonathanlee/opyenxes/shield.svg
-     :target: https://pyup.io/repos/github/wailamjonathanlee/opyenxes/
+.. image:: https://pyup.io/repos/github/opyenxes/OpyenXes/shield.svg
+     :target: https://pyup.io/repos/github/opyenxes/OpyenXes/
      :alt: Updates
 
 

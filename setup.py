@@ -33,7 +33,7 @@ setup(
     long_description=readme + '\n\n' + history,
     author="Wai Lam Jonathan Lee",
     author_email='jonathan.wailam.lee@gmail.com',
-    url='https://github.com/wailamjonathanlee/opyenxes',
+    url='https://github.com/opyenxes/OpyenXes',
     packages=find_packages(include=['opyenxes']),
     entry_points={
         'console_scripts': [
