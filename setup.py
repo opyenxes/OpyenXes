@@ -28,13 +28,12 @@ test_requirements = [
 
 setup(
     name='opyenxes',
-    version='0.1',
+    version='0.1.0',
     description="A python implementation of the XES standard based on the Java implementation OpenXes.",
     long_description=readme + '\n\n' + history,
     author="Process Mining UC",
     author_email='processmininguc@gmail.com',
     url='https://github.com/opyenxes/OpyenXes',
-    download_url = 'https://github.com/opyenxes/OpyenXes/archive/0.1.tar.gz',
     packages=find_packages(include=['opyenxes']),
     entry_points={
         'console_scripts': [
