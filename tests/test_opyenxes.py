@@ -7,7 +7,7 @@ import pytest
 
 from click.testing import CliRunner
 
-from opyenxes import opyenxes
+from opyenxes.out.XesXmlSerializer import XesXmlSerializer
 from opyenxes import cli
 
 
