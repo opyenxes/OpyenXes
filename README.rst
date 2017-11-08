@@ -7,7 +7,7 @@ OpyenXes
         :target: https://pypi.python.org/pypi/opyenxes
 
 .. image:: https://img.shields.io/travis/opyenxes/OpyenXes.svg
-        :target: https://travis-ci.org/opyenxes/OpyenXes
+        :target: https://travis-ci.org/opyenxes/
 
 .. image:: https://readthedocs.org/projects/opyenxes/badge/?version=latest
         :target: https://opyenxes.readthedocs.io/en/latest/?badge=latest
