@@ -30,6 +30,13 @@ Features
 
 * Complete replicate of the Java implementation OpenXes.
 
+Development Lead
+----------------
+
+* Hernan Valdivieso (The guy who wrote everything!)
+* Jorge Munoz-Gama (The mastermind)
+* Wai Lam Jonathan Lee
+
 Credits
 ---------
 
@@ -37,4 +44,9 @@ This package was created with Cookiecutter_ and the `audreyr/cookiecutter-pypack
 
 .. _Cookiecutter: https://github.com/audreyr/cookiecutter
 .. _`audreyr/cookiecutter-pypackage`: https://github.com/audreyr/cookiecutter-pypackage
+
+Contributors
+------------
+
+* TKasekamp
 
