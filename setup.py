@@ -4,6 +4,7 @@
 """The setup script."""
 
 from setuptools import setup, find_packages
+import os
 
 with open('README.rst') as readme_file:
     readme = readme_file.read()
@@ -34,7 +35,7 @@ setup(
     author="Process Mining UC",
     author_email='processmininguc@gmail.com',
     url='https://github.com/opyenxes/OpyenXes',
-    packages=find_packages(include=['opyenxes']),
+    packages=find_packages(where=os.path.join('.', 'opyenxes')),
     entry_points={
         'console_scripts': [
             'opyenxes=opyenxes.cli:main'
