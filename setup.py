@@ -44,7 +44,7 @@ setup(
     install_requires=requirements,
     license="GNU General Public License v3",
     zip_safe=False,
-    keywords=['opyenxes', 'xes', 'process mining']
+    keywords=['opyenxes', 'xes', 'process mining'],
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Intended Audience :: Developers',
