@@ -28,12 +28,13 @@ test_requirements = [
 
 setup(
     name='opyenxes',
-    version='0.1.2',
+    version='0.1',
     description="A python implementation of the XES standard based on the Java implementation OpenXes.",
     long_description=readme + '\n\n' + history,
-    author="Wai Lam Jonathan Lee",
-    author_email='jonathan.wailam.lee@gmail.com',
+    author="Process Mining UC",
+    author_email='processmininguc@gmail.com',
     url='https://github.com/opyenxes/OpyenXes',
+    download_url = 'https://github.com/opyenxes/OpyenXes/archive/0.1.tar.gz',
     packages=find_packages(include=['opyenxes']),
     entry_points={
         'console_scripts': [
@@ -44,7 +45,7 @@ setup(
     install_requires=requirements,
     license="GNU General Public License v3",
     zip_safe=False,
-    keywords='opyenxes',
+    keywords=['opyenxes', 'xes', 'process mining']
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Intended Audience :: Developers',
