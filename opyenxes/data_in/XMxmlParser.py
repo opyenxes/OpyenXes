@@ -17,7 +17,7 @@ class XMxmlParser:
     """Parser for the MXML format for event logs (deprecated).
 
     :param factory: The factory to use for XES model building.
-    :type factory: XFactory
+    :type factory: `XFactory`
     """
     MXML_CLASSIFIERS = [XEventAttributeClassifier("MXML Legacy Classifier", ["concept:name", "lifecycle:transition"]),
                         XEventNameClassifier(),
@@ -49,7 +49,7 @@ class XMxmlParser:
           supposed to deliver an MXML serialization.
         :type file: _io.TextIOWrapper
         :return: The parsed list of logs.
-        :rtype: list[XLog]
+        :rtype: list[`XLog`]
         """
         handler = XMxmlParser.MxmlHandler()
 
@@ -97,7 +97,7 @@ class XMxmlParser:
             """Retrieves the parsed list of logs.
 
             :return: The parsed list of logs.
-            :rtype: list[XLog]
+            :rtype: list[`XLog`]
             """
             return self.__logs
 

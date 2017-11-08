@@ -19,7 +19,7 @@ class XEventAttributeClassifier:
         """Retrieves the unique class identity string of a given event.
 
         :param event: The given event to transform in the identity string.
-        :type event: XEvent
+        :type event: `XEvent`
         :return: The string that represent that event with this classifier.
         :rtype: str
         """
@@ -72,9 +72,9 @@ class XEventAttributeClassifier:
         class, i.e. are equal in that sense.
 
         :param event_a: The first event to check.
-        :type event_a: XEvent
+        :type event_a: `XEvent`
         :param event_b: The second event to check with the first.
-        :type event_b: XEvent
+        :type event_b: `XEvent`
         :return: True if two event have the same event class, False otherwise.
         :rtype: bool
         """
@@ -98,7 +98,7 @@ class XEventAttributeClassifier:
         order.
 
         :param obj: the Object to be compared.
-        :type obj: XAttributeDiscrete
+        :type obj: `XAttributeDiscrete`
         :return: A negative integer, zero, or a positive integer as this object
          is less than, equal to, or greater than the specified object.
         :rtype: int

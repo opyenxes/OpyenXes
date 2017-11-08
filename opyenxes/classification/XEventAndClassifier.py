@@ -10,7 +10,7 @@ class XEventAndClassifier(XEventAttributeClassifier):
     :param comparators: Any number of lower-level classifiers, which are
      evaluated with boolean AND logic. If multiple lower-level classifiers use
      the same keys, this key is used only once in this classifier.
-    :type comparators: list[XEventAttributeClassifier]
+    :type comparators: list[`XEventAttributeClassifier`]
     """
     def __init__(self, comparators):
         if len(comparators) == 0:

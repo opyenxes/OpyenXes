@@ -40,7 +40,7 @@ class XExtensionParser(metaclass=XExtensionMetaclass):
             """Retrieves the parsed extension after parsing.
 
             :return: The parsed extension.
-            :rtype: XExtension
+            :rtype: `XExtension`
             """
             return self.__extension
 
@@ -136,7 +136,7 @@ class XExtensionParser(metaclass=XExtensionMetaclass):
           which represents the extension definition file..
         :type file: str
         :return: The extension object, as defined in the provided file.
-        :rtype: XExtension
+        :rtype: `XExtension`
         """
         handler = XExtensionParser.XExtensionHandler()
         if os.path.isfile(file):

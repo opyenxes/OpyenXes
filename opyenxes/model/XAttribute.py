@@ -12,7 +12,7 @@ class XAttribute(XAttributable):
     :type key: str
     :param extension: The extension defining the attribute (set to None, if
      the attribute is not associated to an extension)
-    :type extension: XExtension or None
+    :type extension: `XExtension` or None
     """
     def __init__(self, key, extension=None):
         super(XAttribute, self).__init__()
@@ -32,7 +32,7 @@ class XAttribute(XAttributable):
 
         :return: The extension of this attribute. May return null, if there is
          no extension defining this attribute.
-        :rtype: XExtension or None
+        :rtype: `XExtension` or None
         """
         return self.__extension
 
@@ -40,7 +40,7 @@ class XAttribute(XAttributable):
         """Helper method to compares this object with the specified object for order.
 
         :param other: the Object to be compared.
-        :type other: XAttribute
+        :type other: `XAttribute`
         :return: A negative integer, zero, or a positive integer as this object
          is less than, equal to, or greater than the specified object.
         :rtype: int

@@ -11,11 +11,11 @@ class XLogInfoFactory:
         classifier.
 
         :param log: The event log to create an info summary for.
-        :type log: XLog
+        :type log: `XLog`
         :param classifier: The event classifier to be used.
-        :type classifier: XEventAttributeClassifier
+        :type classifier: `XEventAttributeClassifier`
         :return: The log info summary for this log.
-        :rtype: XLogInfo
+        :rtype: `XLogInfo`
         """
         if classifier is None:
             classifier = XLogInfo.STANDARD_CLASSIFIER

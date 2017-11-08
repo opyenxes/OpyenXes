@@ -7,10 +7,10 @@ class XAttributeID(XAttribute):
     :param key: The key of the attribute.
     :type key: str
     :param value: The value of the attribute.
-    :type value: XID
+    :type value: `XID`
     :param extension: The extension defining the attribute (set to None, if
      the attribute is not associated to an extension)
-    :type extension: XExtension or None
+    :type extension: `XExtension` or None
     """
     def __init__(self, key, value, extension=None):
         super().__init__(key, extension)
@@ -20,7 +20,7 @@ class XAttributeID(XAttribute):
         """Retrieves the ID value of this attribute
 
         :return: Value of this attribute
-        :rtype: XID
+        :rtype: `XID`
         """
         return self.__value
 
@@ -28,7 +28,7 @@ class XAttributeID(XAttribute):
         """Assigns the ID value of this attribute.
 
         :param value: Value of the attribute.
-        :type value: XID
+        :type value: `XID`
         """
         self.__value = value
 
@@ -36,7 +36,7 @@ class XAttributeID(XAttribute):
         """Creates and returns a copy of this object.
 
         :return: A clone of this instance.
-        :rtype: XAttributeID
+        :rtype: `XAttributeID`
         """
         clone = XAttributeID(self.get_key(), self.__value.clone(),
                              self.get_extension())
@@ -46,7 +46,7 @@ class XAttributeID(XAttribute):
         """Helper method to compares this object with the specified object for order.
 
         :param obj: the Object to be compared.
-        :type obj: XAttributeID
+        :type obj: `XAttributeID`
         :return: A negative integer, zero, or a positive integer as this object
          is less than, equal to, or greater than the specified object.
         :rtype: int

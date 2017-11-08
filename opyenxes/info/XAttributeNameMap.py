@@ -25,7 +25,7 @@ class XAttributeNameMap:
         returned.
 
         :param attribute: Attribute or Attribute key to retrieve mapping for.
-        :type attribute: XAttribute or Str
+        :type attribute: `XAttribute` or Str
         :return: The mapping for the given attribute key, or null, if no such
          mapping exists.
         :rtype: str
@@ -40,7 +40,7 @@ class XAttributeNameMap:
 
         :param attribute: Attribute or attribute key for which to register a
          mapping.
-        :type attribute: XAttribute or str
+        :type attribute: `XAttribute` or str
         :param alias: Alias string to map the attribute to.
         :type alias: str
         """

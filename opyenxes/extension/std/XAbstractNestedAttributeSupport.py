@@ -24,7 +24,7 @@ class XAbstractNestedAttributeSupport:
         """ Abstract method to extract a value from an element.
 
         :param element:  The element to extract the value from.
-        :type element: XAttribute
+        :type element: `XAttribute`
         """
         pass
 
@@ -55,7 +55,7 @@ class XAbstractNestedAttributeSupport:
             {"key.1": val.1, "key.2": val.2, "key.3": val.3}
 
         :param element: Element to retrieve all values for.
-        :type element: XAttributable
+        :type element: `XAttributable`
         :return: Dictionary with all child keys to values.
         :rtype: dict(str: any}
         """
@@ -95,7 +95,7 @@ class XAbstractNestedAttributeSupport:
 
 
         :param element: Element to retrieve all values for.
-        :type element: XAttributable
+        :type element: `XAttributable`
         :return: Dictionary with all descending keys to values.
         :rtype: dict(list[str]: Any)
         """
@@ -141,7 +141,7 @@ class XAbstractNestedAttributeSupport:
             </event>
 
         :param element: Element to assign the values to.
-        :type element: XAttributable
+        :type element: `XAttributable`
         :param values: dictionary with keys to values which are to be assigned.
         :type values: dict(str: Any)
         """
@@ -183,7 +183,7 @@ class XAbstractNestedAttributeSupport:
             </event>
 
         :param element: Element to assign the values to.
-        :type element: XAttributable
+        :type element: `XAttributable`
         :param amounts: Dictionary with key lists to values which are to be
          assigned.
         :type amounts: dict(list[str]: Any)

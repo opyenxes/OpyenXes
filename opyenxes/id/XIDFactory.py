@@ -14,6 +14,6 @@ class XIDFactory(metaclass=XIDFactoryMetaclass):
         """Creates a new, unique ID
 
         :return: Unique ID
-        :rtype: XID
+        :rtype: `XID`
         """
         return XID()

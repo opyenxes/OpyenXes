@@ -39,7 +39,7 @@ class XMxmlSerializer:
         """Serializes a given log to the given output stream.
 
         :param log: Log to be serialized.
-        :type log: XLog
+        :type log: `XLog`
         :param out:  TextIOWrapper for serialization.
         :type out: _io.TextIOWrapper
         :param in_bytes: Private argument to decide if serialized in bytes or in string
@@ -177,7 +177,7 @@ class XMxmlSerializer:
         """Helper method, adds all model references of an attributable to the given tag.
 
         :param element: Attributable element.
-        :type element: XAttributable
+        :type element: `XAttributable`
         :param target: Tag to add model references to.
         :type target: xml.etree.ElementTree.Element
         """

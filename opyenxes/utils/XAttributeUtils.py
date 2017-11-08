@@ -19,7 +19,7 @@ class XAttributeUtils:
         typed interface this attribute implements.
 
         :param attribute: Attribute to analyze.
-        :type attribute: XAttribute
+        :type attribute: `XAttribute`
         :return: Class of this attribute.
         :rtype: type
         """
@@ -48,7 +48,7 @@ class XAttributeUtils:
         the attributes specific type (used, e.g., for serialization).
 
         :param attribute: Attribute to extract type string from.
-        :type attribute: XAttribute
+        :type attribute: `XAttribute`
         :return: String representation of the attribute's specific type.
         :rtype: str
         """
@@ -79,9 +79,9 @@ class XAttributeUtils:
         type of the given attribute.
 
         :param instance: Attribute to derive prototype from.
-        :type instance: XAttribute
+        :type instance: `XAttribute`
         :return: The derived prototype attribute.
-        :rtype: XAttribute
+        :rtype: `XAttribute`
         """
         prototype = instance.clone()
 

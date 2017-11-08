@@ -21,10 +21,10 @@ class XFactory:
     def create_log(attribute=None):
         """Creates a new XES log instance.
 
-        :param attribute: A XAttributeMap with the attribute for the log.
-        :type attribute: XAttributeMap
+        :param attribute: A `XAttributeMap` with the attribute for the log.
+        :type attribute: `XAttributeMap`
         :return: A new log instance.
-        :rtype: XLog
+        :rtype: `XLog`
         """
         if attribute:
             return XLog(attribute)
@@ -34,10 +34,10 @@ class XFactory:
     def create_trace(attribute=None):
         """Creates a new XES trace instance.
 
-        :param attribute: A XAttributeMap with the attribute for the trace.
-        :type attribute: XAttributeMap
+        :param attribute: A `XAttributeMap` with the attribute for the trace.
+        :type attribute: `XAttributeMap`
         :return: A new trace instance.
-        :rtype: XTrace
+        :rtype: `XTrace`
         """
         if attribute:
             return XTrace(attribute)
@@ -47,13 +47,13 @@ class XFactory:
     def create_event(attribute=None, identity=None):
         """Creates a new XES event instance.
 
-        :param attribute: A XAttributeMap with the attribute for the event.
-        :type attribute: XAttributeMap
+        :param attribute: A `XAttributeMap` with the attribute for the event.
+        :type attribute: `XAttributeMap`
         :param identity:  The identity defining the attribute (set to None, if
          the attribute is not associated to an identity).
-        :type identity: XID
+        :type identity: `XID`
         :return: A new event instance.
-        :rtype: XEvent
+        :rtype: `XEvent`
         """
         if attribute and identity:
             return XEvent(attribute, identity)
@@ -68,7 +68,7 @@ class XFactory:
         """Creates a new XES attribute map.
 
         :return: A new attribute map instance.
-        :rtype: XAttributeMap
+        :rtype: `XAttributeMap`
         """
         return XAttributeMap()
 
@@ -82,9 +82,9 @@ class XFactory:
         :type value: bool
         :param extension: The extension defining the attribute (set to None, if
          the attribute is not associated to an extension).
-        :type extension: XExtension or None
+        :type extension: `XExtension` or None
         :return: A new attribute with boolean value.
-        :rtype: XAttributeBoolean
+        :rtype: `XAttributeBoolean`
         """
         return XAttributeBoolean(key, value, extension)
 
@@ -98,9 +98,9 @@ class XFactory:
         :type value: float
         :param extension: The extension defining the attribute (set to None, if
          the attribute is not associated to an extension).
-        :type extension: XExtension or None
+        :type extension: `XExtension` or None
         :return: A new attribute with float value.
-        :rtype: XAttributeContinuous
+        :rtype: `XAttributeContinuous`
         """
         return XAttributeContinuous(key, value, extension)
 
@@ -114,9 +114,9 @@ class XFactory:
         :type value: int
         :param extension: The extension defining the attribute (set to None, if
          the attribute is not associated to an extension).
-        :type extension: XExtension or None
+        :type extension: `XExtension` or None
         :return: A new attribute with integer value.
-        :rtype: XAttributeDiscrete
+        :rtype: `XAttributeDiscrete`
         """
         return XAttributeDiscrete(key, value, extension)
 
@@ -130,9 +130,9 @@ class XFactory:
         :type value: str
         :param extension: The extension defining the attribute (set to None, if
          the attribute is not associated to an extension).
-        :type extension: XExtension or None
+        :type extension: `XExtension` or None
         :return: A new attribute with string value.
-        :rtype: XAttributeLiteral
+        :rtype: `XAttributeLiteral`
         """
         return XAttributeLiteral(key, value, extension)
 
@@ -146,9 +146,9 @@ class XFactory:
         :type value: datetime.datetime or int
         :param extension: The extension defining the attribute (set to None, if
          the attribute is not associated to an extension).
-        :type extension: XExtension or None
+        :type extension: `XExtension` or None
         :return: A new attribute with datetime value.
-        :rtype: XAttributeTimestamp
+        :rtype: `XAttributeTimestamp`
         """
         return XAttributeTimestamp(key, value, extension)
 
@@ -159,12 +159,12 @@ class XFactory:
         :param key: The key of the attribute.
         :type key: str
         :param value: The value of the attribute.
-        :type value: XID
+        :type value: `XID`
         :param extension: The extension defining the attribute (set to None, if
          the attribute is not associated to an extension).
-        :type extension: XExtension or None
+        :type extension: `XExtension` or None
         :return: A new attribute with XID value.
-        :rtype: XAttributeID
+        :rtype: `XAttributeID`
         """
         return XAttributeID(key, value, extension)
 
@@ -176,9 +176,9 @@ class XFactory:
         :type key: str
         :param extension: The extension defining the attribute (set to None, if
          the attribute is not associated to an extension).
-        :type extension: XExtension or None
+        :type extension: `XExtension` or None
         :return: A new list attribute.
-        :rtype: XAttributeList
+        :rtype: `XAttributeList`
         """
         return XAttributeList(key, extension)
 
@@ -190,8 +190,8 @@ class XFactory:
         :type key: str
         :param extension: The extension defining the attribute (set to None, if
          the attribute is not associated to an extension).
-        :type extension: XExtension or None
+        :type extension: `XExtension` or None
         :return: A new container attribute.
-        :rtype: XAttributeContainer
+        :rtype: `XAttributeContainer`
         """
         return XAttributeContainer(key, extension=extension)
