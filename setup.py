@@ -35,19 +35,7 @@ setup(
     author="Process Mining UC",
     author_email='processmininguc@gmail.com',
     url='https://github.com/opyenxes/OpyenXes',
-    packages=[
-        'opyenxes.classification',
-        'opyenxes.data_in',
-        'opyenxes.extension',
-        'opyenxes.extension.std',
-        'opyenxes.factory',
-        'opyenxes.id',
-        'opyenxes.info',
-        'opyenxes.log',
-        'opyenxes.model',
-        'opyenxes.out',
-        'opyenxes.utils'
-    ],
+    packages=find_packages(exclude=["*.tests", "*.tests.*", "tests.*", "tests"]),
     entry_points={
         'console_scripts': [
             'opyenxes=opyenxes.cli:main'
