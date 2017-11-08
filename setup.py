@@ -29,7 +29,7 @@ test_requirements = [
 
 setup(
     name='opyenxes',
-    version='0.1.2',
+    version='0.1.3',
     description="A python implementation of the XES standard based on the Java implementation OpenXes.",
     long_description=readme + '\n\n' + history,
     author="Process Mining UC",
