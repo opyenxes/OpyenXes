@@ -1,9 +1,0 @@
-
-XEventNameClassifier
-====================
-
-.. automodule:: classification.XEventNameClassifier
-   :members:
-
-
-

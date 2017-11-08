@@ -1,7 +1,0 @@
-XLogging
-========
-
-.. automodule:: log.XLogging
-   :members:
-
-

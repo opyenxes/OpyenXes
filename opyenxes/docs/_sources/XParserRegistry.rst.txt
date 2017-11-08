@@ -1,7 +1,0 @@
-XParserRegistry
-===============
-
-.. automodule:: data_in.XParserRegistry
-   :members:
-
-

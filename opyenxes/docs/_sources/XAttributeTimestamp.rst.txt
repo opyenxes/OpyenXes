@@ -1,7 +1,0 @@
-XAttributeTimestamp
-===================
-
-.. automodule:: model.XAttributeTimestamp
-   :members:
-
-

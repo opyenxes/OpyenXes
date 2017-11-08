@@ -1,7 +1,0 @@
-XesXmlParser
-============
-
-.. automodule:: data_in.XesXmlParser
-   :members:
-
-

@@ -1,7 +1,0 @@
-
-XesXmlGZIPSerializer
-====================
-
-.. automodule:: out.XesXmlGZIPSerializer
-   :members:
-

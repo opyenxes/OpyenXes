@@ -1,7 +1,0 @@
-
-XTimer
-======
-
-.. automodule:: utils.XTimer
-   :members:
-

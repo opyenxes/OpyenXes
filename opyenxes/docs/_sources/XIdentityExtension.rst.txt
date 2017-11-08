@@ -1,7 +1,0 @@
-XIdentityExtension
-==================
-
-.. automodule:: extension.std.XIdentityExtension
-   :members:
-
-

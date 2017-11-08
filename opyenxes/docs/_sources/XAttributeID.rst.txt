@@ -1,9 +1,0 @@
-
-XAttributeID
-============
-
-asdas
-
-.. automodule:: model.XAttributeID
-   :members:
-

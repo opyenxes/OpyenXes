@@ -1,7 +1,0 @@
-XUniversalParser
-================
-
-.. automodule:: data_in.XUniversalParser
-   :members:
-
-

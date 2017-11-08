@@ -1,7 +1,0 @@
-
-XID
-===
-
-.. automodule:: id.XID
-   :members:
-

@@ -1,9 +1,0 @@
-
-XEventResourceClassifier
-========================
-
-.. automodule:: classification.XEventResourceClassifier
-   :members:
-
-
-

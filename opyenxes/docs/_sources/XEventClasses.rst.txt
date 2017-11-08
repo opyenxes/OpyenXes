@@ -1,9 +1,0 @@
-
-XEventClasses
-=============
-
-.. automodule:: classification.XEventClasses
-   :members:
-
-
-

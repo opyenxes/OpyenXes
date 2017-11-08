@@ -1,9 +1,0 @@
-
-XEventLifeTransClassifier
-=========================
-
-.. automodule:: classification.XEventLifeTransClassifier
-   :members:
-
-
-

@@ -1,7 +1,0 @@
-
-XAttributeInfo
-==============
-
-.. automodule:: info.XAttributeInfo
-   :members:
-

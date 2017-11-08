@@ -1,7 +1,0 @@
-XStdoutLoggingListener
-======================
-
-.. automodule:: log.XStdoutLoggingListener
-   :members:
-
-

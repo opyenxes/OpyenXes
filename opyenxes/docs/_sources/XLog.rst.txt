@@ -1,7 +1,0 @@
-XLog
-====
-
-.. automodule:: model.XLog
-   :members:
-
-

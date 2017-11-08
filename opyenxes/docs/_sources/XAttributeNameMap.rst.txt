@@ -1,7 +1,0 @@
-
-XAttributeNameMap
-=================
-
-.. automodule:: info.XAttributeNameMap
-   :members:
-

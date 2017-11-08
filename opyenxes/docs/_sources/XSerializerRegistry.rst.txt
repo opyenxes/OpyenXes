@@ -1,7 +1,0 @@
-
-XSerializerRegistry
-===================
-
-.. automodule:: out.XSerializerRegistry
-   :members:
-

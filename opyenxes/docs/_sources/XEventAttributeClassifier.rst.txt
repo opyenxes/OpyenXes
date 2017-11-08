@@ -1,9 +1,0 @@
-
-XEventAttributeClassifier
-=========================
-
-.. automodule:: classification.XEventAttributeClassifier
-   :members:
-
-
-

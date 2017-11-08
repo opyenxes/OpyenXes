@@ -1,7 +1,0 @@
-
-XAttributeUtils
-===============
-
-.. automodule:: utils.XAttributeUtils
-   :members:
-

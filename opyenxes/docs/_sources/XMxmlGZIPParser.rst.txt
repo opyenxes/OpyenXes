@@ -1,7 +1,0 @@
-XMxmlGZIPParser
-===============
-
-.. automodule:: data_in.XMxmlGZIPParser
-   :members:
-
-

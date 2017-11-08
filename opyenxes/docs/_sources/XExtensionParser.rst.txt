@@ -1,7 +1,0 @@
-XExtensionParser
-================
-
-.. automodule:: extension.XExtensionParser
-   :members:
-
-

@@ -1,7 +1,0 @@
-XEvent
-======
-
-.. automodule:: model.XEvent
-   :members:
-
-

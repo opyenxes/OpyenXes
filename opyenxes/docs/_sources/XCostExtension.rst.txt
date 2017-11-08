@@ -1,7 +1,0 @@
-XCostExtension
-==============
-
-.. automodule:: extension.std.XCostExtension
-   :members:
-
-

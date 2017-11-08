@@ -1,7 +1,0 @@
-XAttributeCollection
-====================
-
-.. automodule:: model.XAttributeCollection
-   :members:
-
-

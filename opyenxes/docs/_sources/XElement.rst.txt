@@ -1,7 +1,0 @@
-XElement
-========
-
-.. automodule:: model.XElement
-   :members:
-
-

@@ -1,7 +1,0 @@
-XAttributeLiteral
-=================
-
-.. automodule:: model.XAttributeLiteral
-   :members:
-
-

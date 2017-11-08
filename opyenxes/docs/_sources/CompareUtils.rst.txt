@@ -1,7 +1,0 @@
-
-CompareUtils
-============
-
-.. automodule:: utils.CompareUtils
-   :members:
-
