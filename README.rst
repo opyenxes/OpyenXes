@@ -28,7 +28,7 @@ A python implementation of the XES standard based on the Java implementation Ope
 Features
 --------
 
-* TODO
+* Complete replicate of the Java implementation OpenXes.
 
 Credits
 ---------
