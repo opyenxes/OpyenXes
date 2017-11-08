@@ -21,3 +21,10 @@ History
 ------------------
 
 * Removed opyenxes module.
+
+0.1.5 (2017-11-08)
+------------------
+
+* Fixing missing packages in setup.
+
+
