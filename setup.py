@@ -28,7 +28,7 @@ test_requirements = [
 
 setup(
     name='opyenxes',
-    version='0.1.1',
+    version='0.1.2',
     description="A python implementation of the XES standard based on the Java implementation OpenXes.",
     long_description=readme + '\n\n' + history,
     author="Wai Lam Jonathan Lee",
