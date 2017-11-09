@@ -4,4 +4,4 @@
 
 __author__ = """Process Mining UC"""
 __email__ = 'processmininguc@gmail.com'
-__version__ = '0.1.5'
+__version__ = '0.1.6'
