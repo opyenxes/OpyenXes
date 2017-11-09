@@ -10,7 +10,7 @@ OpyenXes
         :target: https://travis-ci.org/opyenxes/OpyenXes
 
 .. image:: https://readthedocs.org/projects/opyenxes/badge/?version=latest
-        :target: https://opyenxes.readthedocs.io/en/latest/?badge=latest
+        :target: http://opyenxes.readthedocs.io/en/latest/?badge=latest
         :alt: Documentation Status
 
 .. image:: https://pyup.io/repos/github/opyenxes/OpyenXes/shield.svg
