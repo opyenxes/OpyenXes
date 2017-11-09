@@ -27,4 +27,9 @@ History
 
 * Fixing missing packages in setup.
 
+0.1.6 (2017-11-09)
+------------------
+
+* Making extension.std a module
+
 
