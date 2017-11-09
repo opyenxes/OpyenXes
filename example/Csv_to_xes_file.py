@@ -3,9 +3,9 @@ Read a csv file and convert that in xes file
 """
 
 
-from factory.XFactory import XFactory
+from opyenxes.factory.XFactory import XFactory
 from datetime import datetime
-from out.XesXmlSerializer import XesXmlSerializer
+from opyenxes.out.XesXmlSerializer import XesXmlSerializer
 
 
 def convert_line_in_event(type_for_attribute: dict, attribute_list: list):

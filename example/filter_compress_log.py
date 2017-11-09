@@ -5,9 +5,9 @@ and we remove the similar trace if the have the same sequence of attribute per e
 if the log = [[a,b,c,d],[a,b,c],[a,b,c,d],[a,b,c,d],[a,b,e,d],[a,b,c]]
 The new log will be = [[a,b,c,d],[a,b,c],[a,b,e,d]]
 """
-from data_in.XUniversalParser import XUniversalParser
-from out.XesXmlGZIPSerializer import XesXmlGZIPSerializer
-from classification.XEventAttributeClassifier import XEventAttributeClassifier
+from opyenxes.data_in.XUniversalParser import XUniversalParser
+from opyenxes.out.XesXmlGZIPSerializer import XesXmlGZIPSerializer
+from opyenxes.classification.XEventAttributeClassifier import XEventAttributeClassifier
 
 
 def same_trace(trace_a, trace_b, classifier):
