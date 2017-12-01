@@ -61,10 +61,10 @@ class XExtension:
         """
         if self.__all_attributes is None:
             self.__all_attributes = set()
-            self.__all_attributes.add(self.__log_attributes)
-            self.__all_attributes.add(self.__trace_attributes)
-            self.__all_attributes.add(self.__event_attributes)
-            self.__all_attributes.add(self.__meta_attributes)
+            self.__all_attributes.update(self.__log_attributes)
+            self.__all_attributes.update(self.__trace_attributes)
+            self.__all_attributes.update(self.__event_attributes)
+            self.__all_attributes.update(self.__meta_attributes)
 
         return self.__all_attributes
 
