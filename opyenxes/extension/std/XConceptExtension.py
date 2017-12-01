@@ -5,6 +5,9 @@ from opyenxes.factory.XFactoryRegistry import XFactoryRegistry
 from opyenxes.utils.SingletonClassGenerator import XConceptExtensionMetaclass
 
 
+__all__ = ['XConceptExtension']
+
+
 class XConceptExtension(XExtension, metaclass=XConceptExtensionMetaclass):
     """This extension provides naming for concepts in the event log type
     hierarchy. It defines two attributes:

@@ -5,6 +5,9 @@ from opyenxes.factory.XFactoryRegistry import XFactoryRegistry
 from opyenxes.utils.SingletonClassGenerator import XSemanticExtensionMetaclass
 
 
+__all__ = ['XSemanticExtension']
+
+
 class XSemanticExtension(XExtension, metaclass=XSemanticExtensionMetaclass):
     """This extension adds semantic attributes to event log objects.
     These semantic attributes reference concepts, which are represented by event

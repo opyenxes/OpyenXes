@@ -5,6 +5,9 @@ from opyenxes.utils.SingletonClassGenerator import XLifecycleExtensionMetaclass
 from opyenxes.factory.XFactoryRegistry import XFactoryRegistry
 
 
+__all__ = ['XLifecycleExtension']
+
+
 class XLifecycleExtension(XExtension, metaclass=XLifecycleExtensionMetaclass):
     """Extension defining additional attributes for the event lifecycle.
     Lifecycles define a set of states for activities, with an accompanying set

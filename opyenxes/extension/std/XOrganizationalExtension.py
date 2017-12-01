@@ -5,6 +5,9 @@ from opyenxes.factory.XFactoryRegistry import XFactoryRegistry
 from opyenxes.utils.SingletonClassGenerator import XOrganizationalExtensionMetaclass
 
 
+__all__ = ['XOrganizationalExtension']
+
+
 class XOrganizationalExtension(XExtension, metaclass=XOrganizationalExtensionMetaclass):
     """This extension adds the organizational perspective to event logs. It
     defines for events three attributes, referring to:

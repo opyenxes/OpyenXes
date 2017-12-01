@@ -9,6 +9,9 @@ from urllib import request, parse, error
 import os
 
 
+__all__ = ['XExtensionParser']
+
+
 class XExtensionParser(metaclass=XExtensionMetaclass):
     """Parser for extension definition files.
 
