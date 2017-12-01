@@ -5,9 +5,11 @@ Credits
 Development Lead
 ----------------
 
-* Wai Lam Jonathan Lee <jonathan.wailam.lee@gmail.com>
+* Hernan Valdivieso (The guy who wrote everything!)
+* Jorge Munoz-Gama (The mastermind)
+* Wai Lam Jonathan Lee 
 
 Contributors
 ------------
 
-None yet. Why not be the first?
+* TKasekamp

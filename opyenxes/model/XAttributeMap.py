@@ -14,7 +14,7 @@ class XAttributeMap(dict):
         """Creates and returns a copy of this object.
 
         :return: A clone of this instance.
-        :rtype: XAttributeMap
+        :rtype: `XAttributeMap`
         """
         clone = XAttributeMap()
         for key in self.keys():

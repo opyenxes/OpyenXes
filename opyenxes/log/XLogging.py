@@ -13,7 +13,7 @@ class XLogging:
         """Sets a new logging listener.
 
         :param listener: New logging listener.
-        :type listener: XStdOutLoggingListener
+        :type listener: `XStdOutLoggingListener`
         """
         self.__listener = listener
 

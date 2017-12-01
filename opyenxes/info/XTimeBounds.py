@@ -52,7 +52,7 @@ class XTimeBounds:
         boundaries.
 
         :param element: Timestamp boundaries to be registered.
-        :type element: XTimeBounds or XEvent or datetime
+        :type element: `XTimeBounds` or `XEvent` or datetime
         """
         if isinstance(element, XTimeBounds):
             self.register(element.get_start_date())

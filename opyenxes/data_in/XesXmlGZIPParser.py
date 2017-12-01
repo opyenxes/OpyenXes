@@ -7,7 +7,7 @@ class XesXmlGZIPParser(XesXmlParser):
 
     :param factory: The XES model factory instance used to build the model from
       the serialization.
-    :type factory: XFactory
+    :type factory: `XFactory`
     """
     def __init__(self, factory=None):
         super().__init__(factory)
@@ -30,7 +30,7 @@ class XesXmlGZIPParser(XesXmlParser):
           supposed to deliver an XES log in XML representation.
         :type file: _io.TextIOWrapper
         :return: The parsed list of logs.
-        :rtype: list[XLog]
+        :rtype: list[`XLog`]
         """
         path = file.name
         file.close()

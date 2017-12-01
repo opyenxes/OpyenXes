@@ -47,7 +47,7 @@ class XOrganizationalExtension(XExtension, metaclass=XOrganizationalExtensionMet
         """Extracts the resource attribute string from an event.
 
         :param event: Event to extract instance from.
-        :type event: XEvent
+        :type event: `XEvent`
         :return: Resource string for the given event (may be None if not defined)
         :rtype: str
         """
@@ -60,7 +60,7 @@ class XOrganizationalExtension(XExtension, metaclass=XOrganizationalExtensionMet
         """Assigns the resource attribute value for a given event.
 
         :param event: Event to be modified.
-        :type event: XEvent
+        :type event: `XEvent`
         :param instance: Resource string to be assigned.
         :type instance: str
         """
@@ -74,7 +74,7 @@ class XOrganizationalExtension(XExtension, metaclass=XOrganizationalExtensionMet
         """Extracts the role attribute string from an event.
 
         :param event: Event to extract instance from.
-        :type event: XEvent
+        :type event: `XEvent`
         :return: Role string for the given event (may be None if not defined)
         :rtype: str
         """
@@ -87,7 +87,7 @@ class XOrganizationalExtension(XExtension, metaclass=XOrganizationalExtensionMet
         """Assigns the role attribute value for a given event.
 
         :param event: Event to be modified.
-        :type event: XEvent
+        :type event: `XEvent`
         :param instance: Role string to be assigned.
         :type instance: str
         """
@@ -101,7 +101,7 @@ class XOrganizationalExtension(XExtension, metaclass=XOrganizationalExtensionMet
         """Extracts the group attribute string from an event.
 
         :param event: Event to extract instance from.
-        :type event: XEvent
+        :type event: `XEvent`
         :return: The requested activity instance identifier.
         :rtype: str
         """
@@ -114,7 +114,7 @@ class XOrganizationalExtension(XExtension, metaclass=XOrganizationalExtensionMet
         """Assigns the group attribute value for a given event.
 
         :param event: Event to be modified.
-        :type event: XEvent
+        :type event: `XEvent`
         :param instance: Group string to be assigned.
         :type instance: str
         """

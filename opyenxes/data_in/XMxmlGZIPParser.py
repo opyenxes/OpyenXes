@@ -6,7 +6,7 @@ class XMxmlGZIPParser(XMxmlParser):
     """Parser for the compressed MXML format for event logs (deprecated).
 
     :param factory: The factory to use for XES model building.
-    :type factory: XFactory
+    :type factory: `XFactory`
     """
     def __init__(self, factory=None):
         super().__init__(factory)
@@ -29,7 +29,7 @@ class XMxmlGZIPParser(XMxmlParser):
           supposed to deliver an XES log in XML representation.
         :type file: _io.TextIOWrapper
         :return: The parsed log.
-        :rtype: list[XLog]
+        :rtype: list[`XLog`]
         """
         path = file.name
         file.close()

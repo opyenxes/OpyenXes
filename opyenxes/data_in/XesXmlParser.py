@@ -15,7 +15,7 @@ class XesXmlParser:
 
     :param factory: The XES model factory instance used to build the model from
       the serialization.
-    :type factory: XFactory
+    :type factory: `XFactory`
     """
     def __init__(self, factory=None):
         if factory:
@@ -41,7 +41,7 @@ class XesXmlParser:
           supposed to deliver an XES log in XML representation.
         :type file: _io.TextIOWrapper
         :return: The parsed list of logs.
-        :rtype: list[XLog]
+        :rtype: list[`XLog`]
         """
         handler = XesXmlParser.XesXmlHandler()
 
@@ -86,7 +86,7 @@ class XesXmlParser:
             """Retrieves the parsed log.
 
             :return: The parsed log.
-            :rtype: XLog
+            :rtype: `XLog`
             """
             return self.__log
 

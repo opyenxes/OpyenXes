@@ -63,7 +63,7 @@ class XEventClass:
         """Helper method to compares this object with the specified object for order.
 
         :param obj: The Object to be compared.
-        :type obj: XAttributeDiscrete
+        :type obj: `XAttributeDiscrete`
         :return: A negative integer, zero, or a positive integer as this object
          is less than, equal to, or greater than the specified object.
         :rtype: int

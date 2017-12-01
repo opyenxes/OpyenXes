@@ -56,7 +56,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'OpyenXes'
-copyright = u"2017, Wai Lam Jonathan Lee"
+copyright = u"2017, Process Mining UC"
 
 # The version info for the project you're documenting, acts as replacement
 # for |version| and |release|, also used in various other places throughout
@@ -210,7 +210,7 @@ latex_elements = {
 latex_documents = [
     ('index', 'opyenxes.tex',
      u'OpyenXes Documentation',
-     u'Wai Lam Jonathan Lee', 'manual'),
+     u'Process Mining UC', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at
@@ -241,7 +241,7 @@ latex_documents = [
 man_pages = [
     ('index', 'opyenxes',
      u'OpyenXes Documentation',
-     [u'Wai Lam Jonathan Lee'], 1)
+     [u'Process Mining UC'], 1)
 ]
 
 # If true, show URL addresses after external links.
@@ -256,7 +256,7 @@ man_pages = [
 texinfo_documents = [
     ('index', 'opyenxes',
      u'OpyenXes Documentation',
-     u'Wai Lam Jonathan Lee',
+     u'Process Mining UC',
      'opyenxes',
      'One line description of project.',
      'Miscellaneous'),

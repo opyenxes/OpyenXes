@@ -39,7 +39,7 @@ class XConceptExtension(XExtension, metaclass=XConceptExtensionMetaclass):
         extension's name attribute.
 
         :param element: Log hierarchy element to extract name from.
-        :type element: XAttributable
+        :type element: `XAttributable`
         :return: The requested element name.
         :rtype: str
         """
@@ -53,7 +53,7 @@ class XConceptExtension(XExtension, metaclass=XConceptExtensionMetaclass):
         extension's name attribute.
 
         :param element: Log hierarchy element to assign name to.
-        :type element: XAttributable
+        :type element: `XAttributable`
         :param name: The name to be assigned.
         :type name: str
         """
@@ -68,7 +68,7 @@ class XConceptExtension(XExtension, metaclass=XConceptExtensionMetaclass):
         this extension's instance attribute.
 
         :param event: Event to extract instance from.
-        :type event: XEvent
+        :type event: `XEvent`
         :return: The requested activity instance identifier.
         :rtype: str
         """
@@ -82,7 +82,7 @@ class XConceptExtension(XExtension, metaclass=XConceptExtensionMetaclass):
         this extension's instance attribute.
 
         :param event: Event to assign activity instance identifier to.
-        :type event: XEvent
+        :type event: `XEvent`
         :param instance: The activity instance identifier to be assigned.
         :type instance: str
         """

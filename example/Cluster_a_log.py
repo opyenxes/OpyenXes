@@ -1,9 +1,9 @@
-from model.XLog import XLog
-from data_in.XUniversalParser import XUniversalParser
-from classification.XEventAttributeClassifier import XEventAttributeClassifier
-from out.XesXmlSerializer import XesXmlSerializer
+from opyenxes.model.XLog import XLog
+from opyenxes.data_in.XUniversalParser import XUniversalParser
+from opyenxes.classification.XEventAttributeClassifier import XEventAttributeClassifier
+from opyenxes.out.XesXmlSerializer import XesXmlSerializer
 from sklearn.cluster import KMeans
-from factory.XFactory import XFactory
+from opyenxes.factory.XFactory import XFactory
 
 
 if __name__ == '__main__':

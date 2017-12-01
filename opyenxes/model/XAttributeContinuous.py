@@ -11,7 +11,7 @@ class XAttributeContinuous(XAttribute):
     :type value: float
     :param extension: The extension defining the attribute (set to None, if
      the attribute is not associated to an extension)
-    :type extension: XExtension or None
+    :type extension: `XExtension` or None
     """
     def __init__(self, key, value, extension=None):
         super().__init__(key, extension)
@@ -37,7 +37,7 @@ class XAttributeContinuous(XAttribute):
         """Creates and returns a copy of this object.
 
         :return: A clone of this instance.
-        :rtype: XAttributeContinuous
+        :rtype: `XAttributeContinuous`
         """
         clone = XAttributeContinuous(self.get_key(), self.__value,
                                      self.get_extension())
@@ -47,7 +47,7 @@ class XAttributeContinuous(XAttribute):
         """Helper method to compares this object with the specified object for order.
 
         :param obj: the Object to be compared.
-        :type obj: XAttributeContinuous
+        :type obj: `XAttributeContinuous`
         :return: A negative integer, zero, or a positive integer as this object
          is less than, equal to, or greater than the specified object.
         :rtype: int

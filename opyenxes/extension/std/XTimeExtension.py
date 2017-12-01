@@ -33,7 +33,7 @@ class XTimeExtension(XExtension, metaclass=XTimeExtensionMetaclass):
         """Extracts from a given event the timestamp.
 
         :param event: Event to be queried.
-        :type event: XEvent
+        :type event: `XEvent`
         :return: The timestamp of this event, as a datetime object (may be null
          if not defined).
         :rtype: datetime
@@ -47,7 +47,7 @@ class XTimeExtension(XExtension, metaclass=XTimeExtensionMetaclass):
         """Assigns to a given event its timestamp.
 
         :param event: Event to be modified.
-        :type event: XEvent
+        :type event: `XEvent`
         :param date: Timestamp, as a datetime object or as a long of
             milliseconds in UNIX time..
         :type date: datetime or int

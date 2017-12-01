@@ -1,9 +1,9 @@
 """
 Create_random_log:
 """
-from factory.XFactory import XFactory
-from id.XIDFactory import XIDFactory
-from out.XesXmlSerializer import XesXmlSerializer
+from opyenxes.factory.XFactory import XFactory
+from opyenxes.id.XIDFactory import XIDFactory
+from opyenxes.out.XesXmlSerializer import XesXmlSerializer
 import random
 
 

@@ -37,7 +37,7 @@ class XAttributeInfo:
         requested attribute.
 
         :param element: Key of an attribute or an attribute.
-        :type element: str or XAttribute
+        :type element: str or `XAttribute`
         :return: Total frequency of that attribute as registered.
         :rtype: int
         """
@@ -51,7 +51,7 @@ class XAttributeInfo:
         requested attribute.
 
         :param element: Key of an attribute or an attribute.
-        :type element: str or XAttribute
+        :type element: str or `XAttribute`
         :return: Relative frequency of that attribute as registered.
         :rtype: int
         """
@@ -97,7 +97,7 @@ class XAttributeInfo:
         attributes defined by that extension.
 
         :param extension:  Requested attribute extension.
-        :type extension: XExtension
+        :type extension: `XExtension`
         :return: A tuple of attribute prototypes registered for that extension.
         :rtype: tuple
         """
@@ -114,7 +114,7 @@ class XAttributeInfo:
         defined by that extension.
 
         :param extension:  Requested attribute extension.
-        :type extension: XExtension
+        :type extension: `XExtension`
         :return: A tuple of attribute keys registered for that extension.
         :rtype: tuple
         """
@@ -145,7 +145,7 @@ class XAttributeInfo:
         """Registers a concrete attribute with this registry.
 
         :param attribute: Attribute to be registered.
-        :type attribute: XAttribute
+        :type attribute: `XAttribute`
         """
         if attribute.get_key() not in self.__key_map:
             prototype = XAttributeUtils.derive_prototype(attribute)

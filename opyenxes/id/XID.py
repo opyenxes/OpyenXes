@@ -16,7 +16,7 @@ class XID:
         :param id_string: Text representation of an XID.
         :type id_string: str
         :return: The parsed XID.
-        :rtype: XID
+        :rtype: `XID`
         """
         return XID(uuid.UUID(id_string))
 
@@ -46,7 +46,7 @@ class XID:
         """Creates and returns a copy of this object.
 
         :return: A clone of this instance.
-        :rtype: XID
+        :rtype: `XID`
         """
         return XID(self.__uuid)
 
@@ -54,7 +54,7 @@ class XID:
         """Helper method to compares this object with the specified object for order.
 
         :param other: the Object to be compared.
-        :type other: XID
+        :type other: `XID`
         :return: A negative integer, zero, or a positive integer as this object
          is less than, equal to, or greater than the specified object.
         :rtype: int

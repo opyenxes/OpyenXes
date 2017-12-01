@@ -30,7 +30,7 @@ class XUniversalParser:
           supposed to deliver an XES log in XML representation.
         :type file: _io.TextIOWrapper
         :return: The parsed list of logs.
-        :rtype: list[XLog]
+        :rtype: list[`XLog`]
         """
         for parse in XParserRegistry().get_available():
             if parse.can_parse(file.name):

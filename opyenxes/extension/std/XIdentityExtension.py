@@ -32,7 +32,7 @@ class XIdentityExtension(XExtension, metaclass=XIdentityExtensionMetaclass):
         extension's name attribute.
 
         :param element: Log hierarchy element to extract name from.
-        :type element: XAttributable
+        :type element: `XAttributable`
         :return: The requested element name.
         :rtype: str
         """
@@ -47,7 +47,7 @@ class XIdentityExtension(XExtension, metaclass=XIdentityExtensionMetaclass):
         extension's id attribute.
 
         :param element: Log hierarchy element to assign name from.
-        :type element: XAttributable
+        :type element: `XAttributable`
         :return: The requested element id.
         :rtype: XID
         """
@@ -61,7 +61,7 @@ class XIdentityExtension(XExtension, metaclass=XIdentityExtensionMetaclass):
         extension's id attribute.
 
         :param element: Log hierarchy element to assign id to.
-        :type element: XAttributable
+        :type element: `XAttributable`
         :param identity: The id to be assigned.
         :type identity: XID
         """

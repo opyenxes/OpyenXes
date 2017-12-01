@@ -1,6 +1,6 @@
-from data_in.XUniversalParser import XUniversalParser
-from extension.XExtensionParser import XExtensionParser
-from extension.XExtensionManager import XExtensionManager
+from opyenxes.data_in.XUniversalParser import XUniversalParser
+from opyenxes.extension.XExtensionParser import XExtensionParser
+from opyenxes.extension.XExtensionManager import XExtensionManager
 
 with open("xes_file/example_with_new_extension.xes") as file:
     logs = XUniversalParser().parse(file)

@@ -12,7 +12,7 @@ class XExtendedEvent:
     typically-available extension attributes.
 
     :param event: The original event to be wrapped.
-    :type event: XEvent
+    :type event: `XEvent`
     """
 
     @staticmethod
@@ -21,9 +21,9 @@ class XExtendedEvent:
         this class, which transparently provides extended access to attributes.
 
         :param event: The original event to be wrapped.
-        :type event: XEvent
+        :type event: `XEvent`
         :return: A wrapped event.
-        :rtype: XExtendedEvent
+        :rtype: `XExtendedEvent`
         """
         return XExtendedEvent(event)
 
@@ -217,7 +217,7 @@ class XExtendedEvent:
         """Retrieves the attributes set for this element.
 
         :return: A map of attributes.
-        :rtype: XAttributeMap
+        :rtype: `XAttributeMap`
         """
         return self.__original.get_attributes()
 
@@ -226,7 +226,7 @@ class XExtendedEvent:
         used by all attributes of this element, and the element itself
 
         :return: A set of extensions
-        :rtype: set(XExtension)
+        :rtype: set(`XExtension`)
         """
         return self.__original.get_extensions()
 
@@ -234,7 +234,7 @@ class XExtendedEvent:
         """Sets the map of attributes for this element.
 
         :param attributes: A map of attributes
-        :type attributes: XAttributeMap
+        :type attributes: `XAttributeMap`
         """
         self.__original.set_attributes(attributes)
 
@@ -251,7 +251,7 @@ class XExtendedEvent:
         equals does not hold between this and the clone
 
         :return: An identical clone.
-        :rtype: XExtendedEvent
+        :rtype: `XExtendedEvent`
         """
         aux = XExtendedEvent(self.__original.clone())
         aux._XExtendedEvent__id = XIDFactory.create_id()

@@ -14,7 +14,7 @@ class XEventClasses:
     determining the identity of the contained events.
 
     :param classifier: The classifier used for creating the set of event classes.
-    :type classifier: XEventAttributeClassifier
+    :type classifier: `XEventAttributeClassifier`
     """
     def __init__(self, classifier):
         self.__classifier = classifier
@@ -25,11 +25,11 @@ class XEventClasses:
         """Creates a new set of event classes, factory method.
 
         :param classifier: The classifier to be used for event comparison.
-        :type classifier: XEventAttributeClassifier
+        :type classifier: `XEventAttributeClassifier`
         :param log: The log, on which event classes should be imposed.
-        :type log: XLog
+        :type log: `XLog`
         :return: A set of event classes, as an instance of this class.
-        :rtype: XEventClasses
+        :rtype: `XEventClasses`
         """
         n_classes = XEventClasses(classifier)
         n_classes.register(log)
@@ -58,11 +58,11 @@ class XEventClasses:
         determined by this set.
 
         :param event: The event of which the event class should be determined.
-        :type event: XEvent
+        :type event: `XEvent`
         :return: The event class of this event, as found in this set of event
          classes. If no matching event class is found, this method may return
           null.
-        :rtype: XEventClass
+        :rtype: `XEventClass`
         """
         return self.__class_map.get(self.__classifier.get_class_identity(event))
 
@@ -74,7 +74,7 @@ class XEventClasses:
         :type identity: str
         :return: The requested event class. If no matching event class is found,
          this method may return null.
-        :rtype: XEventClass
+        :rtype: `XEventClass`
         """
         return self.__class_map.get(identity)
 
@@ -85,7 +85,7 @@ class XEventClasses:
         :type index: int
         :return: The requested event class. If no matching event class is found,
          this method may return null.
-        :rtype: XEventClass
+        :rtype: `XEventClass`
         """
         for event_class in self.__class_map.values():
             if event_class.get_index() == index:
@@ -100,7 +100,7 @@ class XEventClasses:
         members of these classes are found among the events in the log.
 
         :param element: The Xes Element or Class ID to be analyzed.
-        :type element: XLog or XTrace or XEvent or str
+        :type element: `XLog` or `XTrace` or `XEvent` or str
         """
         if isinstance(element, XElement) and not isinstance(element, XEvent):
             for objects in element:

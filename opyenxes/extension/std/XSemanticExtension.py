@@ -58,7 +58,7 @@ class XSemanticExtension(XExtension, metaclass=XSemanticExtensionMetaclass):
 
         :param target: Any log element (i.e., archive, log, trace, event, or
          attribute) to be queried.
-        :type target: XAttributable
+        :type target: `XAttributable`
         :return: The list of model references, as a list of URIs, referred to
          by this element.
         :rtype: list[ParseResult]
@@ -76,7 +76,7 @@ class XSemanticExtension(XExtension, metaclass=XSemanticExtensionMetaclass):
 
         :param target: Any log element (i.e., archive, log, trace, event, or
          attribute) to be assigned references to.
-        :type target: XAttributable
+        :type target: `XAttributable`
         :param model_reference: The list of model references, as a list of
          strings, referred to by this element.
         :type model_reference: list[str]
@@ -98,7 +98,7 @@ class XSemanticExtension(XExtension, metaclass=XSemanticExtensionMetaclass):
 
         :param target: Any log element (i.e., archive, log, trace, event,
          or attribute) to be assigned references to.
-        :type target: XAttributable
+        :type target: `XAttributable`
         :param model_reference: The list of model references, as a list of URIs,
          referred to by this element.
         :type model_reference: list[ParseResult or SplitResult]

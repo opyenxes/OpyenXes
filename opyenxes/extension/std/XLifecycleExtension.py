@@ -84,7 +84,7 @@ class XLifecycleExtension(XExtension, metaclass=XLifecycleExtensionMetaclass):
         """Extracts the lifecycle model identifier from a given log.
 
         :param log: Event log.
-        :type log: XLog
+        :type log: `XLog`
         :return: Lifecycle model identifier string.
         :rtype: str
         """
@@ -97,7 +97,7 @@ class XLifecycleExtension(XExtension, metaclass=XLifecycleExtensionMetaclass):
         """Assigns a value for the lifecycle model identifier to a given log.
 
         :param log: Log to be tagged.
-        :type log: XLog
+        :type log: `XLog`
         :param model: Lifecycle model identifier string to be used.
         :type model: str
         """
@@ -111,7 +111,7 @@ class XLifecycleExtension(XExtension, metaclass=XLifecycleExtensionMetaclass):
         transitions.
 
         :param log: Log to be checked.
-        :type log: XLog
+        :type log: `XLog`
         :return: Returns true, if the log indeed uses the standard lifecycle model.
         :rtype: bool
         """
@@ -125,7 +125,7 @@ class XLifecycleExtension(XExtension, metaclass=XLifecycleExtensionMetaclass):
         """Extracts the lifecycle transition string from a given event.
 
         :param event: The given event
-        :type event: XEvent
+        :type event: `XEvent`
         :return: The lifecycle transition string of this event. Can be null, if
          not defined.
         :rtype: str
@@ -139,7 +139,7 @@ class XLifecycleExtension(XExtension, metaclass=XLifecycleExtensionMetaclass):
         """Extracts the standard lifecycle transition object from a given event.
 
         :param event: The given event
-        :type event: XEvent
+        :type event: `XEvent`
         :return: The standard lifecycle transition instance of this event. Can
          be null, if not defined.
         :rtype: str
@@ -153,7 +153,7 @@ class XLifecycleExtension(XExtension, metaclass=XLifecycleExtensionMetaclass):
         """Assigns a lifecycle transition string to the given event.
 
         :param event: Event to be tagged.
-        :type event: XEvent
+        :type event: `XEvent`
         :param transition: Lifecycle transition string to be assigned.
         :type transition: str
         """
@@ -166,7 +166,7 @@ class XLifecycleExtension(XExtension, metaclass=XLifecycleExtensionMetaclass):
         """Assigns a standard lifecycle transition to the given event..
 
         :param event: Event to be tagged.
-        :type event: XEvent
+        :type event: `XEvent`
         :param transition: Standard lifecycle transition to be assigned.
         :type transition: str
         """

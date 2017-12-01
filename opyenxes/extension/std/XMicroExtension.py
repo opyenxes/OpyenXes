@@ -34,7 +34,7 @@ class XMicroExtension(XExtension, metaclass=XMicroExtensionMetaclass):
         attribute.
 
         :param event: Event to extract level from.
-        :type event: XEvent
+        :type event: `XEvent`
         :return: The requested event level, -1 if not set.
         :rtype: int
         """
@@ -48,7 +48,7 @@ class XMicroExtension(XExtension, metaclass=XMicroExtensionMetaclass):
         attribute.
 
         :param event: Event to assign level to.
-        :type event: XAttributable
+        :type event: `XAttributable`
         :param level: The level to be assigned. Should be a positive integer.
         :type level: int
         """
@@ -62,7 +62,7 @@ class XMicroExtension(XExtension, metaclass=XMicroExtensionMetaclass):
         """Removes the level from an event.
 
         :param event: The event to remove th elevel from.
-        :type event: XAttributable
+        :type event: `XAttributable`
         """
         if "micro:level" in event.get_attributes():
             del event.get_attributes()["micro:level"]
@@ -73,7 +73,7 @@ class XMicroExtension(XExtension, metaclass=XMicroExtensionMetaclass):
         parentId attribute.
 
         :param event: Event to extract parent Id from.
-        :type event: XEvent
+        :type event: `XEvent`
         :return: The requested event parent Id, null if not set.
         :rtype: XID
         """
@@ -87,9 +87,9 @@ class XMicroExtension(XExtension, metaclass=XMicroExtensionMetaclass):
         parentId attribute.
 
         :param event: Event to assign parent Id to.
-        :type event: XAttributable
+        :type event: `XAttributable`
         :param parent_id: The parent Id to be assigned. May not be null.
-        :type parent_id: XID
+        :type parent_id: `XID`
         """
         if parent_id is not None:
             attr = self.ATTR_PID.clone()
@@ -104,7 +104,7 @@ class XMicroExtension(XExtension, metaclass=XMicroExtensionMetaclass):
         """Removes the parent Id from an event.
 
         :param event: The event to remove the parent Id from.
-        :type event: XAttributable
+        :type event: `XAttributable`
         """
         if "micro:parentId" in event.get_attributes():
             del event.get_attributes()["micro:parentId"]
@@ -117,7 +117,7 @@ class XMicroExtension(XExtension, metaclass=XMicroExtensionMetaclass):
         the children, it simply returns the number as found in the event.
 
         :param event: Event to extract stated number of children from.
-        :type event: XEvent
+        :type event: `XEvent`
         :return: The requested number for this event, -1 if not set.
         :rtype: int
         """
@@ -131,7 +131,7 @@ class XMicroExtension(XExtension, metaclass=XMicroExtensionMetaclass):
         extension's length attribute.
 
         :param event: Event to assign number of children to.
-        :type event: XAttributable
+        :type event: `XAttributable`
         :param length: The number to be assigned. Should be a non-negative integer.
         :type length: int
         """
@@ -145,7 +145,7 @@ class XMicroExtension(XExtension, metaclass=XMicroExtensionMetaclass):
         """Removes the stated number of children from an event.
 
         :param event: The event to remove the number from.
-        :type event: XAttributable
+        :type event: `XAttributable`
         """
         if "micro:length" in event.get_attributes():
             del event.get_attributes()["micro:length"]

@@ -38,7 +38,7 @@ class XExtensionManager(metaclass=XExtensionManagerMetaclass):
         """Explicitly registers an extension instance with the extension manager.
 
         :param extension: The extension to be registered.
-        :type extension: XExtension
+        :type extension: `XExtension`
         """
         self.__extension_map[extension.get_uri()] = extension
         if extension not in self.__extension_list:
@@ -53,7 +53,7 @@ class XExtensionManager(metaclass=XExtensionManagerMetaclass):
         :param uri: The unique URI of the requested extension.
         :type uri: urllib.parse.ParseResult or urllib.parse.SplitResult
         :return: The requested extension.
-        :rtype: XExtension
+        :rtype: `XExtension`
         """
         return self.__extension_map.get(uri)
 
@@ -64,7 +64,7 @@ class XExtensionManager(metaclass=XExtensionManagerMetaclass):
         :param name: The name of the requested extension.
         :type name: str
         :return: The requested extension (may be null, if it cannot be found).
-        :rtype: XExtension
+        :rtype: `XExtension`
         """
         for elem in self.__extension_list:
             if elem.get_name() == name:
@@ -78,7 +78,7 @@ class XExtensionManager(metaclass=XExtensionManagerMetaclass):
         :param prefix: The prefix of the requested extension.
         :type prefix: str
         :return: The requested extension (may be null, if it cannot be found).
-        :rtype: XExtension
+        :rtype: `XExtension`
         """
         for elem in self.__extension_list:
             if elem.get_prefix() == prefix:
@@ -92,7 +92,7 @@ class XExtensionManager(metaclass=XExtensionManagerMetaclass):
         :param index: The index of the requested extension.
         :type index: int
         :return: The requested extension (may be null, if it cannot be found).
-        :rtype: XExtension
+        :rtype: `XExtension`
         """
         if index in range(len(self.__extension_list)):
             return self.__extension_list[index]
@@ -104,7 +104,7 @@ class XExtensionManager(metaclass=XExtensionManagerMetaclass):
         index has not been registered previously, this method returns -1.
 
         :param extension:  The extension to look up the index for.
-        :type extension: XExtension
+        :type extension: `XExtension`
         :return: Unique index of the requested extension (positive integer).
         :rtype: int
         """

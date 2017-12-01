@@ -8,7 +8,7 @@ class XLog(XElement, list):
     traces, which are all representing executions of the same kind of process.
 
     :param attributes: Map of attribute for the log.
-    :type attributes: XAttributeMap
+    :type attributes: `XAttributeMap`
     """
     def __init__(self, attributes):
         super().__init__(attribute=attributes)
@@ -24,7 +24,7 @@ class XLog(XElement, list):
         """Creates and returns a copy of this object.
 
         :return: A clone of this instance.
-        :rtype: XLog
+        :rtype: `XLog`
         """
         clone = XLog(self.get_attributes().clone())
         for elem in self.__extension:
@@ -45,7 +45,7 @@ class XLog(XElement, list):
         used by all attributes of this element, and the element itself
 
         :return: A set of extensions
-        :rtype: set(XExtension)
+        :rtype: set(`XExtension`)
         """
         return self.__extension
 
@@ -56,7 +56,7 @@ class XLog(XElement, list):
         add further classifiers to this list.
 
         :return: The list of classifiers defined for this log.
-        :rtype: list[XEventAttributeClassifier]
+        :rtype: list[`XEventAttributeClassifier`]
         """
         return self.__classifiers
 
@@ -67,7 +67,7 @@ class XLog(XElement, list):
         attributes.
 
         :return: List of ubiquitous trace attributes.
-        :rtype: List[XAttribute]
+        :rtype: List[`XAttribute`]
         """
         return self.__globalEventAttributes
 
@@ -78,7 +78,7 @@ class XLog(XElement, list):
         attributes.
 
         :return: List of ubiquitous trace attributes.
-        :rtype: List[XAttribute]
+        :rtype: List[`XAttribute`]
         """
         return self.__globalTraceAttributes
 
@@ -105,9 +105,9 @@ class XLog(XElement, list):
         """Adds the given info for the given classifier to the info cache.
 
         :param classifier: The given classifier.
-        :type classifier: XEventClassifier
+        :type classifier: `XEventClassifier`
         :param info: The given info.
-        :type info: XLogInfo
+        :type info: `XLogInfo`
         """
         self.__cachedClassifier = classifier
         self.__cachedInfo = info
@@ -116,9 +116,9 @@ class XLog(XElement, list):
         """Returns the cached info for the given classifier, null if not available.
 
         :param classifier: The given classifier
-        :type classifier: XEventAttributeClassifier
+        :type classifier: `XEventAttributeClassifier`
         :return: The cached info for the given classifier, null if not available
-        :rtype: XLogInfo or None
+        :rtype: `XLogInfo` or None
         """
         if classifier == self.__cachedClassifier:
             return self.__cachedInfo
@@ -129,6 +129,6 @@ class XLog(XElement, list):
         Add only a trace object in the log.
 
         :param p_object: a Trace object to append for the log
-        :type p_object: XTrace
+        :type p_object: `XTrace`
         """
         super(XLog, self).append(p_object)

@@ -11,9 +11,9 @@ class XEvent(XElement):
     activity.
 
     :param attributes: Map of attribute for the event.
-    :type attributes: XAttributeMap
+    :type attributes: `XAttributeMap`
     :param identity: The unique id that represent this event.
-    :type identity: XID
+    :type identity: `XID`
     """
     def __init__(self, attributes=None, identity=None):
         if not attributes:
@@ -28,7 +28,7 @@ class XEvent(XElement):
         """Creates and returns a copy of this object.
 
         :return: A clone of this instance.
-        :rtype: XEvent
+        :rtype: `XEvent`
         """
         clone = XEvent()
         clone.set_attributes(self.get_attributes().clone())
@@ -39,7 +39,7 @@ class XEvent(XElement):
         """Retrieves the id value of this event
 
         :return: id of this event
-        :rtype: XID
+        :rtype: `XID`
         """
         return self.__id
 
@@ -47,7 +47,7 @@ class XEvent(XElement):
         """Assigns the id value of this event.
 
         :param idem: id of the event.
-        :type idem: XID
+        :type idem: `XID`
         """
         self.__id = idem
 

@@ -6,8 +6,8 @@ class XAttributable:
     This class is implemented by all elements of the log hierarchy, which can
     be equipped with attributes
 
-    :param attribute: A XAttributeMap with the attribute for this class.
-    :type attribute: XAttributeMap
+    :param attribute: A `XAttributeMap` with the attribute for this class.
+    :type attribute: `XAttributeMap`
     """
     def __init__(self, attribute=None):
         if attribute:
@@ -20,7 +20,7 @@ class XAttributable:
         used by all attributes of this element, and the element itself
 
         :return: A set of extensions
-        :rtype: set(XExtension)
+        :rtype: set(`XExtension`)
         """
         extensions = set()
         for attribute in self.__attributes.values():
@@ -33,7 +33,7 @@ class XAttributable:
         """Retrieves the attributes set for this element.
 
         :return: A map of attributes.
-        :rtype: XAttributeMap
+        :rtype: `XAttributeMap`
         """
         return self.__attributes
 
@@ -41,7 +41,7 @@ class XAttributable:
         """Sets the map of attributes for this element.
 
         :param attributes: A map of attributes
-        :type attributes: XAttributeMap
+        :type attributes: `XAttributeMap`
         """
         self.__attributes = attributes
 

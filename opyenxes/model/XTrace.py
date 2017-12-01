@@ -8,7 +8,7 @@ class XTrace(XElement, list):
     in their given order.
 
     :param attributes: Map of attribute for the trace.
-    :type attributes: XAttributeMap
+    :type attributes: `XAttributeMap`
     """
     def __init__(self, attributes):
         super().__init__(attributes)
@@ -17,7 +17,7 @@ class XTrace(XElement, list):
         """Creates and returns a copy of this object.
 
         :return: A clone of this instance.
-        :rtype: XTrace
+        :rtype: `XTrace`
         """
         clone = XTrace(self.get_attributes().clone())
         for event in self:
@@ -30,7 +30,7 @@ class XTrace(XElement, list):
          available in this trace.
 
         :param event: the event to be inserted.
-        :type event: XEvent
+        :type event: `XEvent`
         :return: index of the inserted event.
         :rtype: int
         """
@@ -61,7 +61,7 @@ class XTrace(XElement, list):
         Add only a event object in the log.
 
         :param p_object: a Event object to append for the log
-        :type p_object: XEvent
+        :type p_object: `XEvent`
         """
         super(XTrace, self).append(p_object)
 

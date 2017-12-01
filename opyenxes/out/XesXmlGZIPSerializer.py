@@ -10,7 +10,7 @@ class XesXmlGZIPSerializer(XesXmlSerializer):
         """Serializes a given log to the given output stream.
 
         :param log: Log to be serialized.
-        :type log: XLog
+        :type log: `XLog`
         :param out:  TextIOWrapper for serialization.
         :type out: _io.TextIOWrapper
         :param in_bytes: Private argument to decide if serialized as bytes or as string

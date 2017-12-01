@@ -1,6 +1,6 @@
 import itertools
 import copy
-from classification.XEventAttributeClassifier import XEventAttributeClassifier
+from opyenxes.classification.XEventAttributeClassifier import XEventAttributeClassifier
 
 
 def gen():
@@ -204,7 +204,7 @@ class AlphaAlgorithm:
 
 
 if __name__ == '__main__':
-    from data_in.XUniversalParser import XUniversalParser
+    from opyenxes.data_in.XUniversalParser import XUniversalParser
 
     path = "xes_file/general_example.xes"
     with open(path) as log_file:

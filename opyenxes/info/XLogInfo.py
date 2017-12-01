@@ -13,12 +13,12 @@ class XLogInfo:
     classifier, which is used to identify event class abstractions.
 
     :param log: The event log to create an info summary for.
-    :type log: XLog
+    :type log: `XLog`
     :param default_classifier: The default event classifier to be used
-    :type default_classifier: XEventAttributeClassifier
+    :type default_classifier: `XEventAttributeClassifier`
     :param classifiers: A collection of additional event classifiers to be
      covered by the created log info instance.
-    :type classifiers: list[XEventAttributeClassifier]
+    :type classifiers: list[`XEventAttributeClassifier`]
     """
     STANDARD_CLASSIFIER = XEventAttributeClassifier("MXML Legacy Classifier", ["concept:name", "lifecycle:transition"])
     NAME_CLASSIFIER = XEventNameClassifier()
@@ -30,14 +30,14 @@ class XLogInfo:
         """Creates a new log info summary with the standard event classifier.
 
         :param log: The event log to create an info summary for.
-        :type log: XLog
+        :type log: `XLog`
         :param default_classifier: The default event classifier to be used
-        :type default_classifier: XEventAttributeClassifier
+        :type default_classifier: `XEventAttributeClassifier`
         :param classifiers: A collection of additional event classifiers to be
          covered by the created log info instance.
-        :type classifiers: list[XEventAttributeClassifier]
+        :type classifiers: list[`XEventAttributeClassifier`]
         :return: The log info summary for this log.
-        :rtype: XLogInfo
+        :rtype: `XLogInfo`
         """
         if default_classifier is None:
             return XLogInfo(log, XLogInfo.STANDARD_CLASSIFIER, classifiers)
@@ -99,9 +99,9 @@ class XLogInfo:
         hierarchy element, in the given attribute info registry.
 
         :param attribute_info: Attribute info registry to use for registration.
-        :type attribute_info: XAttributeInfo
+        :type attribute_info: `XAttributeInfo`
         :param attributable: Attributable whose attributes to register.
-        :type attributable: XAttributable
+        :type attributable: `XAttributable`
         """
         if attributable.has_attributes():
             for attribute in attributable.get_attributes().values():
@@ -112,7 +112,7 @@ class XLogInfo:
         """Retrieves the log used for this summary.
 
         :return: The event log which this summary describes.
-        :rtype: XLog
+        :rtype: `XLog`
         """
         return self.__log
 
@@ -141,10 +141,10 @@ class XLogInfo:
         method getEventClassifiers().
 
         :param classifier: The classifier for which to retrieve the event classes.
-        :type classifier: XEventAttributeClassifier or None
+        :type classifier: `XEventAttributeClassifier` or None
         :return: The requested event classes, or null if the given event
          classifier is not covered by this log info instance.
-        :rtype: XEventClasses
+        :rtype: `XEventClasses`
         """
         if classifier is None:
             return self.__event_classes.get(self.__default_classifier)
@@ -163,7 +163,7 @@ class XLogInfo:
         """Retrieves the resource classes of the summarized log.
 
         :return: The resource classes of the summarized log.
-        :rtype: XEventClasses
+        :rtype: `XEventClasses`
         """
         return self.__event_classes.get(self.RESOURCE_CLASSIFIER)
 
@@ -171,7 +171,7 @@ class XLogInfo:
         """Retrieves the event name classes of the summarized log.
 
         :return: The event name classes of the summarized log.
-        :rtype: XEventClasses
+        :rtype: `XEventClasses`
         """
         return self.__event_classes.get(self.NAME_CLASSIFIER)
 
@@ -179,7 +179,7 @@ class XLogInfo:
         """Retrieves the lifecycle transition classes of the summarized log.
 
         :return: The lifecycle transition classes of the summarized log.
-        :rtype: XEventClasses
+        :rtype: `XEventClasses`
         """
         return self.__event_classes.get(self.LIFECYCLE_TRANSITION_CLASSIFIER)
 
@@ -187,7 +187,7 @@ class XLogInfo:
         """Retrieves the global timestamp boundaries of this log.
 
         :return: Timestamp boundaries for the complete log.
-        :rtype XTimeBounds
+        :rtype `XTimeBounds`
         """
         return self.__log_boundaries
 
@@ -196,7 +196,7 @@ class XLogInfo:
 
         :param trace: Trace to be queried for.
         :return: Timestamp boundaries for the indicated trace.
-        :rtype: XTimeBounds
+        :rtype: `XTimeBounds`
         """
         return self.__trace_boundaries.get(trace)
 
@@ -205,7 +205,7 @@ class XLogInfo:
         contains on the log level.
 
         :return: Attribute information on the log level.
-        :rtype: XAttributeInfo
+        :rtype: `XAttributeInfo`
         """
         return self.__log_attribute_info
 
@@ -214,7 +214,7 @@ class XLogInfo:
         contains on the trace level.
 
         :return: Attribute information on the trace level.
-        :rtype: XAttributeInfo
+        :rtype: `XAttributeInfo`
         """
         return self.__trace_attribute_info
 
@@ -223,7 +223,7 @@ class XLogInfo:
         contains on the event level.
 
         :return: Attribute information on the event level.
-        :rtype: XAttributeInfo
+        :rtype: `XAttributeInfo`
         """
         return self.__event_attribute_info
 
@@ -232,7 +232,7 @@ class XLogInfo:
         contains on the meta (i.e., attribute) level.
 
         :return: Attribute information on the meta level.
-        :rtype: XAttributeInfo
+        :rtype: `XAttributeInfo`
         """
         return self.__meta_attribute_info
 

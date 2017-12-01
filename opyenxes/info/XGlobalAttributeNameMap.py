@@ -53,7 +53,7 @@ class XGlobalAttributeNameMap(metaclass=XGlobalAttributeNameMapMetaclass):
         :param name: Name of the requested mapping.
         :type name: str
         :return: The requested mapping, as stored in this facility (or newly created).
-        :rtype: XAttributeNameMap
+        :rtype: `XAttributeNameMap`
         """
         mapping = self.__mappings.get(name)
         if mapping is None:
@@ -67,7 +67,7 @@ class XGlobalAttributeNameMap(metaclass=XGlobalAttributeNameMapMetaclass):
         language mapping.
 
         :return: The standard mapping.
-        :rtype: XAttributeNameMap
+        :rtype: `XAttributeNameMap`
         """
         return self.__standard_mapping
 
@@ -80,10 +80,10 @@ class XGlobalAttributeNameMap(metaclass=XGlobalAttributeNameMapMetaclass):
         ensured that this method returns a valid string for naming attributes.
 
         :param attribute: Attribute to map or key of the attribute to map.
-        :type attribute: XAttribute or str
+        :type attribute: `XAttribute` or str
         :param mapping: Name of the mapping to be used preferably or attribute
          name map to be used preferably.
-        :type mapping: str or XAttributeNameMap
+        :type mapping: str or `XAttributeNameMap`
         :return: The safe mapping for the given attribute.
         :rtype: str
         """
@@ -140,7 +140,7 @@ class XGlobalAttributeNameMap(metaclass=XGlobalAttributeNameMapMetaclass):
         returned.
 
         :param attribute: Attribute or attribute key to retrieve mapping for.
-        :type attribute: str or XAttribute
+        :type attribute: str or `XAttribute`
         :return: The mapping for the given attribute, or null, if no such
          mapping exists.
         :rtype: str

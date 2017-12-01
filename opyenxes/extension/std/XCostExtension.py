@@ -15,7 +15,7 @@ class XCostAmount(XAbstractNestedAttributeSupport, metaclass=XCostAmountMetaclas
         """Abstract method to extract a value from an element.
 
         :param attribute: The element to extract the value from.
-        :type attribute: XAttribute
+        :type attribute: `XAttribute`
         :return: The extracted value.
         :rtype: float
         """
@@ -25,7 +25,7 @@ class XCostAmount(XAbstractNestedAttributeSupport, metaclass=XCostAmountMetaclas
         """Abstract method to assign a value to an element.
 
         :param attribute: The element to assign the value to.
-        :type attribute: XAttribute
+        :type attribute: `XAttribute`
         :param value: The value to be assigned.
         :type value: float
         """
@@ -41,7 +41,7 @@ class XCostDriver(XAbstractNestedAttributeSupport, metaclass=XCostDriverMetaclas
         """Abstract method to extract a value from an element.
 
         :param attribute: The element to extract the value from.
-        :type attribute: XAttribute
+        :type attribute: `XAttribute`
         :return: The extracted value.
         :rtype: str
         """
@@ -51,7 +51,7 @@ class XCostDriver(XAbstractNestedAttributeSupport, metaclass=XCostDriverMetaclas
         """Abstract method to assign a value to an element.
 
         :param attribute: The element to assign the value to.
-        :type attribute: XAttribute
+        :type attribute: `XAttribute`
         :param value: The value to be assigned.
         :type value: str
         """
@@ -67,7 +67,7 @@ class XCostType(XAbstractNestedAttributeSupport, metaclass=XCostTypeMetaclass):
         """Abstract method to extract a value from an element.
 
         :param attribute: The element to extract the value from.
-        :type attribute: XAttribute
+        :type attribute: `XAttribute`
         :return: The extracted value.
         :rtype: str
         """
@@ -77,7 +77,7 @@ class XCostType(XAbstractNestedAttributeSupport, metaclass=XCostTypeMetaclass):
         """Abstract method to assign a value to an element.
 
         :param attribute: The element to assign the value to.
-        :type attribute: XAttribute
+        :type attribute: `XAttribute`
         :param value: The value to be assigned.
         :type value: str
         """
@@ -130,7 +130,7 @@ class XCostExtension(XExtension, metaclass=XConceptExtensionMetaclass):
         extension's total attribute.
 
         :param element: Trace or Event to retrieve total costs for.
-        :type element: XTrace or XEvent
+        :type element: `XTrace` or `XEvent`
         :return: The requested total costs.
         :rtype: float
         """
@@ -144,7 +144,7 @@ class XCostExtension(XExtension, metaclass=XConceptExtensionMetaclass):
         extension's total attribute.
 
         :param element:  Trace or Event to assign total costs to.
-        :type element: XTrace or XEvent
+        :type element: `XTrace` or `XEvent`
         :param total: The total costs to be assigned.
         :type total: float
         """
@@ -159,7 +159,7 @@ class XCostExtension(XExtension, metaclass=XConceptExtensionMetaclass):
         extension's currency attribute.
 
         :param element: Event or Trace to retrieve currency for.
-        :type element: XTrace or XEvent
+        :type element: `XTrace` or `XEvent`
         :return: The requested cost currency.
         :rtype: str
         """
@@ -173,7 +173,7 @@ class XCostExtension(XExtension, metaclass=XConceptExtensionMetaclass):
         extension's currency attribute.
 
         :param element: Trace or Event to assign cost currency to.
-        :type element: XEvent or XEvent
+        :type element: `XEvent` or `XEvent`
         :param currency: The currency to be assigned.
         :type currency: str
         """
@@ -188,7 +188,7 @@ class XCostExtension(XExtension, metaclass=XConceptExtensionMetaclass):
         extension's amount attribute.
 
         :param attribute: Attribute element to retrieve cost amount for.
-        :type attribute: XAttribute
+        :type attribute: `XAttribute`
         :return: The requested cost amount.
         :rtype: float
         """
@@ -225,7 +225,7 @@ class XCostExtension(XExtension, metaclass=XConceptExtensionMetaclass):
             {"a": 10.00, "b": 15.00, "c": 25.00}
 
         :param element: Trace or Event to retrieve all cost amounts for.
-        :type element: XTrace or XEvent
+        :type element: `XTrace` or `XEvent`
         :return: Dictionary with all child keys to cost amounts.
         :rtype: dict(str: float)
         """
@@ -259,7 +259,7 @@ class XCostExtension(XExtension, metaclass=XConceptExtensionMetaclass):
             {["a"]: 10.00, ["a", "b"]: 20.00, ["a", "c"]: 30.00, ["b"]: 15.00, ["c"]: 25.00}
 
         :param element: Trace or Event to retrieve all cost amounts for.
-        :type element: XTrace or XEvent
+        :type element: `XTrace` or `XEvent`
         :return: Dictionary with all descending keys to cost amounts.
         :rtype: dict(list[str]: float)
         """
@@ -270,7 +270,7 @@ class XCostExtension(XExtension, metaclass=XConceptExtensionMetaclass):
         amount attribute.
 
         :param attribute: Attribute to assign cost amount to
-        :type attribute: XAttribute
+        :type attribute: `XAttribute`
         :param amount: The cost amount to be assigned.
         :type amount: float
         """
@@ -302,7 +302,7 @@ class XCostExtension(XExtension, metaclass=XConceptExtensionMetaclass):
             </trace>
 
         :param element: Trace or Event to assign the amounts to.
-        :type element: XEvent or XTrace
+        :type element: `XEvent` or `XTrace`
         :param amounts:  Dictionary with keys to amounts which are to be assigned.
         :type amounts: dict(str: float)
         """
@@ -339,7 +339,7 @@ class XCostExtension(XExtension, metaclass=XConceptExtensionMetaclass):
             </trace>
 
         :param element: Trace or Event to assign the amounts to.
-        :type element: XEvent or XTrace
+        :type element: `XEvent` or `XTrace`
         :param amounts:  Dictionary with list of keys to amounts which are to
          be assigned.
         :type amounts: dict(list[str]: float)
@@ -352,7 +352,7 @@ class XCostExtension(XExtension, metaclass=XConceptExtensionMetaclass):
         driver attribute.
 
         :param attribute: Attribute element to retrieve cost driver for.
-        :type attribute: XAttribute
+        :type attribute: `XAttribute`
         :return: The requested cost driver.
         :rtype: str
         """
@@ -367,7 +367,7 @@ class XCostExtension(XExtension, metaclass=XConceptExtensionMetaclass):
         of a trace or event.
 
         :param element: Trace or Event to retrieve all cost drivers for.
-        :type element: XTrace or XEvent
+        :type element: `XTrace` or `XEvent`
         :return: Dictionary with all child keys to cost drivers.
         :rtype: dict(str: str)
         """
@@ -379,7 +379,7 @@ class XCostExtension(XExtension, metaclass=XConceptExtensionMetaclass):
         attributes of a trace or event.
 
         :param element: Trace or Event to retrieve all cost drivers for.
-        :type element: XTrace or XEvent
+        :type element: `XTrace` or `XEvent`
         :return: Dictionary with all descending keys to cost drivers.
         :rtype: dict(list[str]: str)
         """
@@ -390,7 +390,7 @@ class XCostExtension(XExtension, metaclass=XConceptExtensionMetaclass):
         extension's driver attribute.
 
         :param attribute: Attribute to assign cost driver to.
-        :type attribute: XAttribute
+        :type attribute: `XAttribute`
         :param driver: The cost driver to be assigned.
         :type driver: str
         """
@@ -406,7 +406,7 @@ class XCostExtension(XExtension, metaclass=XConceptExtensionMetaclass):
         when it does not find an attribute with the proper key.
 
         :param element: Trace or Event to assign the cost drivers to.
-        :type element: XTrace or XEvent
+        :type element: `XTrace` or `XEvent`
         :param drivers: Dictionary with keys to cost drivers which are to be assigned.
         :type drivers: dict(str: str)
         """
@@ -421,7 +421,7 @@ class XCostExtension(XExtension, metaclass=XConceptExtensionMetaclass):
         proper key.
 
         :param element: Trace or Event to assign the cost drivers to.
-        :type element: XTrace or XEvent
+        :type element: `XTrace` or `XEvent`
         :param drivers: Dictionary with keys to cost drivers which are to be assigned.
         :type drivers: dict(list[str]: str)
         """
@@ -433,7 +433,7 @@ class XCostExtension(XExtension, metaclass=XConceptExtensionMetaclass):
         type attribute.
 
         :param attribute: Attribute element to retrieve cost type for.
-        :type attribute: XAttribute
+        :type attribute: `XAttribute`
         :return: The requested cost type.
         :rtype: str
         """
@@ -448,7 +448,7 @@ class XCostExtension(XExtension, metaclass=XConceptExtensionMetaclass):
         of a trace or event.
 
         :param element: Trace or Event to retrieve all cost types for.
-        :type element: XTrace or XEvent
+        :type element: `XTrace` or `XEvent`
         :return: Dictionary with all child keys to cost types.
         :rtype: dict(str: str)
         """
@@ -460,7 +460,7 @@ class XCostExtension(XExtension, metaclass=XConceptExtensionMetaclass):
         attributes of a trace or event.
 
         :param element: Trace or Event to retrieve all cost types for.
-        :type element: XTrace or XEvent
+        :type element: `XTrace` or `XEvent`
         :return: Dictionary with all descending keys to cost types.
         :rtype: dict(list[str]: str)
         """
@@ -471,7 +471,7 @@ class XCostExtension(XExtension, metaclass=XConceptExtensionMetaclass):
         type attribute.
 
         :param attribute: Attribute to assign cost type to.
-        :type attribute: XAttribute
+        :type attribute: `XAttribute`
         :param type_: The cost type to be assigned.
         :type type_: str
         """
@@ -487,7 +487,7 @@ class XCostExtension(XExtension, metaclass=XConceptExtensionMetaclass):
         does not find an attribute with the proper key.
 
         :param element: Event or Trace to assign the cost types to.
-        :type element: XTrace or XEvent
+        :type element: `XTrace` or `XEvent`
         :param types: Dictionary with keys to cost types which are to be assigned.
         :type types: dict(list[str]: str)
         """
@@ -502,7 +502,7 @@ class XCostExtension(XExtension, metaclass=XConceptExtensionMetaclass):
         with the proper key.
 
         :param element: Event or Trace to assign the cost types to.
-        :type element: XTrace or XEvent
+        :type element: `XTrace` or `XEvent`
         :param types: Dictionary with keys to cost types which are to be assigned.
         :type types: dict(list[str]: str)
         """

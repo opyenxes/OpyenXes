@@ -1,5 +1,6 @@
 from opyenxes.model.XAttribute import XAttribute
 from datetime import datetime
+import platform
 import time
 
 
@@ -12,7 +13,7 @@ class XAttributeTimestamp(XAttribute):
     :type value: datetime or int
     :param extension: The extension defining the attribute (set to None, if
      the attribute is not associated to an extension)
-    :type extension: XExtension or None
+    :type extension: `XExtension` or None
     """
     def __init__(self, key, value, extension=None):
         super().__init__(key, extension)
@@ -21,7 +22,7 @@ class XAttributeTimestamp(XAttribute):
         if isinstance(value, datetime):
             self.__value = value
         elif isinstance(value, int):
-            self.__value = datetime.fromtimestamp(value / 1000.0)
+            self.__value = datetime.fromtimestamp(self.__timestamp(value))
 
     def get_value(self):
         """Retrieves the datetime value of this attribute
@@ -49,7 +50,7 @@ class XAttributeTimestamp(XAttribute):
         """Creates and returns a copy of this object.
 
         :return: A clone of this instance.
-        :rtype: XAttributeLiteral
+        :rtype: `XAttributeLiteral`
         """
         clone = XAttributeTimestamp(self.get_key(), self.__value,
                                     self.get_extension())
@@ -59,7 +60,7 @@ class XAttributeTimestamp(XAttribute):
         """Helper method to compares this object with the specified object for order.
 
         :param obj: the Object to be compared.
-        :type obj: XAttributeTimestamp
+        :type obj: `XAttributeTimestamp`
         :return: A negative integer, zero, or a positive integer as this object
          is less than, equal to, or greater than the specified object.
         :rtype: int
@@ -118,3 +119,14 @@ class XAttributeTimestamp(XAttribute):
 
     def __ge__(self, other):
         return True if self.compare_to(other) >= 0 else False
+
+    def __timestamp(self, value):
+        """ Windows timestamp workaround
+        
+        Creating the timestamp will fail if less than 86400 on Windows with
+        Python 3.6.
+        """
+        value = value / 1000.0
+        if (platform.system() == 'Windows') and (value < 86400):
+            return 86400
+        return value
