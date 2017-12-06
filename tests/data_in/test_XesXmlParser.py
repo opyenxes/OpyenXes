@@ -38,8 +38,6 @@ def log():
     # add global event attributes
     glb_e_attr = XFactory.create_attribute_discrete('glb_e_attr', 0)
     log.get_global_event_attributes().append(glb_e_attr)
-    # add log features
-    log.set_features('f1', 0)
     # add log attributes
     str_attr = XFactory.create_attribute_literal('l_attr', 'UNKNOWN')
     log.get_attributes()['l_attr'] = str_attr
@@ -98,9 +96,13 @@ class TestXesXmlParser:
         log = self.read_log('log.xes')
         log_features = log.get_features()
         # there are a standard number of features
-        assert len(log_features) == 4
-        assert 'f1' in log_features
-        assert log_features['f1'] == 0
+        assert len(log_features) == 3
+        assert 'openxes.version' in log_features
+        assert 'xes.features' in log_features
+        assert 'xes.version' in log_features
+        assert log_features['openxes.version'] == '1.0RC7'
+        assert log_features['xes.features'] == 'nested-attributes'
+        assert log_features['xes.version'] == '1.0'
 
     def test_parsed_log_has_attributes(self):
         export_log(self.log, 'log.xes')
