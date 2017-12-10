@@ -13,7 +13,7 @@ class XEventAttributeClassifier:
     """
     def __init__(self, name, keys):
         self.__name = name
-        self.__keys = sorted(keys)
+        self.__keys = keys
 
     def get_class_identity(self, event):
         """Retrieves the unique class identity string of a given event.
