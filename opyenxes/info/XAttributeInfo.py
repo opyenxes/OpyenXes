@@ -2,6 +2,9 @@ from opyenxes.utils.XAttributeUtils import XAttributeUtils
 from opyenxes.model.XAttribute import XAttribute
 
 
+__all__ = [ 'XAttributeInfo' ]
+
+
 class XAttributeInfo:
     """This class provides aggregate information about attributes within one
     container in the log type hierarchy. For example, it may store information

@@ -7,6 +7,9 @@ from opyenxes.info.XAttributeInfo import XAttributeInfo
 from opyenxes.info.XTimeBounds import XTimeBounds
 
 
+__all__ = [ 'XLogInfo' ]
+
+
 class XLogInfo:
     """This class implements a bare-bones log info summary which can be created
     on demand by using applications. The log info summary is based on an event

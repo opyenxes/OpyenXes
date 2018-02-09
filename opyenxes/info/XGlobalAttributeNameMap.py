@@ -3,6 +3,9 @@ from opyenxes.utils.SingletonClassGenerator import XGlobalAttributeNameMapMetacl
 from opyenxes.model.XAttribute import XAttribute
 
 
+__all__ = [ 'XGlobalAttributeNameMap' ]
+
+
 class XGlobalAttributeNameMap(metaclass=XGlobalAttributeNameMapMetaclass):
     """This singleton class implements a global attribute name mapping facility
     and can manage a number of attribute name mappings. Further, this class also

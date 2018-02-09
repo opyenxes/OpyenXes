@@ -3,6 +3,9 @@ from opyenxes.model.XEvent import XEvent
 from opyenxes.extension.std.XTimeExtension import XTimeExtension
 
 
+__all__ = [ 'XTimeBounds' ]
+
+
 class XTimeBounds:
     """This class implements timestamp boundaries, which can be used to describe
     the temporal extent of a log, or of a contained trace.

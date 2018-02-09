@@ -1,6 +1,9 @@
 from opyenxes.info.XLogInfo import XLogInfo
 
 
+__all__ = [ 'XLogInfoFactory' ]
+
+
 class XLogInfoFactory:
     """Factory for deriving log info summaries from logs.
 
