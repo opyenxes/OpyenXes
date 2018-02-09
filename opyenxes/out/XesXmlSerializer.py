@@ -15,6 +15,9 @@ from opyenxes.model.XAttributeCollection import XAttributeCollection
 from opyenxes.utils.XTokenHelper import XTokenHelper
 
 
+__all__ = [ 'XesXmlSerializer' ]
+
+
 class XesXmlSerializer:
     """XES plain XML serialization for the XES format.
 

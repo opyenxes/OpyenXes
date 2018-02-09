@@ -6,6 +6,9 @@ from opyenxes.out.XMxmlSerializer import XMxmlSerializer
 from opyenxes.out.XMxmlGZIPSerializer import XMxmlGZIPSerializer
 
 
+__all__ = [ 'XSerializerRegistry' ]
+
+
 class XSerializerRegistry(XRegistry, metaclass=XSerializerRegistryMetaclass):
     """System-wide registry for XES serializer implementations. Applications can
     use this registry as a convenience to provide an overview about
