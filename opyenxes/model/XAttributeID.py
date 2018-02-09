@@ -1,6 +1,9 @@
 from opyenxes.model.XAttribute import XAttribute
 
 
+__all__ = [ 'XAttributeID' ]
+
+
 class XAttributeID(XAttribute):
     """ Attribute with ID type value.
 

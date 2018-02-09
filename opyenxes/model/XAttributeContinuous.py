@@ -2,6 +2,9 @@ from opyenxes.model.XAttribute import XAttribute
 from opyenxes.utils.CompareUtils import compare_to_number
 
 
+__all__ = [ 'XAttributeContinuous' ]
+
+
 class XAttributeContinuous(XAttribute):
     """ Attribute with float type value.
 

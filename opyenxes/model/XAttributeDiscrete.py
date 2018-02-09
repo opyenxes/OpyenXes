@@ -2,6 +2,9 @@ from opyenxes.model.XAttribute import XAttribute
 from opyenxes.utils.CompareUtils import compare_to_number
 
 
+__all__ = [ 'XAttributeDiscrete' ]
+
+
 class XAttributeDiscrete(XAttribute):
     """ Attribute with integer type value.
 

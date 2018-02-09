@@ -2,6 +2,9 @@ from opyenxes.model.XAttributable import XAttributable
 from opyenxes.model.XAttributeMap import XAttributeMap
 
 
+__all__ = [ 'XElement' ]
+
+
 class XElement(XAttributable):
     """This Class is implemented by all elements of an event log structure.
     It defines that all elements are attributable

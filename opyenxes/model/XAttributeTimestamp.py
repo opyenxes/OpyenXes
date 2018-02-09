@@ -4,6 +4,9 @@ import platform
 import time
 
 
+__all__ = [ 'XAttributeTimestamp' ]
+
+
 class XAttributeTimestamp(XAttribute):
     """ Attribute with datetime type value.
 
@@ -122,7 +125,7 @@ class XAttributeTimestamp(XAttribute):
 
     def __timestamp(self, value):
         """ Windows timestamp workaround
-        
+
         Creating the timestamp will fail if less than 86400 on Windows with
         Python 3.6.
         """

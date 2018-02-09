@@ -1,6 +1,9 @@
 from opyenxes.model.XElement import XElement
 
 
+__all__ = [ 'XLog' ]
+
+
 class XLog(XElement, list):
     """
     A log is an element of an XES event log structure. Logs are contained in

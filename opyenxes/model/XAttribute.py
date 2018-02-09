@@ -2,6 +2,9 @@ from opyenxes.model.XAttributable import XAttributable
 from opyenxes.utils.CompareUtils import compare_to_string
 
 
+__all__ = [ 'XAttribute' ]
+
+
 class XAttribute(XAttributable):
     """
     This class defines attributes used for describing meta-information about

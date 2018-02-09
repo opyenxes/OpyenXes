@@ -1,6 +1,9 @@
 from opyenxes.model.XAttributeMap import XAttributeMap
 
 
+__all__ = [ 'XAttributable' ]
+
+
 class XAttributable:
     """
     This class is implemented by all elements of the log hierarchy, which can

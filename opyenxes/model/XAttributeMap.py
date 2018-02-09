@@ -1,3 +1,8 @@
+
+
+__all__ = [ 'XAttributeMap' ]
+
+
 class XAttributeMap(dict):
     """An attribute map is used to hold a set of attributes, indexed by their
     key strings, for event log hierarchy elements
