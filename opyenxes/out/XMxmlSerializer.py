@@ -5,7 +5,7 @@ from xml.dom import minidom
 from opyenxes.extension.std.XConceptExtension import XConceptExtension
 
 
-__all__ = [ 'XMxmlGZIPSerializer' ]
+__all__ = [ 'XMxmlSerializer' ]
 
 
 class XMxmlSerializer:
