@@ -1,6 +1,9 @@
 import uuid
 
 
+__all__ = [ 'XID' ]
+
+
 class XID:
     """
     Implements a unique ID based on UUID.
