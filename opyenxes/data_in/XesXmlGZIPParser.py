@@ -2,6 +2,9 @@ from opyenxes.data_in.XesXmlParser import XesXmlParser
 import gzip
 
 
+__all__ = [ 'XesXmlGZIPParser' ]
+
+
 class XesXmlGZIPParser(XesXmlParser):
     """Parser for the compressed XES XML serialization.
 

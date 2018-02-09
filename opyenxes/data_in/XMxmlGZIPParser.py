@@ -2,6 +2,9 @@ from opyenxes.data_in.XMxmlParser import XMxmlParser
 import gzip
 
 
+__all__ = [ 'XMxmlGZIPParser' ]
+
+
 class XMxmlGZIPParser(XMxmlParser):
     """Parser for the compressed MXML format for event logs (deprecated).
 
