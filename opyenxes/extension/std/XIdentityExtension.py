@@ -7,9 +7,6 @@ from opyenxes.id.XIDFactory import XIDFactory
 from opyenxes.utils.SingletonClassGenerator import XIdentityExtensionMetaclass
 
 
-__all__ = ['XIdentityExtension']
-
-
 class XIdentityExtension(XExtension, metaclass=XIdentityExtensionMetaclass):
     """Provides unique identifiers (UUIDs) for elements.
 

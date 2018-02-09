@@ -2,9 +2,6 @@ from opyenxes.out.XesXmlSerializer import XesXmlSerializer
 import gzip
 
 
-__all__ = [ 'XesXmlGZIPSerializer' ]
-
-
 class XesXmlGZIPSerializer(XesXmlSerializer):
     """XES compressed XML serialization for the XES format.
 

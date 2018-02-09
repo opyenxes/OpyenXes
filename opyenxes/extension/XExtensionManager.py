@@ -15,9 +15,6 @@ import os
 import time
 
 
-__all__ = ['XExtensionManager']
-
-
 class XExtensionManager(metaclass=XExtensionManagerMetaclass):
     """The extension manager is used to access, store, and manage extensions in
     a system. Extensions can be loaded from their given URI, which should point

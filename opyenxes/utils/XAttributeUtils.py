@@ -9,9 +9,6 @@ from opyenxes.model.XAttributeTimestamp import XAttributeTimestamp
 from opyenxes.id.XIDFactory import XIDFactory
 
 
-__all__ = [ 'XAttributeUtils' ]
-
-
 class XAttributeUtils:
     """Utilities for working with attributes.
 

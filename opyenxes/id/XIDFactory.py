@@ -2,9 +2,6 @@ from opyenxes.id.XID import XID
 from opyenxes.utils.SingletonClassGenerator import XIDFactoryMetaclass
 
 
-__all__ = [ 'XIDFactory' ]
-
-
 class XIDFactory(metaclass=XIDFactoryMetaclass):
     """
     This class is a factory for unique identifiers, as they are used throughout

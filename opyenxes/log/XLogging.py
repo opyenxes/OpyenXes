@@ -1,9 +1,6 @@
 from opyenxes.log.XStdoutLoggingListener import XStdOutLoggingListener
 
 
-__all__ = [ 'XLogging' ]
-
-
 class XLogging:
     """This class provides low-level logging for library components.
     Used for debugging.

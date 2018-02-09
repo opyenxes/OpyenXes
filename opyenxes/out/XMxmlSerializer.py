@@ -5,9 +5,6 @@ from xml.dom import minidom
 from opyenxes.extension.std.XConceptExtension import XConceptExtension
 
 
-__all__ = [ 'XMxmlSerializer' ]
-
-
 class XMxmlSerializer:
     """MXML serialization for XES data (legacy implementation). Note that this
     serialization may be lossy, you should preferrably use the XES.XML

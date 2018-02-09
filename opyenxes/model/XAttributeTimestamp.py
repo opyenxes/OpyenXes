@@ -4,9 +4,6 @@ import platform
 import time
 
 
-__all__ = [ 'XAttributeTimestamp' ]
-
-
 class XAttributeTimestamp(XAttribute):
     """ Attribute with datetime type value.
 

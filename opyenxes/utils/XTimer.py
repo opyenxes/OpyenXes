@@ -1,9 +1,6 @@
 import time
 
 
-__all__ = [ 'XTimer' ]
-
-
 class XTimer:
     """This class implements a simple timer that can be used to quickly profile
     the speed of operations within library components. The timer simply uses the

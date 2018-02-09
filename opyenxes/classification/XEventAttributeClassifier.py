@@ -2,9 +2,6 @@ from opyenxes.model.XEvent import XEvent
 from opyenxes.utils.CompareUtils import compare_to_string
 
 
-__all__ = [ 'XEventAttributeClassifier' ]
-
-
 class XEventAttributeClassifier:
     """Event classifier which considers two events as equal, if, for a set of
     given (configurable) attributes, they have the same values.

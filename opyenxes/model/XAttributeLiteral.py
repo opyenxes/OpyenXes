@@ -2,9 +2,6 @@ from opyenxes.model.XAttribute import XAttribute
 from opyenxes.utils.CompareUtils import compare_to_string
 
 
-__all__ = [ 'XAttributeLiteral' ]
-
-
 class XAttributeLiteral(XAttribute):
     """ Attribute with string type value.
 

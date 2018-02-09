@@ -7,9 +7,6 @@ import time
 from datetime import datetime
 
 
-__all__ = ['XTimeExtension']
-
-
 class XTimeExtension(XExtension, metaclass=XTimeExtensionMetaclass):
     """This extension defines the Time perspective on event logs. It makes it
     possible to assign to each event a timestamp, describing when the event has

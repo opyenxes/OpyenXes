@@ -1,9 +1,6 @@
 from opyenxes.model.XElement import XElement
 
 
-__all__ = [ 'XTrace' ]
-
-
 class XTrace(XElement, list):
     """ A trace is an element of an XES event log structure. Traces are
     contained in logs. Any trace is a list of events. Traces describe sequences

@@ -6,9 +6,6 @@ from opyenxes.data_in.XMxmlGZIPParser import XMxmlGZIPParser
 from opyenxes.data_in.XesXmlGZIPParser import XesXmlGZIPParser
 
 
-__all__ = [ 'XParserRegistry' ]
-
-
 class XParserRegistry(XRegistry, metaclass=XParserRegistryMetaclass):
     """System-wide registry for XES parser implementations. Applications can use
     this registry as a convenience to provide an overview about parseable

@@ -1,9 +1,6 @@
 from opyenxes.classification.XEventAttributeClassifier import XEventAttributeClassifier
 
 
-__all__ = [ 'XEventAndClassifier' ]
-
-
 class XEventAndClassifier(XEventAttributeClassifier):
     """Composite event classifier, which can hold any number of lower-level
     classifiers, concatenated with boolean AND logic. This classifier will
