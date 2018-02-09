@@ -9,7 +9,7 @@ __author__ = "Wai Lam Jonathan Lee"
 __email__ = "walee@uc.cl"
 
 
-from opyenxes.extension import *
+from opyenxes.extension.XExtensionManager import XExtensionManager
 
 
 def test_create_extension_manager():
