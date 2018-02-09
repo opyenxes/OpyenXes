@@ -1,6 +1,9 @@
 from opyenxes.classification.XEventAttributeClassifier import XEventAttributeClassifier
 
 
+__all__ = [ 'XEventNameClassifier' ]
+
+
 class XEventNameClassifier(XEventAttributeClassifier):
     """Implements an event classifier based on the activity name of events.
 

@@ -4,6 +4,9 @@ from opyenxes.model.XElement import XElement
 from opyenxes.model.XEvent import XEvent
 
 
+__all__ = [ 'XEventClasses' ]
+
+
 class XEventClasses:
     """A set of event classes. For any log, this class can be used to impose a
     classification of events. Two events which belong to the same event class

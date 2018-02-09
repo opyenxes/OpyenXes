@@ -1,6 +1,9 @@
 from opyenxes.utils.CompareUtils import compare_to_string
 
 
+__all__ = [ 'XEventClass' ]
+
+
 class XEventClass:
     """Implements an event class. An event class is an identity for events,
     making them comparable. If two events are part of the same class,
