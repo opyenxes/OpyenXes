@@ -1,3 +1,8 @@
+
+
+__all__ = [ 'XStdOutLoggingListener' ]
+
+
 class XStdOutLoggingListener:
     """Default standard output logging listener.
 
