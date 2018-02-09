@@ -109,6 +109,11 @@ class XesXmlParser:
                     self.__attributable_stack.append(self.__trace)
                 elif tag_name == "log":
                     self.__log = XesXmlParser().factory.create_log()
+                    for attr_name in attributes.getNames():
+                        if attr_name.startswith('xes.') or \
+                        attr_name.startswith('openxes.'):
+                            attr = attributes.get(attr_name)
+                            self.__log.set_features(attr_name, attr)
                     self.__attributable_stack.append(self.__log)
                 elif tag_name == "extension":
                     extension = None
