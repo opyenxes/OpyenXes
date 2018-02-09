@@ -12,6 +12,9 @@ from opyenxes.model.XLog import XLog
 from opyenxes.model.XTrace import XTrace
 
 
+__all__ = [ 'XFactory' ]
+
+
 class XFactory:
     """
     Provide methods for creating all element classes of the XES model type
