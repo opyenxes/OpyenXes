@@ -159,7 +159,7 @@ class XLifecycleExtension(XExtension, metaclass=XLifecycleExtensionMetaclass):
         """
         if transition is not None and len(transition.strip()) > 0:
             trans_attr = self.ATTR_TRANSITION.clone()
-            trans_attr.set_value = transition.strip()
+            trans_attr.set_value(transition.strip())
             event.get_attributes()["lifecycle:transition"] = trans_attr
 
     def assign_standard_transition(self, event, transition):
