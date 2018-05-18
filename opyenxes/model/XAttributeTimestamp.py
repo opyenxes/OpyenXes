@@ -43,7 +43,7 @@ class XAttributeTimestamp(XAttribute):
         """
         self.__value = value
 
-    def set_value_millies(self, value):
+    def set_value_millis(self, value):
         self.__value = datetime.fromtimestamp(value / 1000.0)
 
     def clone(self):
