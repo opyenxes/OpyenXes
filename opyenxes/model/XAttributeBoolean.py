@@ -2,9 +2,6 @@ from opyenxes.model.XAttribute import XAttribute
 from opyenxes.utils.CompareUtils import compare_to_boolean
 
 
-__all__ = [ 'XAttributeBoolean' ]
-
-
 class XAttributeBoolean(XAttribute):
     """ Attribute with boolean type value.
 

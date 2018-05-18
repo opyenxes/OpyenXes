@@ -1,9 +1,6 @@
 from opyenxes.model.XAttribute import XAttribute
 
 
-__all__ = [ 'XAttributeCollection' ]
-
-
 class XAttributeCollection(XAttribute):
     """This Class is implemented by all attribute that contain more attributes,
     for example list and container.

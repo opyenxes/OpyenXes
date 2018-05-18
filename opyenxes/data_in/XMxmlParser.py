@@ -13,9 +13,6 @@ from opyenxes.log.XLogging import XLogging
 from opyenxes.utils.XsDateTimeConversion import parse_date_time
 
 
-__all__ = [ 'XMxmlParser' ]
-
-
 class XMxmlParser:
     """Parser for the MXML format for event logs (deprecated).
 

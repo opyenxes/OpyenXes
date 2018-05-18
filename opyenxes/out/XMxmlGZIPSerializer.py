@@ -2,9 +2,6 @@ from opyenxes.out.XMxmlSerializer import XMxmlSerializer
 import gzip
 
 
-__all__ = [ 'XMxmlGZIPSerializer' ]
-
-
 class XMxmlGZIPSerializer(XMxmlSerializer):
     """Compressed MXML serialization for XES data (legacy implementation).
     Note that this serialization may be lossy, you should preferrably use the

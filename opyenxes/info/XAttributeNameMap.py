@@ -1,9 +1,6 @@
 from opyenxes.model.XAttribute import XAttribute
 
 
-__all__ = [ 'XAttributeNameMap' ]
-
-
 class XAttributeNameMap:
     """Implements an attribute name mapping.
 

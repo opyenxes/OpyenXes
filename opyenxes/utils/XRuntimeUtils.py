@@ -2,9 +2,6 @@ import sys
 import os
 
 
-__all__ = [ 'XRuntimeUtils' ]
-
-
 class XRuntimeUtils:
     """This class provides runtime utilities for library components.
     Its main purpose is to identify the host OS, and to locate a standard

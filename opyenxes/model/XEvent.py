@@ -3,9 +3,6 @@ from opyenxes.model.XAttributeMap import XAttributeMap
 from opyenxes.id.XIDFactory import XIDFactory
 
 
-__all__ = [ 'XEvent' ]
-
-
 class XEvent(XElement):
     """
     An event is an element of an XES event log structure. Events are

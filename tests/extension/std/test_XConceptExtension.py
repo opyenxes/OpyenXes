@@ -6,7 +6,7 @@ This module tests XConceptExtension.
 """
 
 
-from opyenxes.extension.std import *
+from opyenxes.extension.std.XConceptExtension import XConceptExtension
 
 
 __author__ = "Wai Lam Jonathan Lee"

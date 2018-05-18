@@ -6,9 +6,6 @@ from opyenxes.factory.XFactoryRegistry import XFactoryRegistry
 from opyenxes.utils.SingletonClassGenerator import XConceptExtensionMetaclass, XCostAmountMetaclass, XCostDriverMetaclass, XCostTypeMetaclass
 
 
-__all__ = ['XCostExtension']
-
-
 class XCostAmount(XAbstractNestedAttributeSupport, metaclass=XCostAmountMetaclass):
     """Class which value contains the cost amount for a cost driver.
 

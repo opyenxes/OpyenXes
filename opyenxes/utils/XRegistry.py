@@ -1,6 +1,3 @@
-__all__ = [ 'XRegistry' ]
-
-
 class XRegistry:
     """Template implementation for a generic registry.
 

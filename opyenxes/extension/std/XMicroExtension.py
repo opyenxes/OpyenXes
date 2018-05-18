@@ -6,9 +6,6 @@ from opyenxes.id.XIDFactory import XIDFactory
 from opyenxes.utils.SingletonClassGenerator import XMicroExtensionMetaclass
 
 
-__all__ = ['XMicroExtension']
-
-
 class XMicroExtension(XExtension, metaclass=XMicroExtensionMetaclass):
     """ The micro event extension defines a nesting level, a nesting parent,
     and the number of nested children for events within a log.

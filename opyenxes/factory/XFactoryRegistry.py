@@ -3,9 +3,6 @@ from opyenxes.utils.SingletonClassGenerator import XFactoryRegistryMetaclass
 from opyenxes.factory.XFactory import XFactory
 
 
-__all__ = [ 'XFactoryRegistry' ]
-
-
 class XFactoryRegistry(XRegistry, metaclass=XFactoryRegistryMetaclass):
     """XModelFactoryRegistry is the most important integration point for
     external contributors, aside from the extension infrastructure. This

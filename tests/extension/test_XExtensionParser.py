@@ -6,7 +6,7 @@ This module tests XExtensionParser.
 """
 
 
-from opyenxes.extension import *
+from opyenxes.extension.XExtensionManager import XExtensionParser
 
 __author__ = "Wai Lam Jonathan Lee"
 __email__ = "walee@uc.cl"

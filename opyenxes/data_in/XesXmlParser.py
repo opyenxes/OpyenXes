@@ -10,9 +10,6 @@ from opyenxes.id.XID import XID
 from opyenxes.model.XAttributeCollection import XAttributeCollection
 
 
-__all__ = [ 'XesXmlParser' ]
-
-
 class XesXmlParser:
     """Parser for the XES XML serialization.
 

@@ -1,9 +1,6 @@
 from opyenxes.model.XAttributeCollection import XAttributeCollection
 
 
-__all__ = [ 'XAttributeList' ]
-
-
 class XAttributeList(XAttributeCollection):
     """Attribute with child attributes. Theses child attributes are ordered.
 

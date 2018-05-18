@@ -1,9 +1,6 @@
 from opyenxes.data_in.XParserRegistry import XParserRegistry
 
 
-__all__ = [ 'XUniversalParser' ]
-
-
 class XUniversalParser:
     """This class implements a universal parser, using the parser registry to
     find an appropriate parser for extracting an XES model from any given file.

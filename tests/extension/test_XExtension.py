@@ -5,7 +5,7 @@
 This module tests XExtension.
 """
 
-from opyenxes.extension import *
+from opyenxes.extension.XExtension import XExtension
 from urllib.parse import urlencode
 import pytest
 

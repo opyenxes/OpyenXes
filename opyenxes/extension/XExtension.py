@@ -1,6 +1,3 @@
-__all__ = ['XExtension']
-
-
 class XExtension:
     """This class defines and implements extensions to the basic log meta-model.
     Extensions have a name, a defined prefix, and a unique URI. They can define
