@@ -7,6 +7,18 @@ from opyenxes.model.XAttributeList import XAttributeList
 from opyenxes.model.XAttributeContainer import XAttributeContainer
 from opyenxes.model.XAttributeTimestamp import XAttributeTimestamp
 from opyenxes.id.XIDFactory import XIDFactory
+from enum import Enum
+
+
+class XAttributeType(Enum):
+    DISCRETE = 1
+    LITERAL = 2
+    CONTINUOUS = 3
+    BOOLEAN = 4
+    ID = 5
+    LIST = 6
+    CONTAINER = 7
+    TIMESTAMP = 8
 
 
 class XAttributeUtils:
@@ -53,21 +65,21 @@ class XAttributeUtils:
         :rtype: str
         """
         if isinstance(attribute, XAttributeDiscrete):
-            return "DISCRETE"
+            return XAttributeType.DISCRETE.name
         elif isinstance(attribute, XAttributeLiteral):
-            return "LITERAL"
+            return XAttributeType.LITERAL.name
         elif isinstance(attribute, XAttributeContinuous):
-            return "CONTINUOUS"
+            return XAttributeType.CONTINUOUS.name
         elif isinstance(attribute, XAttributeBoolean):
-            return "BOOLEAN"
+            return XAttributeType.BOOLEAN.name
         elif isinstance(attribute, XAttributeID):
-            return "ID"
+            return XAttributeType.ID.name
         elif isinstance(attribute, XAttributeList):
-            return "LIST"
+            return XAttributeType.LIST.name
         elif isinstance(attribute, XAttributeContainer):
-            return "CONTAINER"
+            return XAttributeType.CONTAINER.name
         elif isinstance(attribute, XAttributeTimestamp):
-            return "TIMESTAMP"
+            return XAttributeType.TIMESTAMP.name
         else:
             raise TypeError("Unexpected attribute type!")
 
