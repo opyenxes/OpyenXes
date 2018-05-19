@@ -4,7 +4,13 @@
 """The setup script."""
 
 from setuptools import setup, find_packages
-import os
+from os.path import splitext, basename
+from glob import glob
+
+
+__author__ = 'Wai Lam Jonathan Lee'
+__email__ = 'walee@uc.cl'
+
 
 with open('README.rst') as readme_file:
     readme = readme_file.read()
@@ -35,11 +41,9 @@ setup(
     author="Process Mining UC",
     author_email='processmininguc@gmail.com',
     url='https://github.com/opyenxes/OpyenXes',
-    packages=find_packages(exclude=["*.tests", "*.tests.*", "tests.*", "tests"]),
     entry_points={
-        'console_scripts': [
-            'opyenxes=opyenxes.cli:main'
-        ]
+        'console_scripts': ['opyenxes=opyenxes.cli:main'],
+        'pytest11': ['opyenxes = opyenxes']
     },
     include_package_data=True,
     install_requires=requirements,
@@ -59,4 +63,7 @@ setup(
     test_suite='tests',
     tests_require=test_requirements,
     setup_requires=setup_requirements,
+    packages=find_packages('src'),
+    package_dir={'': 'src'},
+    py_modules=[splitext(basename(path))[0] for path in glob('src/*.py')]
 )
