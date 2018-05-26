@@ -3,7 +3,7 @@ from opyenxes.info.XGlobalAttributeNameMap import XGlobalAttributeNameMap
 from opyenxes.extension.std.XAbstractNestedAttributeSupport import XAbstractNestedAttributeSupport
 from opyenxes.extension.XExtension import XExtension
 from opyenxes.factory.XFactoryRegistry import XFactoryRegistry
-from opyenxes.utils.SingletonClassGenerator import XConceptExtensionMetaclass, XCostAmountMetaclass, XCostDriverMetaclass, XCostTypeMetaclass
+from opyenxes.utils.SingletonClassGenerator import XCostExtensionMetaclass, XCostAmountMetaclass, XCostDriverMetaclass, XCostTypeMetaclass
 
 
 class XCostAmount(XAbstractNestedAttributeSupport, metaclass=XCostAmountMetaclass):
@@ -84,7 +84,7 @@ class XCostType(XAbstractNestedAttributeSupport, metaclass=XCostTypeMetaclass):
         XCostExtension().assign_type(attribute, value)
 
 
-class XCostExtension(XExtension, metaclass=XConceptExtensionMetaclass):
+class XCostExtension(XExtension, metaclass=XCostExtensionMetaclass):
     """This extension provides costs for traces and events. It defines five
     attributes:
 

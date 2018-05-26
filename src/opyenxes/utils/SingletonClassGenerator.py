@@ -34,9 +34,21 @@ class XCostTypeMetaclass(type):
         return XCostTypeMetaclass.instance
 
 
-class XConceptExtensionMetaclass(type):
+class XCostExtensionMetaclass(type):
     """
     This Metaclass produce a singleton XCostExtension class.
+    """
+    instance = None
+
+    def __call__(cls, *args, **kw):
+        if not XCostExtensionMetaclass.instance:
+            XCostExtensionMetaclass.instance = super().__call__(*args, **kw)
+        return XCostExtensionMetaclass.instance
+
+
+class XConceptExtensionMetaclass(type):
+    """
+    This Metaclass produce a singleton XConceptExtension class.
     """
     instance = None
 
