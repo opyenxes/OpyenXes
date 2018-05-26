@@ -10,3 +10,4 @@ cryptography==2.1.4
 PyYAML==3.12
 pytest==3.2.5
 pytest-runner==4.2
+setuptools-scm>=1.15.0
