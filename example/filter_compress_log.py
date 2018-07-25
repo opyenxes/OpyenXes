@@ -6,7 +6,7 @@ if the log = [[a,b,c,d],[a,b,c],[a,b,c,d],[a,b,c,d],[a,b,e,d],[a,b,c]]
 The new log will be = [[a,b,c,d],[a,b,c],[a,b,e,d]]
 """
 from opyenxes.data_in.XUniversalParser import XUniversalParser
-from opyenxes.out.XesXmlGZIPSerializer import XesXmlGZIPSerializer
+from opyenxes.data_out.XesXmlGZIPSerializer import XesXmlGZIPSerializer
 from opyenxes.classification.XEventAttributeClassifier import XEventAttributeClassifier
 
 

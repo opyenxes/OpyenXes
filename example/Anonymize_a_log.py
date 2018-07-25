@@ -4,7 +4,7 @@ All value of "resource" attribute and "org:resource" attribute will be "UNKNOWN"
 """
 
 from opyenxes.data_in.XUniversalParser import XUniversalParser
-from opyenxes.out.XesXmlSerializer import XesXmlSerializer
+from opyenxes.data_out.XesXmlSerializer import XesXmlSerializer
 
 
 path = "xes_file/general_example.xes"

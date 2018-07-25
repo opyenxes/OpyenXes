@@ -5,7 +5,7 @@ Read a csv file and convert that in xes file
 
 from opyenxes.factory.XFactory import XFactory
 from datetime import datetime
-from opyenxes.out.XesXmlSerializer import XesXmlSerializer
+from opyenxes.data_out.XesXmlSerializer import XesXmlSerializer
 
 
 def convert_line_in_event(type_for_attribute: dict, attribute_list: list):

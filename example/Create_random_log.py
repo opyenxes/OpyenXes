@@ -3,7 +3,7 @@ Create_random_log:
 """
 from opyenxes.factory.XFactory import XFactory
 from opyenxes.id.XIDFactory import XIDFactory
-from opyenxes.out.XesXmlSerializer import XesXmlSerializer
+from opyenxes.data_out.XesXmlSerializer import XesXmlSerializer
 import random
 
 

@@ -1,7 +1,7 @@
 from opyenxes.model.XLog import XLog
 from opyenxes.data_in.XUniversalParser import XUniversalParser
 from opyenxes.classification.XEventAttributeClassifier import XEventAttributeClassifier
-from opyenxes.out.XesXmlSerializer import XesXmlSerializer
+from opyenxes.data_out.XesXmlSerializer import XesXmlSerializer
 from sklearn.cluster import KMeans
 from opyenxes.factory.XFactory import XFactory
 
