@@ -72,11 +72,11 @@ from opyenxes.model import XEvent
 from opyenxes.model import XLog
 from opyenxes.model import XTrace
 
-from opyenxes.out import XesXmlGZIPSerializer
-from opyenxes.out import XesXmlSerializer
-from opyenxes.out import XMxmlGZIPSerializer
-from opyenxes.out import XMxmlSerializer
-from opyenxes.out import XSerializerRegistry
+from opyenxes.data_out import XesXmlGZIPSerializer
+from opyenxes.data_out import XesXmlSerializer
+from opyenxes.data_out import XMxmlGZIPSerializer
+from opyenxes.data_out import XMxmlSerializer
+from opyenxes.data_out import XSerializerRegistry
 
 from opyenxes.utils import CompareUtils
 from opyenxes.utils import SingletonClassGenerator

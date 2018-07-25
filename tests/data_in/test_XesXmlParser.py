@@ -8,7 +8,7 @@ This module tests the XesXmlParser.
 
 import pytest, os, tempfile
 from opyenxes.data_in.XesXmlParser import XesXmlParser
-from opyenxes.out.XesXmlSerializer import XesXmlSerializer
+from opyenxes.data_out.XesXmlSerializer import XesXmlSerializer
 from opyenxes.factory.XFactory import XFactory
 from opyenxes.classification.XEventNameClassifier import XEventNameClassifier
 from opyenxes.extension.XExtensionParser import XExtensionParser
