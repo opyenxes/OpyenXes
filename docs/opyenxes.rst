@@ -8,13 +8,13 @@ Subpackages
 
     opyenxes.classification
     opyenxes.data_in
+    opyenxes.data_out
     opyenxes.extension
     opyenxes.factory
     opyenxes.id
     opyenxes.info
     opyenxes.log
     opyenxes.model
-    opyenxes.out
     opyenxes.utils
 
 Submodules
