@@ -1,6 +1,13 @@
 opyenxes.extension package
 ==========================
 
+Subpackages
+-----------
+
+.. toctree::
+
+    opyenxes.extension.std
+
 Submodules
 ----------
 
