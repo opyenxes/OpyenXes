@@ -1,9 +1,9 @@
 from opyenxes.utils.XRegistry import XRegistry
 from opyenxes.utils.SingletonClassGenerator import XSerializerRegistryMetaclass
-from opyenxes.out.XesXmlGZIPSerializer import XesXmlGZIPSerializer
-from opyenxes.out.XesXmlSerializer import XesXmlSerializer
-from opyenxes.out.XMxmlSerializer import XMxmlSerializer
-from opyenxes.out.XMxmlGZIPSerializer import XMxmlGZIPSerializer
+from opyenxes.data_out.XesXmlGZIPSerializer import XesXmlGZIPSerializer
+from opyenxes.data_out.XesXmlSerializer import XesXmlSerializer
+from opyenxes.data_out.XMxmlSerializer import XMxmlSerializer
+from opyenxes.data_out.XMxmlGZIPSerializer import XMxmlGZIPSerializer
 
 
 class XSerializerRegistry(XRegistry, metaclass=XSerializerRegistryMetaclass):

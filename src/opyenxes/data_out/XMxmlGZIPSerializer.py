@@ -1,4 +1,4 @@
-from opyenxes.out.XMxmlSerializer import XMxmlSerializer
+from opyenxes.data_out.XMxmlSerializer import XMxmlSerializer
 import gzip
 
 
