@@ -8,6 +8,6 @@ coverage==4.5.1
 Sphinx==1.6.5
 cryptography==2.1.4
 PyYAML==3.12
-pytest==3.2.5
+pytest==3.6.4
 pytest-runner==4.2
 setuptools-scm>=1.15.0
