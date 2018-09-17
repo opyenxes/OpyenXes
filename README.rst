@@ -1,5 +1,5 @@
 ========
-OpyenXes
+OpyenXES
 ========
 
 
@@ -23,6 +23,14 @@ A python implementation of the XES standard based on the Java implementation Ope
 
 * Free software: GNU General Public License v3
 * Documentation: https://opyenxes.readthedocs.io.
+
+
+Citing OpyenXES
+---------------
+The package OpyenXES is an academic project. Therefore, the time and resources spent to develop OpyenXES are justified by the number of citations made to the corresponding publication. If you publish scientific works that make use of OpyenXES, please cite the following paper (`bibtex <https://dblp.org/rec/bibtex/conf/bpm/ValdiviesoLMS18>`_):
+
+
+   Valdivieso, H., Lee, W. L. J., Munoz-Gama, J., & Sepúlveda, M. OpyenXES: A Complete Python Library for the eXtensible Event Stream Standard. 
 
 
 Features
