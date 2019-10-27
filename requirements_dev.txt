@@ -9,5 +9,5 @@ Sphinx==1.7.9
 cryptography==2.3.1
 PyYAML==3.12
 pytest==3.7.4
-pytest-runner==4.2
+pytest-runner==5.2
 setuptools-scm>=1.15.0
